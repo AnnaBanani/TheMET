@@ -10,12 +10,19 @@ import Foundation
 class NetworkManager {
     
     func loadData(urlString: String, parameters: [String : String], completion: @escaping([String: Any]?) -> Void)  {
-        var components = URLComponents(string: urlString)!
+        guard var components = URLComponents(string: urlString) else {
+            completion(nil)
+            return
+        }
         components.queryItems = parameters.map{ (key, value) in
             URLQueryItem(name: key, value: value)
         }
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-        let urlRequest = URLRequest(url: components.url!)
+        guard let url = components.url else {
+            completion(nil)
+            return
+        }
+        let urlRequest = URLRequest(url: url)
         let urlSession = URLSession.shared
         let fileDownloadTask = urlSession.dataTask(
             with: urlRequest
