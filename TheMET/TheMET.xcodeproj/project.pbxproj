@@ -13,6 +13,8 @@
 		F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3012FBA29C4AE1800138CE3 /* Main.storyboard */; };
 		F3012FBE29C4AE1A00138CE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3012FBD29C4AE1A00138CE3 /* Assets.xcassets */; };
 		F3012FC129C4AE1A00138CE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3012FBF29C4AE1A00138CE3 /* LaunchScreen.storyboard */; };
+		F30CE99529CA005F00013B2A /* Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99429CA005F00013B2A /* Art.swift */; };
+		F30CE99729CA007A00013B2A /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99629CA007A00013B2A /* Department.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		F3012FBD29C4AE1A00138CE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3012FC029C4AE1A00138CE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3012FC229C4AE1B00138CE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F30CE99429CA005F00013B2A /* Art.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Art.swift; sourceTree = "<group>"; };
+		F30CE99629CA007A00013B2A /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
+				F30CE99329CA003800013B2A /* DataModels */,
 				F3012FB429C4AE1800138CE3 /* AppDelegate.swift */,
 				F3012FB629C4AE1800138CE3 /* SceneDelegate.swift */,
 				F3012FB829C4AE1800138CE3 /* ViewController.swift */,
@@ -65,6 +70,15 @@
 				F3012FC229C4AE1B00138CE3 /* Info.plist */,
 			);
 			path = TheMET;
+			sourceTree = "<group>";
+		};
+		F30CE99329CA003800013B2A /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				F30CE99429CA005F00013B2A /* Art.swift */,
+				F30CE99629CA007A00013B2A /* Department.swift */,
+			);
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +154,9 @@
 			files = (
 				F3012FB929C4AE1800138CE3 /* ViewController.swift in Sources */,
 				F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */,
+				F30CE99729CA007A00013B2A /* Department.swift in Sources */,
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,
+				F30CE99529CA005F00013B2A /* Art.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
