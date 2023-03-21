@@ -7,13 +7,13 @@
 
 import Foundation
 
-class Art: Decodable {
+class Art {
     
     let objectID: Int
     
-    let primaryImage: String?
+    let primaryImageURLString: String?
     
-    let department: Department
+    let department: String
     
     let objectName: String?
     
@@ -37,10 +37,21 @@ class Art: Decodable {
     
     let classification: String?
     
-    required init(from decoder: Decoder) throws {
-        <#code#>
+    init(objectID: Int, primaryImageURLString: String?, department: String, objectName: String?, title: String?, culture: String?, period: String?, artistDisplayName: String?, artistNationality: String?, objectDate: String?, medium: String?, creditLine: String?, country: String?, classification: String?) {
+        self.objectID = objectID
+        self.primaryImageURLString = primaryImageURLString
+        self.department = department
+        self.objectName = objectName
+        self.title = title
+        self.culture = culture
+        self.period = period
+        self.artistDisplayName = artistDisplayName
+        self.artistNationality = artistNationality
+        self.objectDate = objectDate
+        self.medium = medium
+        self.creditLine = creditLine
+        self.country = country
+        self.classification = classification
     }
-    
-
     
 }
