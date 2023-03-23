@@ -9,12 +9,12 @@ import Foundation
 
 class NetworkManager {
     
-    func loadData(urlString: String, parameters: [String : String], completion: @escaping([String: Any]?) -> Void)  {
+    func get(urlString: String, parameters: [String : String], completion: @escaping ([String: Any]?) -> Void)  {
         guard var components = URLComponents(string: urlString) else {
             completion(nil)
             return
         }
-        components.queryItems = parameters.map{ (key, value) in
+        components.queryItems = parameters.map { (key, value) in
             URLQueryItem(name: key, value: value)
         }
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
@@ -27,15 +27,14 @@ class NetworkManager {
         let urlSession = URLSession.shared
         let fileDownloadTask = urlSession.dataTask(
             with: urlRequest
-        ) { data, urlResponse, error in
+        ) { data, _, error in
             let executeCompletionOnMain: ([String: Any]?) -> Void = { loadedData in
                 DispatchQueue.main.async {
                     completion(loadedData)
                 }
             }
             guard error == nil,
-                  let data = data,
-                  let _ = urlResponse as? HTTPURLResponse else {
+                  let data = data else {
                 executeCompletionOnMain(nil)
                 return
             }
