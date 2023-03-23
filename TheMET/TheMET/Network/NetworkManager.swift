@@ -22,7 +22,8 @@ class NetworkManager {
             completion(nil)
             return
         }
-        let urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
         let urlSession = URLSession.shared
         let fileDownloadTask = urlSession.dataTask(
             with: urlRequest
