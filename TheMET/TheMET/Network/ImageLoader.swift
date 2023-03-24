@@ -15,12 +15,17 @@ class ImageLoader {
             completion(nil)
             return
         }
-        DispatchQueue.global().async { [] in
+        DispatchQueue.global().async {
+            let executeComplitionOnMain: (UIImage?) -> Void = { image in
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            }
             if let imageData = try? Data(contentsOf: imageURL),
                let loadedImage = UIImage(data: imageData) {
-                DispatchQueue.main.async {
-                    completion(loadedImage)
-                }
+                executeComplitionOnMain(loadedImage)
+            } else {
+               executeComplitionOnMain(nil)
             }
         }
     }
