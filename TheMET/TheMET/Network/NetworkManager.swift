@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager {
     
     func get(urlString: String, parameters: [String : String], completion: @escaping ([String: Any]?) -> Void)  {
-        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .milliseconds(Int(12.5)), qos: .background) {
+        var lastRequestTime = Date()
             guard var components = URLComponents(string: urlString) else {
                 completion(nil)
                 return
@@ -42,10 +42,29 @@ class NetworkManager {
                 let result = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
                 executeCompletionOnMain(result)
             }
-            fileDownloadTask.resume()
+        while !self.timeIntervalBWLastRequestTimeToNow(lastRequest: lastRequestTime) {
+            DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .milliseconds(Int(12.5)), qos: .background) {
+            }
         }
+        fileDownloadTask.resume()
+        lastRequestTime = .now
     }
     
+   func timeIntervalBWLastRequestTimeToNow(lastRequest: Date) -> Bool {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let dateComponnentsFormatter = DateComponentsFormatter()
+        dateComponnentsFormatter.allowedUnits = [.second]
+        let differenceInSeconds = dateComponnentsFormatter.string(from: lastRequest, to: currentDate)
+        if let seconds = differenceInSeconds,
+           let secondsDouble = Double(seconds) {
+            return secondsDouble * 1000 > 12.5
+        }
+        else {
+            return false
+        }
+    }
+
 }
 
 
