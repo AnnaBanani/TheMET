@@ -15,7 +15,7 @@ class NetworkManager {
         if self.isTimeIntervalLongEnough(lastRequest: lastRequestTime) {
             self.executeNetworkGet(urlString: urlString, parameters: parameters, completion: completion)
         } else {
-            DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .milliseconds(Int(12.5))) { [weak self] in
+            DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .microseconds(Int(12500))) { [weak self] in
                 self?.get(urlString: urlString, parameters: parameters, completion: completion)
             }
         }
