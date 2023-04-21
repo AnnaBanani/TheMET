@@ -9,7 +9,19 @@ import Foundation
 
 class NetworkManager {
     
+    private var lastRequestTime = Date.distantPast
+    
     func get(urlString: String, parameters: [String : String], completion: @escaping ([String: Any]?) -> Void)  {
+        if self.isTimeIntervalLongEnough(lastRequest: lastRequestTime) {
+            self.executeNetworkGet(urlString: urlString, parameters: parameters, completion: completion)
+        } else {
+            DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .microseconds(Int(12500))) { [weak self] in
+                self?.get(urlString: urlString, parameters: parameters, completion: completion)
+            }
+        }
+    }
+    
+    private func executeNetworkGet(urlString: String, parameters: [String : String], completion: @escaping ([String: Any]?) -> Void)  {
         guard var components = URLComponents(string: urlString) else {
             completion(nil)
             return
@@ -42,8 +54,15 @@ class NetworkManager {
             executeCompletionOnMain(result)
         }
         fileDownloadTask.resume()
+        lastRequestTime = .now
     }
     
+    private func isTimeIntervalLongEnough(lastRequest: Date) -> Bool {
+        let currentDate = Date()
+        let differenceInSeconds = currentDate.distance(to: lastRequest)
+        let requiedTimeInterval: TimeInterval = 0.0125
+        return differenceInSeconds > requiedTimeInterval
+    }
 }
 
 
