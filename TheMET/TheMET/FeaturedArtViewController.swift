@@ -11,4 +11,13 @@ import UIKit
 
 class FeaturedArtViewController: UIViewController {
     
+    override func viewDidLoad() {
+           super.viewDidLoad()
+           
+        let newView = FeaturedArtWorkLoadingView.constructView()
+        newView.awakeFromNib()
+        self.view.addSubview(newView)
+        
+       }
+    
 }
