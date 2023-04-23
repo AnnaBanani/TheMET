@@ -14,10 +14,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZW-5i-T6V">
-                    <rect key="frame" x="96.666666666666686" y="508.99999999999994" width="200" height="20.333333333333314"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="5c2-36-XCA"/>
-                    </constraints>
+                    <rect key="frame" x="50" y="508.99999999999994" width="293" height="20.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -31,12 +28,14 @@
                 </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" red="0.082352941176470587" green="0.12156862745098039" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="6Z5-6V-4bl" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="FCf-hA-whe"/>
                 <constraint firstItem="FZW-5i-T6V" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="P6I-Pz-LcC"/>
                 <constraint firstItem="6Z5-6V-4bl" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="150" id="PmO-ui-bub"/>
                 <constraint firstItem="FZW-5i-T6V" firstAttribute="top" secondItem="6Z5-6V-4bl" secondAttribute="bottom" constant="150" id="Web-qa-uih"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="FZW-5i-T6V" secondAttribute="trailing" constant="50" id="iyL-uE-mEk"/>
+                <constraint firstItem="FZW-5i-T6V" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="tYB-21-z9y"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

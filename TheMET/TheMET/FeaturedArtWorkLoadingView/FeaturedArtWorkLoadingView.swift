@@ -10,21 +10,16 @@ import UIKit
 
 class FeaturedArtWorkLoadingView: UIView {
     
-    static let identifier = "FeaturedArtWorkLoadingView"
+    static let xibFileName = "FeaturedArtWorkLoadingView"
     
 
     @IBOutlet var textLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     
     static func constructView() -> FeaturedArtWorkLoadingView {
-        let nib = UINib(nibName: FeaturedArtWorkLoadingView.identifier, bundle: nil)
+        let nib = UINib(nibName: FeaturedArtWorkLoadingView.xibFileName, bundle: nil)
         return nib.instantiate(withOwner: nil).first as! FeaturedArtWorkLoadingView
         }
-            
-    func configureImageAndText(image : UIImage, text : String) {
-        textLabel.text = text
-        imageView.image = image
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
