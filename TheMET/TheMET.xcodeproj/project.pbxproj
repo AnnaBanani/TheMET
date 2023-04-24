@@ -12,14 +12,16 @@
 		F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3012FBA29C4AE1800138CE3 /* Main.storyboard */; };
 		F3012FBE29C4AE1A00138CE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3012FBD29C4AE1A00138CE3 /* Assets.xcassets */; };
 		F3012FC129C4AE1A00138CE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3012FBF29C4AE1A00138CE3 /* LaunchScreen.storyboard */; };
-		F30CE99A29CA0A2700013B2A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99929CA0A2700013B2A /* NetworkManager.swift */; };
 		F3012FC929C9E30700138CE3 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3012FC829C9E30700138CE3 /* RootTabBarController.swift */; };
 		F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3012FCA29C9E35800138CE3 /* FeaturedArtViewController.swift */; };
 		F3012FCD29C9E37D00138CE3 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3012FCC29C9E37D00138CE3 /* CatalogViewController.swift */; };
 		F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3012FCE29C9E3A800138CE3 /* FavoritesViewController.swift */; };
 		F30CE99529CA005F00013B2A /* Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99429CA005F00013B2A /* Art.swift */; };
 		F30CE99729CA007A00013B2A /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99629CA007A00013B2A /* Department.swift */; };
+		F30CE99A29CA0A2700013B2A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99929CA0A2700013B2A /* NetworkManager.swift */; };
 		F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99C29CC91F300013B2A /* ImageLoader.swift */; };
+		F3F5C5D329EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */; };
+		F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,14 +32,16 @@
 		F3012FBD29C4AE1A00138CE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3012FC029C4AE1A00138CE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3012FC229C4AE1B00138CE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F30CE99929CA0A2700013B2A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F3012FC829C9E30700138CE3 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		F3012FCA29C9E35800138CE3 /* FeaturedArtViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtViewController.swift; sourceTree = "<group>"; };
 		F3012FCC29C9E37D00138CE3 /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		F3012FCE29C9E3A800138CE3 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		F30CE99429CA005F00013B2A /* Art.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Art.swift; sourceTree = "<group>"; };
 		F30CE99629CA007A00013B2A /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
+		F30CE99929CA0A2700013B2A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F30CE99C29CC91F300013B2A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtWorkLoadingView.swift; sourceTree = "<group>"; };
+		F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedArtWorkLoadingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,7 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
+				F37EB74829F2AC1600A0B008 /* FeaturedArtWorkLoadingView */,
 				F30CE99B29CC91BD00013B2A /* Network */,
 				F30CE99329CA003800013B2A /* DataModels */,
 				F3012FB429C4AE1800138CE3 /* AppDelegate.swift */,
@@ -99,9 +104,18 @@
 			isa = PBXGroup;
 			children = (
 				F30CE99C29CC91F300013B2A /* ImageLoader.swift */,
-                F30CE99929CA0A2700013B2A /* NetworkManager.swift */,
+				F30CE99929CA0A2700013B2A /* NetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		F37EB74829F2AC1600A0B008 /* FeaturedArtWorkLoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */,
+				F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */,
+			);
+			path = FeaturedArtWorkLoadingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +178,7 @@
 			files = (
 				F3012FC129C4AE1A00138CE3 /* LaunchScreen.storyboard in Resources */,
 				F3012FBE29C4AE1A00138CE3 /* Assets.xcassets in Resources */,
+				F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */,
 				F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,8 +191,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F30CE99A29CA0A2700013B2A /* NetworkManager.swift in Sources */,
-				F3012FB929C4AE1800138CE3 /* ViewController.swift in Sources */,
 				F3012FCD29C9E37D00138CE3 /* CatalogViewController.swift in Sources */,
+				F3F5C5D329EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,
 				F3012FC929C9E30700138CE3 /* RootTabBarController.swift in Sources */,
 				F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */,
