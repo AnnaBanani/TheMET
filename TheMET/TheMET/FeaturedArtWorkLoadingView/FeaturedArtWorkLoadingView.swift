@@ -28,12 +28,8 @@ class FeaturedArtWorkLoadingView: UIView {
         imageView.image = UIImage(named: "Frame")
         button.backgroundColor = UIColor(red: 134.0/255, green: 121.0/255, blue: 139.0/255, alpha: 1)
         button.layer.cornerRadius = 30
-        var buttonAttributed: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.foregroundColor: UIColor(red: 242.0/255, green: 242.0/255, blue: 242.0/255, alpha: 1)
-        ]
-        let buttonTitle: String = "Generate new artwork"
-        let attributedNexttButtonString = NSAttributedString(string: buttonTitle, attributes: buttonAttributed)
-        button.setAttributedTitle(attributedNexttButtonString, for: .normal)
+        button.setTitleColor(UIColor(red: 242.0/255, green: 242.0/255, blue: 242.0/255, alpha: 1), for: .normal)
+        button.setTitle("Generate new artwork", for: .normal)
     }
 }
 

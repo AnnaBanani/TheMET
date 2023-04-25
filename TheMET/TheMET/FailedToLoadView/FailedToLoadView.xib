@@ -41,13 +41,11 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bbX-wp-Twx" secondAttribute="trailing" constant="50" id="0Px-Y4-Fph"/>
                 <constraint firstItem="ebe-23-fjT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="120" id="Hta-8z-i5m"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zpv-wu-J7I" secondAttribute="trailing" constant="50" id="NBs-nV-3Wf"/>
+                <constraint firstItem="ebe-23-fjT" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="OgQ-Yk-c14"/>
                 <constraint firstItem="bbX-wp-Twx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="UZT-5i-IUg"/>
-                <constraint firstItem="zpv-wu-J7I" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="agr-fH-4dq"/>
-                <constraint firstItem="bbX-wp-Twx" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="ajw-Ep-coN"/>
                 <constraint firstItem="zpv-wu-J7I" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="b2a-yw-4XW"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="bbX-wp-Twx" secondAttribute="bottom" constant="50" id="eG1-cM-KM0"/>
                 <constraint firstItem="bbX-wp-Twx" firstAttribute="top" secondItem="zpv-wu-J7I" secondAttribute="bottom" priority="900" constant="100" id="kcn-ua-G1c"/>
-                <constraint firstItem="ebe-23-fjT" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="nt5-Kx-AXg"/>
                 <constraint firstItem="zpv-wu-J7I" firstAttribute="top" secondItem="ebe-23-fjT" secondAttribute="bottom" constant="100" id="znX-jo-Fy2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
