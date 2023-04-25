@@ -12,8 +12,7 @@ import UIKit
 class FeaturedArtViewController: UIViewController {
     
     override func viewDidLoad() {
-           super.viewDidLoad()
-           
+        super.viewDidLoad()
         let newView = FeaturedArtWorkLoadingView.constructView()
         newView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(newView)
@@ -22,10 +21,7 @@ class FeaturedArtViewController: UIViewController {
             newView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
             newView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
             newView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
-           ])
-        
-        
-        
-       }
+        ])
+    }
     
 }
