@@ -11,7 +11,7 @@ class NetworkManager {
     
     private var lastRequestTime = Date.distantPast
     
-    func get(urlString: String, parameters: [String : String], completion: @escaping ([String: Any]?) -> Void)  {
+    func get(urlString: String, parameters: [String : String], completion: @escaping (Data?) -> Void)  {
         if self.isTimeIntervalLongEnough(lastRequest: lastRequestTime) {
             self.executeNetworkGet(urlString: urlString, parameters: parameters, completion: completion)
         } else {
@@ -21,7 +21,7 @@ class NetworkManager {
         }
     }
     
-    private func executeNetworkGet(urlString: String, parameters: [String : String], completion: @escaping ([String: Any]?) -> Void)  {
+    private func executeNetworkGet(urlString: String, parameters: [String : String], completion: @escaping (Data?) -> Void)  {
         guard var components = URLComponents(string: urlString) else {
             completion(nil)
             return
@@ -40,7 +40,7 @@ class NetworkManager {
         let fileDownloadTask = urlSession.dataTask(
             with: urlRequest
         ) { data, _, error in
-            let executeCompletionOnMain: ([String: Any]?) -> Void = { loadedData in
+            let executeCompletionOnMain: (Data?) -> Void = { loadedData in
                 DispatchQueue.main.async {
                     completion(loadedData)
                 }
@@ -50,7 +50,7 @@ class NetworkManager {
                 executeCompletionOnMain(nil)
                 return
             }
-            let result = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+            let result = try? JSONSerialization.jsonObject(with: data) as? Data
             executeCompletionOnMain(result)
         }
         fileDownloadTask.resume()
@@ -59,7 +59,7 @@ class NetworkManager {
     
     private func isTimeIntervalLongEnough(lastRequest: Date) -> Bool {
         let currentDate = Date()
-        let differenceInSeconds = currentDate.distance(to: lastRequest)
+        let differenceInSeconds = lastRequest.distance(to: currentDate)
         let requiedTimeInterval: TimeInterval = 0.0125
         return differenceInSeconds > requiedTimeInterval
     }
