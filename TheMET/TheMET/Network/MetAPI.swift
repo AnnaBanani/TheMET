@@ -11,13 +11,19 @@ class MetAPI{
     
     private var networkManager: NetworkManager
     
+    private let urlBaseString: String = "https://collectionapi.metmuseum.org/"
+    
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
     }
     
     func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (ObjectsResponse?) -> Void) {
+        var urlString: String = self.urlBaseString
+        let urlStringSuffix: String = "public/collection/v1/objects"
+        urlString.append(urlStringSuffix)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        var parameters: [String : String] = [ : ]
         let dateString: String?
         if let date = metadataDate {
             dateString = dateFormatter.string(from: date)
@@ -27,20 +33,10 @@ class MetAPI{
         let idArrayString: String?
         if !departmentIds.isEmpty {
             idArrayString = departmentIds.map {String($0)}.joined(separator: "|")
-        } else {
-            idArrayString = nil
+            parameters.updateValue(idArrayString!, forKey: "departmentIds")
         }
-        let urlString: String = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
-        var parameters: [String : String]
-        if let date =  dateString,
-           let arrayString = idArrayString {
-           parameters = ["metadataDate" : date, "departmentIds" : arrayString]
-        } else if let date =  dateString {
-            parameters = ["metadataDate" : date]
-        } else if let arrayString = idArrayString {
-            parameters = ["departmentIds" : arrayString]
-        } else {
-            parameters = [ : ]
+        if let date =  dateString {
+            parameters.updateValue(date, forKey: "metadataDate")
         }
         self.networkManager.get(
             urlString: urlString,

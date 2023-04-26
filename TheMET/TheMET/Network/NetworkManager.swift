@@ -50,8 +50,7 @@ class NetworkManager {
                 executeCompletionOnMain(nil)
                 return
             }
-            let result = try? JSONSerialization.jsonObject(with: data) as? Data
-            executeCompletionOnMain(result)
+            executeCompletionOnMain(data)
         }
         fileDownloadTask.resume()
         lastRequestTime = .now
