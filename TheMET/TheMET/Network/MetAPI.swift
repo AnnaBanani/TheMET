@@ -27,16 +27,12 @@ class MetAPI{
         let dateString: String?
         if let date = metadataDate {
             dateString = dateFormatter.string(from: date)
-        } else {
-            dateString = nil
-        }
-        let idArrayString: String?
+            parameters["metadataDate"] = dateString
+        } 
+        let idArrayString: String
         if !departmentIds.isEmpty {
             idArrayString = departmentIds.map {String($0)}.joined(separator: "|")
-            parameters.updateValue(idArrayString!, forKey: "departmentIds")
-        }
-        if let date =  dateString {
-            parameters.updateValue(date, forKey: "metadataDate")
+            parameters["departmentIds"] = idArrayString
         }
         self.networkManager.get(
             urlString: urlString,
