@@ -12,9 +12,9 @@ class FeaturedArtWorkLoadingView: UIView {
     
     static let xibFileName = "FeaturedArtWorkLoadingView"
     
-
     @IBOutlet var textLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var button: UIButton!
     
     static func constructView() -> FeaturedArtWorkLoadingView {
         let nib = UINib(nibName: FeaturedArtWorkLoadingView.xibFileName, bundle: nil)
@@ -26,9 +26,10 @@ class FeaturedArtWorkLoadingView: UIView {
         textLabel.text = "Please wait while we choose a masterpiece"
         textLabel.textColor = UIColor(red: 188.0/255, green: 176.0/255, blue: 193.0/255, alpha: 1)
         imageView.image = UIImage(named: "Frame")
+        button.backgroundColor = UIColor(red: 134.0/255, green: 121.0/255, blue: 139.0/255, alpha: 1)
+        button.layer.cornerRadius = 30
+        button.setTitleColor(UIColor(red: 242.0/255, green: 242.0/255, blue: 242.0/255, alpha: 1), for: .normal)
+        button.setTitle("Generate new artwork", for: .normal)
     }
-
-    
-    
 }
 
