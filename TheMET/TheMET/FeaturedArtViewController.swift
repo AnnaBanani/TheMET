@@ -23,5 +23,4 @@ class FeaturedArtViewController: UIViewController {
             newView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
         ])
     }
-    
 }
