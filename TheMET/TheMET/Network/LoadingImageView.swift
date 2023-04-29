@@ -10,13 +10,13 @@ import UIKit
 
 class LoadingImageView: UIView {
     
-    enum LoadingImageView {
+    enum State {
         case loading
         case failed
         case loaded(UIImage)
     }
     
-    private var state: LoadingImageView = .loaded(UIImage(named: "Not Loaded Image")!) {
+    private var state: State = .loading {
         didSet {
             self.resetStateView(state: self.state)
         }
@@ -46,22 +46,22 @@ class LoadingImageView: UIView {
         self.addSubview(self.activityIndicator)
         self.addSubview(self.failedImageView)
         self.imageView.contentMode = .scaleAspectFit
-        self.failedImageView.contentMode = .center
+        self.failedImageView.contentMode = .scaleAspectFit
         NSLayoutConstraint.activate([
             self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
             self.imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
-            self.failedImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            self.failedImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            self.failedImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            self.failedImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+            self.failedImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
+            self.failedImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            self.failedImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.failedImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             self.activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
     
-    private func resetStateView(state: LoadingImageView) {
+    private func resetStateView(state: State) {
         switch state {
         case .loading:
             self.imageView.image = nil
@@ -70,6 +70,8 @@ class LoadingImageView: UIView {
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
         case .failed:
+            self.imageView.image = nil
+            self.imageView.isHidden = true
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
             self.failedImageView.isHidden = false
