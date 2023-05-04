@@ -25,6 +25,7 @@
 		F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834829F7FD2500283EE3 /* MetAPI.swift */; };
 		F30E834B29F7FEFD00283EE3 /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834A29F7FEFD00283EE3 /* ObjectResponse.swift */; };
 		F30E835029FE854C00283EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F30E835229FE854C00283EE3 /* Localizable.strings */; };
+		F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */; };
 		F3F5C5D329EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */; };
 		F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		F30E834A29F7FEFD00283EE3 /* ObjectResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F30E835129FE854C00283EE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F30E835329FE85BA00283EE3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtWorkLoadingView.swift; sourceTree = "<group>"; };
 		F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedArtWorkLoadingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +120,7 @@
 			children = (
 				F30CE99C29CC91F300013B2A /* ImageLoader.swift */,
 				F30CE99929CA0A2700013B2A /* NetworkManager.swift */,
+				F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */,
 				F30E834829F7FD2500283EE3 /* MetAPI.swift */,
 				F30E834A29F7FEFD00283EE3 /* ObjectResponse.swift */,
 			);
@@ -226,6 +229,7 @@
 				F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */,
 				F30CE99729CA007A00013B2A /* Department.swift in Sources */,
 				F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */,
+				F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */,
 				F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */,
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,
 				F30CE99529CA005F00013B2A /* Art.swift in Sources */,
