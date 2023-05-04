@@ -6,10 +6,10 @@
   
 */
 
-"Random Artwork Of The Day" = "Произведение дня";
-"Catalog" = "Каталог";
-"Favories" = "Избранное";
-"Please wait while we choose a masterpiece" = "Пожалуйста, подождите, пока мы выбираем шедевр";
-"Artwork cannot be upload Make sure you are connected to Wi-Fi or your cellural network" = "Произведение не может быть загружено  \n \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
-"Try again" = "Попробуйте снова";
-"Generate next artwork" = "Сгенерировать другое";
+"random_artwork_screen_title" = "Произведение дня";
+"catalog_screen_title" = "Каталог";
+"favories_screen_title" = "Избранное";
+"featured_artwork.loading" = "Пожалуйста, подождите, пока мы выбираем шедевр";
+"featured_artwork.loading_failed" = "Произведение не может быть загружено  \n \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
+"featured_artwork.load_again_cta" = "Попробуйте снова";
+"featured_artwork.load_next_cta" = "Сгенерировать другое";

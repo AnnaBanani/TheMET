@@ -23,13 +23,13 @@ class FailedToLoadView: UIView{
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        textLabel.text = NSLocalizedString("Artwork cannot be upload Make sure you are connected to Wi-Fi or your cellural network", comment: "")
+        textLabel.text = NSLocalizedString("featured_artwork.loading_failed", comment: "")
         textLabel.textColor = UIColor(red: 188.0/255, green: 176.0/255, blue: 193.0/255, alpha: 1)
         imageView.image = UIImage(named: "No Connection")
         button.backgroundColor = UIColor(red: 134.0/255, green: 121.0/255, blue: 139.0/255, alpha: 1)
         button.layer.cornerRadius = 30
         button.setTitleColor(UIColor(red: 242.0/255, green: 242.0/255, blue: 242.0/255, alpha: 1), for: .normal)
-        button.setTitle(NSLocalizedString("Try again", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("featured_artwork.load_again_cta", comment: ""), for: .normal)
     }
     
 }

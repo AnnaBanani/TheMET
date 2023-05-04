@@ -6,10 +6,10 @@
   
 */
 
-"Random Artwork Of The Day" = "Random Artwork Of The Day";
-"Catalog" = "Catalog";
-"Favories" = "Favories";
-"Please wait while we choose a masterpiece" = "Please wait while we choose a masterpiece";
-"Artwork cannot be upload Make sure you are connected to Wi-Fi or your cellural network" = "Artwork cannot be upload  \n \n \nMake sure you are connected to Wi-Fi or your cellural network";
-"Try again" = "Try again";
-"Generate next artwork" = "Generate next artwork";
+"random_artwork_screen_title" = "Random Artwork Of The Day";
+"catalog_screen_title" = "Catalog";
+"favories_screen_title" = "Favories";
+"featured_artwork.loading" = "Please wait while we choose a masterpiece";
+"featured_artwork.loading_failed" = "Artwork cannot be upload  \n \n \nMake sure you are connected to Wi-Fi or your cellural network";
+"featured_artwork.load_again_cta" = "Try again";
+"featured_artwork.load_next_cta" = "Generate next artwork";
