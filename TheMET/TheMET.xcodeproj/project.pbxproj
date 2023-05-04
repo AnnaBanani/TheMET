@@ -20,10 +20,11 @@
 		F30CE99729CA007A00013B2A /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99629CA007A00013B2A /* Department.swift */; };
 		F30CE99A29CA0A2700013B2A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99929CA0A2700013B2A /* NetworkManager.swift */; };
 		F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99C29CC91F300013B2A /* ImageLoader.swift */; };
-		F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834829F7FD2500283EE3 /* MetAPI.swift */; };
-		F30E834B29F7FEFD00283EE3 /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834A29F7FEFD00283EE3 /* ObjectResponse.swift */; };
 		F30E834529F6AD5A00283EE3 /* FailedToLoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F30E834429F6AD5A00283EE3 /* FailedToLoadView.xib */; };
 		F30E834729F7E5EA00283EE3 /* FailedToLoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834629F7E5EA00283EE3 /* FailedToLoadView.swift */; };
+		F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834829F7FD2500283EE3 /* MetAPI.swift */; };
+		F30E834B29F7FEFD00283EE3 /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834A29F7FEFD00283EE3 /* ObjectResponse.swift */; };
+		F30E835029FE854C00283EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F30E835229FE854C00283EE3 /* Localizable.strings */; };
 		F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */; };
 		F3F5C5D329EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */; };
 		F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */; };
@@ -45,10 +46,12 @@
 		F30CE99629CA007A00013B2A /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		F30CE99929CA0A2700013B2A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F30CE99C29CC91F300013B2A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
-		F30E834829F7FD2500283EE3 /* MetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetAPI.swift; sourceTree = "<group>"; };
-		F30E834A29F7FEFD00283EE3 /* ObjectResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F30E834429F6AD5A00283EE3 /* FailedToLoadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FailedToLoadView.xib; sourceTree = "<group>"; };
 		F30E834629F7E5EA00283EE3 /* FailedToLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedToLoadView.swift; sourceTree = "<group>"; };
+		F30E834829F7FD2500283EE3 /* MetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetAPI.swift; sourceTree = "<group>"; };
+		F30E834A29F7FEFD00283EE3 /* ObjectResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
+		F30E835129FE854C00283EE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F30E835329FE85BA00283EE3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtWorkLoadingView.swift; sourceTree = "<group>"; };
 		F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedArtWorkLoadingView.xib; sourceTree = "<group>"; };
@@ -68,6 +71,7 @@
 		F3012FA829C4AE1800138CE3 = {
 			isa = PBXGroup;
 			children = (
+				F30E835229FE854C00283EE3 /* Localizable.strings */,
 				F3012FB329C4AE1800138CE3 /* TheMET */,
 				F3012FB229C4AE1800138CE3 /* Products */,
 			);
@@ -183,6 +187,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = F3012FA829C4AE1800138CE3;
 			productRefGroup = F3012FB229C4AE1800138CE3 /* Products */;
@@ -200,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3012FC129C4AE1A00138CE3 /* LaunchScreen.storyboard in Resources */,
+				F30E835029FE854C00283EE3 /* Localizable.strings in Resources */,
 				F3012FBE29C4AE1A00138CE3 /* Assets.xcassets in Resources */,
 				F30E834529F6AD5A00283EE3 /* FailedToLoadView.xib in Resources */,
 				F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */,
@@ -251,6 +257,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		F30E835229FE854C00283EE3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F30E835129FE854C00283EE3 /* en */,
+				F30E835329FE85BA00283EE3 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -258,6 +273,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -318,6 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

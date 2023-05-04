@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  TheMET
+
+  Created by Анна Ситникова on 30/04/2023.
+  
+*/
+
+"random_artwork_screen_title" = "Произведение дня";
+"catalog_screen_title" = "Каталог";
+"favories_screen_title" = "Избранное";
+"featured_artwork.loading" = "Пожалуйста, подождите, пока мы выбираем шедевр";
+"featured_artwork.loading_failed" = "Произведение не может быть загружено  \n \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
+"featured_artwork.load_again_cta" = "Попробуйте снова";
+"featured_artwork.load_next_cta" = "Сгенерировать другое";
