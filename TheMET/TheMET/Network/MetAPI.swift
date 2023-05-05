@@ -51,5 +51,27 @@ class MetAPI{
                 }
             }
     }
+    
+    func object(id: Int, completion: @escaping (ObjectResponse?) -> Void) {
+        var urlString: String = self.urlBaseString
+        let urlStringSuffix: String = "public/collection/v1/objects/\(id)"
+        urlString.append(urlStringSuffix)
+        self.networkManager.get(
+            urlString: urlString,
+            parameters: [ : ]) { data in
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .useDefaultKeys
+                if let data = data {
+                    do {
+                        let result = try jsonDecoder.decode(ObjectResponse.self, from: data)
+                        completion(result)
+                    } catch {
+                        completion(nil)
+                    }
+                } else {
+                    completion(nil)
+                }
+            }
+    }
 
 }
