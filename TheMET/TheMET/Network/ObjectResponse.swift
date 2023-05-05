@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 class ObjectResponse: Decodable {
+    
     enum DecodeError: Error {
+        
         case dateNotConverted
     }
 
@@ -29,7 +31,7 @@ class ObjectResponse: Decodable {
 
     let additionalImages: [String]
 
-    let constituents: [Constituents]
+    let constituents: [Constituent]
 
     let department: String?
 
@@ -79,7 +81,7 @@ class ObjectResponse: Decodable {
 
     let dimensions: String?
 
-    let measurements: [Measurements]?
+    let measurements: [Measurement]?
 
     let creditLine: String?
 
@@ -117,7 +119,7 @@ class ObjectResponse: Decodable {
 
     let objectURL: String?
 
-    let tags: [Tags]?
+    let tags: [Tag]?
 
     let objectWikidataURL: String?
 
@@ -194,7 +196,7 @@ class ObjectResponse: Decodable {
         self.primaryImage = try container.decode(String?.self, forKey: .primaryImage)
         self.primaryImageSmall = try container.decode(String?.self, forKey: .primaryImageSmall)
         self.additionalImages = try container.decode([String].self, forKey: .additionalImages)
-        self.constituents = try container.decode([Constituents].self, forKey: .constituents)
+        self.constituents = try container.decode([Constituent].self, forKey: .constituents)
         self.department = try container.decode(String?.self, forKey: .department)
         self.title = try container.decode(String?.self, forKey: .title)
         self.culture = try container.decode(String?.self, forKey: .culture)
@@ -219,7 +221,7 @@ class ObjectResponse: Decodable {
         self.objectEndDate = try container.decode(Int?.self, forKey: .objectEndDate)
         self.medium = try container.decode(String?.self, forKey: .medium)
         self.dimensions = try container.decode(String?.self, forKey: .dimensions)
-        self.measurements = try container.decode(([Measurements]?).self, forKey: .measurements)
+        self.measurements = try container.decode(([Measurement]?).self, forKey: .measurements)
         self.creditLine = try container.decode(String?.self, forKey: .creditLine)
         self.geographyType = try container.decode(String?.self, forKey: .geographyType)
         self.city = try container.decode(String?.self, forKey: .city)
@@ -242,45 +244,38 @@ class ObjectResponse: Decodable {
             throw DecodeError.dateNotConverted
         }
         self.metadataDate = metadataDate
-        
         self.repository = try container.decode(String?.self, forKey: .repository)
         self.objectURL = try container.decode(String?.self, forKey: .objectURL)
-        self.tags = try container.decode([Tags]?.self, forKey: .tags)
+        self.tags = try container.decode([Tag]?.self, forKey: .tags)
         self.objectWikidataURL = try container.decode(String?.self, forKey: .objectWikidataURL)
         self.isTimelineWork = try container.decode(Bool.self, forKey: .isTimelineWork)
         self.galleryNumber = try container.decode(String?.self, forKey: .galleryNumber)
     }
 
-    struct Constituents: Decodable {
+    struct Constituent: Decodable {
         private let constituentID: Int
-        private let role: String
-        private let name: String
-        private let constituentULAN_URL: String
-        private let constituentWikidata_URL: String
-        private let gender: String
+        private let role: String?
+        private let name: String?
+        private let constituentULAN_URL: String?
+        private let constituentWikidata_URL: String?
+        private let gender: String?
     }
 
-    struct ElementMeasurements: Decodable {
+    struct ElementMeasurement: Decodable {
         private let height: Double
         private let width: Double
     }
 
-    struct Measurements: Decodable {
+    struct Measurement: Decodable {
         private let elementName: String?
         private let elementDescription: String?
-        private let elementMeasurements: ElementMeasurements
+        private let elementMeasurements: ElementMeasurement
     }
 
-    struct Tags: Decodable {
+    struct Tag: Decodable {
         private let term: String
-        private let AAT_URL: String
-        private let Wikidata_URL: String
-    }
-    
-    struct DimensionsParsed: Decodable {
-        private let element: String
-        private let dimensionType: String
-        private let dimension: Float
+        private let AAT_URL: String?
+        private let Wikidata_URL: String?
     }
     
 }
