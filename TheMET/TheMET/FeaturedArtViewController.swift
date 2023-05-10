@@ -11,8 +11,16 @@ import UIKit
 
 class FeaturedArtViewController: UIViewController {
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.tabBarItem = UITabBarItem(title: nil,
+                                       image: UIImage(named: "FeaturedIcon")?.withRenderingMode(.alwaysOriginal),
+                                       selectedImage: UIImage(named: "FeaturedIconTapped")?.withRenderingMode(.alwaysOriginal))
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("random_artwork_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
         let newView = FeaturedArtWorkLoadingView.constructView()
         newView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(newView)

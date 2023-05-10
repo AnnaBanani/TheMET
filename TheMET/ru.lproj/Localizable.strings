@@ -6,10 +6,18 @@
   
 */
 
+//fonts
+
+"serif_font" = "Noto Serif JP";
+"san_serif_font" = "Zen Kaku Gothic New Regular";
+"san_serif_fon_bold" = "Zen Kaku Gothic New Bold";
+
+//titles
+
 "random_artwork_screen_title" = "Произведение дня";
 "catalog_screen_title" = "Каталог";
 "favories_screen_title" = "Избранное";
 "featured_artwork.loading" = "Пожалуйста, подождите, пока мы выбираем шедевр";
-"featured_artwork.loading_failed" = "Произведение не может быть загружено  \n \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
+"featured_artwork.loading_failed" = "Произведение не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
 "featured_artwork.load_again_cta" = "Попробуйте снова";
 "featured_artwork.load_next_cta" = "Сгенерировать другое";

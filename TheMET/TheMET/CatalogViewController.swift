@@ -11,8 +11,16 @@ import UIKit
 
 class CatalogViewController: UIViewController {
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.tabBarItem = UITabBarItem(title: nil,
+                                       image: UIImage(named: "CatalogIcon")?.withRenderingMode(.alwaysOriginal),
+                                       selectedImage: UIImage(named: "CatalogIconTapped")?.withRenderingMode(.alwaysOriginal))
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("catalog_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
         let newView = FailedToLoadView.constructView()
         newView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(newView)

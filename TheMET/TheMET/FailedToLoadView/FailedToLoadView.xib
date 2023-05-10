@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,13 +22,13 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpv-wu-J7I">
-                    <rect key="frame" x="50" y="429" width="293" height="61"/>
+                    <rect key="frame" x="50" y="379" width="293" height="77"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbX-wp-Twx">
-                    <rect key="frame" x="50" y="590" width="293" height="60"/>
+                    <rect key="frame" x="50" y="556" width="293" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="Inh-pG-J62"/>
                     </constraints>
@@ -46,7 +47,7 @@
                 <constraint firstItem="zpv-wu-J7I" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="b2a-yw-4XW"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="bbX-wp-Twx" secondAttribute="bottom" constant="50" id="eG1-cM-KM0"/>
                 <constraint firstItem="bbX-wp-Twx" firstAttribute="top" secondItem="zpv-wu-J7I" secondAttribute="bottom" priority="900" constant="100" id="kcn-ua-G1c"/>
-                <constraint firstItem="zpv-wu-J7I" firstAttribute="top" secondItem="ebe-23-fjT" secondAttribute="bottom" constant="100" id="znX-jo-Fy2"/>
+                <constraint firstItem="zpv-wu-J7I" firstAttribute="top" secondItem="ebe-23-fjT" secondAttribute="bottom" constant="50" id="znX-jo-Fy2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

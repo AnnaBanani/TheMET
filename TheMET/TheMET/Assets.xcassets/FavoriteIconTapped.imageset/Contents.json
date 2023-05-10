@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "FavoriteIconTapped.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

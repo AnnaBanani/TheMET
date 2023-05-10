@@ -26,6 +26,14 @@
 		F30E834B29F7FEFD00283EE3 /* ObjectsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834A29F7FEFD00283EE3 /* ObjectsResponse.swift */; };
 		F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */; };
 		F30E835029FE854C00283EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F30E835229FE854C00283EE3 /* Localizable.strings */; };
+		F3451E922A05644D00C31619 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3451E912A05644D00C31619 /* Colors.xcassets */; };
+		F3451E962A05698200C31619 /* Caviar Dreams Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */; };
+		F3451E972A05698200C31619 /* Caviar Dreams.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3451E942A05698200C31619 /* Caviar Dreams.ttf */; };
+		F3451E982A05698200C31619 /* Quattrocento.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3451E952A05698200C31619 /* Quattrocento.ttf */; };
+		F3528F7F2A06C19F000D9CEB /* Zen Kaku Gothic New Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3528F7C2A06C19E000D9CEB /* Zen Kaku Gothic New Regular.ttf */; };
+		F3528F802A06C19F000D9CEB /* Noto Serif JP.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3528F7D2A06C19F000D9CEB /* Noto Serif JP.otf */; };
+		F3528F812A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3528F7E2A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf */; };
+		F3528F832A0AB99A000D9CEB /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F822A0AB99A000D9CEB /* Extentions.swift */; };
 		F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */; };
 		F3F5C5D329EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */; };
 		F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */; };
@@ -54,6 +62,14 @@
 		F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		F30E835129FE854C00283EE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F30E835329FE85BA00283EE3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F3451E912A05644D00C31619 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Caviar Dreams Bold.ttf"; path = "TheMET/Fonts/Caviar Dreams Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		F3451E942A05698200C31619 /* Caviar Dreams.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Caviar Dreams.ttf"; path = "TheMET/Fonts/Caviar Dreams.ttf"; sourceTree = SOURCE_ROOT; };
+		F3451E952A05698200C31619 /* Quattrocento.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Quattrocento.ttf; path = TheMET/Fonts/Quattrocento.ttf; sourceTree = SOURCE_ROOT; };
+		F3528F7C2A06C19E000D9CEB /* Zen Kaku Gothic New Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Zen Kaku Gothic New Regular.ttf"; sourceTree = "<group>"; };
+		F3528F7D2A06C19F000D9CEB /* Noto Serif JP.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Noto Serif JP.otf"; sourceTree = "<group>"; };
+		F3528F7E2A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Zen Kaku Gothic New Bold.ttf"; sourceTree = "<group>"; };
+		F3528F822A0AB99A000D9CEB /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtWorkLoadingView.swift; sourceTree = "<group>"; };
 		F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedArtWorkLoadingView.xib; sourceTree = "<group>"; };
@@ -101,9 +117,11 @@
 				F3012FCC29C9E37D00138CE3 /* CatalogViewController.swift */,
 				F3012FCE29C9E3A800138CE3 /* FavoritesViewController.swift */,
 				F3012FBA29C4AE1800138CE3 /* Main.storyboard */,
+				F3451E912A05644D00C31619 /* Colors.xcassets */,
 				F3012FBD29C4AE1A00138CE3 /* Assets.xcassets */,
 				F3012FBF29C4AE1A00138CE3 /* LaunchScreen.storyboard */,
 				F3012FC229C4AE1B00138CE3 /* Info.plist */,
+				F3451E992A05699A00C31619 /* Fonts */,
 			);
 			path = TheMET;
 			sourceTree = "<group>";
@@ -113,6 +131,7 @@
 			children = (
 				F30CE99429CA005F00013B2A /* Art.swift */,
 				F30CE99629CA007A00013B2A /* Department.swift */,
+				F3528F822A0AB99A000D9CEB /* Extentions.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -137,6 +156,19 @@
 				F30E834629F7E5EA00283EE3 /* FailedToLoadView.swift */,
 			);
 			path = FailedToLoadView;
+			sourceTree = "<group>";
+		};
+		F3451E992A05699A00C31619 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F3528F7C2A06C19E000D9CEB /* Zen Kaku Gothic New Regular.ttf */,
+				F3528F7E2A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf */,
+				F3528F7D2A06C19F000D9CEB /* Noto Serif JP.otf */,
+				F3451E942A05698200C31619 /* Caviar Dreams.ttf */,
+				F3451E952A05698200C31619 /* Quattrocento.ttf */,
+				F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		F37EB74829F2AC1600A0B008 /* FeaturedArtWorkLoadingView */ = {
@@ -209,10 +241,17 @@
 			files = (
 				F3012FC129C4AE1A00138CE3 /* LaunchScreen.storyboard in Resources */,
 				F30E835029FE854C00283EE3 /* Localizable.strings in Resources */,
+				F3451E972A05698200C31619 /* Caviar Dreams.ttf in Resources */,
 				F3012FBE29C4AE1A00138CE3 /* Assets.xcassets in Resources */,
+				F3451E982A05698200C31619 /* Quattrocento.ttf in Resources */,
+				F3451E962A05698200C31619 /* Caviar Dreams Bold.ttf in Resources */,
 				F30E834529F6AD5A00283EE3 /* FailedToLoadView.xib in Resources */,
+				F3528F7F2A06C19F000D9CEB /* Zen Kaku Gothic New Regular.ttf in Resources */,
+				F3528F802A06C19F000D9CEB /* Noto Serif JP.otf in Resources */,
 				F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */,
+				F3528F812A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf in Resources */,
 				F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */,
+				F3451E922A05644D00C31619 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +270,7 @@
 				F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */,
 				F3012FC929C9E30700138CE3 /* RootTabBarController.swift in Sources */,
 				F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */,
+				F3528F832A0AB99A000D9CEB /* Extentions.swift in Sources */,
 				F30CE99729CA007A00013B2A /* Department.swift in Sources */,
 				F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */,
 				F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */,
