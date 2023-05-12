@@ -2,6 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Caviar Dreams.ttf</string>
+		<string>Caviar Dreams Bold.ttf</string>
+		<string>Quattrocento.ttf</string>
+		<string>Noto Serif JP.otf</string>
+		<string>Zen Kaku Gothic New Regular.ttf</string>
+		<string>Zen Kaku Gothic New Bold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
