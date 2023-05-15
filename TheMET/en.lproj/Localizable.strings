@@ -16,6 +16,7 @@
 
 "random_artwork_screen_title" = "Random Artwork Of The Day";
 "catalog_screen_title" = "Catalog";
+"catalog_screen_departments_section_title" = "Department";
 "favories_screen_title" = "Favories";
 "featured_artwork.loading" = "Please wait while we choose a masterpiece";
 "featured_artwork.loading_failed" = "Artwork cannot be upload  \n \n Make sure you are connected to Wi-Fi or your cellural network";
