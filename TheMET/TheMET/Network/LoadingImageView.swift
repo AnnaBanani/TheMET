@@ -45,7 +45,6 @@ class LoadingImageView: UIView {
         self.addSubview(self.imageView)
         self.addSubview(self.activityIndicator)
         self.addSubview(self.failedImageView)
-        self.imageView.contentMode = .scaleToFill
         self.failedImageView.contentMode = .scaleAspectFit
         NSLayoutConstraint.activate([
             self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),

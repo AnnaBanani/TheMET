@@ -133,7 +133,6 @@
 				F3451E912A05644D00C31619 /* Colors.xcassets */,
 				F3012FB429C4AE1800138CE3 /* AppDelegate.swift */,
 				F3012FB629C4AE1800138CE3 /* SceneDelegate.swift */,
-				F3847C572A0E972B00501F0F /* GradientView.swift */,
 			);
 			path = TheMET;
 			sourceTree = "<group>";
@@ -188,6 +187,7 @@
 				F3528F822A0AB99A000D9CEB /* UINavigationItem+apply.swift */,
 				F3528F892A0D0171000D9CEB /* UIButton+apply.swift */,
 				F3528F872A0D0149000D9CEB /* UILabel+apply.swift */,
+				F3847C572A0E972B00501F0F /* GradientView.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
