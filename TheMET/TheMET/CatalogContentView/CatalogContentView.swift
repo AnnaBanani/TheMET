@@ -19,7 +19,7 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     var flowLayout: UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 130 , height: 180)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 10
         return layout
