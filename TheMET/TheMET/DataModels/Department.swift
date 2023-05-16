@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Department {
+class Department: Decodable {
     
     let departmentId: Int
     

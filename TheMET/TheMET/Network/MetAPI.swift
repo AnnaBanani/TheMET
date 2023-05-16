@@ -73,5 +73,27 @@ class MetAPI{
                 }
             }
     }
+    
+    func departments(completion: @escaping (DepartmentsResponse?) -> Void) {
+        var urlString: String = self.urlBaseString
+        let urlStringSuffix: String = "public/collection/v1/departments"
+        urlString.append(urlStringSuffix)
+        self.networkManager.get(
+            urlString: urlString,
+            parameters: [ : ]) { data in
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .useDefaultKeys
+                if let data = data {
+                    do {
+                        let result = try jsonDecoder.decode(DepartmentsResponse.self, from: data)
+                        completion(result)
+                    } catch {
+                        completion(nil)
+                    }
+                } else {
+                    completion(nil)
+                }
+            }
+    }
 
 }
