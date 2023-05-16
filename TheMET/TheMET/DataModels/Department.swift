@@ -9,12 +9,12 @@ import Foundation
 
 class Department: Decodable {
     
-    let departmentId: Int
+    let id: Int
     
     let displayName: String
     
-    init(departmentId: Int, displayName: String) {
-        self.departmentId = departmentId
+    init(id: Int, displayName: String) {
+        self.id = id
         self.displayName = displayName
     }
     
