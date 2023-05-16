@@ -17,8 +17,11 @@
 "random_artwork_screen_title" = "Произведение дня";
 "catalog_screen_title" = "Каталог";
 "catalog_screen_departments_section_title" = "Департамент";
+"catalog.loading_failed" = "Каталог не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
 "favories_screen_title" = "Избранное";
 "featured_artwork.loading" = "Пожалуйста, подождите, пока мы выбираем шедевр";
-"featured_artwork.loading_failed" = "Произведение не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
-"featured_artwork.load_again_cta" = "Попробуйте снова";
+"artwork.loading_failed" = "Произведение не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
+"artwork.load_again_cta" = "Попробуйте снова";
 "featured_artwork.load_next_cta" = "Сгенерировать другое";
+"category_artworks.loading" = "Подождите пока мы развешиваем картины";
+"category.loading_failed" = "Произведения не могут быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";

@@ -21,7 +21,8 @@ class FeaturedArtViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("random_artwork_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        let newView = FeaturedArtWorkLoadingView.constructView()
+        let newView = LoadingPlaceholderView.constructView()
+        newView.setup(configuration: .featuredLoading)
         newView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(newView)
         NSLayoutConstraint.activate([

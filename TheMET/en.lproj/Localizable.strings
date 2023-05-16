@@ -17,9 +17,12 @@
 "random_artwork_screen_title" = "Random Artwork Of The Day";
 "catalog_screen_title" = "Catalog";
 "catalog_screen_departments_section_title" = "Department";
+"catalog.loading_failed" = "Catalog cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
 "favories_screen_title" = "Favories";
 "featured_artwork.loading" = "Please wait while we choose a masterpiece";
-"featured_artwork.loading_failed" = "Artwork cannot be upload  \n \n Make sure you are connected to Wi-Fi or your cellural network";
-"featured_artwork.load_again_cta" = "Try again";
+"artwork.loading_failed" = "Artwork cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
+"artwork.load_again_cta" = "Try again";
 "featured_artwork.load_next_cta" = "Generate next artwork";
+"category_artworks.loading" = "Please wait,\nwhile we're hanging pictures";
+"category.loading_failed" = "Artworks cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
 

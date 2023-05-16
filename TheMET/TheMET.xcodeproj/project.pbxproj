@@ -42,8 +42,8 @@
 		F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */; };
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
 		F3C7DB552A13B5DE00DBBF87 /* DepartmentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB542A13B5DE00DBBF87 /* DepartmentsResponse.swift */; };
-		F3F5C5D329EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */; };
-		F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */; };
+		F3F5C5D329EEE6DC004CFA85 /* LoadingPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5C5D229EEE6DC004CFA85 /* LoadingPlaceholderView.swift */; };
+		F3F5C5D529EEF3EF004CFA85 /* LoadingPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F5C5D429EEF3EF004CFA85 /* LoadingPlaceholderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,8 +85,8 @@
 		F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F3C7DB542A13B5DE00DBBF87 /* DepartmentsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentsResponse.swift; sourceTree = "<group>"; };
-		F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtWorkLoadingView.swift; sourceTree = "<group>"; };
-		F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedArtWorkLoadingView.xib; sourceTree = "<group>"; };
+		F3F5C5D229EEE6DC004CFA85 /* LoadingPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlaceholderView.swift; sourceTree = "<group>"; };
+		F3F5C5D429EEF3EF004CFA85 /* LoadingPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingPlaceholderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				F3528F8B2A0D01AA000D9CEB /* ViewControllers */,
+				F37EB74829F2AC1600A0B008 /* FeaturedArtWorkLoadingView */,
 				F30E834129F6AD1500283EE3 /* FailedToLoadView */,
 				F3528F912A0E7FB7000D9CEB /* CatalogContentView */,
 				F30CE99329CA003800013B2A /* DataModels */,
@@ -166,7 +167,6 @@
 			children = (
 				F30E834429F6AD5A00283EE3 /* FailedToLoadView.xib */,
 				F30E834629F7E5EA00283EE3 /* FailedToLoadView.swift */,
-				F37EB74829F2AC1600A0B008 /* FeaturedArtWorkLoadingView */,
 			);
 			path = FailedToLoadView;
 			sourceTree = "<group>";
@@ -219,8 +219,8 @@
 		F37EB74829F2AC1600A0B008 /* FeaturedArtWorkLoadingView */ = {
 			isa = PBXGroup;
 			children = (
-				F3F5C5D429EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib */,
-				F3F5C5D229EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift */,
+				F3F5C5D429EEF3EF004CFA85 /* LoadingPlaceholderView.xib */,
+				F3F5C5D229EEE6DC004CFA85 /* LoadingPlaceholderView.swift */,
 			);
 			path = FeaturedArtWorkLoadingView;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 				F3528F7F2A06C19F000D9CEB /* Zen Kaku Gothic New Regular.ttf in Resources */,
 				F3528F972A0E7FDA000D9CEB /* CatalogContentView.xib in Resources */,
 				F3528F802A06C19F000D9CEB /* Noto Serif JP.otf in Resources */,
-				F3F5C5D529EEF3EF004CFA85 /* FeaturedArtWorkLoadingView.xib in Resources */,
+				F3F5C5D529EEF3EF004CFA85 /* LoadingPlaceholderView.xib in Resources */,
 				F3528F812A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf in Resources */,
 				F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */,
 				F3451E922A05644D00C31619 /* Colors.xcassets in Resources */,
@@ -311,7 +311,7 @@
 				F30CE99A29CA0A2700013B2A /* NetworkManager.swift in Sources */,
 				F3012FCD29C9E37D00138CE3 /* CatalogViewController.swift in Sources */,
 				F3847C582A0E972B00501F0F /* GradientView.swift in Sources */,
-				F3F5C5D329EEE6DC004CFA85 /* FeaturedArtWorkLoadingView.swift in Sources */,
+				F3F5C5D329EEE6DC004CFA85 /* LoadingPlaceholderView.swift in Sources */,
 				F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,
 				F30E834729F7E5EA00283EE3 /* FailedToLoadView.swift in Sources */,
