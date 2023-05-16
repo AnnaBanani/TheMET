@@ -7,15 +7,21 @@
 
 import Foundation
 
-class Department {
+class Department: Decodable {
     
-    let departmentId: Int
+    let id: Int
     
     let displayName: String
     
-    init(departmentId: Int, displayName: String) {
-        self.departmentId = departmentId
-        self.displayName = displayName
+    enum CodingKeys: String, CodingKey {
+        case id = "departmentId"
+        case displayName
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.displayName = try container.decode(String.self, forKey: .displayName)
     }
     
 }
