@@ -16,7 +16,7 @@ class LoadingImageView: UIView {
         case loaded(UIImage)
     }
     
-    private var state: State = .loading {
+    var state: State = .loading {
         didSet {
             self.resetStateView(state: self.state)
         }
@@ -39,13 +39,14 @@ class LoadingImageView: UIView {
     }
     
     func setupLayout() {
+        self.clipsToBounds = true
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         self.failedImageView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.imageView)
         self.addSubview(self.activityIndicator)
         self.addSubview(self.failedImageView)
-        self.imageView.contentMode = .scaleAspectFit
+        self.imageView.contentMode = .scaleAspectFill
         self.failedImageView.contentMode = .scaleAspectFit
         NSLayoutConstraint.activate([
             self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
