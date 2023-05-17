@@ -16,16 +16,14 @@ class LoadingPlaceholderView: UIView {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var button: UIButton!
     
-    static func constructView() -> LoadingPlaceholderView {
+    static func constructView(configuration: LoadingPlaceholderConfiguration) -> LoadingPlaceholderView {
         let nib = UINib(nibName: LoadingPlaceholderView.xibFileName, bundle: nil)
-        return nib.instantiate(withOwner: nil).first as! LoadingPlaceholderView
-        }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+        let view = nib.instantiate(withOwner: nil).first as! LoadingPlaceholderView
+        view.setup(configuration: configuration)
+        return view
     }
     
-    func setup(configuration: LoadingPlaceholderConfiguration) {
+    private func setup(configuration: LoadingPlaceholderConfiguration) {
         self.imageView.image = configuration.image
         self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: configuration.text)
         if let buttonTitle = configuration.buttonTitle {
