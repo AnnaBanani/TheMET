@@ -121,12 +121,13 @@
 			isa = PBXGroup;
 			children = (
 				F3528F8B2A0D01AA000D9CEB /* ViewControllers */,
-				F37EB74829F2AC1600A0B008 /* FeaturedArtWorkLoadingView */,
 				F30E834129F6AD1500283EE3 /* FailedToLoadView */,
 				F3528F912A0E7FB7000D9CEB /* CatalogContentView */,
 				F30CE99329CA003800013B2A /* DataModels */,
 				F30CE99B29CC91BD00013B2A /* Network */,
 				F3528F862A0D00EA000D9CEB /* Extentions */,
+				F30E834129F6AD1500283EE3 /* FailedToLoadView */,
+				F3528F8B2A0D01AA000D9CEB /* ViewControllers */,
 				F3451E992A05699A00C31619 /* Fonts */,
 				F3012FC229C4AE1B00138CE3 /* Info.plist */,
 				F3012FBF29C4AE1A00138CE3 /* LaunchScreen.storyboard */,
@@ -157,7 +158,6 @@
 				F30E834829F7FD2500283EE3 /* MetAPI.swift */,
 				F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */,
 				F30E834A29F7FEFD00283EE3 /* ObjectsResponse.swift */,
-				F3C7DB542A13B5DE00DBBF87 /* DepartmentsResponse.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -319,7 +319,6 @@
 				F3012FC929C9E30700138CE3 /* RootTabBarController.swift in Sources */,
 				F3528F952A0E7FDA000D9CEB /* CatalogContentView.swift in Sources */,
 				F3528F962A0E7FDA000D9CEB /* CatalogCell.swift in Sources */,
-				F3C7DB552A13B5DE00DBBF87 /* DepartmentsResponse.swift in Sources */,
 				F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */,
 				F3528F832A0AB99A000D9CEB /* UINavigationItem+apply.swift in Sources */,
 				F30CE99729CA007A00013B2A /* Department.swift in Sources */,
