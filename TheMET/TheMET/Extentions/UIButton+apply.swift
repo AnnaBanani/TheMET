@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    func apply(backgroundColor: UIColor?, fontColor: UIColor?, font: String, fontSize: Double, buttonTitle: String) {
+    func apply(radius: CGFloat, backgroundColor: UIColor?, fontColor: UIColor?, font: String, fontSize: Double, buttonTitle: String) {
         self.backgroundColor = backgroundColor
-        self.layer.cornerRadius = 30
+        self.layer.cornerRadius = radius
         var buttonAttributed: [NSAttributedString.Key: Any] = [ : ]
         let fontName = font
         if let font: UIFont = UIFont(name: fontName, size: fontSize),
@@ -19,9 +19,9 @@ extension UIButton {
             buttonAttributed[.font] = font
             buttonAttributed[.foregroundColor] = color
             if fontName == "Zen Kaku Gothic New Regular" {
-                buttonAttributed[.baselineOffset] = 7
+                buttonAttributed[.baselineOffset] = 5
             } else {
-                buttonAttributed[.baselineOffset] = 4
+                buttonAttributed[.baselineOffset] = 2
             }
         }
         let buttonAttributedString = NSAttributedString(
