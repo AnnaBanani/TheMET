@@ -73,11 +73,11 @@ class TagListView: UIView {
         self.maxNumberOfLines = .max
     }
     
-    typealias frameData = (tagViewFrames: [CGRect], showMoreButtonFrame: CGRect?, height: CGFloat)
+    private typealias LayoutData = (tagViewFrames: [CGRect], showMoreButtonFrame: CGRect?, height: CGFloat)
     
     
-    private func calculateLayout(for width: CGFloat) -> frameData {
-        var result: frameData = frameData(tagViewFrames: [], showMoreButtonFrame: .zero, height: 0)
+    private func calculateLayout(for width: CGFloat) -> LayoutData {
+        var result: LayoutData = LayoutData(tagViewFrames: [], showMoreButtonFrame: .zero, height: 0)
         guard width > 0 else {
             return result
         }
@@ -106,19 +106,18 @@ class TagListView: UIView {
         } else {
             let restTagsWidth = self.tagsWidth(from: tagViewIndex, to: self.tagViews.count - 1, xSpace: xSpace)
             if restTagsWidth < width {
-                let restTagsFrames:[CGRect] = self.setRestTagsFrames(from: tagViewIndex, to: self.tagViews.count - 1, xSpace: xSpace, ySpace: ySpace, x: x, y: y)
+                let restTagsFrames:[CGRect] = self.calculateRestTagsFrames(from: tagViewIndex, to: self.tagViews.count - 1, xSpace: xSpace, ySpace: ySpace, x: x, y: y)
                 result.tagViewFrames.append(contentsOf: restTagsFrames)
                 break throughTags
             } else {
-                let restTagsAndShowMoreButtonFrames = self.setRestTagsAndShowMoreButtonFrames(from: tagViewIndex, to: self.tagViews.count - 1, xSpace: xSpace, ySpace: ySpace, x: x, y: y)
+                let restTagsAndShowMoreButtonFrames = self.calculateRestTagsAndShowMoreButtonFrames(from: tagViewIndex, to: self.tagViews.count - 1, xSpace: xSpace, ySpace: ySpace, x: x, y: y)
                 result.tagViewFrames.append(contentsOf: restTagsAndShowMoreButtonFrames.tagViewFrames)
-                result.showMoreButtonFrame = restTagsAndShowMoreButtonFrames.showMoreButton
+                result.showMoreButtonFrame = restTagsAndShowMoreButtonFrames.showMoreButtonFrame
                 break throughTags
             }
         }
     }
-        self.totalHeight = self.tagViews[0].bounds.height * CGFloat(lineNumber + 1) + ySpace * CGFloat(lineNumber)
-        result.height = self.totalHeight
+        result.height = self.tagViews[0].bounds.height * CGFloat(lineNumber + 1) + ySpace * CGFloat(lineNumber)
         return result
     }
     
@@ -146,21 +145,23 @@ class TagListView: UIView {
     }
     
     private func layoutTagViews() {
-        let visibleTags:[CGRect] = self.calculateLayout(for: self.bounds.width).tagViewFrames
+        let layoutData: LayoutData = self.calculateLayout(for: self.bounds.width)
+        let visibleTags:[CGRect] = layoutData.tagViewFrames
         let visibleTagsCount = visibleTags.count
     throughTags: for (tagViewIndex, tagView) in tagViews.enumerated() {
         if tagViewIndex < visibleTagsCount {
             self.addSubview(tagView)
             tagView.apply(radius: 15, backgroundColor: UIColor(named: "plum"), fontColor: UIColor(named: "blackberry"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 13, buttonTitle: (self.tagViews[tagViewIndex].titleLabel?.text)!)
-            let tagFrameOrigin = self.calculateLayout(for: self.bounds.width).tagViewFrames[tagViewIndex].origin
+            let tagFrameOrigin = layoutData.tagViewFrames[tagViewIndex].origin
             tagView.frame.origin = tagFrameOrigin
         }
     }
-        if let showMoreButtonFrame = self.calculateLayout(for: self.bounds.width).showMoreButtonFrame,
+        if let showMoreButtonFrame = layoutData.showMoreButtonFrame,
            showMoreButtonFrame.width != 0 {
             self.addSubview(self.showMoreTagsButton)
             self.showMoreTagsButton.frame.origin = showMoreButtonFrame.origin
         }
+        self.totalHeight = layoutData.height
         self.invalidateIntrinsicContentSize()
     }
     
@@ -174,7 +175,7 @@ class TagListView: UIView {
         return result
     }
     
-    private func setRestTagsFrames(from index1: Int, to index2: Int, xSpace: CGFloat, ySpace: CGFloat, x: CGFloat, y: CGFloat) -> [CGRect] {
+    private func calculateRestTagsFrames(from index1: Int, to index2: Int, xSpace: CGFloat, ySpace: CGFloat, x: CGFloat, y: CGFloat) -> [CGRect] {
         var tagViewFrames: [CGRect] = []
         var xCoord: CGFloat = x
         for index in index1 ... index2 {
@@ -185,13 +186,12 @@ class TagListView: UIView {
         return tagViewFrames
     }
     
-    private func setRestTagsAndShowMoreButtonFrames(from index1: Int, to index2: Int, xSpace: CGFloat, ySpace: CGFloat, x: CGFloat, y: CGFloat) -> (tagViewFrames: [CGRect], showMoreButton: CGRect) {
+    private func calculateRestTagsAndShowMoreButtonFrames(from index1: Int, to index2: Int, xSpace: CGFloat, ySpace: CGFloat, x: CGFloat, y: CGFloat) -> (tagViewFrames: [CGRect], showMoreButtonFrame: CGRect) {
         var result: ([CGRect], CGRect) = ([], .zero)
         var xCoord: CGFloat = x
         for index in index1 ... index2 {
             let tagView = self.tagViews[index]
             if tagView.bounds.width > self.bounds.width - xCoord - self.showMoreTagsButton.bounds.width {
-                self.showMoreTagsButton.frame.origin = CGPoint(x: xCoord, y: y)
                 result.1  = CGRect(x: xCoord, y: y, width: showMoreTagsButton.bounds.width, height: showMoreTagsButton.bounds.height)
                 return result
             } else {
