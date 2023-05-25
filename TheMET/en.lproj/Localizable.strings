@@ -25,4 +25,5 @@
 "featured_artwork.load_next_cta" = "Generate next artwork";
 "category_artworks.loading" = "Please wait,\nwhile we're hanging pictures";
 "category.loading_failed" = "Artworks cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
+"button_title.show_more_tags_cta" = "Show more tags...";
 
