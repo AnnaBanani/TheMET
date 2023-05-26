@@ -44,6 +44,7 @@
 		F3C7DB5B2A14F38C00DBBF87 /* LoadingPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C7DB592A14F38C00DBBF87 /* LoadingPlaceholderView.xib */; };
 		F3C7DB5C2A14F38C00DBBF87 /* LoadingPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5A2A14F38C00DBBF87 /* LoadingPlaceholderView.swift */; };
 		F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */; };
+		F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		F3C7DB592A14F38C00DBBF87 /* LoadingPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingPlaceholderView.xib; sourceTree = "<group>"; };
 		F3C7DB5A2A14F38C00DBBF87 /* LoadingPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingPlaceholderView.swift; sourceTree = "<group>"; };
 		F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
+		F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		F30CE99B29CC91BD00013B2A /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */,
 				F30CE99C29CC91F300013B2A /* ImageLoader.swift */,
 				F30CE99929CA0A2700013B2A /* NetworkManager.swift */,
 				F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */,
@@ -336,6 +339,7 @@
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,
 				F30CE99529CA005F00013B2A /* Art.swift in Sources */,
 				F30E834B29F7FEFD00283EE3 /* ObjectsResponse.swift in Sources */,
+				F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
 				F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */,
 				F3528F882A0D0149000D9CEB /* UILabel+apply.swift in Sources */,
