@@ -28,7 +28,7 @@ class MetAPI{
         if let date = metadataDate {
             dateString = dateFormatter.string(from: date)
             parameters["metadataDate"] = dateString
-        } 
+        }
         let idArrayString: String
         if !departmentIds.isEmpty {
             idArrayString = departmentIds.map {String($0)}.joined(separator: "|")
@@ -73,5 +73,74 @@ class MetAPI{
                 }
             }
     }
-
+    
+    func search(parameters: [SearchParameter], completion: @escaping (SearchResponse?) -> Void) {
+        var urlString: String = self.urlBaseString
+        let urlStringSuffix: String = "public/collection/v1/search"
+        urlString.append(urlStringSuffix)
+        let searchParameters: [String : String] = self.parameters(from: parameters)
+        self.networkManager.get(
+            urlString: urlString,
+            parameters: searchParameters) { data in
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .useDefaultKeys
+                if let data = data {
+                    do {
+                        let result = try jsonDecoder.decode(SearchResponse.self, from: data)
+                        completion(result)
+                    } catch {
+                        completion(nil)
+                    }
+                } else {
+                    completion(nil)
+                }
+            }
+    }
+    
+    private func parameters(from searchParameters: [SearchParameter]) -> [String : String] {
+        var parameters: [String : String] = [ : ]
+        for parameter in searchParameters {
+            switch parameter {
+            case .q(let text):
+                parameters["q"] = text
+            case .isHighlight(let isHighlight):
+                parameters["isHighlight"] = self.convertBoolToString(value: isHighlight)
+            case .title(let isTitle):
+                parameters["title"] = self.convertBoolToString(value: isTitle)
+            case .tags(let isTag):
+                parameters["tags"] = self.convertBoolToString(value: isTag)
+            case .departmentId(let departmentId):
+                parameters["departmentId"] = String(departmentId)
+            case .isOnView(let isOnView):
+                parameters["isOnView"] = self.convertBoolToString(value: isOnView)
+            case .artistOrCulture(let isArtistOrCulture):
+                parameters["artistOrCulture"] = self.convertBoolToString(value: isArtistOrCulture)
+            case .medium(let medium):
+                parameters["medium"] = medium
+            case .hasImages(let hasImages):
+                parameters["hasImages"] = self.convertBoolToString(value: hasImages)
+            case .geoLocation(let geoLocation):
+                parameters["geoLocation"] = geoLocation
+            case .dates(let dates):
+                parameters["dates"] = self.covertDatasToString(from: dates.from, to: dates.to)
+            }
+        }
+        return parameters
+    }
+    
+    private func convertBoolToString(value: Bool) -> String {
+        if value {
+            return ("true")
+        } else {
+            return ("false")
+        }
+    }
+    
+    private func covertDatasToString(from: Int, to: Int) -> String {
+        var result: String
+        result = String(from)
+        result.append("&")
+        result.append(String(to))
+        return result
+    }
 }
