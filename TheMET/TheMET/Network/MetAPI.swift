@@ -78,7 +78,7 @@ class MetAPI{
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/search"
         urlString.append(urlStringSuffix)
-        var searchParameters: [String : String] = self.fillingParameters(parameters: parameters)
+        let searchParameters: [String : String] = self.parameters(from: parameters)
         self.networkManager.get(
             urlString: urlString,
             parameters: searchParameters) { data in
@@ -97,35 +97,35 @@ class MetAPI{
             }
     }
     
-    private func fillingParameters (parameters: [SearchParameter]) -> [String : String] {
-        var searchParameters: [String : String] = [ : ]
-        for parameter in parameters {
+    private func parameters(from searchParameters: [SearchParameter]) -> [String : String] {
+        var parameters: [String : String] = [ : ]
+        for parameter in searchParameters {
             switch parameter {
             case .q(let text):
-                searchParameters["q"] = text
-            case .isHighlight(let bool):
-                searchParameters["isHighlight"] = self.convertBoolToString(value: bool)
-            case .title(let bool):
-                searchParameters["title"] = self.convertBoolToString(value: bool)
-            case .tags(let bool):
-                searchParameters["tags"] = self.convertBoolToString(value: bool)
+                parameters["q"] = text
+            case .isHighlight(let isHighlight):
+                parameters["isHighlight"] = self.convertBoolToString(value: isHighlight)
+            case .title(let isTitle):
+                parameters["title"] = self.convertBoolToString(value: isTitle)
+            case .tags(let isTag):
+                parameters["tags"] = self.convertBoolToString(value: isTag)
             case .departmentId(let departmentId):
-                searchParameters["departmentId"] = String(departmentId)
-            case .isOnView(let bool):
-                searchParameters["isOnView"] = self.convertBoolToString(value: bool)
-            case .artistOrCulture(let bool):
-                searchParameters["artistOrCulture"] = self.convertBoolToString(value: bool)
+                parameters["departmentId"] = String(departmentId)
+            case .isOnView(let isOnView):
+                parameters["isOnView"] = self.convertBoolToString(value: isOnView)
+            case .artistOrCulture(let isArtistOrCulture):
+                parameters["artistOrCulture"] = self.convertBoolToString(value: isArtistOrCulture)
             case .medium(let medium):
-                searchParameters["medium"] = medium
-            case .hasImages(let bool):
-                searchParameters["hasImages"] = self.convertBoolToString(value: bool)
+                parameters["medium"] = medium
+            case .hasImages(let hasImages):
+                parameters["hasImages"] = self.convertBoolToString(value: hasImages)
             case .geoLocation(let geoLocation):
-                searchParameters["geoLocation"] = geoLocation
+                parameters["geoLocation"] = geoLocation
             case .dates(let dates):
-                searchParameters["dates"] = self.covertDatasToString(from: dates.from, to: dates.to)
+                parameters["dates"] = self.covertDatasToString(from: dates.from, to: dates.to)
             }
         }
-        return searchParameters
+        return parameters
     }
     
     private func convertBoolToString(value: Bool) -> String {
@@ -138,9 +138,9 @@ class MetAPI{
     
     private func covertDatasToString(from: Int, to: Int) -> String {
         var result: String
-        result = String(describing: from)
+        result = String(from)
         result.append("&")
-        result.append(String(describing: to))
+        result.append(String(to))
         return result
     }
 }
