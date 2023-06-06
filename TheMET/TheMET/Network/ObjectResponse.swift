@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ObjectResponse: Decodable {
+class ObjectResponse: Decodable, Encodable {
     
     enum DecodeError: Error {
         
@@ -186,6 +186,69 @@ class ObjectResponse: Decodable {
         case galleryNumber = "GalleryNumber"
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.objectID, forKey: .objectID)
+        try container.encode(self.isHighlight, forKey: .isHighlight)
+        try container.encode(self.accessionNumber, forKey: .accessionNumber)
+        try container.encode(self.accessionYear, forKey: .accessionYear)
+        try container.encode(self.isPublicDomain, forKey: .isPublicDomain)
+        try container.encode(self.primaryImage, forKey: .primaryImage)
+        try container.encode(self.primaryImageSmall, forKey: .primaryImageSmall)
+        try container.encode(self.additionalImages, forKey: .additionalImages)
+        try container.encode(self.constituents, forKey: .constituents)
+        try container.encode(self.department, forKey: .department )
+        try container.encode(self.title, forKey: .title )
+        try container.encode(self.culture, forKey: .culture )
+        try container.encode(self.period, forKey: .period)
+        try container.encode(self.dynasty, forKey: .dynasty)
+        try container.encode(self.reign, forKey: .reign)
+        try container.encode(self.portfolio, forKey: .portfolio)
+        try container.encode(self.artistRole, forKey: .artistRole)
+        try container.encode(self.artistPrefix, forKey: .artistPrefix)
+        try container.encode(self.artistDisplayName, forKey: .artistDisplayName)
+        try container.encode(self.artistDisplayBio, forKey: .artistDisplayBio)
+        try container.encode(self.artistSuffix, forKey: .artistSuffix)
+        try container.encode(self.artistAlphaSort, forKey: .artistAlphaSort)
+        try container.encode(self.artistNationality, forKey: .artistNationality)
+        try container.encode(self.artistBeginDate, forKey: .artistBeginDate)
+        try container.encode(self.artistEndDate, forKey: .artistEndDate)
+        try container.encode(self.artistGender, forKey: .artistGender)
+        try container.encode(self.artistWikidataUrl, forKey: .artistWikidataUrl)
+        try container.encode(self.artistUlanUrl, forKey: .artistUlanUrl)
+        try container.encode(self.objectDate, forKey: .objectDate)
+        try container.encode(self.objectBeginDate, forKey: .objectBeginDate)
+        try container.encode(self.objectEndDate, forKey: .objectEndDate)
+        try container.encode(self.medium, forKey: .medium)
+        try container.encode(self.dimensions, forKey: .dimensions)
+        try container.encode(self.measurements, forKey: .measurements)
+        try container.encode(self.creditLine, forKey: .creditLine)
+        try container.encode(self.geographyType, forKey: .geographyType)
+        try container.encode(self.city, forKey: .city)
+        try container.encode(self.state, forKey: .state)
+        try container.encode(self.county, forKey: .county)
+        try container.encode(self.country, forKey: .country)
+        try container.encode(self.region, forKey: .region)
+        try container.encode(self.subregion, forKey: .subregion)
+        try container.encode(self.locale, forKey: .locale)
+        try container.encode(self.locus, forKey: .locus)
+        try container.encode(self.excavation, forKey: .excavation)
+        try container.encode(self.river, forKey: .river)
+        try container.encode(self.classification, forKey: .classification)
+        try container.encode(self.rightsAndReproduction, forKey: .rightsAndReproduction)
+        try container.encode(self.linkResource, forKey: .linkResource)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let metaDateString = dateFormatter.string(from: self.metadataDate)
+        try container.encode(metaDateString, forKey: .metadataDate)
+        try container.encode(self.repository, forKey: .repository)
+        try container.encode(self.objectURL, forKey: .objectURL)
+        try container.encode(self.tags, forKey: .tags)
+        try container.encode(self.objectWikidataURL, forKey: .objectWikidataURL)
+        try container.encode(self.isTimelineWork, forKey: .isTimelineWork)
+        try container.encode(self.galleryNumber, forKey: .galleryNumber)
+    }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.objectID = try container.decode(Int.self, forKey: .objectID)
@@ -196,7 +259,11 @@ class ObjectResponse: Decodable {
         self.primaryImage = try container.decode(String?.self, forKey: .primaryImage)
         self.primaryImageSmall = try container.decode(String?.self, forKey: .primaryImageSmall)
         self.additionalImages = try container.decode([String].self, forKey: .additionalImages)
-        self.constituents = try container.decode([Constituent].self, forKey: .constituents)
+        do {
+            self.constituents = try container.decode([Constituent].self, forKey: .constituents)
+        } catch {
+            self.constituents = []
+        }
         self.department = try container.decode(String?.self, forKey: .department)
         self.title = try container.decode(String?.self, forKey: .title)
         self.culture = try container.decode(String?.self, forKey: .culture)
@@ -252,7 +319,7 @@ class ObjectResponse: Decodable {
         self.galleryNumber = try container.decode(String?.self, forKey: .galleryNumber)
     }
 
-    struct Constituent: Decodable {
+    struct Constituent: Decodable, Encodable {
         private let constituentID: Int
         private let role: String?
         private let name: String?
@@ -261,18 +328,27 @@ class ObjectResponse: Decodable {
         private let gender: String?
     }
 
-    struct ElementMeasurement: Decodable {
-        private let height: Double
-        private let width: Double
+    struct ElementMeasurement: Decodable, Encodable {
+        private let height: Double?
+        private let width: Double?
+        private let length: Double?
+        private let diameter: Double?
+        
+        enum CodingKeys: String, CodingKey {
+            case height = "Height"
+            case width = "Width"
+            case length = "Length"
+            case diameter = "Diameter"
+        }
     }
 
-    struct Measurement: Decodable {
+    struct Measurement: Decodable, Encodable {
         private let elementName: String?
         private let elementDescription: String?
         private let elementMeasurements: ElementMeasurement
     }
 
-    struct Tag: Decodable {
+    struct Tag: Decodable, Encodable {
         private let term: String
         private let AAT_URL: String?
         private let Wikidata_URL: String?
