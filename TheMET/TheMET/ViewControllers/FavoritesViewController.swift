@@ -16,10 +16,9 @@ class FavoritesViewController: UIViewController {
                                        image: UIImage(named: "FavoriteIcon")?.withRenderingMode(.alwaysOriginal),
                                        selectedImage: UIImage(named: "FavoriteIconTapped")?.withRenderingMode(.alwaysOriginal))
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("favories_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
     }
-    
 }
