@@ -26,9 +26,6 @@ class ArtFileManager {
         guard let jsonData = try? jsonEncoder.encode(art) else {
             return
         }
-        guard String(data: jsonData, encoding: .utf8) != nil else {
-            return
-        }
         let fileManager = FileManager.default
         let fileURL = self.makeFileUrl(artId: art.objectID)
         DispatchQueue.global().sync {
@@ -45,10 +42,6 @@ class ArtFileManager {
     
     func readArt(id: Int, completion: @escaping (Art?) -> Void) {
         let fileManager = FileManager.default
-        guard fileManager.fileExists(atPath: self.folderURL.path(percentEncoded: false)) else {
-            completion(nil)
-            return
-        }
         let idFileURL = self.folderURL.appending(component: "\(id).string")
         guard fileManager.fileExists(atPath: idFileURL.path()) else {
             completion(nil)
@@ -71,26 +64,25 @@ class ArtFileManager {
     }
     
     func readArtIds(completion: @escaping ([Int]) -> Void) {
-        var filesIds:[Int] = []
+        var artIds:[Int] = []
         let fileManager = FileManager.default
         guard fileManager.fileExists(atPath: self.folderURL.path(percentEncoded: false)) else {
-            completion(filesIds)
+            completion(artIds)
             return
         }
         DispatchQueue.global().async {
             do {
                 let directoryContents = try FileManager.default.contentsOfDirectory(at: self.folderURL, includingPropertiesForKeys: nil, options: [])
                 let folderURLString = self.folderURL.path(percentEncoded: false)
-                let urlStringSuffix: String = ".string"
                 for file in directoryContents {
-                    let contentString = file.path(percentEncoded: false)
-                    var modifiedContentString = contentString.replacingOccurrences(of: folderURLString, with: "")
-                    modifiedContentString = modifiedContentString.replacingOccurrences(of: urlStringSuffix, with: "")
-                    if let id: Int = Int(modifiedContentString) {
-                        filesIds.append(id)
+                    let fileName = (file.lastPathComponent).replacingOccurrences(of: file.pathExtension, with: "")
+                    if let id: Int = Int(fileName) {
+                        artIds.append(id)
                     }
                 }
-                completion(filesIds)
+                DispatchQueue.main.async {
+                    completion(artIds)
+                }
             } catch {
                 print("Could not search for urls of files in documents directory: \(error)")
             }
