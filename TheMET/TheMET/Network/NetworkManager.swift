@@ -9,6 +9,11 @@ import Foundation
 
 class NetworkManager {
     
+    private init() {
+    }
+    
+    static let standard: NetworkManager = NetworkManager()
+    
     private var lastRequestTime = Date.distantPast
     
     func get(urlString: String, parameters: [String : String], completion: @escaping (Data?) -> Void)  {

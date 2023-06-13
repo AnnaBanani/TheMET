@@ -73,7 +73,6 @@ class ArtFileManager {
         DispatchQueue.global().async {
             do {
                 let directoryContents = try FileManager.default.contentsOfDirectory(at: self.folderURL, includingPropertiesForKeys: nil, options: [])
-                let folderURLString = self.folderURL.path(percentEncoded: false)
                 for file in directoryContents {
                     let fileName = (file.lastPathComponent).replacingOccurrences(of: file.pathExtension, with: "")
                     if let id: Int = Int(fileName) {
