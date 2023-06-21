@@ -125,8 +125,7 @@ class CatalogViewController: UIViewController {
                 completion(catalogCellData)
                 return
             }
-            let totalObjectsUInt: UInt = UInt(objects.total)
-            let subtitle: String = (self?.objectsCount(count: totalObjectsUInt))!
+            let subtitle: String = (self?.cellSubtitle(objectsCount: objects.total))!
             self?.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
                 let catalogCellData = CatalogCellData(catalogCellId: department.id, imageURL: url, title: department.displayName, subTitle: subtitle)
                 completion(catalogCellData)
@@ -135,9 +134,9 @@ class CatalogViewController: UIViewController {
     }
     
     
-    private func objectsCount(count: UInt) -> String {
+    private func cellSubtitle(objectsCount: Int) -> String {
         let formatString: String = NSLocalizedString("objects count", comment: "")
-        return String.localizedStringWithFormat(formatString, count)
+        return String.localizedStringWithFormat(formatString, objectsCount)
     }
     
     private func loadDepartmentImageURL(objectIds: [Int], completion: @escaping (URL?) -> Void) {
