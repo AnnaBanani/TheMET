@@ -95,7 +95,7 @@ class CatalogCell: UICollectionViewCell {
     
     private func reapplySubTitleStyle(text: String?) {
         guard let text = text else {
-            self.cardsTitleLabel.attributedText = nil
+            self.cardsSubTitleLabel.attributedText = nil
             return
         }
         self.cardsSubTitleLabel.apply(font: NSLocalizedString("san_serif_font", comment: ""), color: UIColor(named: "pear"), fontSize: 12, title: text)

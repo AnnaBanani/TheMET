@@ -10,6 +10,13 @@ import UIKit
 
 class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var content: [CatalogCellData] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    private let imageLoader = ImageLoader()
+    
     static let xibFileName = "CatalogContentView"
     static let cellIdentifier = "CatalogCell"
     
@@ -43,18 +50,28 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     // UICollectionViewDelegate
     // UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.content.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatalogContentView.cellIdentifier, for: indexPath) as? CatalogCell {
             cell.backgroundColor = .white
-            cell.title = "Title \(indexPath.row)"
-            cell.subtitle = "Subtitle \(indexPath.row)"
-            switch indexPath.row % 3 {
-            case 0: cell.backgroundState = .loading
-            case 1: cell.backgroundState = .loaded(UIImage(named: "Image2")!)
-            default: cell.backgroundState = .loaded(UIImage(named: "Image1")!)
+            let cellContent = self.content[indexPath.row]
+            cell.title = cellContent.title
+            cell.subtitle = cellContent.subTitle
+            cell.backgroundState = .loading
+            cell.tag = cellContent.catalogCellId
+            if let imageURL = cellContent.imageURL {
+                self.imageLoader.loadImage(urlString: imageURL.absoluteString) { image in
+                    guard cell.tag == cellContent.catalogCellId else { return }
+                    if let image = image {
+                        cell.backgroundState = .loaded(image)
+                    } else {
+                        cell.backgroundState = .failed
+                    }
+                }
+            } else {
+                cell.backgroundState = .failed
             }
             return cell
         } else {
