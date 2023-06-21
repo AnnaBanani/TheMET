@@ -43,7 +43,6 @@ class CatalogViewController: UIViewController {
         loadingCatalogView.translatesAutoresizingMaskIntoConstraints = false
         failedCatalogView.translatesAutoresizingMaskIntoConstraints = false
         loadedCatalogView.translatesAutoresizingMaskIntoConstraints = false
-        self.updateContent()
         self.add(catalogSubview: failedCatalogView, stretchView: true)
         self.add(catalogSubview: loadedCatalogView, stretchView: false)
         self.add(catalogSubview: loadingCatalogView, stretchView: true)
@@ -79,21 +78,18 @@ class CatalogViewController: UIViewController {
    
     private func add(catalogSubview: UIView, stretchView: Bool) {
         self.view.addSubview(catalogSubview)
+        var constraints: [NSLayoutConstraint] = [
+            catalogSubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            catalogSubview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            catalogSubview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 70)
+        ]
+        
         if stretchView {
-            NSLayoutConstraint.activate([
-                catalogSubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-                catalogSubview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-                catalogSubview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
-                catalogSubview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                catalogSubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-                catalogSubview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-                catalogSubview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
-            ])
+            constraints.append(catalogSubview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0))
         }
+        NSLayoutConstraint.activate(constraints)
     }
+   
     
     private func loadCatalogCellDataList(completion: @escaping ([CatalogCellData]?) -> Void) {
         self.metAPI.departments { [weak self] departmentResponce in
@@ -101,16 +97,16 @@ class CatalogViewController: UIViewController {
                 completion(nil)
                 return
             }
-            self?.loadCatalogCellDataList(departmens: responce.departments) { catalogCellDataList in
+            self?.loadCatalogCellDataList(departments: responce.departments) { catalogCellDataList in
                 completion(catalogCellDataList)
             }
         }
     }
     
-    private func loadCatalogCellDataList(departmens: [Department], completion: @escaping ([CatalogCellData]) -> Void) {
+    private func loadCatalogCellDataList(departments: [Department], completion: @escaping ([CatalogCellData]) -> Void) {
         let group = DispatchGroup()
         var catalogCellDataList:[CatalogCellData] = []
-        for department in departmens {
+        for department in departments {
             group.enter()
             self.loadCatalogCellData(department: department, completion: { cellData in
                 catalogCellDataList.append(cellData)
@@ -129,13 +125,19 @@ class CatalogViewController: UIViewController {
                 completion(catalogCellData)
                 return
             }
-            let subtitle: String = ("\(objects.total) objects")
-//            localisation
+            let totalObjectsUInt: UInt = UInt(objects.total)
+            let subtitle: String = (self?.objectsCount(count: totalObjectsUInt))!
             self?.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
                 let catalogCellData = CatalogCellData(catalogCellId: department.id, imageURL: url, title: department.displayName, subTitle: subtitle)
                 completion(catalogCellData)
             })
         }
+    }
+    
+    
+    private func objectsCount(count: UInt) -> String {
+        let formatString: String = NSLocalizedString("objects count", comment: "")
+        return String.localizedStringWithFormat(formatString, count)
     }
     
     private func loadDepartmentImageURL(objectIds: [Int], completion: @escaping (URL?) -> Void) {

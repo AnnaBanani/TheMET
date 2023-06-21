@@ -59,8 +59,6 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
             let cellContent = self.content[indexPath.row]
             cell.title = cellContent.title
             cell.subtitle = cellContent.subTitle
-            cell.title = cellContent.title
-            cell.subtitle = cellContent.subTitle
             cell.backgroundState = .loading
             cell.tag = cellContent.catalogCellId
             if let imageURL = cellContent.imageURL {
