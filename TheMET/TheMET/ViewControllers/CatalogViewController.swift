@@ -125,8 +125,11 @@ class CatalogViewController: UIViewController {
                 completion(catalogCellData)
                 return
             }
-            let subtitle: String = (self?.cellSubtitle(objectsCount: objects.total))!
-            self?.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
+            guard let self = self else {
+                return
+            }
+            let subtitle: String = self.cellSubtitle(objectsCount: objects.total)
+            self.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
                 let catalogCellData = CatalogCellData(catalogCellId: department.id, imageURL: url, title: department.displayName, subTitle: subtitle)
                 completion(catalogCellData)
             })
