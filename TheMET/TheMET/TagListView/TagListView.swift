@@ -53,7 +53,7 @@ class TagListView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.showMoreTagsButton.apply(radius: 0, backgroundColor: .clear , fontColor: UIColor(named: "blueberry"), font: NSLocalizedString("serif_font", comment: ""), fontSize: 14, buttonTitle: NSLocalizedString("button_title.show_more_tags_cta", comment: ""))
+        self.showMoreTagsButton.apply(radius: 0, backgroundColor: .clear , fontColor: UIColor(named: "blueberry"), font: NSLocalizedString("serif_font", comment: ""), fontSize: 14, buttonTitle: NSLocalizedString("button_title.show_more_tags_cta", comment: ""), image: nil)
         self.showMoreTagsButton.addTarget(self, action: #selector(showMoreButtonDidTap), for: .touchUpInside)
         self.showMoreTagsButton.frame = CGRect(origin: .zero,
                                                size: self.showMoreTagsButton.intrinsicContentSize)
@@ -151,7 +151,7 @@ class TagListView: UIView {
     throughTags: for (tagViewIndex, tagView) in tagViews.enumerated() {
         if tagViewIndex < visibleTagsCount {
             self.addSubview(tagView)
-            tagView.apply(radius: 15, backgroundColor: UIColor(named: "plum"), fontColor: UIColor(named: "blackberry"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 13, buttonTitle: (self.tagViews[tagViewIndex].titleLabel?.text)!)
+            tagView.apply(radius: 15, backgroundColor: UIColor(named: "plum"), fontColor: UIColor(named: "blackberry"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 13, buttonTitle: (self.tagViews[tagViewIndex].titleLabel?.text)!, image: nil)
             let tagFrameOrigin = layoutData.tagViewFrames[tagViewIndex].origin
             tagView.frame.origin = tagFrameOrigin
         }

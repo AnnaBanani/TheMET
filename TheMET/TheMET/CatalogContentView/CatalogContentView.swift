@@ -55,7 +55,7 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatalogContentView.cellIdentifier, for: indexPath) as? CatalogCell {
-            cell.backgroundColor = .white
+            cell.backgroundColor = UIColor(named: "blackberry")
             let cellContent = self.content[indexPath.row]
             cell.title = cellContent.title
             cell.subtitle = cellContent.subTitle

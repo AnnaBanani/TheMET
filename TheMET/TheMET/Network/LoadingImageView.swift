@@ -38,6 +38,12 @@ class LoadingImageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var contentMode: ContentMode {
+        didSet {
+            self.imageView.contentMode = self.contentMode
+        }
+    }
+    
     func setupLayout() {
         self.clipsToBounds = true
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +52,7 @@ class LoadingImageView: UIView {
         self.addSubview(self.imageView)
         self.addSubview(self.activityIndicator)
         self.addSubview(self.failedImageView)
-        self.imageView.contentMode = .scaleAspectFill
+        self.contentMode = .scaleAspectFill
         self.failedImageView.contentMode = .scaleAspectFit
         NSLayoutConstraint.activate([
             self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),

@@ -27,7 +27,7 @@ class LoadingPlaceholderView: UIView {
         self.imageView.image = configuration.image
         self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: configuration.text)
         if let buttonTitle = configuration.buttonTitle {
-            self.button.apply(radius: 30, backgroundColor: UIColor(named: "blueberry"), fontColor: UIColor(named: "pear"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 20, buttonTitle: buttonTitle)
+            self.button.apply(radius: 30, backgroundColor: UIColor(named: "blueberry"), fontColor: UIColor(named: "pear"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 20, buttonTitle: buttonTitle, image: nil)
             
         } else {
             self.button.isHidden = true
