@@ -82,7 +82,6 @@ class ArtView: UIView {
         self.addSubview(self.textLabel)
         self.addSubview(self.tagView)
         NSLayoutConstraint.activate([
-//            self.loadingImageView.heightAnchor.constraint(equalToConstant: 150),
             self.loadingImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.loadingImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.loadingImageView.topAnchor.constraint(equalTo: self.topAnchor)

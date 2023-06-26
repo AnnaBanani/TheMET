@@ -14,6 +14,8 @@ extension UIButton {
         self.layer.cornerRadius = radius
         if let image = image {
             self.setImage(image, for: .normal)
+        } else {
+            self.setImage(nil, for: .normal)
         }
         var buttonAttributed: [NSAttributedString.Key: Any] = [ : ]
         let fontName = font
