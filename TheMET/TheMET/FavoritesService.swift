@@ -50,10 +50,9 @@ class FavoritesService {
     
     func removeArt(id: Int) {
         self.artFileManager?.deleteArt(id: id)
-    throughArts: for (artIndex, art) in favoriteArts.enumerated() {
-        if art.objectID == id {
-            self.favoriteArts.remove(at: artIndex)
+        self.favoriteArts.removeAll { art in
+            return art.objectID == id
         }
     }
-    }
+
 }
