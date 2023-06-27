@@ -34,6 +34,8 @@ class ObjectResponse: Decodable, Encodable {
     let constituents: [Constituent]
 
     let department: String?
+    
+    let objectName: String?
 
     let title: String?
 
@@ -138,6 +140,7 @@ class ObjectResponse: Decodable, Encodable {
         case additionalImages
         case constituents
         case department
+        case objectName
         case title
         case culture
         case period
@@ -198,6 +201,7 @@ class ObjectResponse: Decodable, Encodable {
         try container.encode(self.additionalImages, forKey: .additionalImages)
         try container.encode(self.constituents, forKey: .constituents)
         try container.encode(self.department, forKey: .department )
+        try container.encode(self.objectName, forKey: .objectName)
         try container.encode(self.title, forKey: .title )
         try container.encode(self.culture, forKey: .culture )
         try container.encode(self.period, forKey: .period)
@@ -265,6 +269,7 @@ class ObjectResponse: Decodable, Encodable {
             self.constituents = []
         }
         self.department = try container.decode(String?.self, forKey: .department)
+        self.objectName = try container.decode(String?.self, forKey: .objectName)
         self.title = try container.decode(String?.self, forKey: .title)
         self.culture = try container.decode(String?.self, forKey: .culture)
         self.period = try container.decode(String?.self, forKey: .period)
