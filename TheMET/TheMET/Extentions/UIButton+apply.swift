@@ -12,11 +12,7 @@ extension UIButton {
     func apply(radius: CGFloat, backgroundColor: UIColor?, fontColor: UIColor?, font: String, fontSize: Double, buttonTitle: String, image: UIImage?) {
         self.backgroundColor = backgroundColor
         self.layer.cornerRadius = radius
-        if let image = image {
-            self.setImage(image, for: .normal)
-        } else {
-            self.setImage(nil, for: .normal)
-        }
+        self.setImage(image, for: .normal)
         var buttonAttributed: [NSAttributedString.Key: Any] = [ : ]
         let fontName = font
         if let font: UIFont = UIFont(name: fontName, size: fontSize),
