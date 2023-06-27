@@ -32,8 +32,8 @@ class FavoritesService {
                     group.leave()
                 }
             }
-            group.notify(queue: .main) {
-                self.favoriteArts = arts
+            group.notify(queue: .main) { [weak self] in
+                self?.favoriteArts = arts
             }
         }
         
@@ -44,18 +44,16 @@ class FavoritesService {
     private (set) var favoriteArts: [Art] = []
     
     func addFavoriteArt(_ art: Art) {
-        guard let artFileManager = self.artFileManager else {
-            return
-        }
         self.artFileManager?.write(art: art)
+        self.favoriteArts.append(art)
     }
     
-    func removeArt(id: String) {
-        guard let idInt = Int(id),
-        let artFileManager = self.artFileManager else {
-            return
+    func removeArt(id: Int) {
+        self.artFileManager?.deleteArt(id: id)
+    throughArts: for (artIndex, art) in favoriteArts.enumerated() {
+        if art.objectID == id {
+            self.favoriteArts.remove(at: artIndex)
         }
-        artFileManager.deleteArt(id: idInt)
     }
-    
+    }
 }
