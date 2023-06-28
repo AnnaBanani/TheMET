@@ -137,12 +137,12 @@ class CatalogViewController: UIViewController {
     }
     
     
-    private func cellSubtitle(objectsCount: Int) -> String {
+    private func cellSubtitle(objectsCount: ArtID) -> String {
         let formatString: String = NSLocalizedString("objects count", comment: "")
         return String.localizedStringWithFormat(formatString, objectsCount)
     }
     
-    private func loadDepartmentImageURL(objectIds: [Int], completion: @escaping (URL?) -> Void) {
+    private func loadDepartmentImageURL(objectIds: [ArtID], completion: @escaping (URL?) -> Void) {
         guard !objectIds.isEmpty else {
             completion(nil)
             return
@@ -151,13 +151,13 @@ class CatalogViewController: UIViewController {
             if let imageURL = url {
                 completion(imageURL)
             } else {
-                let newObjectsIds: [Int] = Array(objectIds.dropFirst())
+                let newObjectsIds: [ArtID] = Array(objectIds.dropFirst())
                 self?.loadDepartmentImageURL(objectIds: newObjectsIds, completion: completion)
             }
         }
     }
 
-    private func loadObjectImageURL(objectId: Int, completion: @escaping (URL?) -> Void){
+    private func loadObjectImageURL(objectId: ArtID, completion: @escaping (URL?) -> Void){
         self.metAPI.object(id: objectId) { object in
             guard let object = object else {
                 completion(nil)

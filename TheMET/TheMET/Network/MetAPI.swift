@@ -52,7 +52,7 @@ class MetAPI{
             }
     }
     
-    func object(id: Int, completion: @escaping (ObjectResponse?) -> Void) {
+    func object(id: ArtID, completion: @escaping (ObjectResponse?) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/objects/\(id)"
         urlString.append(urlStringSuffix)

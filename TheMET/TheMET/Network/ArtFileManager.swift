@@ -40,7 +40,7 @@ class ArtFileManager {
         }
     }
     
-    func readArt(id: Int, completion: @escaping (Art?) -> Void) {
+    func readArt(id: ArtID, completion: @escaping (Art?) -> Void) {
         let fileManager = FileManager.default
         let idFileURL = self.folderURL.appending(component: "\(id).string")
         guard fileManager.fileExists(atPath: idFileURL.path()) else {
@@ -63,8 +63,8 @@ class ArtFileManager {
         }
     }
     
-    func readArtIds(completion: @escaping ([Int]) -> Void) {
-        var artIds:[Int] = []
+    func readArtIds(completion: @escaping ([ArtID]) -> Void) {
+        var artIds:[ArtID] = []
         let fileManager = FileManager.default
         guard fileManager.fileExists(atPath: self.folderURL.path(percentEncoded: false)) else {
             completion(artIds)
@@ -75,7 +75,7 @@ class ArtFileManager {
                 let directoryContents = try FileManager.default.contentsOfDirectory(at: self.folderURL, includingPropertiesForKeys: nil, options: [])
                 for file in directoryContents {
                     let fileName = (file.lastPathComponent).replacingOccurrences(of: file.pathExtension, with: "")
-                    if let id: Int = Int(fileName) {
+                    if let id: ArtID = ArtID(fileName) {
                         artIds.append(id)
                     }
                 }
@@ -88,7 +88,7 @@ class ArtFileManager {
         }
     }
     
-    func deleteArt(id: Int) {
+    func deleteArt(id: ArtID) {
         let fileManager = FileManager.default
         let fileToDeleteUrl = self.makeFileUrl(artId: id)
         guard fileManager.fileExists(atPath: fileToDeleteUrl.path(percentEncoded: false)) else {
@@ -103,7 +103,7 @@ class ArtFileManager {
         }
     }
     
-    private func makeFileUrl(artId: Int) -> URL {
+    private func makeFileUrl(artId: ArtID) -> URL {
         var fileName: String = ""
         fileName.append(String(artId))
         fileName.append(".string")
