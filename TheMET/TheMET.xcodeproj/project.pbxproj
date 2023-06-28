@@ -50,6 +50,8 @@
 		F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */; };
 		F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */; };
 		F3F1D0462A449194003D4559 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0452A449194003D4559 /* ArtView.swift */; };
+		F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0472A49E58E003D4559 /* FavoritesService.swift */; };
+		F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +102,8 @@
 		F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFileManager.swift; sourceTree = "<group>"; };
 		F3F1D0452A449194003D4559 /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
+		F3F1D0472A49E58E003D4559 /* FavoritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesService.swift; sourceTree = "<group>"; };
+		F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+getFolderURL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				F3F1D0442A449180003D4559 /* ArtView */,
+				F3F1D0472A49E58E003D4559 /* FavoritesService.swift */,
 				F3C7DB5D2A14F73800DBBF87 /* TagListView */,
 				F3C7DB582A14F36500DBBF87 /* LoadingPlaceholderView */,
 				F3528F912A0E7FB7000D9CEB /* CatalogContentView */,
@@ -209,6 +214,7 @@
 				F3528F892A0D0171000D9CEB /* UIButton+apply.swift */,
 				F3528F872A0D0149000D9CEB /* UILabel+apply.swift */,
 				F3847C572A0E972B00501F0F /* GradientView.swift */,
+				F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 				F30CE99A29CA0A2700013B2A /* NetworkManager.swift in Sources */,
 				F3012FCD29C9E37D00138CE3 /* CatalogViewController.swift in Sources */,
 				F3847C582A0E972B00501F0F /* GradientView.swift in Sources */,
+				F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */,
 				F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,
 				F30E834729F7E5EA00283EE3 /* FailedToLoadView.swift in Sources */,
@@ -366,6 +373,7 @@
 				F3C7DB5C2A14F38C00DBBF87 /* LoadingPlaceholderView.swift in Sources */,
 				F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */,
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,
+				F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */,
 				F30CE99529CA005F00013B2A /* Art.swift in Sources */,
 				F30E834B29F7FEFD00283EE3 /* ObjectsResponse.swift in Sources */,
 				F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */,
