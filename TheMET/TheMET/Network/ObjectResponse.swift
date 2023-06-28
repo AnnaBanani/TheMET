@@ -15,7 +15,7 @@ class ObjectResponse: Decodable, Encodable {
         case dateNotConverted
     }
 
-    let objectID: Int
+    let objectID: ArtID
 
     let isHighlight: Bool
 
@@ -255,7 +255,7 @@ class ObjectResponse: Decodable, Encodable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.objectID = try container.decode(Int.self, forKey: .objectID)
+        self.objectID = try container.decode(ArtID.self, forKey: .objectID)
         self.isHighlight = try container.decode(Bool.self, forKey: .isHighlight)
         self.accessionNumber = try container.decode(String?.self, forKey: .accessionNumber)
         self.accessionYear = try container.decode(String?.self, forKey: .accessionYear)

@@ -10,6 +10,6 @@ import Foundation
 class ObjectsResponse: Decodable {
     
     var total: Int
-    var objectIDs: [Int]
+    var objectIDs: [ArtID]
     
 }

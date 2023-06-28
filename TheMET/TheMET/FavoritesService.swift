@@ -48,7 +48,7 @@ class FavoritesService {
         self.favoriteArts.append(art)
     }
     
-    func removeArt(id: Int) {
+    func removeArt(id: ArtID) {
         self.artFileManager?.deleteArt(id: id)
         self.favoriteArts.removeAll { art in
             return art.objectID == id

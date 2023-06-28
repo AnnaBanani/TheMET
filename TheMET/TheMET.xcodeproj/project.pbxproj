@@ -39,6 +39,7 @@
 		F3528F952A0E7FDA000D9CEB /* CatalogContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F922A0E7FDA000D9CEB /* CatalogContentView.swift */; };
 		F3528F962A0E7FDA000D9CEB /* CatalogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F932A0E7FDA000D9CEB /* CatalogCell.swift */; };
 		F3528F972A0E7FDA000D9CEB /* CatalogContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3528F942A0E7FDA000D9CEB /* CatalogContentView.xib */; };
+		F355968E2A4C77A500081E72 /* ArID.swift in Sources */ = {isa = PBXBuildFile; fileRef = F355968D2A4C77A500081E72 /* ArID.swift */; };
 		F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */; };
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
 		F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2160C2A3235510056EF54 /* CatalogCellData.swift */; };
@@ -90,6 +91,7 @@
 		F3528F922A0E7FDA000D9CEB /* CatalogContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogContentView.swift; sourceTree = "<group>"; };
 		F3528F932A0E7FDA000D9CEB /* CatalogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogCell.swift; sourceTree = "<group>"; };
 		F3528F942A0E7FDA000D9CEB /* CatalogContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatalogContentView.xib; sourceTree = "<group>"; };
+		F355968D2A4C77A500081E72 /* ArID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArID.swift; sourceTree = "<group>"; };
 		F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F3A2160C2A3235510056EF54 /* CatalogCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCellData.swift; sourceTree = "<group>"; };
@@ -138,8 +140,8 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
-				F3F1D0442A449180003D4559 /* ArtView */,
 				F3F1D0472A49E58E003D4559 /* FavoritesService.swift */,
+				F3F1D0442A449180003D4559 /* ArtView */,
 				F3C7DB5D2A14F73800DBBF87 /* TagListView */,
 				F3C7DB582A14F36500DBBF87 /* LoadingPlaceholderView */,
 				F3528F912A0E7FB7000D9CEB /* CatalogContentView */,
@@ -156,6 +158,7 @@
 				F3451E912A05644D00C31619 /* Colors.xcassets */,
 				F3012FB429C4AE1800138CE3 /* AppDelegate.swift */,
 				F3012FB629C4AE1800138CE3 /* SceneDelegate.swift */,
+				F355968D2A4C77A500081E72 /* ArID.swift */,
 			);
 			path = TheMET;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */,
 				F3528F832A0AB99A000D9CEB /* UINavigationItem+apply.swift in Sources */,
 				F30CE99729CA007A00013B2A /* Department.swift in Sources */,
+				F355968E2A4C77A500081E72 /* ArID.swift in Sources */,
 				F3A2160F2A3374690056EF54 /* DepartmentsResponse.swift in Sources */,
 				F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */,
 				F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */,

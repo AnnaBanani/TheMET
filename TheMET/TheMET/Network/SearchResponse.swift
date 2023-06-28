@@ -11,7 +11,7 @@ import UIKit
 class SearchResponse: Decodable {
     
     let total: Int
-    let objectIDs:[Int]
+    let objectIDs:[ArtID]
     
 }
 
