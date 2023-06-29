@@ -18,25 +18,24 @@ class ImageLoader {
             completion(nil)
             return
         }
-        if self.loadedImagesCollection.keys.contains(imageURL) {
+        if let image = self.loadedImagesCollection[imageURL]  {
             completion(self.loadedImagesCollection[imageURL])
-        } else {
-            DispatchQueue.global().async {
-                let executeComplitionOnMain: (UIImage?) -> Void = { image in
-                    DispatchQueue.main.async {
-                        self.loadedImagesCollection[imageURL] = image
-                        completion(image)
-                    }
-                }
-                if let imageData = try? Data(contentsOf: imageURL),
-                   let loadedImage = UIImage(data: imageData) {
-                    executeComplitionOnMain(loadedImage)
-                } else {
-                   executeComplitionOnMain(nil)
+            return
+        }
+        DispatchQueue.global().async {
+            let executeComplitionOnMain: (UIImage?) -> Void = { image in
+                DispatchQueue.main.async {
+                    self.loadedImagesCollection[imageURL] = image
+                    completion(image)
                 }
             }
+            if let imageData = try? Data(contentsOf: imageURL),
+               let loadedImage = UIImage(data: imageData) {
+                executeComplitionOnMain(loadedImage)
+            } else {
+                executeComplitionOnMain(nil)
+            }
         }
-        
     }
 }
 
