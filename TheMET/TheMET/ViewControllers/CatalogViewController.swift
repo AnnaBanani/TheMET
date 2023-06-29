@@ -39,21 +39,16 @@ class CatalogViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("catalog_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        
-        loadingCatalogView.translatesAutoresizingMaskIntoConstraints = false
-        failedCatalogView.translatesAutoresizingMaskIntoConstraints = false
-        loadedCatalogView.translatesAutoresizingMaskIntoConstraints = false
-        self.add(catalogSubview: failedCatalogView, stretchView: true)
-        self.add(catalogSubview: loadedCatalogView, stretchView: false)
-        self.add(catalogSubview: loadingCatalogView, stretchView: true)
-        self.loadCatalogCellDataList { catalogCellDataList in
-            guard let catalogCellDataList = catalogCellDataList else {
-                self.contentStatus = .failed
-                return
-            }
-            self.contentStatus = .loaded(catalogCellDataList)
+        self.loadingCatalogView.translatesAutoresizingMaskIntoConstraints = false
+        self.failedCatalogView.translatesAutoresizingMaskIntoConstraints = false
+        self.loadedCatalogView.translatesAutoresizingMaskIntoConstraints = false
+        self.add(catalogSubview: self.failedCatalogView, stretchView: true)
+        self.add(catalogSubview: self.loadedCatalogView, stretchView: false)
+        self.add(catalogSubview: self.loadingCatalogView, stretchView: true)
+        self.failedCatalogView.onButtonTap = { [weak self] in
+            self?.reloadButtonDidTap()
         }
-        self.updateContent()
+        self.reloadCatalog()
     }
     
     private func updateContent() {
@@ -90,7 +85,6 @@ class CatalogViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
    
-    
     private func loadCatalogCellDataList(completion: @escaping ([CatalogCellData]?) -> Void) {
         self.metAPI.departments { [weak self] departmentResponce in
             guard let responce = departmentResponce else {
@@ -168,6 +162,21 @@ class CatalogViewController: UIViewController {
                 return
             }
             completion(URL(string: imageURLstring))
+        }
+    }
+    
+    private func reloadButtonDidTap() {
+        self.reloadCatalog()
+    }
+    
+    private func reloadCatalog() {
+        self.contentStatus = .loading
+        self.loadCatalogCellDataList { [self] catalogCellDataList in
+            guard let catalogCellDataList = catalogCellDataList else {
+                self.contentStatus = .failed
+                return
+            }
+            self.contentStatus = .loaded(catalogCellDataList)
         }
     }
 }
