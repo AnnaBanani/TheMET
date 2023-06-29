@@ -19,7 +19,7 @@ class ImageLoader {
             return
         }
         if let image = self.loadedImagesCollection[imageURL]  {
-            completion(self.loadedImagesCollection[imageURL])
+            completion(image)
             return
         }
         DispatchQueue.global().async {
