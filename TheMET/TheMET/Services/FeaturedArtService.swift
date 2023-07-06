@@ -129,11 +129,13 @@ class FeaturedArtService {
             guard let objecResponce = objecResponce,
             let randomId = objecResponce.objectIDs.randomElement() else {
                 self?.featuredArt = .failedToLoad
+                self?.isFeaturedArtLoading = false
                 return
             }
             self?.metAPI.object(id: randomId) {[weak self] object in
                 guard let object = object else {
                     self?.featuredArt = .failedToLoad
+                    self?.isFeaturedArtLoading = false
                     return
                 }
                 self?.storeFeaturedArtData(artId: randomId, date: Date.now)
