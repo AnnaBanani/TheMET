@@ -53,6 +53,7 @@
 		F3F1D0462A449194003D4559 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0452A449194003D4559 /* ArtView.swift */; };
 		F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0472A49E58E003D4559 /* FavoritesService.swift */; };
 		F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */; };
+		F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		F3F1D0452A449194003D4559 /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		F3F1D0472A49E58E003D4559 /* FavoritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesService.swift; sourceTree = "<group>"; };
 		F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+getFolderURL.swift"; sourceTree = "<group>"; };
+		F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +142,7 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
-				F3F1D0472A49E58E003D4559 /* FavoritesService.swift */,
+				F3F5E7292A5312A30014CBF6 /* Services */,
 				F3F1D0442A449180003D4559 /* ArtView */,
 				F3C7DB5D2A14F73800DBBF87 /* TagListView */,
 				F3C7DB582A14F36500DBBF87 /* LoadingPlaceholderView */,
@@ -269,6 +271,15 @@
 			path = ArtView;
 			sourceTree = "<group>";
 		};
+		F3F5E7292A5312A30014CBF6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F3F1D0472A49E58E003D4559 /* FavoritesService.swift */,
+				F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -380,6 +391,7 @@
 				F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */,
 				F30CE99529CA005F00013B2A /* Art.swift in Sources */,
 				F30E834B29F7FEFD00283EE3 /* ObjectsResponse.swift in Sources */,
+				F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */,
 				F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
 				F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */,
