@@ -48,6 +48,9 @@ class CatalogViewController: UIViewController {
         self.failedCatalogView.onButtonTap = { [weak self] in
             self?.reloadButtonDidTap()
         }
+        self.loadedCatalogView.onCatalogCellTap = { [weak self] catalogCellID in
+            self?.catalogCellDidTap(catalogCellID)
+        }
         self.reloadCatalog()
     }
     
@@ -179,5 +182,11 @@ class CatalogViewController: UIViewController {
             self.contentStatus = .loaded(catalogCellDataList)
         }
     }
-}
 
+    private func catalogCellDidTap(_ catalogCellId: Int) {
+            let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+            let categoryViewController = mainStoryBoard.instantiateViewController(withIdentifier: "CategoryViewController")
+            self.navigationController?.pushViewController(categoryViewController, animated: true)
+    }
+    
+}
