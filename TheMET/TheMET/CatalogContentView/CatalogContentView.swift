@@ -17,6 +17,8 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     }
     private let imageLoader = ImageLoader()
     
+    var onCatalogCellTap: (_ catalogCellId: Int) -> Void = { _ in }
+    
     static let xibFileName = "CatalogContentView"
     static let cellIdentifier = "CatalogCell"
     
@@ -79,4 +81,12 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
             return UICollectionViewCell()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.collectionView.deselectItem(at: indexPath, animated: true)
+        let cellData = self.content[indexPath.row]
+        self.onCatalogCellTap(cellData.catalogCellId)
+    }
+    
+   
 }

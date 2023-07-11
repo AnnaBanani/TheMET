@@ -54,6 +54,7 @@
 		F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0472A49E58E003D4559 /* FavoritesService.swift */; };
 		F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */; };
 		F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */; };
+		F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		F3F1D0472A49E58E003D4559 /* FavoritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesService.swift; sourceTree = "<group>"; };
 		F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+getFolderURL.swift"; sourceTree = "<group>"; };
 		F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtService.swift; sourceTree = "<group>"; };
+		F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 				F3012FCA29C9E35800138CE3 /* FeaturedArtViewController.swift */,
 				F3012FCC29C9E37D00138CE3 /* CatalogViewController.swift */,
 				F3012FCE29C9E3A800138CE3 /* FavoritesViewController.swift */,
+				F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
 				F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */,
+				F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */,
 				F3528F882A0D0149000D9CEB /* UILabel+apply.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -60,6 +61,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOJ-K6-MIw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="708" y="-132"/>
+        </scene>
+        <!--Category View Controller-->
+        <scene sceneID="w3b-Ft-Efo">
+            <objects>
+                <viewController storyboardIdentifier="CategoryViewController" id="A1G-Ww-uNj" customClass="CategoryViewController" customModule="TheMET" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xbj-UF-enH">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUM-Oq-p6o">
+                                <rect key="frame" x="146.66666666666666" y="413.66666666666669" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UP0-Jj-ScX"/>
+                                    <constraint firstAttribute="width" constant="100" id="zvE-rF-ajc"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonDidTap" destination="A1G-Ww-uNj" eventType="touchUpInside" id="yoX-SG-wM8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="AnL-1d-a4r"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <constraints>
+                            <constraint firstItem="fUM-Oq-p6o" firstAttribute="centerX" secondItem="AnL-1d-a4r" secondAttribute="centerX" id="3Hg-gk-SqR"/>
+                            <constraint firstItem="fUM-Oq-p6o" firstAttribute="centerY" secondItem="AnL-1d-a4r" secondAttribute="centerY" id="znA-D8-Yrt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButon" destination="fUM-Oq-p6o" id="HKb-00-wNP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QHC-qO-ozk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644" y="-132"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="EAC-2H-Nnk">
@@ -140,5 +177,8 @@
         <namedColor name="plum">
             <color red="0.73725490196078436" green="0.69019607843137254" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
