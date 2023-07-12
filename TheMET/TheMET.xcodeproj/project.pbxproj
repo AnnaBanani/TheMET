@@ -55,6 +55,7 @@
 		F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */; };
 		F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */; };
 		F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */; };
+		F3F5E72F2A5D8AE10014CBF6 /* ArtViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		F3F1D0492A4B0C8B003D4559 /* URL+getFolderURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+getFolderURL.swift"; sourceTree = "<group>"; };
 		F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtService.swift; sourceTree = "<group>"; };
 		F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 		F3F1D0442A449180003D4559 /* ArtView */ = {
 			isa = PBXGroup;
 			children = (
+				F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */,
 				F3F1D0452A449194003D4559 /* ArtView.swift */,
 			);
 			path = ArtView;
@@ -377,6 +380,7 @@
 				F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */,
 				F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */,
 				F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */,
+				F3F5E72F2A5D8AE10014CBF6 /* ArtViewCell.swift in Sources */,
 				F3012FC929C9E30700138CE3 /* RootTabBarController.swift in Sources */,
 				F3F1D0462A449194003D4559 /* ArtView.swift in Sources */,
 				F3528F952A0E7FDA000D9CEB /* CatalogContentView.swift in Sources */,

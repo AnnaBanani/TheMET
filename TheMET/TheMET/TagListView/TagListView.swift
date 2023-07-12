@@ -53,6 +53,8 @@ class TagListView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+//        self.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+//        self.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
         self.showMoreTagsButton.apply(radius: 0, backgroundColor: .clear , fontColor: UIColor(named: "blueberry"), font: NSLocalizedString("serif_font", comment: ""), fontSize: 14, buttonTitle: NSLocalizedString("button_title.show_more_tags_cta", comment: ""), image: nil)
         self.showMoreTagsButton.addTarget(self, action: #selector(showMoreButtonDidTap), for: .touchUpInside)
         self.showMoreTagsButton.frame = CGRect(origin: .zero,

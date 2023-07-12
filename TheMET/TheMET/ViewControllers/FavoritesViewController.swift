@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var tableView: UITableView = UITableView(frame: .zero, style: .plain)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,24 +22,51 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("favories_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        let artView: ArtView = ArtView()
-        artView.imageState = .loaded(UIImage(named: "Image2")!)
-        artView.isLiked = true
-        artView.tags = ["Egypt", "Van Gogh", "Painting", "Oil"]
-        artView.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-        artView.onLikeButtonDidTap = { [weak artView] in
-            artView?.isLiked.toggle()
-        }
-        artView.translatesAutoresizingMaskIntoConstraints = false
-       
-        self.view.addSubview(artView)
+        self.tableView.backgroundColor = .clear
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.tableView)
         NSLayoutConstraint.activate([
-            artView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
-            artView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10),
-            artView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
-            artView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100)
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
+        self.tableView.separatorStyle = .none
+        self.tableView.estimatedRowHeight = 10
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.register(ArtViewCell.self, forCellReuseIdentifier: ArtViewCell.artViewCellIdentifier)
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         
-       
+    }
+    
+//  UITableViewDelegate, UITableViewDataSource
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            cell.imageState = .loaded(UIImage(named: "Image1")!)
+            cell.isLiked = true
+            cell.text = "AAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAA AAAAAAAAAAA"
+            cell.onLikeButtonDidTap = {
+                print("Test art with id favourite button tapped")
+            }
+            cell.tags = ["aaaaaaa", "bbbbbbb", "ccccccc", "dddddddd", "eeeeeeeee"]
+            return cell
+        } else {
+            print ("Error")
+            return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
+
+
