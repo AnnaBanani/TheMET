@@ -44,15 +44,37 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-            cell.imageState = .loaded(UIImage(named: "Image1")!)
-            cell.isLiked = true
-            cell.text = "AAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAA AAAAAAAAAAA"
-            cell.onLikeButtonDidTap = {
-                print("Test art with id favourite button tapped")
+            if indexPath.row == 0 {
+                cell.backgroundColor = .clear
+                cell.selectionStyle = .none
+                cell.imageState = .loaded(UIImage(named: "Image1")!)
+                cell.isLiked = true
+                cell.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+                cell.onLikeButtonDidTap = {
+                    print("Test art with id 0 favourite button tapped")
+                }
+                cell.tags = ["aaaaaaa", "bbbbbbb", "ccccccc", "dddddddd", "eeeeeeeee"]
+            } else if indexPath.row == 1 {
+                cell.backgroundColor = .clear
+                cell.selectionStyle = .none
+                cell.imageState = .loaded(UIImage(named: "Image2")!)
+                cell.isLiked = true
+                cell.text = "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum "
+                cell.onLikeButtonDidTap = {
+                    print("Test art with id 1 favourite button tapped")
+                }
+                cell.tags = ["aaaaaaa", "bbbbbbb", "ccccccc", "dddddddd", "eeeeeeeee"]
+            } else {
+                cell.backgroundColor = .clear
+                cell.selectionStyle = .none
+                cell.imageState = .loaded(UIImage(named: "Not Loaded Image")!)
+                cell.isLiked = true
+                cell.text = "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum "
+                cell.onLikeButtonDidTap = {
+                    print("Test art with id 2 favourite button tapped")
+                }
+                cell.tags = ["aaaaaaa", "bbbbbbb", "ccccccc", "dddddddd", "eeeeeeeee"]
             }
-            cell.tags = ["aaaaaaa", "bbbbbbb", "ccccccc", "dddddddd", "eeeeeeeee"]
             return cell
         } else {
             print ("Error")
@@ -61,7 +83,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

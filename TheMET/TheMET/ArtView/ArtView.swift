@@ -76,6 +76,7 @@ class ArtView: UIView {
         self.loadingImageView.translatesAutoresizingMaskIntoConstraints = false
         self.likeButton.translatesAutoresizingMaskIntoConstraints = false
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
+//        tagView placement problem is going to be solved in  one the next tasks.
 //        self.tagView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.loadingImageView)
         self.addSubview(self.likeButton)
