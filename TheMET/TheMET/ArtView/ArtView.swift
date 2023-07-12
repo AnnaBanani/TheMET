@@ -76,31 +76,36 @@ class ArtView: UIView {
         self.loadingImageView.translatesAutoresizingMaskIntoConstraints = false
         self.likeButton.translatesAutoresizingMaskIntoConstraints = false
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.tagView.translatesAutoresizingMaskIntoConstraints = false
+//    TODO: - tagView placement problem is going to be solved in the task 34
+//      self.tagView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.loadingImageView)
         self.addSubview(self.likeButton)
         self.addSubview(self.textLabel)
-        self.addSubview(self.tagView)
+//        self.addSubview(self.tagView)
         NSLayoutConstraint.activate([
             self.loadingImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.loadingImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.loadingImageView.topAnchor.constraint(equalTo: self.topAnchor)
+            self.loadingImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.loadingImageView.heightAnchor.constraint(equalToConstant: 250)
         ])
         NSLayoutConstraint.activate([
-            self.likeButton.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.likeButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             self.likeButton.widthAnchor.constraint(equalToConstant: 20),
             self.likeButton.heightAnchor.constraint(equalToConstant: 20),
             self.likeButton.topAnchor.constraint(equalTo: self.loadingImageView.bottomAnchor, constant: 10)
         ])
         NSLayoutConstraint.activate([
-            self.textLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.textLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.textLabel.topAnchor.constraint(equalTo: self.likeButton.bottomAnchor, constant: 10)
+            self.textLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            self.textLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            self.textLabel.topAnchor.constraint(equalTo: self.likeButton.bottomAnchor, constant: 10),
+            self.textLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
         ])
-        NSLayoutConstraint.activate([
-            self.tagView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.tagView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.tagView.topAnchor.constraint(equalTo: self.textLabel.bottomAnchor, constant: 10)
-        ])
+//        NSLayoutConstraint.activate([
+//            self.tagView.topAnchor.constraint(equalTo: self.topAnchor),
+//            self.tagView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+//            self.tagView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+//            self.tagView.topAnchor.constraint(equalTo: self.textLabel.bottomAnchor, constant: 10),
+//            self.tagView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
+//        ])
     }
 }

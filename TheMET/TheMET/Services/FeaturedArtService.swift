@@ -45,7 +45,7 @@ class FeaturedArtService {
         }
     }
     
-    private var onFeaturedArtDidChange: () -> Void = {}
+    var onFeaturedArtDidChange: () -> Void = {}
    
     @objc
     private func appDidBecomeActive() {
