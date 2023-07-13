@@ -39,8 +39,6 @@ class CatalogViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("catalog_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        self.navigationController?.navigationBar.backgroundColor = UIColor(named: "blackberry")
-        self.edgesForExtendedLayout = []
         self.loadingCatalogView.translatesAutoresizingMaskIntoConstraints = false
         self.failedCatalogView.translatesAutoresizingMaskIntoConstraints = false
         self.loadedCatalogView.translatesAutoresizingMaskIntoConstraints = false
