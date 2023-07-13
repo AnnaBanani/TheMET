@@ -12,6 +12,8 @@ extension UINavigationItem {
     func apply(title: String, color: UIColor?, fontName: String, fontSize: Double) -> UINavigationBarAppearance{
         self.title = title
         let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = .clear
         if let color: UIColor = color,
            let font: UIFont = UIFont(name: fontName, size: fontSize) {
             navigationBarAppearance.titleTextAttributes = [

@@ -14,11 +14,18 @@
         <scene sceneID="si8-wz-qcS">
             <objects>
                 <tabBarController id="UEt-U9-0ZV" customClass="RootTabBarController" customModule="TheMET" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ra6-xo-MRd">
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Ra6-xo-MRd">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" name="plum"/>
+                        <color key="backgroundColor" name="blackberry"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" name="blackberry"/>
+                        </tabBarAppearance>
+                        <tabBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" name="blackberry"/>
+                        </tabBarAppearance>
                     </tabBar>
                     <connections>
                         <segue destination="fe6-89-rhd" kind="relationship" relationship="viewControllers" id="XcC-c2-WiS"/>
@@ -35,7 +42,7 @@
             <objects>
                 <viewController id="ZZm-IT-SDc" customClass="FeaturedArtViewController" customModule="TheMET" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="egJ-3q-nxY">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="666"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="eZ1-6u-y20"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.1215686275" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -51,7 +58,7 @@
             <objects>
                 <viewController id="gZU-XP-jNY" customClass="CatalogViewController" customModule="TheMET" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lLq-gz-Exx">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="666"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="dkp-ff-i1K"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.1215686275" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -103,7 +110,7 @@
             <objects>
                 <viewController id="4At-h5-aXG" customClass="FavoritesViewController" customModule="TheMET" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ngn-8c-L4V">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="666"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="dN3-0w-Rmf"/>
                         <color key="backgroundColor" red="0.08235294118" green="0.1215686275" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -120,9 +127,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iWJ-qh-B2g" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Title" selectedImage="Image" id="wKF-eF-h8P"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9lu-u0-jXT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="9lu-u0-jXT">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="blackberry"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -139,9 +147,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SOK-Vp-gia" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="XyE-VY-Wy2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dhW-1X-3je">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="dhW-1X-3je">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="blackberry"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -158,9 +167,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fe6-89-rhd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="mLa-qr-oZo"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lza-pm-4Op">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="lza-pm-4Op">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="blackberry"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -174,8 +184,8 @@
     </scenes>
     <resources>
         <image name="Image" width="101" height="101"/>
-        <namedColor name="plum">
-            <color red="0.73725490196078436" green="0.69019607843137254" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="blackberry">
+            <color red="0.082352941176470587" green="0.12156862745098039" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
