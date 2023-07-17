@@ -55,9 +55,9 @@ class ArtView: UIView {
     private func updateLikeButton() {
         let buttonImageName: String
         if self.isLiked {
-            buttonImageName = "EmptyLikeIcon"
-        } else {
             buttonImageName = "FilledLikeIcon"
+        } else {
+            buttonImageName = "EmptyLikeIcon"
         }
         self.likeButton.apply(radius: 0, backgroundColor: .clear, fontColor: nil, font: "", fontSize: 0, buttonTitle: "", image: UIImage(named: buttonImageName))
     }
@@ -77,7 +77,7 @@ class ArtView: UIView {
         self.likeButton.translatesAutoresizingMaskIntoConstraints = false
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
 //    TODO: - tagView placement problem is going to be solved in the task 34
-//      self.tagView.translatesAutoresizingMaskIntoConstraints = false
+//        self.tagView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.loadingImageView)
         self.addSubview(self.likeButton)
         self.addSubview(self.textLabel)
@@ -101,11 +101,12 @@ class ArtView: UIView {
             self.textLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
         ])
 //        NSLayoutConstraint.activate([
-//            self.tagView.topAnchor.constraint(equalTo: self.topAnchor),
-//            self.tagView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            self.tagView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
 //            self.tagView.topAnchor.constraint(equalTo: self.textLabel.bottomAnchor, constant: 10),
-//            self.tagView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
+//            self.tagView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+//            self.tagView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10),
+//            self.tagView.topAnchor.constraint(equalTo: self.textLabel.bottomAnchor, constant: 100),
+//            self.tagView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 20),
+//            self.tagView.heightAnchor.constraint(equalToConstant: 50)
 //        ])
     }
 }

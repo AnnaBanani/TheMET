@@ -12,7 +12,9 @@ class FavoritesService {
     
     private let artFileManager: ArtFileManager?
 
-    init() {
+    static let standart: FavoritesService = FavoritesService()
+    
+    private init() {
         guard let favoriteFolderURL = URL.documentsSubfolderURL(folderName: "FavoritesArt/"),
            let artFileManager = ArtFileManager(folderURL: favoriteFolderURL) else {
             self.artFileManager = nil
@@ -36,8 +38,9 @@ class FavoritesService {
                 self?.favoriteArts = arts
             }
         }
-        
     }
+    
+    static let didChangeFavoriteArtsNotificationName = NSNotification.Name(rawValue: "didChangeFavoriteArts")
     
 //    MARK: - API
     
@@ -46,6 +49,7 @@ class FavoritesService {
     func addFavoriteArt(_ art: Art) {
         self.artFileManager?.write(art: art)
         self.favoriteArts.append(art)
+        NotificationCenter.default.post(name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
     }
     
     func removeArt(id: ArtID) {
@@ -53,6 +57,10 @@ class FavoritesService {
         self.favoriteArts.removeAll { art in
             return art.objectID == id
         }
+        NotificationCenter.default.post(name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
     }
+    
+    
+    
 
 }

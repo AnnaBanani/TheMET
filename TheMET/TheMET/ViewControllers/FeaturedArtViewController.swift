@@ -20,7 +20,7 @@ class FeaturedArtViewController: UIViewController {
     
     private let imageLoader = ImageLoader()
     
-    private let favoriteService = FavoritesService()
+    private let favoriteService = FavoritesService.standart
     
     private let featuredArtService = FeaturedArtService()
     
@@ -34,6 +34,7 @@ class FeaturedArtViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("random_artwork_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
+        NotificationCenter.default.addObserver(self, selector: #selector(favoriteServiceDidChange), name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
         self.add(featuredSubView: self.loadingFeaturedArtView)
         self.add(featuredSubView: self.failedFeaturedArtView)
         self.add(featuredSubView: self.scrollView)
@@ -56,10 +57,24 @@ class FeaturedArtViewController: UIViewController {
         }
     }
     
+    @objc
+    private func favoriteServiceDidChange() {
+        guard case .loaded(let art) = self.featuredArtService.featuredArt else {
+            return
+        }
+        guard self.favoriteService.favoriteArts.contains(where: { favoriteArt in
+            return favoriteArt.objectID == art.objectID
+        }) else {
+            self.artView.isLiked = false
+            return
+        }
+        self.artView.isLiked = true
+    }
+    
     private func add(featuredSubView: UIView) {
         featuredSubView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(featuredSubView)
-        var constraints: [NSLayoutConstraint] = [
+        let constraints: [NSLayoutConstraint] = [
             featuredSubView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             featuredSubView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             featuredSubView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -110,16 +125,20 @@ class FeaturedArtViewController: UIViewController {
                 self.artView.isLiked = false
             }
             var artText: String = ""
-            if let artistDisplayName = art.artistDisplayName {
+            if let artistDisplayName = art.artistDisplayName,
+               artistDisplayName.isEmpty == false {
                 artText.append(artistDisplayName + "\n")
             }
-            if let title = art.title {
+            if let title = art.title,
+               title.isEmpty == false {
                 artText.append(title + "\n")
             }
-            if let objectDate = art.objectDate {
+            if let objectDate = art.objectDate,
+               objectDate.isEmpty == false {
                 artText.append(objectDate + "\n")
             }
-            if let medium = art.medium {
+            if let medium = art.medium,
+               medium.isEmpty == false {
                 artText.append(medium + "\n")
             }
             self.artView.text = artText
