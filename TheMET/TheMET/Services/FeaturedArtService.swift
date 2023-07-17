@@ -17,7 +17,7 @@ class FeaturedArtService {
     private var isFeaturedArtLoading: Bool = false
     
     init() {
-        guard let featuredFolderURL = URL.documentsSubfolderURL(folderName: "FeaturedArts"),
+        guard let featuredFolderURL = URL.documentsSubfolderURL(folderName: "FeaturedArts/"),
               let artFileManager = ArtFileManager(folderURL: featuredFolderURL) else {
             self.artFileManager = nil
             return
@@ -120,11 +120,12 @@ class FeaturedArtService {
         return currentDateString == dateString
     }
     
-    private func forceUpdateFeaturedArt() {
+    func forceUpdateFeaturedArt() {
         guard !self.isFeaturedArtLoading else {
             return
         }
         self.isFeaturedArtLoading = true
+        self.featuredArt = .loading
         self.metAPI.objects { [weak self] objecResponce in
             guard let objecResponce = objecResponce,
             let randomId = objecResponce.objectIDs.randomElement() else {

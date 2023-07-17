@@ -13,7 +13,7 @@ class FavoritesService {
     private let artFileManager: ArtFileManager?
 
     init() {
-        guard let favoriteFolderURL = URL.documentsSubfolderURL(folderName: "FavoritesArt"),
+        guard let favoriteFolderURL = URL.documentsSubfolderURL(folderName: "FavoritesArt/"),
            let artFileManager = ArtFileManager(folderURL: favoriteFolderURL) else {
             self.artFileManager = nil
             return

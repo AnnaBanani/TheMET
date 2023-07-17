@@ -39,9 +39,6 @@ class CatalogViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("catalog_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        self.loadingCatalogView.translatesAutoresizingMaskIntoConstraints = false
-        self.failedCatalogView.translatesAutoresizingMaskIntoConstraints = false
-        self.loadedCatalogView.translatesAutoresizingMaskIntoConstraints = false
         self.add(catalogSubview: self.failedCatalogView, stretchView: true)
         self.add(catalogSubview: self.loadedCatalogView, stretchView: false)
         self.add(catalogSubview: self.loadingCatalogView, stretchView: true)
@@ -75,6 +72,7 @@ class CatalogViewController: UIViewController {
     }
    
     private func add(catalogSubview: UIView, stretchView: Bool) {
+        catalogSubview.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(catalogSubview)
         var constraints: [NSLayoutConstraint] = [
             catalogSubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),

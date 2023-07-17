@@ -49,7 +49,7 @@ struct LoadingPlaceholderConfiguration {
     let buttonTitle: String?
     
     static let featuredFailed: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("artwork.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
-    static let featuredLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("featured_artwork.loading", comment: ""), image: UIImage(named: "Frame"), buttonTitle: NSLocalizedString("featured_artwork.load_next_cta", comment: ""))
+    static let featuredLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("featured_artwork.loading", comment: ""), image: UIImage(named: "Frame"), buttonTitle: nil)
     static let catalogLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""), image: UIImage(named: "HangingPictures"), buttonTitle: nil)
     static let catalogFailed: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
     static let categoryArtworksLoading: LoadingPlaceholderConfiguration =  LoadingPlaceholderConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""), image: UIImage(named: "HangingPictures"), buttonTitle: nil)
