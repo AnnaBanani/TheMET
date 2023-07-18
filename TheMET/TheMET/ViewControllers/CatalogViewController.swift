@@ -13,9 +13,9 @@ class CatalogViewController: UIViewController {
     
     private let metAPI = MetAPI(networkManager: NetworkManager.standard)
     
-    let loadingCatalogView = LoadingPlaceholderView.constructView(configuration: .catalogLoading)
-    let failedCatalogView = LoadingPlaceholderView.constructView(configuration: .catalogFailed)
-    let loadedCatalogView = CatalogContentView.constructView()
+    private let loadingCatalogView = LoadingPlaceholderView.constructView(configuration: .catalogLoading)
+    private let failedCatalogView = LoadingPlaceholderView.constructView(configuration: .catalogFailed)
+    private let loadedCatalogView = CatalogContentView.constructView()
     
     enum Status {
         case loaded([CatalogCellData])
@@ -77,7 +77,7 @@ class CatalogViewController: UIViewController {
         var constraints: [NSLayoutConstraint] = [
             catalogSubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
             catalogSubview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            catalogSubview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 70)
+            catalogSubview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0)
         ]
         
         if stretchView {
