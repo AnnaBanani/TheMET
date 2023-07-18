@@ -153,7 +153,6 @@ class FeaturedArtViewController: UIViewController {
     }
     
     private func likeButtonDidTap(art: Art) {
-        self.artView.isLiked.toggle()
         if self.artView.isLiked {
             self.favoriteService.addFavoriteArt(art)
         } else {
