@@ -20,7 +20,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     private let categoryTableView: UITableView = UITableView(frame: .zero, style: .plain)
     
     enum Status {
-        case loaded
+        case loaded([Art])
         case loading
         case failed
     }
@@ -30,11 +30,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self.updateContent()
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
@@ -89,7 +85,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func reloadCategory() {
-        self.contentStatus = .loaded
+        self.contentStatus = .loaded([])
     }
     
     
