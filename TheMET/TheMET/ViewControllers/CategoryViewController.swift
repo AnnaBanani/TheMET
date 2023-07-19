@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
-    
-    var titleCategoria: String = String()
 
     private let favoriteService = FavoritesService.standart
     
