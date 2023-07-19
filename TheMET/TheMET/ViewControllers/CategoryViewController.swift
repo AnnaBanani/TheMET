@@ -69,7 +69,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         categorySubview.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(categorySubview)
         categorySubview.backgroundColor = .clear
-        var constraints: [NSLayoutConstraint] = [
+        let constraints: [NSLayoutConstraint] = [
             categorySubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
             categorySubview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
             categorySubview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),

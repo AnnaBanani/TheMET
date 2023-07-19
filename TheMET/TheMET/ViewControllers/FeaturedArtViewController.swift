@@ -154,11 +154,10 @@ class FeaturedArtViewController: UIViewController {
     
     private func likeButtonDidTap(art: Art) {
         if self.artView.isLiked {
-            self.favoriteService.addFavoriteArt(art)
-        } else {
             self.favoriteService.removeArt(id: art.objectID)
+        } else {
+            self.favoriteService.addFavoriteArt(art)
         }
     }
-    
    
 }
