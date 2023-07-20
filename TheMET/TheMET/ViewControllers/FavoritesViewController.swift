@@ -49,13 +49,15 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.reloadData()
     }
     
-    private func loadCellImage(cell: ArtViewCell, indexPath: IndexPath) {
+    private func loadCellImage(cell: ArtViewCell, art: Art) {
         cell.imageState = .loading
-        guard let imageURL =  self.favoriteService.favoriteArts[indexPath.row].primaryImage else {
+        cell.tag = art.objectID
+        guard let imageURL =  art.primaryImage else {
             cell.imageState = .failed
             return
         }
         self.imageLoader.loadImage(urlString: imageURL) { image in
+            guard cell.tag == art.objectID else { return }
             guard let image = image else {
                 cell.imageState = .failed
                 return
@@ -64,50 +66,26 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    private func loadCellText(cell: ArtViewCell, indexPath: IndexPath) -> String {
-        var cellText: String = ""
-        if let artistDisplayName = self.favoriteService.favoriteArts[indexPath.row].artistDisplayName,
-           artistDisplayName.isEmpty == false {
-            cellText.append(artistDisplayName + "\n")
-        }
-        if let title = self.favoriteService.favoriteArts[indexPath.row].title,
-           title.isEmpty == false {
-            cellText.append(title + "\n")
-        }
-        if let objectDate = self.favoriteService.favoriteArts[indexPath.row].objectDate,
-           objectDate.isEmpty == false {
-            cellText.append(objectDate + "\n")
-        }
-        if let medium = self.favoriteService.favoriteArts[indexPath.row].medium,
-           medium.isEmpty == false {
-            cellText.append(medium + "\n")
-        }
-        return cellText
-    }
-    
-    private func loadCellTags(cell: ArtViewCell, indexPath: IndexPath) -> [String] {
+    private func loadCellTags(art: Art) -> [String] {
         var tags: [String] = []
-        if let departmentName = self.favoriteService.favoriteArts[indexPath.row].department {
+        if let departmentName = art.department {
             tags.append(departmentName)
         }
         return tags
-    }
-    
-    private func reloadFavoritesViewController() {
-        
     }
     
 //  UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
+            let art = self.favoriteService.favoriteArts[indexPath.row]
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
-            self.loadCellImage(cell: cell, indexPath: indexPath)
+            self.loadCellImage(cell: cell, art: art)
             cell.isLiked = true
-            cell.text = self.loadCellText(cell: cell, indexPath: indexPath)
-            cell.tags = self.loadCellTags(cell: cell, indexPath: indexPath)
-            let oblectID = self.favoriteService.favoriteArts[indexPath.row].objectID
+            cell.text = String.artDescriptionText(art: art)
+            cell.tags = self.loadCellTags(art: art)
+            let oblectID = art.objectID
             cell.onLikeButtonDidTap = { [weak self] in
                 self?.favoriteService.removeArt(id: oblectID)
             }

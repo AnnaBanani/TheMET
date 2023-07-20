@@ -124,24 +124,7 @@ class FeaturedArtViewController: UIViewController {
             } else {
                 self.artView.isLiked = false
             }
-            var artText: String = ""
-            if let artistDisplayName = art.artistDisplayName,
-               artistDisplayName.isEmpty == false {
-                artText.append(artistDisplayName + "\n")
-            }
-            if let title = art.title,
-               title.isEmpty == false {
-                artText.append(title + "\n")
-            }
-            if let objectDate = art.objectDate,
-               objectDate.isEmpty == false {
-                artText.append(objectDate + "\n")
-            }
-            if let medium = art.medium,
-               medium.isEmpty == false {
-                artText.append(medium + "\n")
-            }
-            self.artView.text = artText
+            self.artView.text = String.artDescriptionText(art: art)
             self.artView.onLikeButtonDidTap = { [weak self] in
                 self?.likeButtonDidTap(art: art)
             }

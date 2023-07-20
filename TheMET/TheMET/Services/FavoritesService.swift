@@ -60,8 +60,4 @@ class FavoritesService {
         }
         NotificationCenter.default.post(name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
     }
-    
-    
-    
-
 }
