@@ -126,9 +126,9 @@ class FeaturedArtService {
         }
         self.isFeaturedArtLoading = true
         self.featuredArt = .loading
-        self.metAPI.objects { [weak self] objecResponce in
-            guard let objecResponce = objecResponce,
-            let randomId = objecResponce.objectIDs.randomElement() else {
+        self.metAPI.objects { [weak self] objectResponce in
+            guard let objectResponce = objectResponce,
+            let randomId = objectResponce.objectIDs.randomElement() else {
                 self?.featuredArt = .failedToLoad
                 self?.isFeaturedArtLoading = false
                 return

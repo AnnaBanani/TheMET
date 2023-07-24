@@ -17,7 +17,7 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     }
     private let imageLoader = ImageLoader()
     
-    var onCatalogCellTap: (_ catalogCellId: Int) -> Void = { _ in }
+    var onCatalogCellTap: (_ departmentId: Int) -> Void = { _ in }
     
     static let xibFileName = "CatalogContentView"
     static let cellIdentifier = "CatalogCell"
@@ -62,10 +62,10 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
             cell.title = cellContent.title
             cell.subtitle = cellContent.subTitle
             cell.backgroundState = .loading
-            cell.tag = cellContent.catalogCellId
+            cell.tag = cellContent.departmentId
             if let imageURL = cellContent.imageURL {
                 self.imageLoader.loadImage(urlString: imageURL.absoluteString) { image in
-                    guard cell.tag == cellContent.catalogCellId else { return }
+                    guard cell.tag == cellContent.departmentId else { return }
                     if let image = image {
                         cell.backgroundState = .loaded(image)
                     } else {
@@ -85,7 +85,7 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.collectionView.deselectItem(at: indexPath, animated: true)
         let cellData = self.content[indexPath.row]
-        self.onCatalogCellTap(cellData.catalogCellId)
+        self.onCatalogCellTap(cellData.departmentId)
     }
     
    

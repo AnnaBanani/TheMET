@@ -9,8 +9,14 @@ import Foundation
 import UIKit
 
 class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
-
+    
+    private let metAPI = MetAPI(networkManager: NetworkManager.standard)
+    
     private let favoriteService = FavoritesService.standart
+    
+    var departmentId: Int?
+    
+    private var imageLoader: ImageLoader = ImageLoader()
     
     private let loadingCategoryView = LoadingPlaceholderView.constructView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = LoadingPlaceholderView.constructView(configuration: .categoryFailed)
@@ -28,10 +34,11 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self.updateContent()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
+        NotificationCenter.default.addObserver(self, selector: #selector(favoriteServiceDidChange), name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
         self.add(categorySubview: self.loadingCategoryView)
         self.add(categorySubview: self.failedCategoryView)
         self.add(categorySubview: self.categoryTableView)
@@ -46,6 +53,11 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         }
         self.updateContent()
         self.reloadCategory()
+    }
+    
+    @objc
+    private func favoriteServiceDidChange() {
+        self.categoryTableView.reloadData()
     }
     
     private func updateContent() {
@@ -63,6 +75,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self.failedCategoryView.isHidden = true
             self.categoryTableView.isHidden = true
         }
+        self.categoryTableView.reloadData()
     }
     
     private func add(categorySubview: UIView) {
@@ -83,44 +96,108 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func reloadCategory() {
-        self.contentStatus = .loaded([])
+        self.contentStatus = .loading
+        self.loadListOfArts { [weak self] arts in
+            guard let arts = arts else {
+                self?.contentStatus = .failed
+                return
+            }
+            self?.contentStatus = .loaded(arts)
+        }
     }
     
+    private func loadCellImage(cell: ArtViewCell, art: Art) {
+        cell.imageState = .loading
+        cell.tag = art.objectID
+        guard let imageURL =  art.primaryImage else {
+            cell.imageState = .failed
+            return
+        }
+        self.imageLoader.loadImage(urlString: imageURL) { [weak cell] image in
+            guard let cell = cell,
+                  cell.tag == art.objectID else { return }
+            guard let image = image else {
+                cell.imageState = .failed
+                return
+            }
+            cell.imageState = .loaded(image)
+        }
+    }
+    
+    private func isArtLiked(art: Art) -> Bool {
+        return self.favoriteService.favoriteArts.contains(where: { favoriteArt in
+            return favoriteArt.objectID == art.objectID
+        })
+    }
+    
+    private func likeButtonDidTap(cell: ArtViewCell, art: Art) {
+        if cell.isLiked {
+            self.favoriteService.removeArt(id: art.objectID)
+        } else {
+            self.favoriteService.addFavoriteArt(art)
+        }
+    }
+    
+    private func loadArtIDs(completion: @escaping([ArtID]?) -> Void) {
+        guard let id = self.departmentId else {
+            self.contentStatus = .failed
+            completion(nil)
+            return
+        }
+        self.metAPI.objects(departmentIds: [id]) { [weak self] objectResponse in
+            guard let objectResponse = objectResponse else {
+                self?.contentStatus = .failed
+                completion(nil)
+                return
+            }
+            completion(objectResponse.objectIDs)
+        }
+    }
+    
+    private func loadListOfArts(completion: @escaping([Art]?) -> Void) {
+        self.loadArtIDs { [weak self] artIDs in
+            guard let self = self,
+                  let artIDs = artIDs else {
+                completion(nil)
+                return
+            }
+            let group = DispatchGroup()
+            var arts: [Art] = []
+            for artID in artIDs {
+                group.enter()
+                self.metAPI.object(id: artID, completion: { objectResponce in
+                    guard let art = objectResponce else {
+                        group.leave()
+                        return
+                    }
+                    arts.append(art)
+                    group.leave()
+                })
+            }
+            group.notify(queue: .main) {
+                completion(arts)
+            }
+        }
+    }
     
     //  UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard case .loaded(let arts) = self.contentStatus else {
+            return UITableViewCell()
+        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
-            if indexPath.row == 0 {
-                cell.backgroundColor = .clear
-                cell.selectionStyle = .none
-                cell.imageState = .loaded(UIImage(named: "Image1")!)
-                cell.isLiked = true
-                cell.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
-                cell.onLikeButtonDidTap = {
-                    print("Test art with id 0 favourite button tapped")
-                }
-                cell.tags = ["aaaaaaa", "bbbbbbb", "ccccccc", "dddddddd", "eeeeeeeee"]
-            } else if indexPath.row == 1 {
-                cell.backgroundColor = .clear
-                cell.selectionStyle = .none
-                cell.imageState = .loaded(UIImage(named: "Image2")!)
-                cell.isLiked = true
-                cell.text = "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum "
-                cell.onLikeButtonDidTap = {
-                    print("Test art with id 1 favourite button tapped")
-                }
-                cell.tags = ["aaaaaaa", "bbbbbbb", "ccccccc", "dddddddd", "eeeeeeeee"]
-            } else {
-                cell.backgroundColor = .clear
-                cell.selectionStyle = .none
-                cell.imageState = .loaded(UIImage(named: "Not Loaded Image")!)
-                cell.isLiked = true
-                cell.text = "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum "
-                cell.onLikeButtonDidTap = {
-                    print("Test art with id 2 favourite button tapped")
-                }
-                cell.tags = ["aaaaaaa", "bbbbbbb", "ccccccc", "dddddddd", "eeeeeeeee"]
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            let art = arts[indexPath.row]
+            self.loadCellImage(cell: cell, art: art)
+            cell.isLiked = self.isArtLiked(art: art)
+            cell.text = String.artDescriptionText(art: art)
+            if let departmentName = art.department {
+                cell.tags = [departmentName]
+            }
+            cell.onLikeButtonDidTap = { [weak self] in
+                self?.likeButtonDidTap(cell: cell, art: art)
             }
             return cell
         } else {
@@ -130,7 +207,12 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch self.contentStatus {
+        case .failed, .loading:
+            return 0
+        case .loaded(let arts):
+            return arts.count
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

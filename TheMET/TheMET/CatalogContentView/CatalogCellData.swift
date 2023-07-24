@@ -10,7 +10,7 @@ import UIKit
 
 struct CatalogCellData {
     
-    let catalogCellId: Int
+    let departmentId: Int
     let imageURL: URL?
     let title: String
     let subTitle: String?

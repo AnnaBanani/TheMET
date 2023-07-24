@@ -45,8 +45,8 @@ class CatalogViewController: UIViewController {
         self.failedCatalogView.onButtonTap = { [weak self] in
             self?.reloadButtonDidTap()
         }
-        self.loadedCatalogView.onCatalogCellTap = { [weak self] catalogCellID in
-            self?.catalogCellDidTap(catalogCellID)
+        self.loadedCatalogView.onCatalogCellTap = { [weak self] departmentId in
+            self?.catalogCellDidTap(departmentId)
         }
         self.reloadCatalog()
     }
@@ -116,7 +116,7 @@ class CatalogViewController: UIViewController {
     private func loadCatalogCellData(department: Department, completion: @escaping (CatalogCellData) -> Void) {
         self.metAPI.objects(departmentIds: [department.id]) { [weak self] objects in
             guard let objects = objects else {
-                let catalogCellData = CatalogCellData(catalogCellId: department.id, imageURL: nil, title: department.displayName, subTitle: nil)
+                let catalogCellData = CatalogCellData(departmentId: department.id, imageURL: nil, title: department.displayName, subTitle: nil)
                 completion(catalogCellData)
                 return
             }
@@ -125,7 +125,7 @@ class CatalogViewController: UIViewController {
             }
             let subtitle: String = self.cellSubtitle(objectsCount: objects.total)
             self.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
-                let catalogCellData = CatalogCellData(catalogCellId: department.id, imageURL: url, title: department.displayName, subTitle: subtitle)
+                let catalogCellData = CatalogCellData(departmentId: department.id, imageURL: url, title: department.displayName, subTitle: subtitle)
                 completion(catalogCellData)
             })
         }
@@ -181,10 +181,12 @@ class CatalogViewController: UIViewController {
         }
     }
 
-    private func catalogCellDidTap(_ catalogCellId: Int) {
-            let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-            let categoryViewController = mainStoryBoard.instantiateViewController(withIdentifier: "CategoryViewController")
-            self.navigationController?.pushViewController(categoryViewController, animated: true)
+    private func catalogCellDidTap(_ departmentId: Int) {
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let categoryViewController = mainStoryBoard.instantiateViewController(withIdentifier: "CategoryViewController") as? CategoryViewController
+        guard let categoryViewController = categoryViewController else { return }
+        categoryViewController.departmentId = departmentId
+        self.navigationController?.pushViewController(categoryViewController, animated: true)
     }
     
 }
