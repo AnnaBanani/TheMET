@@ -18,8 +18,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var imageLoader: ImageLoader = ImageLoader()
     
-    private let favoritteService = FavoritesService.standart
-    
     private let loadingCategoryView = LoadingPlaceholderView.constructView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = LoadingPlaceholderView.constructView(configuration: .categoryFailed)
     
@@ -115,8 +113,9 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             cell.imageState = .failed
             return
         }
-        self.imageLoader.loadImage(urlString: imageURL) { image in
-            guard cell.tag == art.objectID else { return }
+        self.imageLoader.loadImage(urlString: imageURL) { [weak cell] image in
+            guard let cell = cell,
+                  cell.tag == art.objectID else { return }
             guard let image = image else {
                 cell.imageState = .failed
                 return

@@ -48,11 +48,6 @@ class FavoritesService {
     private (set) var favoriteArts: [Art] = []
     
     func addFavoriteArt(_ art: Art) {
-//        guard self.favoriteArts.contains(where: { favoriteArt in
-//            return favoriteArt.objectID == art.objectID
-//        }) else {
-//            return
-//        }
         self.artFileManager?.write(art: art)
         self.favoriteArts.append(art)
         NotificationCenter.default.post(name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
