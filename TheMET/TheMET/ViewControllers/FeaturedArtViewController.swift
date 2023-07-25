@@ -85,7 +85,7 @@ class FeaturedArtViewController: UIViewController {
     
     private func displayCurrentFeaturedArtStatus() {
         switch self.featuredArtService.featuredArt {
-        case .failedToLoad:
+        case .failed:
             self.failedFeaturedArtView.isHidden = false
             self.loadingFeaturedArtView.isHidden = true
             self.scrollView.isHidden = true
@@ -101,7 +101,7 @@ class FeaturedArtViewController: UIViewController {
                       return
                     }
                     switch self.featuredArtService.featuredArt {
-                    case .failedToLoad, .loading:
+                    case .failed, .loading:
                         return
                     case .loaded(let currentArt):
                         guard art.objectID == currentArt.objectID else {

@@ -57,6 +57,7 @@
 		F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */; };
 		F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */; };
 		F3F5E72F2A5D8AE10014CBF6 /* ArtViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */; };
+		F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD733D2A700C7500B163EA /* LoadingStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +115,7 @@
 		F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtService.swift; sourceTree = "<group>"; };
 		F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtViewCell.swift; sourceTree = "<group>"; };
+		F3FD733D2A700C7500B163EA /* LoadingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
+				F3FD733C2A700C5B00B163EA /* Generic Types */,
 				F3F5E7292A5312A30014CBF6 /* Services */,
 				F3F1D0442A449180003D4559 /* ArtView */,
 				F3C7DB5D2A14F73800DBBF87 /* TagListView */,
@@ -289,6 +292,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		F3FD733C2A700C5B00B163EA /* Generic Types */ = {
+			isa = PBXGroup;
+			children = (
+				F3FD733D2A700C7500B163EA /* LoadingStatus.swift */,
+			);
+			path = "Generic Types";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -396,6 +407,7 @@
 				F3A2160F2A3374690056EF54 /* DepartmentsResponse.swift in Sources */,
 				F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */,
 				F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */,
+				F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */,
 				F3C7DB5C2A14F38C00DBBF87 /* LoadingPlaceholderView.swift in Sources */,
 				F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */,
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,

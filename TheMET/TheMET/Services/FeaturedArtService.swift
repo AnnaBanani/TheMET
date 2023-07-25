@@ -33,24 +33,21 @@ class FeaturedArtService {
     }
     
 //    MARK: - API
-    enum FeaturedArt {
-        case loaded(Art)
-        case loading
-        case failedToLoad
-    }
     
-    private (set) var featuredArt: FeaturedArt = .loading {
+    private (set) var featuredArt: LoadingStatus<Art> = .loading {
         didSet {
             self.onFeaturedArtDidChange()
         }
     }
+    
+    
     
     var onFeaturedArtDidChange: () -> Void = {}
    
     @objc
     private func appDidBecomeActive() {
         switch self.featuredArt {
-        case .failedToLoad:
+        case .failed:
             self.updateFeaturedArt()
         case .loading:
             return
@@ -129,13 +126,13 @@ class FeaturedArtService {
         self.metAPI.objects { [weak self] objectResponce in
             guard let objectResponce = objectResponce,
             let randomId = objectResponce.objectIDs.randomElement() else {
-                self?.featuredArt = .failedToLoad
+                self?.featuredArt = .failed
                 self?.isFeaturedArtLoading = false
                 return
             }
             self?.metAPI.object(id: randomId) {[weak self] object in
                 guard let object = object else {
-                    self?.featuredArt = .failedToLoad
+                    self?.featuredArt = .failed
                     self?.isFeaturedArtLoading = false
                     return
                 }
