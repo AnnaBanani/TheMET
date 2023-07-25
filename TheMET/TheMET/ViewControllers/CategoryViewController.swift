@@ -22,14 +22,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     private let failedCategoryView = LoadingPlaceholderView.constructView(configuration: .categoryFailed)
     
     private let categoryTableView: UITableView = UITableView(frame: .zero, style: .plain)
-    
-    enum Status {
-        case loaded([Art])
-        case loading
-        case failed
-    }
-    
-    var contentStatus: Status = .loading {
+  
+    var contentStatus: LoadingStatus<[Art]> = .loading {
         didSet {
             self.updateContent()
         }

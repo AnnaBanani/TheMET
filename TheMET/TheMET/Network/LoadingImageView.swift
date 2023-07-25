@@ -9,13 +9,8 @@ import Foundation
 import UIKit
 
 class LoadingImageView: UIView {
-    
-    enum State {
-        case loading
-        case failed
-        case loaded(UIImage)
-    }
-    
+    typealias State = LoadingStatus<UIImage>
+        
     var state: State = .loading {
         didSet {
             self.resetStateView(state: self.state)
@@ -68,7 +63,7 @@ class LoadingImageView: UIView {
         ])
     }
     
-    private func resetStateView(state: State) {
+    private func resetStateView(state: LoadingStatus<UIImage>) {
         switch state {
         case .loading:
             self.imageView.image = nil

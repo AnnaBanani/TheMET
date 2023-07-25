@@ -17,13 +17,7 @@ class CatalogViewController: UIViewController {
     private let failedCatalogView = LoadingPlaceholderView.constructView(configuration: .catalogFailed)
     private let loadedCatalogView = CatalogContentView.constructView()
     
-    enum Status {
-        case loaded([CatalogCellData])
-        case loading
-        case failed
-    }
-    
-    var contentStatus: Status = .loading {
+    var contentStatus:LoadingStatus<[CatalogCellData]> = .loading {
         didSet {
             self.updateContent()
         }
