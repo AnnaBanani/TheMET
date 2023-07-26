@@ -11,6 +11,8 @@ class MetAPI{
     
     private var networkManager: NetworkManager
     
+    private let metAPICache = MetAPICashe.standard
+    
     private let urlBaseString: String = "https://collectionapi.metmuseum.org/"
     
     init(networkManager: NetworkManager) {
@@ -18,6 +20,27 @@ class MetAPI{
     }
     
     func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (ObjectsResponse?) -> Void) {
+        self.metAPICache.objects(metadataDate: metadataDate, departmentIds: departmentIds) { [weak self] objectsResponce in
+            guard let self = self else {
+                completion(nil)
+                return
+            }
+            if let objectsResponce = objectsResponce {
+                completion(objectsResponce)
+            } else {
+                self.executeObjects(metadataDate: metadataDate, departmentIds: departmentIds) {[weak self] realResponse in
+                    guard let realResponse = realResponse else {
+                        completion(nil)
+                        return
+                    }
+                    self?.metAPICache.putObjectsResponce(metadataDate: metadataDate, departmentIds: departmentIds, responceData: realResponse)
+                    completion(realResponse)
+                }
+            }
+        }
+    }
+    
+    private func executeObjects(metadataDate: Date?, departmentIds: [Int], completion: @escaping (ObjectsResponse?) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/objects"
         urlString.append(urlStringSuffix)
@@ -53,6 +76,27 @@ class MetAPI{
     }
     
     func object(id: ArtID, completion: @escaping (ObjectResponse?) -> Void) {
+        self.metAPICache.object(id: id) { [weak self] objectResponce in
+            guard let self = self else {
+                completion(nil)
+                return
+            }
+            if let objectResponce = objectResponce {
+                completion(objectResponce)
+            } else {
+                self.executeObject(id: id) {[weak self] realResponse in
+                    guard let realResponse = realResponse else {
+                        completion(nil)
+                        return
+                    }
+                    self?.metAPICache.putObjectResponce(id: id, responceData: realResponse)
+                    completion(realResponse)
+                }
+            }
+        }
+    }
+    
+    private func executeObject(id: ArtID, completion: @escaping (ObjectResponse?) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/objects/\(id)"
         urlString.append(urlStringSuffix)
@@ -75,6 +119,27 @@ class MetAPI{
     }
 
     func departments(completion: @escaping (DepartmentsResponse?) -> Void) {
+        self.metAPICache.departments { [weak self] departmentsResponce in
+            guard let self = self else {
+                completion(nil)
+                return
+            }
+            if let departmentsResponce = departmentsResponce {
+                completion(departmentsResponce)
+            } else {
+                self.executeDepartments {[weak self] realResponse in
+                    guard let realResponse = realResponse else {
+                        completion(nil)
+                        return
+                    }
+                    self?.metAPICache.putDepartmentsResponce(responceData: realResponse)
+                    completion(realResponse)
+                }
+            }
+        }
+    }
+    
+    func executeDepartments(completion: @escaping (DepartmentsResponse?) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/departments"
         urlString.append(urlStringSuffix)
@@ -97,6 +162,27 @@ class MetAPI{
     }
     
     func search(parameters: [SearchParameter], completion: @escaping (SearchResponse?) -> Void) {
+        self.metAPICache.search(parameters: parameters) { [weak self] searchResponce in
+            guard let self = self else {
+                completion(nil)
+                return
+            }
+            if let searchResponce = searchResponce {
+                completion(searchResponce)
+            } else {
+                self.executeSearch(parameters: parameters) {[weak self] realResponse in
+                    guard let realResponse = realResponse else {
+                        completion(nil)
+                        return
+                    }
+                    self?.metAPICache.putSearchResponce(parameters: parameters, responceData: realResponse)
+                    completion(realResponse)
+                }
+            }
+        }
+    }
+    
+    func executeSearch(parameters: [SearchParameter], completion: @escaping (SearchResponse?) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/search"
         urlString.append(urlStringSuffix)

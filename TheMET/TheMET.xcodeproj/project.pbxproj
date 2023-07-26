@@ -58,6 +58,7 @@
 		F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */; };
 		F3F5E72F2A5D8AE10014CBF6 /* ArtViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */; };
 		F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD733D2A700C7500B163EA /* LoadingStatus.swift */; };
+		F3FD73402A7018DB00B163EA /* MetAPICache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD733F2A7018DB00B163EA /* MetAPICache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtViewCell.swift; sourceTree = "<group>"; };
 		F3FD733D2A700C7500B163EA /* LoadingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStatus.swift; sourceTree = "<group>"; };
+		F3FD733F2A7018DB00B163EA /* MetAPICache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetAPICache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */,
 				F30E834A29F7FEFD00283EE3 /* ObjectsResponse.swift */,
 				F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */,
+				F3FD733F2A7018DB00B163EA /* MetAPICache.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				F30CE99729CA007A00013B2A /* Department.swift in Sources */,
 				F355968E2A4C77A500081E72 /* ArID.swift in Sources */,
 				F3A2160F2A3374690056EF54 /* DepartmentsResponse.swift in Sources */,
+				F3FD73402A7018DB00B163EA /* MetAPICache.swift in Sources */,
 				F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */,
 				F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */,
 				F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */,
