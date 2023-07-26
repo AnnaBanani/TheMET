@@ -15,6 +15,12 @@ class MetAPICashe {
         let requestData: RequestData
         let responceData: ResponceData
         let date: Date
+        
+        init(requestData: RequestData, responceData: ResponceData) {
+            self.requestData = requestData
+            self.responceData = responceData
+            self.date = Date.now
+        }
     }
     
     private struct ObjectsRequestData {
@@ -63,7 +69,7 @@ class MetAPICashe {
         }
         completion(cachedData.responceData)
     }
-
+    
     func departments(completion: @escaping (DepartmentsResponse?) -> Void) {
         self.departmentsCashe.removeAll { data in
             !self.isTimeIntervalLessEnough(lastRequest: data.date)
@@ -94,35 +100,31 @@ class MetAPICashe {
     func putObjectsResponce(metadataDate: Date?, departmentIds: [Int], responceData: ObjectsResponse) {
         let newCachedData = CachedData<ObjectsRequestData, ObjectsResponse>(
             requestData: ObjectsRequestData(metadataDate: metadataDate, departmentIds: departmentIds),
-            responceData: responceData,
-            date: Date.now
+            responceData: responceData
         )
         self.objectsCache.append(newCachedData)
     }
     
-    func putObjectResponce(requestData: ArtID, responceData: ObjectResponse) {
+    func putObjectResponce(id: ArtID, responceData: ObjectResponse) {
         let newCachedData = CachedData<ArtID, ObjectResponse>(
-        requestData: requestData,
-        responceData: responceData,
-        date: Date.now
+            requestData: id,
+            responceData: responceData
         )
         self.objectCache.append(newCachedData)
     }
     
     func putDepartmentsResponce(responceData: DepartmentsResponse) {
         let newCachedData = CachedData<Void, DepartmentsResponse>(
-        requestData: Void(),
-        responceData: responceData,
-        date: Date.now
+            requestData: Void(),
+            responceData: responceData
         )
         self.departmentsCashe.append(newCachedData)
     }
     
-    func putSearchResponce(requestData: [SearchParameter], responceData: SearchResponse) {
+    func putSearchResponce(parameters: [SearchParameter], responceData: SearchResponse) {
         let newCachedData = CachedData<[SearchParameter], SearchResponse>(
-        requestData: requestData,
-        responceData: responceData,
-        date: Date.now
+            requestData: parameters,
+            responceData: responceData
         )
         self.searchCache.append(newCachedData)
     }

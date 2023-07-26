@@ -89,7 +89,7 @@ class MetAPI{
                         completion(nil)
                         return
                     }
-                    self?.metAPICache.putObjectResponce(requestData: id, responceData: realResponse)
+                    self?.metAPICache.putObjectResponce(id: id, responceData: realResponse)
                     completion(realResponse)
                 }
             }
@@ -175,7 +175,7 @@ class MetAPI{
                         completion(nil)
                         return
                     }
-                    self?.metAPICache.putSearchResponce(requestData: parameters, responceData: realResponse)
+                    self?.metAPICache.putSearchResponce(parameters: parameters, responceData: realResponse)
                     completion(realResponse)
                 }
             }
