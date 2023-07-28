@@ -29,7 +29,7 @@ class CatalogViewController: UIViewController {
                                        image: UIImage(named: "CatalogIcon")?.withRenderingMode(.alwaysOriginal),
                                        selectedImage: UIImage(named: "CatalogIconTapped")?.withRenderingMode(.alwaysOriginal))
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("catalog_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
@@ -64,7 +64,7 @@ class CatalogViewController: UIViewController {
             self.loadedCatalogView.isHidden = true
         }
     }
-   
+    
     private func add(catalogSubview: UIView, stretchView: Bool) {
         catalogSubview.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(catalogSubview)
@@ -79,29 +79,26 @@ class CatalogViewController: UIViewController {
         }
         NSLayoutConstraint.activate(constraints)
     }
-   
-    private func loadCatalogCellDataList(completion: @escaping ([CatalogCellData]?) -> Void) {
+    
+    private func reloadCatalog() {
+        self.contentStatus = .loading
         self.metAPI.departments { [weak self] departmentResponce in
             guard let responce = departmentResponce else {
-                completion(nil)
+                self?.contentStatus = .failed
                 return
             }
             var catalogCellDataList: [CatalogCellData] = []
-       for department in responce.departments {
-            let catalogCellData: CatalogCellData = CatalogCellData(departmentId: department.id, departmentData: .placeholder)
-           catalogCellDataList.append(catalogCellData)
-        }
-            self?.contentStatus = .loaded(catalogCellDataList)
-            self?.loadCatalogCellDataList(departments: responce.departments, catalogCellDataList: catalogCellDataList) { catalogCellDataList in
-                completion(catalogCellDataList)
+            for department in responce.departments {
+                let catalogCellData: CatalogCellData = CatalogCellData(departmentId: department.id, departmentData: .placeholder)
+                catalogCellDataList.append(catalogCellData)
             }
+            self?.contentStatus = .loaded(catalogCellDataList)
+            self?.reloadCatalog(departments: responce.departments, catalogCellDataList: catalogCellDataList)
         }
     }
     
-    private func loadCatalogCellDataList(departments: [Department], catalogCellDataList: [CatalogCellData], completion: @escaping ([CatalogCellData]) -> Void) {
-        let group = DispatchGroup()
+    private func reloadCatalog(departments: [Department], catalogCellDataList: [CatalogCellData]) {
         for department in departments {
-            group.enter()
             self.loadCatalogCellData(department: department, completion: { [weak self] cellData in
                 if let contentStatus = self?.contentStatus,
                    case .loaded(var catalogCellDataList) = contentStatus,
@@ -109,11 +106,7 @@ class CatalogViewController: UIViewController {
                     catalogCellDataList[cellDataIndex] = cellData
                     self?.contentStatus = .loaded(catalogCellDataList)
                 }
-                group.leave()
             })
-        }
-        group.notify(queue: .main) {
-            completion(catalogCellDataList)
         }
     }
     
@@ -155,7 +148,7 @@ class CatalogViewController: UIViewController {
             }
         }
     }
-
+    
     private func loadObjectImageURL(objectId: ArtID, completion: @escaping (URL?) -> Void){
         self.metAPI.object(id: objectId) { object in
             guard let object = object else {
@@ -174,17 +167,6 @@ class CatalogViewController: UIViewController {
         self.reloadCatalog()
     }
     
-    private func reloadCatalog() {
-        self.contentStatus = .loading
-        self.loadCatalogCellDataList { [self] catalogCellDataList in
-            guard let catalogCellDataList = catalogCellDataList else {
-                self.contentStatus = .failed
-                return
-            }
-            self.contentStatus = .loaded(catalogCellDataList)
-        }
-    }
-
     private func catalogCellDidTap(_ departmentId: Int) {
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let categoryViewController = mainStoryBoard.instantiateViewController(withIdentifier: "CategoryViewController") as? CategoryViewController
