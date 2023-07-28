@@ -15,6 +15,20 @@ class CatalogCell: UICollectionViewCell {
     private let cardsSubTitleLabel: UILabel = UILabel()
     private let gradientView: VerticalGradientView = VerticalGradientView()
     
+    var isPlaceholderVisible: Bool = false {
+        didSet {
+            if self.isPlaceholderVisible {
+                self.imageView.isHidden = true
+                self.cardsTitleLabel.isHidden = true
+                self.cardsSubTitleLabel.isHidden = true
+            } else {
+                self.imageView.isHidden = false
+                self.cardsTitleLabel.isHidden = false
+                self.cardsSubTitleLabel.isHidden = false
+            }
+        }
+    }
+    
     var title: String? {
         get {
             return self.cardsTitleLabel.attributedText?.string
@@ -54,6 +68,7 @@ class CatalogCell: UICollectionViewCell {
         self.gradientView.translatesAutoresizingMaskIntoConstraints = false
         self.cardsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.cardsSubTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = UIColor(named: "blueberry")
         self.contentView.addSubview(self.imageView)
         self.contentView.addSubview(self.gradientView)
         self.contentView.addSubview(self.cardsTitleLabel)

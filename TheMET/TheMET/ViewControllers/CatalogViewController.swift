@@ -86,19 +86,29 @@ class CatalogViewController: UIViewController {
                 completion(nil)
                 return
             }
-            self?.loadCatalogCellDataList(departments: responce.departments) { catalogCellDataList in
+            var catalogCellDataList: [CatalogCellData] = []
+       for department in responce.departments {
+            let catalogCellData: CatalogCellData = CatalogCellData(departmentId: department.id, departmentData: .placeholder)
+           catalogCellDataList.append(catalogCellData)
+        }
+            self?.contentStatus = .loaded(catalogCellDataList)
+            self?.loadCatalogCellDataList(departments: responce.departments, catalogCellDataList: catalogCellDataList) { catalogCellDataList in
                 completion(catalogCellDataList)
             }
         }
     }
     
-    private func loadCatalogCellDataList(departments: [Department], completion: @escaping ([CatalogCellData]) -> Void) {
+    private func loadCatalogCellDataList(departments: [Department], catalogCellDataList: [CatalogCellData], completion: @escaping ([CatalogCellData]) -> Void) {
         let group = DispatchGroup()
-        var catalogCellDataList:[CatalogCellData] = []
         for department in departments {
             group.enter()
-            self.loadCatalogCellData(department: department, completion: { cellData in
-                catalogCellDataList.append(cellData)
+            self.loadCatalogCellData(department: department, completion: { [weak self] cellData in
+                if let contentStatus = self?.contentStatus,
+                   case .loaded(var catalogCellDataList) = contentStatus,
+                   let cellDataIndex = catalogCellDataList.firstIndex(where: { $0.departmentId == department.id}) {
+                    catalogCellDataList[cellDataIndex] = cellData
+                    self?.contentStatus = .loaded(catalogCellDataList)
+                }
                 group.leave()
             })
         }
@@ -110,7 +120,7 @@ class CatalogViewController: UIViewController {
     private func loadCatalogCellData(department: Department, completion: @escaping (CatalogCellData) -> Void) {
         self.metAPI.objects(departmentIds: [department.id]) { [weak self] objects in
             guard let objects = objects else {
-                let catalogCellData = CatalogCellData(departmentId: department.id, imageURL: nil, title: department.displayName, subTitle: nil)
+                let catalogCellData = CatalogCellData(departmentId: department.id, departmentData: .data(imageURL: nil, title: department.displayName, subTitle: nil))
                 completion(catalogCellData)
                 return
             }
@@ -119,7 +129,7 @@ class CatalogViewController: UIViewController {
             }
             let subtitle: String = self.cellSubtitle(objectsCount: objects.total)
             self.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
-                let catalogCellData = CatalogCellData(departmentId: department.id, imageURL: url, title: department.displayName, subTitle: subtitle)
+                let catalogCellData = CatalogCellData(departmentId: department.id, departmentData: .data(imageURL: url, title: department.displayName, subTitle: subtitle))
                 completion(catalogCellData)
             })
         }
