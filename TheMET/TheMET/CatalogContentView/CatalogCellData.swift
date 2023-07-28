@@ -10,9 +10,12 @@ import UIKit
 
 struct CatalogCellData {
     
-    let departmentId: Int
-    let imageURL: URL?
-    let title: String
-    let subTitle: String?
+    var departmentId: Int
     
+    var departmentData: DepartmentData
+    
+    enum DepartmentData {
+        case placeholder
+        case data(imageURL: URL?, title: String, subTitle: String?)
+    }
 }
