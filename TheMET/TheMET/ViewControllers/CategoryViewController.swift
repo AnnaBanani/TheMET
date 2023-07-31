@@ -22,8 +22,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     private let failedCategoryView = LoadingPlaceholderView.constructView(configuration: .categoryFailed)
     
     private let categoryTableView: UITableView = UITableView(frame: .zero, style: .plain)
-  
-    var contentStatus: LoadingStatus<[Art]> = .loading {
+    
+    var contentStatus: LoadingStatus<[ArtCellData]> = .loading {
         didSet {
             self.updateContent()
         }
@@ -91,15 +91,59 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func reloadCategory() {
         self.contentStatus = .loading
-        self.loadListOfArts { [weak self] arts in
-            guard let arts = arts else {
+        self.loadArtCellDataList()
+    }
+    
+    private func loadArtCellDataList() {
+        guard let id = self.departmentId else {
+            self.contentStatus = .failed
+            return
+        }
+        self.metAPI.objects(departmentIds: [id]) { [weak self] objectsResponse in
+            guard let objectsResponse = objectsResponse else {
                 self?.contentStatus = .failed
                 return
             }
-            self?.contentStatus = .loaded(arts)
+            var artCellDataList: [ArtCellData] = []
+            for artId in objectsResponse.objectIDs {
+                let artCellData = ArtCellData(artID: artId, artData: .placeholder)
+                artCellDataList.append(artCellData)
+            }
+            self?.contentStatus = .loaded(artCellDataList)
+            self?.reloadCategory(artIDs: objectsResponse.objectIDs, artCellDataList: artCellDataList)
         }
     }
     
+    private func reloadCategory(artIDs: [ArtID], artCellDataList: [ArtCellData]?) {
+        guard let artCellDataList = artCellDataList else {
+            self.contentStatus = .failed
+            return
+        }
+        for artID in artIDs {
+            self.loadArtCellData(artID: artID, completion: { [weak self] artCellData in
+                if let artCellData = artCellData,
+                   let contentStatus = self?.contentStatus,
+                   case .loaded(var artCellDataList) = contentStatus,
+                   let artCellDataIndex = artCellDataList.firstIndex(where: { $0.artID == artID}) {
+                    artCellDataList[artCellDataIndex] = artCellData
+                    self?.contentStatus = .loaded(artCellDataList)
+                }
+            })
+        }
+    }
+    
+    private func loadArtCellData(artID: ArtID, completion: @escaping (ArtCellData?) -> Void) {
+        self.metAPI.object(id: artID) {object in
+            guard let object = object else {
+                completion(nil)
+                return
+            }
+            let artCellData = ArtCellData(artID: artID, artData: .data(art: object))
+            completion(artCellData)
+        }
+    }
+    
+  
     private func loadCellImage(cell: ArtViewCell, art: Art) {
         cell.imageState = .loading
         cell.tag = art.objectID
@@ -132,48 +176,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    private func loadArtIDs(completion: @escaping([ArtID]?) -> Void) {
-        guard let id = self.departmentId else {
-            self.contentStatus = .failed
-            completion(nil)
-            return
-        }
-        self.metAPI.objects(departmentIds: [id]) { [weak self] objectResponse in
-            guard let objectResponse = objectResponse else {
-                self?.contentStatus = .failed
-                completion(nil)
-                return
-            }
-            completion(objectResponse.objectIDs)
-        }
-    }
-    
-    private func loadListOfArts(completion: @escaping([Art]?) -> Void) {
-        self.loadArtIDs { [weak self] artIDs in
-            guard let self = self,
-                  let artIDs = artIDs else {
-                completion(nil)
-                return
-            }
-            let group = DispatchGroup()
-            var arts: [Art] = []
-            for artID in artIDs {
-                group.enter()
-                self.metAPI.object(id: artID, completion: { objectResponce in
-                    guard let art = objectResponce else {
-                        group.leave()
-                        return
-                    }
-                    arts.append(art)
-                    group.leave()
-                })
-            }
-            group.notify(queue: .main) {
-                completion(arts)
-            }
-        }
-    }
-    
     //  UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -184,14 +186,20 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             let art = arts[indexPath.row]
-            self.loadCellImage(cell: cell, art: art)
-            cell.isLiked = self.isArtLiked(art: art)
-            cell.text = String.artDescriptionText(art: art)
-            if let departmentName = art.department {
-                cell.tags = [departmentName]
-            }
-            cell.onLikeButtonDidTap = { [weak self] in
-                self?.likeButtonDidTap(cell: cell, art: art)
+            switch art.artData {
+            case .placeholder:
+                cell.isPlaceholderVisible = true
+            case .data(let art):
+                cell.isPlaceholderVisible = false
+                self.loadCellImage(cell: cell, art: art)
+                cell.isLiked = self.isArtLiked(art: art)
+                cell.text = String.artDescriptionText(art: art)
+                if let departmentName = art.department {
+                    cell.tags = [departmentName]
+                }
+                cell.onLikeButtonDidTap = { [weak self] in
+                    self?.likeButtonDidTap(cell: cell, art: art)
+                }
             }
             return cell
         } else {
