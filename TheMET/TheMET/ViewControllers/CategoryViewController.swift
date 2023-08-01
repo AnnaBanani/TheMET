@@ -110,15 +110,11 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 artCellDataList.append(artCellData)
             }
             self?.contentStatus = .loaded(artCellDataList)
-            self?.reloadCategory(artIDs: objectsResponse.objectIDs, artCellDataList: artCellDataList)
+            self?.reloadCategory(artIDs: objectsResponse.objectIDs)
         }
     }
     
-    private func reloadCategory(artIDs: [ArtID], artCellDataList: [ArtCellData]?) {
-        guard let artCellDataList = artCellDataList else {
-            self.contentStatus = .failed
-            return
-        }
+    private func reloadCategory(artIDs: [ArtID]) {
         for artID in artIDs {
             self.loadArtCellData(artID: artID, completion: { [weak self] artCellData in
                 if let artCellData = artCellData,
@@ -188,6 +184,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             let art = arts[indexPath.row]
             switch art.artData {
             case .placeholder:
+                cell.tag = art.artID
                 cell.isPlaceholderVisible = true
             case .data(let art):
                 cell.isPlaceholderVisible = false
