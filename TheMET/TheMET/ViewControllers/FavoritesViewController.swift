@@ -89,6 +89,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
             let art = self.favoriteService.favoriteArts[indexPath.row]
+            cell.isPlaceholderVisible = false
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             self.loadCellImage(cell: cell, art: art)
