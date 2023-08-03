@@ -41,6 +41,7 @@
 		F3528F972A0E7FDA000D9CEB /* CatalogContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3528F942A0E7FDA000D9CEB /* CatalogContentView.xib */; };
 		F355968E2A4C77A500081E72 /* ArID.swift in Sources */ = {isa = PBXBuildFile; fileRef = F355968D2A4C77A500081E72 /* ArID.swift */; };
 		F36BD6CE2A7417870062AEFC /* ArtCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CD2A7417870062AEFC /* ArtCellData.swift */; };
+		F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */; };
 		F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */; };
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
 		F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2160C2A3235510056EF54 /* CatalogCellData.swift */; };
@@ -100,6 +101,7 @@
 		F3528F942A0E7FDA000D9CEB /* CatalogContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatalogContentView.xib; sourceTree = "<group>"; };
 		F355968D2A4C77A500081E72 /* ArID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArID.swift; sourceTree = "<group>"; };
 		F36BD6CD2A7417870062AEFC /* ArtCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtCellData.swift; sourceTree = "<group>"; };
+		F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsLoadingIndicatorView.swift; sourceTree = "<group>"; };
 		F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F3A2160C2A3235510056EF54 /* CatalogCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCellData.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */,
 				F36BD6CD2A7417870062AEFC /* ArtCellData.swift */,
 				F3F1D0452A449194003D4559 /* ArtView.swift */,
+				F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */,
 			);
 			path = ArtView;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */,
 				F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
+				F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */,
 				F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */,
 				F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */,
 				F3528F882A0D0149000D9CEB /* UILabel+apply.swift in Sources */,
