@@ -13,17 +13,17 @@ class FeaturedArtViewController: UIViewController {
     
     private let loadingFeaturedArtView = LoadingPlaceholderView.constructView(configuration: .featuredLoading)
     private let failedFeaturedArtView = LoadingPlaceholderView.constructView(configuration: .featuredFailed)
-    
+
     private let scrollView: UIScrollView = UIScrollView()
-    
+
     private let artView: ArtView = ArtView()
-    
+
     private let imageLoader = ImageLoader()
-    
+
     private let favoriteService = FavoritesService.standart
-    
+
     private let featuredArtService = FeaturedArtService()
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.tabBarItem = UITabBarItem(title: nil,
@@ -56,7 +56,7 @@ class FeaturedArtViewController: UIViewController {
             self?.displayCurrentFeaturedArtStatus()
         }
     }
-    
+
     @objc
     private func favoriteServiceDidChange() {
         guard case .loaded(let art) = self.featuredArtService.featuredArt else {
@@ -70,19 +70,19 @@ class FeaturedArtViewController: UIViewController {
         }
         self.artView.isLiked = true
     }
-    
+
     private func add(featuredSubView: UIView) {
-        featuredSubView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(featuredSubView)
-        let constraints: [NSLayoutConstraint] = [
-            featuredSubView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            featuredSubView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            featuredSubView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            featuredSubView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
-    }
-    
+            featuredSubView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(featuredSubView)
+            let constraints: [NSLayoutConstraint] = [
+                featuredSubView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                featuredSubView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                featuredSubView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                featuredSubView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            ]
+            NSLayoutConstraint.activate(constraints)
+        }
+
     private func displayCurrentFeaturedArtStatus() {
         switch self.featuredArtService.featuredArt {
         case .failed:
@@ -134,7 +134,7 @@ class FeaturedArtViewController: UIViewController {
             self.scrollView.isHidden = false
         }
     }
-    
+
     private func likeButtonDidTap(art: Art) {
         if self.artView.isLiked {
             self.favoriteService.removeArt(id: art.objectID)
@@ -142,5 +142,5 @@ class FeaturedArtViewController: UIViewController {
             self.favoriteService.addFavoriteArt(art)
         }
     }
-   
+
 }
