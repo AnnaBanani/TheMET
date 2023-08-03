@@ -10,6 +10,35 @@ import UIKit
 
 class ArtsLoadingIndicatorView: UIView {
     
+    let artIndicatorViewContainer: ArtsLoadingIndicatorContainerView = ArtsLoadingIndicatorContainerView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.artIndicatorViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.artIndicatorViewContainer)
+        let heightConstraint: NSLayoutConstraint = self.artIndicatorViewContainer.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.9)
+        let widthConstraint: NSLayoutConstraint = self.artIndicatorViewContainer.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8)
+        widthConstraint.priority = .defaultHigh
+        heightConstraint.priority = .defaultHigh
+        NSLayoutConstraint.activate([
+            self.artIndicatorViewContainer.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.artIndicatorViewContainer.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.artIndicatorViewContainer.heightAnchor.constraint(equalTo: self.artIndicatorViewContainer.widthAnchor, multiplier: 1.07),
+            self.artIndicatorViewContainer.heightAnchor.constraint(lessThanOrEqualTo: self.heightAnchor, multiplier: 0.9),
+            self.artIndicatorViewContainer.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: 0.8),
+            heightConstraint,
+            widthConstraint
+        ])
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+    
+   
+    
+class ArtsLoadingIndicatorContainerView: UIView {
+    
     let frameOneImageView: UIImageView = UIImageView(image: UIImage(named: "Frame1"))
     let frameTwoImageView: UIImageView = UIImageView(image: UIImage(named: "Frame2"))
     let frameThreeImageView: UIImageView = UIImageView(image: UIImage(named: "Frame3"))
@@ -31,6 +60,7 @@ class ArtsLoadingIndicatorView: UIView {
         self.invisibleViewThree.translatesAutoresizingMaskIntoConstraints = false
         self.invisibleViewFour.translatesAutoresizingMaskIntoConstraints = false
         self.invisibleViewFive.translatesAutoresizingMaskIntoConstraints = false
+        
         self.addSubview(self.frameOneImageView)
         self.addSubview(self.frameTwoImageView)
         self.addSubview(self.frameThreeImageView)
