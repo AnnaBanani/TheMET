@@ -12,6 +12,15 @@ class ImageLoader {
     
     private var loadedImagesCollection: [URL : UIImage] = [:]
     
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(cleanUpCache), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+    }
+    
+    @objc
+    private func cleanUpCache() {
+        self.loadedImagesCollection = [:]
+    }
+    
     func loadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
         
         guard let imageURL = URL(string: urlString) else {
