@@ -10,6 +10,8 @@ import UIKit
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    private let searchBar: UISearchBar = UISearchBar()
+    
     private let favoriteService = FavoritesService.standart
     
     private let imageLoader = ImageLoader()
@@ -27,13 +29,21 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("favories_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
         NotificationCenter.default.addObserver(self, selector: #selector(favoriteServiceDidChange), name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
+        self.searchBar.apply(barTintColor: UIColor(named: "blackberry"), textFieldBackgroundColor: UIColor(named: "blueberry0.5"), textFieldColor: UIColor(named: "plum"))
+        self.searchBar.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.searchBar)
         self.tableView.backgroundColor = .clear
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.tableView)
         NSLayoutConstraint.activate([
+            self.searchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.searchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.searchBar.topAnchor.constraint(equalTo: self.view.topAnchor)
+        ])
+        NSLayoutConstraint.activate([
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
         self.tableView.separatorStyle = .none
@@ -79,6 +89,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
             let art = self.favoriteService.favoriteArts[indexPath.row]
+            cell.isPlaceholderVisible = false
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             self.loadCellImage(cell: cell, art: art)
