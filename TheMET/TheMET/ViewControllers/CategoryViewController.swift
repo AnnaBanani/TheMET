@@ -18,6 +18,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var imageLoader: ImageLoader = ImageLoader()
     
+    private var loadingArtIds: [ArtID] = []
+    
     private let loadingCategoryView = LoadingPlaceholderView.constructView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = LoadingPlaceholderView.constructView(configuration: .categoryFailed)
     
@@ -110,21 +112,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 artCellDataList.append(artCellData)
             }
             self?.contentStatus = .loaded(artCellDataList)
-            self?.reloadCategory(artIDs: objectsResponse.objectIDs)
-        }
-    }
-    
-    private func reloadCategory(artIDs: [ArtID]) {
-        for artID in artIDs {
-            self.loadArtCellData(artID: artID, completion: { [weak self] artCellData in
-                if let artCellData = artCellData,
-                   let contentStatus = self?.contentStatus,
-                   case .loaded(var artCellDataList) = contentStatus,
-                   let artCellDataIndex = artCellDataList.firstIndex(where: { $0.artID == artID}) {
-                    artCellDataList[artCellDataIndex] = artCellData
-                    self?.contentStatus = .loaded(artCellDataList)
-                }
-            })
         }
     }
     
@@ -155,6 +142,12 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 return
             }
             cell.imageState = .loaded(image)
+        }
+    }
+    
+    private func removeLoadingArtId(artId: ArtID) {
+        self.loadingArtIds.removeAll { id in
+            return id == artId
         }
     }
     
@@ -217,6 +210,29 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+
+    func tableView(_ tableView: UITableView, willDisplay: UITableViewCell, forRowAt: IndexPath) {
+        guard case .loaded(let arts) = self.contentStatus else {
+            return
+        }
+        let art = arts[forRowAt.row]
+        guard case .placeholder = art.artData,
+              !self.loadingArtIds.contains(art.artID) else {
+            return
+        }
+        self.loadingArtIds.append(art.artID)
+        self.loadArtCellData(artID: art.artID) { [weak self] artCellData in
+            if let artCellData = artCellData,
+               let contentStatus = self?.contentStatus,
+               case .loaded(var artCellDataList) = contentStatus,
+               let artCellDataIndex = artCellDataList.firstIndex(where: { $0.artID == art.artID}) {
+                artCellDataList[artCellDataIndex] = artCellData
+                self?.contentStatus = .loaded(artCellDataList)
+            }
+            self?.removeLoadingArtId(artId: art.artID)
+        }
+    }
+    
 }
 
 
