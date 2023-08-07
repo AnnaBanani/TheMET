@@ -112,23 +112,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 artCellDataList.append(artCellData)
             }
             self?.contentStatus = .loaded(artCellDataList)
-//            self?.reloadCategory(artIDs: objectsResponse.objectIDs)
         }
     }
-    
-//    private func reloadCategory(artIDs: [ArtID]) {
-//        for artID in artIDs {
-//            self.loadArtCellData(artID: artID, completion: { [weak self] artCellData in
-//                if let artCellData = artCellData,
-//                   let contentStatus = self?.contentStatus,
-//                   case .loaded(var artCellDataList) = contentStatus,
-//                   let artCellDataIndex = artCellDataList.firstIndex(where: { $0.artID == artID}) {
-//                    artCellDataList[artCellDataIndex] = artCellData
-//                    self?.contentStatus = .loaded(artCellDataList)
-//                }
-//            })
-//        }
-//    }
     
     private func loadArtCellData(artID: ArtID, completion: @escaping (ArtCellData?) -> Void) {
         self.metAPI.object(id: artID) {object in
