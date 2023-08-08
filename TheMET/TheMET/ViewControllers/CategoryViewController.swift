@@ -20,7 +20,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var loadingArtIds: [ArtID] = []
     
-    private let loadingCategoryView = FailedPlaceholderView.constructView(configuration: .categoryArtworksLoading)
+    private let loadingCategoryView = LoadingPlaceholderView.construstView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = FailedPlaceholderView.constructView(configuration: .categoryFailed)
     
     private let categoryTableView: UITableView = UITableView(frame: .zero, style: .plain)

@@ -11,7 +11,7 @@ import UIKit
 
 class FeaturedArtViewController: UIViewController {
     
-    private let loadingFeaturedArtView = FailedPlaceholderView.constructView(configuration: .featuredLoading)
+    private let loadingFeaturedArtView = LoadingPlaceholderView.construstView(configuration: .featuredLoading)
     private let failedFeaturedArtView = FailedPlaceholderView.constructView(configuration: .featuredFailed)
 
     private let scrollView: UIScrollView = UIScrollView()

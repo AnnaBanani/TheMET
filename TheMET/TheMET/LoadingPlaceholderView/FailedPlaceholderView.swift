@@ -18,14 +18,14 @@ class FailedPlaceholderView: UIView {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var button: UIButton!
     
-    static func constructView(configuration: LoadingPlaceholderConfiguration) -> FailedPlaceholderView {
+    static func constructView(configuration: FailedPlaceholderConfiguration) -> FailedPlaceholderView {
         let nib = UINib(nibName: FailedPlaceholderView.xibFileName, bundle: nil)
         let view = nib.instantiate(withOwner: nil).first as! FailedPlaceholderView
         view.setup(configuration: configuration)
         return view
     }
     
-    private func setup(configuration: LoadingPlaceholderConfiguration) {
+    private func setup(configuration: FailedPlaceholderConfiguration) {
         self.imageView.image = configuration.image
         self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: configuration.text)
         if let buttonTitle = configuration.buttonTitle {
@@ -42,17 +42,14 @@ class FailedPlaceholderView: UIView {
     }
 }
 
-struct LoadingPlaceholderConfiguration {
+struct FailedPlaceholderConfiguration {
     
     let text: String
     let image: UIImage?
     let buttonTitle: String?
     
-    static let featuredFailed: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("artwork.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
-    static let featuredLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("featured_artwork.loading", comment: ""), image: UIImage(named: "Frame"), buttonTitle: nil)
-    static let catalogLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""), image: UIImage(named: "HangingPictures"), buttonTitle: nil)
-    static let catalogFailed: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
-    static let categoryArtworksLoading: LoadingPlaceholderConfiguration =  LoadingPlaceholderConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""), image: UIImage(named: "HangingPictures"), buttonTitle: nil)
-    static let categoryFailed: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
+    static let featuredFailed: FailedPlaceholderConfiguration = FailedPlaceholderConfiguration(text: NSLocalizedString("artwork.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
+    static let catalogFailed: FailedPlaceholderConfiguration = FailedPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
+    static let categoryFailed: FailedPlaceholderConfiguration = FailedPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
     
 }

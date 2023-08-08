@@ -41,6 +41,7 @@
 		F36BD6CE2A7417870062AEFC /* ArtCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CD2A7417870062AEFC /* ArtCellData.swift */; };
 		F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */; };
 		F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6D12A7C004C0062AEFC /* UISearchBar+apply.swift */; };
+		F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */; };
 		F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */; };
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
 		F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2160C2A3235510056EF54 /* CatalogCellData.swift */; };
@@ -100,6 +101,7 @@
 		F36BD6CD2A7417870062AEFC /* ArtCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtCellData.swift; sourceTree = "<group>"; };
 		F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsLoadingIndicatorView.swift; sourceTree = "<group>"; };
 		F36BD6D12A7C004C0062AEFC /* UISearchBar+apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+apply.swift"; sourceTree = "<group>"; };
+		F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlaceholderView.swift; sourceTree = "<group>"; };
 		F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F3A2160C2A3235510056EF54 /* CatalogCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCellData.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */,
 				F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */,
+				F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */,
 			);
 			path = LoadingPlaceholderView;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
 				F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */,
+				F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */,
 				F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */,
 				F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */,
 				F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */,
