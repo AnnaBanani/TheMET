@@ -1,5 +1,5 @@
 //
-//  LoadingPlaceholderView.swift
+//  FailedPlaceholderView.swift
 //  TheMET
 //
 //  Created by Анна Ситникова on 18/04/2023.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class LoadingPlaceholderView: UIView {
+class FailedPlaceholderView: UIView {
     
-    static let xibFileName = "LoadingPlaceholderView"
+    static let xibFileName = "FailedPlaceholderView"
     
     var onButtonTap: () -> Void = {}
     
@@ -18,9 +18,9 @@ class LoadingPlaceholderView: UIView {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var button: UIButton!
     
-    static func constructView(configuration: LoadingPlaceholderConfiguration) -> LoadingPlaceholderView {
-        let nib = UINib(nibName: LoadingPlaceholderView.xibFileName, bundle: nil)
-        let view = nib.instantiate(withOwner: nil).first as! LoadingPlaceholderView
+    static func constructView(configuration: LoadingPlaceholderConfiguration) -> FailedPlaceholderView {
+        let nib = UINib(nibName: FailedPlaceholderView.xibFileName, bundle: nil)
+        let view = nib.instantiate(withOwner: nil).first as! FailedPlaceholderView
         view.setup(configuration: configuration)
         return view
     }

@@ -13,8 +13,8 @@ class CatalogViewController: UIViewController {
     
     private let metAPI = MetAPI(networkManager: NetworkManager.standard)
     
-    private let loadingCatalogView = LoadingPlaceholderView.constructView(configuration: .catalogLoading)
-    private let failedCatalogView = LoadingPlaceholderView.constructView(configuration: .catalogFailed)
+    private let loadingCatalogView = FailedPlaceholderView.constructView(configuration: .catalogLoading)
+    private let failedCatalogView = FailedPlaceholderView.constructView(configuration: .catalogFailed)
     private let loadedCatalogView = CatalogContentView.constructView()
     
     private var loadedDepartments: [Department] = []

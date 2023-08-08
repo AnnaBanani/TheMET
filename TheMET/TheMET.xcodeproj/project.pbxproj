@@ -47,8 +47,8 @@
 		F3A2160F2A3374690056EF54 /* DepartmentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2160E2A3374690056EF54 /* DepartmentsResponse.swift */; };
 		F3AC638E2A433FCF00BEF886 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F3AC63902A433FCF00BEF886 /* Localizable.stringsdict */; };
 		F3BC62962A696C22003A39D9 /* String+artDescriptionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BC62952A696C22003A39D9 /* String+artDescriptionText.swift */; };
-		F3C7DB5B2A14F38C00DBBF87 /* LoadingPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C7DB592A14F38C00DBBF87 /* LoadingPlaceholderView.xib */; };
-		F3C7DB5C2A14F38C00DBBF87 /* LoadingPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5A2A14F38C00DBBF87 /* LoadingPlaceholderView.swift */; };
+		F3C7DB5B2A14F38C00DBBF87 /* FailedPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */; };
+		F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */; };
 		F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */; };
 		F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */; };
 		F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */; };
@@ -107,8 +107,8 @@
 		F3AC638F2A433FCF00BEF886 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F3AC63912A433FD300BEF886 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F3BC62952A696C22003A39D9 /* String+artDescriptionText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+artDescriptionText.swift"; sourceTree = "<group>"; };
-		F3C7DB592A14F38C00DBBF87 /* LoadingPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingPlaceholderView.xib; sourceTree = "<group>"; };
-		F3C7DB5A2A14F38C00DBBF87 /* LoadingPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingPlaceholderView.swift; sourceTree = "<group>"; };
+		F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedPlaceholderView.xib; sourceTree = "<group>"; };
+		F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedPlaceholderView.swift; sourceTree = "<group>"; };
 		F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFileManager.swift; sourceTree = "<group>"; };
@@ -256,8 +256,8 @@
 		F3C7DB582A14F36500DBBF87 /* LoadingPlaceholderView */ = {
 			isa = PBXGroup;
 			children = (
-				F3C7DB5A2A14F38C00DBBF87 /* LoadingPlaceholderView.swift */,
-				F3C7DB592A14F38C00DBBF87 /* LoadingPlaceholderView.xib */,
+				F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */,
+				F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */,
 			);
 			path = LoadingPlaceholderView;
 			sourceTree = "<group>";
@@ -366,7 +366,7 @@
 				F3528F7F2A06C19F000D9CEB /* Zen Kaku Gothic New Regular.ttf in Resources */,
 				F3AC638E2A433FCF00BEF886 /* Localizable.stringsdict in Resources */,
 				F3528F972A0E7FDA000D9CEB /* CatalogContentView.xib in Resources */,
-				F3C7DB5B2A14F38C00DBBF87 /* LoadingPlaceholderView.xib in Resources */,
+				F3C7DB5B2A14F38C00DBBF87 /* FailedPlaceholderView.xib in Resources */,
 				F3528F802A06C19F000D9CEB /* Noto Serif JP.otf in Resources */,
 				F3528F812A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf in Resources */,
 				F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */,
@@ -406,7 +406,7 @@
 				F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */,
 				F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */,
 				F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */,
-				F3C7DB5C2A14F38C00DBBF87 /* LoadingPlaceholderView.swift in Sources */,
+				F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */,
 				F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */,
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,
 				F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */,
