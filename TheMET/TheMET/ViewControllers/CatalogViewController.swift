@@ -17,11 +17,15 @@ class CatalogViewController: UIViewController {
     private let failedCatalogView = LoadingPlaceholderView.constructView(configuration: .catalogFailed)
     private let loadedCatalogView = CatalogContentView.constructView()
     
+    private var loadedDepartments: [Department] = []
+    
     var contentStatus:LoadingStatus<[CatalogCellData]> = .loading {
         didSet {
             self.updateContent()
         }
     }
+    
+    var loadingDepartmentIds: [Int] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,7 +46,40 @@ class CatalogViewController: UIViewController {
         self.loadedCatalogView.onCatalogCellTap = { [weak self] departmentId in
             self?.catalogCellDidTap(departmentId)
         }
+        self.loadedCatalogView.onCatalogCellWillDisplay = { [weak self] departmentId in
+            self?.loadParticularDepartmentCellDataIfNeeded(departmentId: departmentId)
+        }
         self.reloadCatalog()
+    }
+    
+    private func loadParticularDepartmentCellDataIfNeeded(departmentId: Int) {
+        guard case .loaded(let catalogCellDataList) = self.contentStatus else {
+            return
+        }
+        guard let catalogCellData = catalogCellDataList.first(where: { cellData in
+            cellData.departmentId == departmentId
+        }),
+              case .placeholder = catalogCellData.departmentData,
+              !self.loadingDepartmentIds.contains(departmentId),
+        let department = self.loadedDepartments.first(where: { department in
+            department.id == departmentId
+        })
+        else {
+            return
+        }
+        self.loadingDepartmentIds.append(departmentId)
+        
+        self.loadCatalogCellData(department: department, completion: { [weak self] catalogCellData in
+               if let contentStatus = self?.contentStatus,
+               case .loaded(var catalogCellDataList) = contentStatus,
+               let catalogCellDataIndex = catalogCellDataList.firstIndex(where: { $0.departmentId == catalogCellData.departmentId}) {
+                catalogCellDataList[catalogCellDataIndex] = catalogCellData
+                self?.contentStatus = .loaded(catalogCellDataList)
+            }
+            self?.loadingDepartmentIds.removeAll { id in
+                return id == departmentId
+            }
+        })
     }
     
     private func updateContent() {
@@ -92,21 +129,8 @@ class CatalogViewController: UIViewController {
                 let catalogCellData: CatalogCellData = CatalogCellData(departmentId: department.id, departmentData: .placeholder)
                 catalogCellDataList.append(catalogCellData)
             }
+            self?.loadedDepartments = responce.departments
             self?.contentStatus = .loaded(catalogCellDataList)
-            self?.reloadCatalog(departments: responce.departments, catalogCellDataList: catalogCellDataList)
-        }
-    }
-    
-    private func reloadCatalog(departments: [Department], catalogCellDataList: [CatalogCellData]) {
-        for department in departments {
-            self.loadCatalogCellData(department: department, completion: { [weak self] cellData in
-                if let contentStatus = self?.contentStatus,
-                   case .loaded(var catalogCellDataList) = contentStatus,
-                   let cellDataIndex = catalogCellDataList.firstIndex(where: { $0.departmentId == department.id}) {
-                    catalogCellDataList[cellDataIndex] = cellData
-                    self?.contentStatus = .loaded(catalogCellDataList)
-                }
-            })
         }
     }
     
@@ -174,5 +198,4 @@ class CatalogViewController: UIViewController {
         categoryViewController.departmentId = departmentId
         self.navigationController?.pushViewController(categoryViewController, animated: true)
     }
-    
 }

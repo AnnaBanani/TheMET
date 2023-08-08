@@ -22,6 +22,8 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     static let xibFileName = "CatalogContentView"
     static let cellIdentifier = "CatalogCell"
     
+    var onCatalogCellWillDisplay: (_ departmentId: Int) -> Void = { _ in }
+    
     @IBOutlet var label: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     
@@ -92,6 +94,9 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
         let cellData = self.content[indexPath.row]
         self.onCatalogCellTap(cellData.departmentId)
     }
-    
-   
+  
+    func collectionView(_: UICollectionView, willDisplay: UICollectionViewCell, forItemAt: IndexPath) {
+        let cellData = self.content[forItemAt.row]
+        self.onCatalogCellWillDisplay(cellData.departmentId)
+    }
 }
