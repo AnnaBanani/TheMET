@@ -33,17 +33,15 @@ class LoadingPlaceholderView: UIView {
         self.container.addArrangedSubview(self.animationView)
         self.container.addArrangedSubview(self.textLabel)
         self.container.axis = .vertical
-        self.container.distribution = .equalCentering
+        self.container.distribution = .fill
         self.container.alignment = .center
+        self.container.spacing = 30
+        
         NSLayoutConstraint.activate([
-            self.container.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.6),
-            self.container.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            self.container.widthAnchor.constraint(equalTo: self.widthAnchor),
             self.container.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.container.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             ])
-        NSLayoutConstraint.activate([
-            self.animationView.widthAnchor.constraint(equalTo: self.container.widthAnchor, multiplier: 0.5)
-        ])
     }
     
     required init?(coder: NSCoder) {
