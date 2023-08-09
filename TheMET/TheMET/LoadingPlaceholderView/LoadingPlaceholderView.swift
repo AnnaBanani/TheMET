@@ -12,6 +12,7 @@ class LoadingPlaceholderView: UIView {
     
     private let textLabel: UILabel = UILabel()
     private let animationView: ArtsLoadingIndicatorView = ArtsLoadingIndicatorView()
+    private let container: UIStackView = UIStackView()
     
     static func construstView(configuration: LoadingPlaceholderConfiguration) -> LoadingPlaceholderView {
         let view = LoadingPlaceholderView()
@@ -27,22 +28,21 @@ class LoadingPlaceholderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.container.translatesAutoresizingMaskIntoConstraints = false
         self.animationView.translatesAutoresizingMaskIntoConstraints = false
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(self.animationView)
-        self.addSubview(self.textLabel)
+        self.addSubview(self.container)
+        self.container.addArrangedSubview(self.animationView)
+        self.container.addArrangedSubview(self.textLabel)
+        self.container.axis = .vertical
+        self.container.distribution = .equalCentering
+        self.container.alignment = .center
         NSLayoutConstraint.activate([
-            self.animationView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.6),
-            self.animationView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
-            self.animationView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.animationView.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
+            self.container.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.6),
+            self.container.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            self.container.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.container.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             ])
-        NSLayoutConstraint.activate([
-            self.textLabel.topAnchor.constraint(equalTo: self.animationView.bottomAnchor),
-            self.textLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            self.textLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.textLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-        ])
     }
     
     required init?(coder: NSCoder) {
