@@ -20,8 +20,6 @@
 		F30CE99729CA007A00013B2A /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99629CA007A00013B2A /* Department.swift */; };
 		F30CE99A29CA0A2700013B2A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99929CA0A2700013B2A /* NetworkManager.swift */; };
 		F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99C29CC91F300013B2A /* ImageLoader.swift */; };
-		F30E834529F6AD5A00283EE3 /* FailedToLoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F30E834429F6AD5A00283EE3 /* FailedToLoadView.xib */; };
-		F30E834729F7E5EA00283EE3 /* FailedToLoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834629F7E5EA00283EE3 /* FailedToLoadView.swift */; };
 		F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834829F7FD2500283EE3 /* MetAPI.swift */; };
 		F30E834B29F7FEFD00283EE3 /* ObjectsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834A29F7FEFD00283EE3 /* ObjectsResponse.swift */; };
 		F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */; };
@@ -43,14 +41,15 @@
 		F36BD6CE2A7417870062AEFC /* ArtCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CD2A7417870062AEFC /* ArtCellData.swift */; };
 		F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */; };
 		F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6D12A7C004C0062AEFC /* UISearchBar+apply.swift */; };
+		F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */; };
 		F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */; };
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
 		F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2160C2A3235510056EF54 /* CatalogCellData.swift */; };
 		F3A2160F2A3374690056EF54 /* DepartmentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2160E2A3374690056EF54 /* DepartmentsResponse.swift */; };
 		F3AC638E2A433FCF00BEF886 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F3AC63902A433FCF00BEF886 /* Localizable.stringsdict */; };
 		F3BC62962A696C22003A39D9 /* String+artDescriptionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BC62952A696C22003A39D9 /* String+artDescriptionText.swift */; };
-		F3C7DB5B2A14F38C00DBBF87 /* LoadingPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C7DB592A14F38C00DBBF87 /* LoadingPlaceholderView.xib */; };
-		F3C7DB5C2A14F38C00DBBF87 /* LoadingPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5A2A14F38C00DBBF87 /* LoadingPlaceholderView.swift */; };
+		F3C7DB5B2A14F38C00DBBF87 /* FailedPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */; };
+		F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */; };
 		F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */; };
 		F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */; };
 		F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */; };
@@ -80,8 +79,6 @@
 		F30CE99629CA007A00013B2A /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		F30CE99929CA0A2700013B2A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F30CE99C29CC91F300013B2A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
-		F30E834429F6AD5A00283EE3 /* FailedToLoadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FailedToLoadView.xib; sourceTree = "<group>"; };
-		F30E834629F7E5EA00283EE3 /* FailedToLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedToLoadView.swift; sourceTree = "<group>"; };
 		F30E834829F7FD2500283EE3 /* MetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetAPI.swift; sourceTree = "<group>"; };
 		F30E834A29F7FEFD00283EE3 /* ObjectsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsResponse.swift; sourceTree = "<group>"; };
 		F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
@@ -104,6 +101,7 @@
 		F36BD6CD2A7417870062AEFC /* ArtCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtCellData.swift; sourceTree = "<group>"; };
 		F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsLoadingIndicatorView.swift; sourceTree = "<group>"; };
 		F36BD6D12A7C004C0062AEFC /* UISearchBar+apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+apply.swift"; sourceTree = "<group>"; };
+		F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlaceholderView.swift; sourceTree = "<group>"; };
 		F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F3A2160C2A3235510056EF54 /* CatalogCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCellData.swift; sourceTree = "<group>"; };
@@ -111,8 +109,8 @@
 		F3AC638F2A433FCF00BEF886 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F3AC63912A433FD300BEF886 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F3BC62952A696C22003A39D9 /* String+artDescriptionText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+artDescriptionText.swift"; sourceTree = "<group>"; };
-		F3C7DB592A14F38C00DBBF87 /* LoadingPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingPlaceholderView.xib; sourceTree = "<group>"; };
-		F3C7DB5A2A14F38C00DBBF87 /* LoadingPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingPlaceholderView.swift; sourceTree = "<group>"; };
+		F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedPlaceholderView.xib; sourceTree = "<group>"; };
+		F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedPlaceholderView.swift; sourceTree = "<group>"; };
 		F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		F3EDF2D12A1FA931000680B1 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFileManager.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 				F30CE99329CA003800013B2A /* DataModels */,
 				F30CE99B29CC91BD00013B2A /* Network */,
 				F3528F862A0D00EA000D9CEB /* Extentions */,
-				F30E834129F6AD1500283EE3 /* FailedToLoadView */,
 				F3528F8B2A0D01AA000D9CEB /* ViewControllers */,
 				F3451E992A05699A00C31619 /* Fonts */,
 				F3012FC229C4AE1B00138CE3 /* Info.plist */,
@@ -206,15 +203,6 @@
 				F3FD733F2A7018DB00B163EA /* MetAPICache.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		F30E834129F6AD1500283EE3 /* FailedToLoadView */ = {
-			isa = PBXGroup;
-			children = (
-				F30E834429F6AD5A00283EE3 /* FailedToLoadView.xib */,
-				F30E834629F7E5EA00283EE3 /* FailedToLoadView.swift */,
-			);
-			path = FailedToLoadView;
 			sourceTree = "<group>";
 		};
 		F3451E992A05699A00C31619 /* Fonts */ = {
@@ -270,8 +258,9 @@
 		F3C7DB582A14F36500DBBF87 /* LoadingPlaceholderView */ = {
 			isa = PBXGroup;
 			children = (
-				F3C7DB5A2A14F38C00DBBF87 /* LoadingPlaceholderView.swift */,
-				F3C7DB592A14F38C00DBBF87 /* LoadingPlaceholderView.xib */,
+				F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */,
+				F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */,
+				F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */,
 			);
 			path = LoadingPlaceholderView;
 			sourceTree = "<group>";
@@ -377,11 +366,10 @@
 				F3012FBE29C4AE1A00138CE3 /* Assets.xcassets in Resources */,
 				F3451E982A05698200C31619 /* Quattrocento.ttf in Resources */,
 				F3451E962A05698200C31619 /* Caviar Dreams Bold.ttf in Resources */,
-				F30E834529F6AD5A00283EE3 /* FailedToLoadView.xib in Resources */,
 				F3528F7F2A06C19F000D9CEB /* Zen Kaku Gothic New Regular.ttf in Resources */,
 				F3AC638E2A433FCF00BEF886 /* Localizable.stringsdict in Resources */,
 				F3528F972A0E7FDA000D9CEB /* CatalogContentView.xib in Resources */,
-				F3C7DB5B2A14F38C00DBBF87 /* LoadingPlaceholderView.xib in Resources */,
+				F3C7DB5B2A14F38C00DBBF87 /* FailedPlaceholderView.xib in Resources */,
 				F3528F802A06C19F000D9CEB /* Noto Serif JP.otf in Resources */,
 				F3528F812A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf in Resources */,
 				F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */,
@@ -402,7 +390,6 @@
 				F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */,
 				F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,
-				F30E834729F7E5EA00283EE3 /* FailedToLoadView.swift in Sources */,
 				F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */,
 				F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */,
 				F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */,
@@ -422,7 +409,7 @@
 				F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */,
 				F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */,
 				F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */,
-				F3C7DB5C2A14F38C00DBBF87 /* LoadingPlaceholderView.swift in Sources */,
+				F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */,
 				F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */,
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,
 				F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */,
@@ -432,6 +419,7 @@
 				F3EDF2D22A1FA931000680B1 /* SearchResponse.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
 				F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */,
+				F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */,
 				F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */,
 				F30E834929F7FD2500283EE3 /* MetAPI.swift in Sources */,
 				F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */,

@@ -2,7 +2,7 @@
 //  LoadingPlaceholderView.swift
 //  TheMET
 //
-//  Created by Анна Ситникова on 18/04/2023.
+//  Created by Анна Ситникова on 08/08/2023.
 //
 
 import Foundation
@@ -10,49 +10,50 @@ import UIKit
 
 class LoadingPlaceholderView: UIView {
     
-    static let xibFileName = "LoadingPlaceholderView"
+    private let textLabel: UILabel = UILabel()
+    private let animationView: ArtsLoadingIndicatorView = ArtsLoadingIndicatorView()
+    private let container: UIStackView = UIStackView()
     
-    var onButtonTap: () -> Void = {}
-    
-    @IBOutlet var textLabel: UILabel!
-    @IBOutlet var imageView: UIImageView!
-    @IBOutlet var button: UIButton!
-    
-    static func constructView(configuration: LoadingPlaceholderConfiguration) -> LoadingPlaceholderView {
-        let nib = UINib(nibName: LoadingPlaceholderView.xibFileName, bundle: nil)
-        let view = nib.instantiate(withOwner: nil).first as! LoadingPlaceholderView
+    static func construstView(configuration: LoadingPlaceholderConfiguration) -> LoadingPlaceholderView {
+        let view = LoadingPlaceholderView()
         view.setup(configuration: configuration)
         return view
     }
     
     private func setup(configuration: LoadingPlaceholderConfiguration) {
-        self.imageView.image = configuration.image
+        self.textLabel.numberOfLines = 0
+        self.textLabel.textAlignment = .center
         self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: configuration.text)
-        if let buttonTitle = configuration.buttonTitle {
-            self.button.apply(radius: 30, backgroundColor: UIColor(named: "blueberry"), fontColor: UIColor(named: "pear"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 20, buttonTitle: buttonTitle, image: nil)
-            self.button.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
-        } else {
-            self.button.isHidden = true
-        }
     }
     
-    @objc
-    private func buttonDidTap(){
-        self.onButtonTap()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.container.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.container)
+        self.container.addArrangedSubview(self.animationView)
+        self.container.addArrangedSubview(self.textLabel)
+        self.container.axis = .vertical
+        self.container.distribution = .fill
+        self.container.alignment = .center
+        self.container.spacing = 30
+        
+        NSLayoutConstraint.activate([
+            self.container.widthAnchor.constraint(equalTo: self.widthAnchor),
+            self.container.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.container.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
 struct LoadingPlaceholderConfiguration {
     
     let text: String
-    let image: UIImage?
-    let buttonTitle: String?
     
-    static let featuredFailed: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("artwork.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
-    static let featuredLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("featured_artwork.loading", comment: ""), image: UIImage(named: "Frame"), buttonTitle: nil)
-    static let catalogLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""), image: UIImage(named: "HangingPictures"), buttonTitle: nil)
-    static let catalogFailed: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
-    static let categoryArtworksLoading: LoadingPlaceholderConfiguration =  LoadingPlaceholderConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""), image: UIImage(named: "HangingPictures"), buttonTitle: nil)
-    static let categoryFailed: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
-    
+    static let featuredLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("featured_artwork.loading", comment: ""))
+        static let catalogLoading: LoadingPlaceholderConfiguration = LoadingPlaceholderConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""))
+        static let categoryArtworksLoading: LoadingPlaceholderConfiguration =  LoadingPlaceholderConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""))
 }
