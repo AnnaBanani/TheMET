@@ -29,8 +29,6 @@ class LoadingPlaceholderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.container.translatesAutoresizingMaskIntoConstraints = false
-        self.animationView.translatesAutoresizingMaskIntoConstraints = false
-        self.textLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.container)
         self.container.addArrangedSubview(self.animationView)
         self.container.addArrangedSubview(self.textLabel)
@@ -43,6 +41,9 @@ class LoadingPlaceholderView: UIView {
             self.container.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.container.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             ])
+        NSLayoutConstraint.activate([
+            self.animationView.widthAnchor.constraint(equalTo: self.container.widthAnchor, multiplier: 0.5)
+        ])
     }
     
     required init?(coder: NSCoder) {
