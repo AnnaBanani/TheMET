@@ -10,6 +10,8 @@ import UIKit
 
 class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
+    private let searchBar: UISearchBar = UISearchBar()
+    
     private let metAPI = MetAPI(networkManager: NetworkManager.standard)
     
     private let favoriteService = FavoritesService.standart
@@ -35,9 +37,17 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
         NotificationCenter.default.addObserver(self, selector: #selector(favoriteServiceDidChange), name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
-        self.add(categorySubview: self.loadingCategoryView)
-        self.add(categorySubview: self.failedCategoryView)
-        self.add(categorySubview: self.categoryTableView)
+        self.searchBar.apply(barTintColor: UIColor(named: "blackberry"), textFieldBackgroundColor: UIColor(named: "blueberry0.5"), textFieldColor: UIColor(named: "plum"))
+        self.searchBar.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.searchBar)
+        NSLayoutConstraint.activate([
+            self.searchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.searchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.searchBar.topAnchor.constraint(equalTo: self.view.topAnchor)
+        ])
+        self.add(subView: self.loadingCategoryView, topAnchorSubView: self.searchBar)
+        self.add(subView: self.failedCategoryView, topAnchorSubView: self.searchBar)
+        self.add(subView: self.categoryTableView, topAnchorSubView: self.searchBar)
         self.categoryTableView.separatorStyle = .none
         self.categoryTableView.estimatedRowHeight = 10
         self.categoryTableView.rowHeight = UITableView.automaticDimension
@@ -74,15 +84,15 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         self.categoryTableView.reloadData()
     }
     
-    private func add(categorySubview: UIView) {
-        categorySubview.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(categorySubview)
-        categorySubview.backgroundColor = .clear
+    private func add(subView: UIView, topAnchorSubView: UIView) {
+        subView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(subView)
+        subView.backgroundColor = .clear
         let constraints: [NSLayoutConstraint] = [
-            categorySubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-            categorySubview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            categorySubview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
-            categorySubview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+            subView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            subView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            subView.topAnchor.constraint(equalTo: topAnchorSubView.bottomAnchor, constant: 0),
+            subView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
         ]
         NSLayoutConstraint.activate(constraints)
     }
