@@ -24,11 +24,11 @@ class ArtViewCell: UITableViewCell {
     // MARK: - API
     var isPlaceholderVisible: Bool = false {
         didSet {
-            self.setElementsVisibility(isPlaceholderVisible: isPlaceholderVisible)
+            self.setElementsVisibility()
         }
     }
     
-    private func setElementsVisibility(isPlaceholderVisible: Bool) {
+    private func setElementsVisibility() {
         if self.isPlaceholderVisible {
             self.artView.isHidden = true
             self.placeHolderImageView.isHidden = false
@@ -98,7 +98,7 @@ class ArtViewCell: UITableViewCell {
             self.placeHolderTextView.topAnchor.constraint(equalTo: self.placeHolderImageView.bottomAnchor, constant: 10),
             self.placeHolderTextView.heightAnchor.constraint(equalToConstant: 50),
         ])
-        self.setElementsVisibility(isPlaceholderVisible: self.isPlaceholderVisible)
+        self.setElementsVisibility()
     }
     
     required init?(coder: NSCoder) {
