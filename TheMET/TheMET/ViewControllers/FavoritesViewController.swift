@@ -8,7 +8,11 @@
 import Foundation
 import UIKit
 
-class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+    
+    private let artFilter : ArtFilter = ArtFilter()
+    
+    private var displayArts: [Art] = []
     
     private let searchBar: UISearchBar = UISearchBar()
     
@@ -27,6 +31,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.displayArts = self.favoriteService.favoriteArts
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("favories_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
         NotificationCenter.default.addObserver(self, selector: #selector(favoriteServiceDidChange), name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
         self.searchBar.apply(barTintColor: UIColor(named: "blackberry"), textFieldBackgroundColor: UIColor(named: "blueberry0.5"), textFieldColor: UIColor(named: "plum"))
@@ -52,10 +57,12 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.register(ArtViewCell.self, forCellReuseIdentifier: ArtViewCell.artViewCellIdentifier)
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.searchBar.delegate = self
     }
     
     @objc
     private func favoriteServiceDidChange() {
+        self.displayArts = self.artFilter.filter(arts: self.favoriteService.favoriteArts, searchText: self.searchBar.searchTextField.text)
         self.tableView.reloadData()
     }
     
@@ -88,7 +95,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
-            let art = self.favoriteService.favoriteArts[indexPath.row]
+            var art: Art
+            art = self.displayArts[indexPath.row]
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             self.loadCellImage(cell: cell, art: art)
@@ -107,12 +115,25 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.favoriteService.favoriteArts.count
+        return self.displayArts.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+//    UISearchBarDelegate
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            self.displayArts = favoriteService.favoriteArts
+            self.tableView.reloadData()
+            return
+        }
+        self.displayArts = self.artFilter.filter(arts: self.favoriteService.favoriteArts, searchText: searchText)
+        self.tableView.reloadData()
+    }
+      
 }
 
 

@@ -42,6 +42,7 @@
 		F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */; };
 		F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6D12A7C004C0062AEFC /* UISearchBar+apply.swift */; };
 		F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */; };
+		F376B37E2A8529AC00AA096B /* ArtFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376B37D2A8529AC00AA096B /* ArtFilter.swift */; };
 		F37A93A52A04064B00AA1DEA /* ObjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */; };
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
 		F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2160C2A3235510056EF54 /* CatalogCellData.swift */; };
@@ -102,6 +103,7 @@
 		F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsLoadingIndicatorView.swift; sourceTree = "<group>"; };
 		F36BD6D12A7C004C0062AEFC /* UISearchBar+apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+apply.swift"; sourceTree = "<group>"; };
 		F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlaceholderView.swift; sourceTree = "<group>"; };
+		F376B37D2A8529AC00AA096B /* ArtFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFilter.swift; sourceTree = "<group>"; };
 		F37A93A42A04064B00AA1DEA /* ObjectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectResponse.swift; sourceTree = "<group>"; };
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F3A2160C2A3235510056EF54 /* CatalogCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCellData.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
+				F376B37C2A85299800AA096B /* ArtFilter */,
 				F3FD733C2A700C5B00B163EA /* Generic Types */,
 				F3F5E7292A5312A30014CBF6 /* Services */,
 				F3F1D0442A449180003D4559 /* ArtView */,
@@ -253,6 +256,14 @@
 				F3A2160C2A3235510056EF54 /* CatalogCellData.swift */,
 			);
 			path = CatalogContentView;
+			sourceTree = "<group>";
+		};
+		F376B37C2A85299800AA096B /* ArtFilter */ = {
+			isa = PBXGroup;
+			children = (
+				F376B37D2A8529AC00AA096B /* ArtFilter.swift */,
+			);
+			path = ArtFilter;
 			sourceTree = "<group>";
 		};
 		F3C7DB582A14F36500DBBF87 /* LoadingPlaceholderView */ = {
@@ -388,6 +399,7 @@
 				F3012FCD29C9E37D00138CE3 /* CatalogViewController.swift in Sources */,
 				F3847C582A0E972B00501F0F /* GradientView.swift in Sources */,
 				F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */,
+				F376B37E2A8529AC00AA096B /* ArtFilter.swift in Sources */,
 				F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,
 				F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */,
