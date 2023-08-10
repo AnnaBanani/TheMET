@@ -24,19 +24,23 @@ class ArtViewCell: UITableViewCell {
     // MARK: - API
     var isPlaceholderVisible: Bool = false {
         didSet {
-            if self.isPlaceholderVisible {
-                self.artView.isHidden = true
-                self.placeHolderImageView.isHidden = false
-                self.placeHolderTextView.isHidden = false
-                self.artViewBottomConstraint?.isActive = false
-                self.placeholderBottomConstraint?.isActive = true
-            } else {
-                self.artView.isHidden = false
-                self.placeHolderImageView.isHidden = true
-                self.placeHolderTextView.isHidden = true
-                self.artViewBottomConstraint?.isActive = true
-                self.placeholderBottomConstraint?.isActive = false
-            }
+            self.setElementsVisibility(isPlaceholderVisible: isPlaceholderVisible)
+        }
+    }
+    
+    private func setElementsVisibility(isPlaceholderVisible: Bool) {
+        if self.isPlaceholderVisible {
+            self.artView.isHidden = true
+            self.placeHolderImageView.isHidden = false
+            self.placeHolderTextView.isHidden = false
+            self.artViewBottomConstraint?.isActive = false
+            self.placeholderBottomConstraint?.isActive = true
+        } else {
+            self.artView.isHidden = false
+            self.placeHolderImageView.isHidden = true
+            self.placeHolderTextView.isHidden = true
+            self.artViewBottomConstraint?.isActive = true
+            self.placeholderBottomConstraint?.isActive = false
         }
     }
     
@@ -94,6 +98,7 @@ class ArtViewCell: UITableViewCell {
             self.placeHolderTextView.topAnchor.constraint(equalTo: self.placeHolderImageView.bottomAnchor, constant: 10),
             self.placeHolderTextView.heightAnchor.constraint(equalToConstant: 50),
         ])
+        self.setElementsVisibility(isPlaceholderVisible: self.isPlaceholderVisible)
     }
     
     required init?(coder: NSCoder) {
