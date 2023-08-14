@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
     
     private let searchBar: UISearchBar = UISearchBar()
     
@@ -54,6 +54,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         self.categoryTableView.register(ArtViewCell.self, forCellReuseIdentifier: ArtViewCell.artViewCellIdentifier)
         self.categoryTableView.dataSource = self
         self.categoryTableView.delegate = self
+        self.searchBar.delegate = self
         self.failedCategoryView.onButtonTap = { [weak self] in
             self?.reloadButtonDidTap()
         }
@@ -111,18 +112,55 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self.contentStatus = .failed
             return
         }
-        self.metAPI.objects(departmentIds: [id]) { [weak self] objectsResponse in
-            guard let objectsResponse = objectsResponse else {
-                self?.contentStatus = .failed
-                return
+        guard let searchTextBeforeLoading = self.searchBar.searchTextField.text else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard self?.searchBar.searchTextField.text == nil else {
+                    return
+                }
+                self?.metAPI.objects(departmentIds: [id]) { [weak self] objectsResponse in
+                    guard self?.searchBar.searchTextField.text == nil else {
+                        return
+                    }
+                    guard let objectsResponse = objectsResponse else {
+                        self?.contentStatus = .failed
+                        return
+                    }
+                    var artCellDataList: [ArtCellData] = []
+                    for artId in objectsResponse.objectIDs {
+                        let artCellData = ArtCellData(artID: artId, artData: .placeholder)
+                        artCellDataList.append(artCellData)
+                    }
+                    self?.contentStatus = .loaded(artCellDataList)
+                }
+                self?.categoryTableView.reloadData()
             }
-            var artCellDataList: [ArtCellData] = []
-            for artId in objectsResponse.objectIDs {
-                let artCellData = ArtCellData(artID: artId, artData: .placeholder)
-                artCellDataList.append(artCellData)
-            }
-            self?.contentStatus = .loaded(artCellDataList)
+            return
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
+              return
+            }
+            let parameters:[SearchParameter] = [
+                .departmentId(id),
+                .q(searchTextBeforeLoading)
+            ]
+            self?.metAPI.search(parameters: parameters) { [weak self] searchResponse in
+                guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
+                  return
+                }
+                guard let searchResponse = searchResponse else {
+                    self?.contentStatus = .failed
+                    return
+                }
+                var filteredArtCellDataList: [ArtCellData] = []
+                for artId in searchResponse.objectIDs {
+                    let filteredArtCellData = ArtCellData(artID: artId, artData: .placeholder)
+                    filteredArtCellDataList.append(filteredArtCellData)
+                }
+                self?.contentStatus = .loaded(filteredArtCellDataList)
+            }
+        }
+        self.categoryTableView.reloadData()
     }
     
     private func loadArtCellData(artID: ArtID, completion: @escaping (ArtCellData?) -> Void) {
@@ -242,6 +280,12 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self?.removeLoadingArtId(artId: art.artID)
         }
     }
+    
+    //    UISearchBarDelegate
+        
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            self.reloadCategory()
+        }
     
 }
 
