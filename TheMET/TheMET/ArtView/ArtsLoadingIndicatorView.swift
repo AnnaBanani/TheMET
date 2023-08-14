@@ -132,6 +132,12 @@ class ArtsLoadingIndicatorContainerView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        DispatchQueue.main.async { [weak self] in
+            self?.startAnimationIfNeeded()
+        }
+    }
+
+    private func startAnimationIfNeeded() {
         guard self.window != nil,
         self.bounds != .zero else {
             return

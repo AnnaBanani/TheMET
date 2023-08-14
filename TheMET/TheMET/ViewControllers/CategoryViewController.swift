@@ -112,54 +112,12 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self.contentStatus = .failed
             return
         }
-        guard let searchTextBeforeLoading = self.searchBar.searchTextField.text else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-                guard self?.searchBar.searchTextField.text == nil else {
-                    return
-                }
-                self?.metAPI.objects(departmentIds: [id]) { [weak self] objectsResponse in
-                    guard self?.searchBar.searchTextField.text == nil else {
-                        return
-                    }
-                    guard let objectsResponse = objectsResponse else {
-                        self?.contentStatus = .failed
-                        return
-                    }
-                    var artCellDataList: [ArtCellData] = []
-                    for artId in objectsResponse.objectIDs {
-                        let artCellData = ArtCellData(artID: artId, artData: .placeholder)
-                        artCellDataList.append(artCellData)
-                    }
-                    self?.contentStatus = .loaded(artCellDataList)
-                }
-                self?.categoryTableView.reloadData()
-            }
+        guard let searchTextBeforeLoading = self.searchBar.searchTextField.text,
+              !searchTextBeforeLoading.isEmpty else {
+            self.loadObjects(departmentId: id)
             return
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
-              return
-            }
-            let parameters:[SearchParameter] = [
-                .departmentId(id),
-                .q(searchTextBeforeLoading)
-            ]
-            self?.metAPI.search(parameters: parameters) { [weak self] searchResponse in
-                guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
-                  return
-                }
-                guard let searchResponse = searchResponse else {
-                    self?.contentStatus = .failed
-                    return
-                }
-                var filteredArtCellDataList: [ArtCellData] = []
-                for artId in searchResponse.objectIDs {
-                    let filteredArtCellData = ArtCellData(artID: artId, artData: .placeholder)
-                    filteredArtCellDataList.append(filteredArtCellData)
-                }
-                self?.contentStatus = .loaded(filteredArtCellDataList)
-            }
-        }
+        self.loadSearchResponce(searchTextBeforeLoading: searchTextBeforeLoading, departmentId: id)
         self.categoryTableView.reloadData()
     }
     
@@ -210,6 +168,61 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self.favoriteService.removeArt(id: art.objectID)
         } else {
             self.favoriteService.addFavoriteArt(art)
+        }
+    }
+    
+    private func loadObjects(departmentId: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self,
+                self.searchBar.searchTextField.text == nil ||
+                    self.searchBar.searchTextField.text == "" else {
+                return
+            }
+            self.metAPI.objects(departmentIds: [departmentId]) { [weak self] objectsResponse in
+                guard let self = self,
+                    self.searchBar.searchTextField.text == nil ||
+                        self.searchBar.searchTextField.text == "" else {
+                    return
+                }
+                guard let objectsResponse = objectsResponse else {
+                    self.contentStatus = .failed
+                    return
+                }
+                var artCellDataList: [ArtCellData] = []
+                for artId in objectsResponse.objectIDs {
+                    let artCellData = ArtCellData(artID: artId, artData: .placeholder)
+                    artCellDataList.append(artCellData)
+                }
+                self.contentStatus = .loaded(artCellDataList)
+            }
+            self.categoryTableView.reloadData()
+        }
+    }
+    
+    private func loadSearchResponce(searchTextBeforeLoading: String, departmentId: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
+              return
+            }
+            let parameters:[SearchParameter] = [
+                .departmentId(departmentId),
+                .q(searchTextBeforeLoading)
+            ]
+            self?.metAPI.search(parameters: parameters) { [weak self] searchResponse in
+                guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
+                  return
+                }
+                guard let searchResponse = searchResponse else {
+                    self?.contentStatus = .failed
+                    return
+                }
+                var filteredArtCellDataList: [ArtCellData] = []
+                for artId in searchResponse.objectIDs {
+                    let filteredArtCellData = ArtCellData(artID: artId, artData: .placeholder)
+                    filteredArtCellDataList.append(filteredArtCellData)
+                }
+                self?.contentStatus = .loaded(filteredArtCellDataList)
+            }
         }
     }
     
