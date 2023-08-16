@@ -65,6 +65,11 @@ class ArtViewCell: UITableViewCell {
         set { self.artView.tags = newValue }
     }
     
+    var onImageDidTap: ((UIImage) -> Void)? {
+        get { return self.artView.onImageDidTap }
+        set { self.artView.onImageDidTap = newValue }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.artView.translatesAutoresizingMaskIntoConstraints = false

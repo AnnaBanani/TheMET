@@ -128,6 +128,9 @@ class FeaturedArtViewController: UIViewController {
             self.artView.onLikeButtonDidTap = { [weak self] in
                 self?.likeButtonDidTap(art: art)
             }
+            self.artView.onImageDidTap = { [weak self] image in
+                self?.imageDidTap(image: image)
+            }
 //            TODO tags
             self.failedFeaturedArtView.isHidden = true
             self.loadingFeaturedArtView.isHidden = true
@@ -141,6 +144,13 @@ class FeaturedArtViewController: UIViewController {
         } else {
             self.favoriteService.addFavoriteArt(art)
         }
+    }
+    
+    private func imageDidTap(image: UIImage) {
+        let fullScreenViewController =  FullScreenPhotoViewController()
+        fullScreenViewController.modalPresentationStyle = .fullScreen
+        fullScreenViewController.image = image
+        self.present(fullScreenViewController, animated: true)
     }
 
 }

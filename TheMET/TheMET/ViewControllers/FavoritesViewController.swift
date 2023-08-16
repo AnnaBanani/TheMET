@@ -91,6 +91,13 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         return tags
     }
     
+    private func imageDidTap(image: UIImage) {
+        let fullScreenViewController =  FullScreenPhotoViewController()
+        fullScreenViewController.modalPresentationStyle = .fullScreen
+        fullScreenViewController.image = image
+        self.present(fullScreenViewController, animated: true)
+    }
+    
 //  UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,6 +113,9 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             let oblectID = art.objectID
             cell.onLikeButtonDidTap = { [weak self] in
                 self?.favoriteService.removeArt(id: oblectID)
+            }
+            cell.onImageDidTap = { [weak self] image in
+                self?.imageDidTap(image: image)
             }
             return cell
         } else {
