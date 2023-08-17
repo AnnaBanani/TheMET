@@ -16,6 +16,8 @@ class ArtView: UIView {
     private let tagView: TagListView = TagListView()
     
     // MARK: - API
+    var onImageDidTap: ((UIImage) -> Void)? 
+    
     var imageState: LoadingImageView.State {
         get { return self.loadingImageView.state }
         set { self.loadingImageView.state = newValue }
@@ -41,6 +43,8 @@ class ArtView: UIView {
         self.updateLikeButton()
         self.likeButton.addTarget(self, action: #selector(likeButtonDidTap), for: .touchUpInside)
         self.setupLayout()
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageDidTap))
+        self.loadingImageView.addGestureRecognizer(tapRecognizer)
     }
     
     required init?(coder: NSCoder) {
@@ -50,6 +54,14 @@ class ArtView: UIView {
     @objc
     private func likeButtonDidTap(){
         self.onLikeButtonDidTap?()
+    }
+
+    @objc
+    private func imageDidTap() {
+        guard case .loaded(let image) = self.imageState else {
+            return
+        }
+        self.onImageDidTap?(image)
     }
     
     private func updateLikeButton() {

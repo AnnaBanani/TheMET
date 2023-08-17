@@ -215,6 +215,13 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         self.contentStatus = .loaded(filteredArtCellDataList)
     }
     
+    private func imageDidTap(image: UIImage) {
+        let fullScreenViewController =  FullScreenPhotoViewController()
+        fullScreenViewController.modalPresentationStyle = .fullScreen
+        fullScreenViewController.image = image
+        self.present(fullScreenViewController, animated: true)
+    }
+    
     //  UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -239,6 +246,9 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 }
                 cell.onLikeButtonDidTap = { [weak self] in
                     self?.likeButtonDidTap(cell: cell, art: art)
+                }
+                cell.onImageDidTap = { [weak self] image in
+                    self?.imageDidTap(image: image)
                 }
             }
             return cell
