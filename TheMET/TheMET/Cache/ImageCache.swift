@@ -22,7 +22,6 @@ class ImageCache {
     }
 
     private var loadedImagesCollection: [URL : UIImage] = [:]
-    private let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     
     func loadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
         guard let imageURL = URL(string: urlString) else {
@@ -32,14 +31,16 @@ class ImageCache {
         if let image = self.loadedImagesCollection[imageURL]  {
             completion(image)
         } else {
-            guard let fileURL = self.makeFileUrl(urlString: urlString),
-                  let data = try? Data(contentsOf: fileURL),
-                  let image = UIImage(data: data) else {
-                completion(nil)
-                return
+            DispatchQueue.global().sync {
+                guard let fileURL = self.makeFileUrl(urlString: urlString),
+                      let data = try? Data(contentsOf: fileURL),
+                      let image = UIImage(data: data) else {
+                    completion(nil)
+                    return
+                }
+                self.loadedImagesCollection[imageURL] = image
+                completion(image)
             }
-            self.loadedImagesCollection[imageURL] = image
-            completion(image)
         }
     }
     
@@ -48,10 +49,12 @@ class ImageCache {
             return
         }
         self.loadedImagesCollection[imageURL] = image
-        guard let fileURL = self.makeFileUrl(urlString: urlString) else { return }
-        let fileManager = FileManager.default
-        let data = image.pngData()
-        fileManager.createFile(atPath: fileURL.path, contents: data)
+        DispatchQueue.global().sync {
+            guard let fileURL = self.makeFileUrl(urlString: urlString) else { return }
+            let fileManager = FileManager.default
+            let data = image.pngData()
+            fileManager.createFile(atPath: fileURL.path, contents: data)
+        }
     }
     
     private func makeFileUrl(urlString: String) -> URL? {
