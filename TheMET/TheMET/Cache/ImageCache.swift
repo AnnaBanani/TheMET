@@ -39,7 +39,9 @@ class ImageCache {
                     return
                 }
                 self.loadedImagesCollection[imageURL] = image
-                completion(image)
+                DispatchQueue.main.async {
+                    completion(image)
+                }
             }
         }
     }
