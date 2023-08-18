@@ -16,5 +16,12 @@ extension URL {
         }
         return homeDirectory.appending(component: folderName)
     }
+    
+    static var cacheSubfolderURL: URL? {
+        let fileManager = FileManager.default
+        return fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first
+    }
 }
+
+
 

@@ -10,41 +10,36 @@ import UIKit
 
 class ImageLoader {
     
-    private var loadedImagesCollection: [URL : UIImage] = [:]
-    
-    init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(cleanUpCache), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
-    }
-    
-    @objc
-    private func cleanUpCache() {
-        self.loadedImagesCollection = [:]
-    }
+    let imageCache: ImageCache = ImageCache()
     
     func loadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
-        
         guard let imageURL = URL(string: urlString) else {
             completion(nil)
             return
         }
-        if let image = self.loadedImagesCollection[imageURL]  {
-            completion(image)
-            return
-        }
-        DispatchQueue.global().async {
-            let executeComplitionOnMain: (UIImage?) -> Void = { image in
-                DispatchQueue.main.async {
-                    self.loadedImagesCollection[imageURL] = image
-                    completion(image)
+        self.imageCache.loadImage(urlString: urlString) { cachedImage in
+            guard let cachedImage = cachedImage else {
+                DispatchQueue.global().async {
+                    let executeComplitionOnMain: (UIImage?) -> Void = { image in
+                        DispatchQueue.main.async {
+                            if let image = image {
+                                self.imageCache.putLoadedImageToCache(image: image, for: urlString)
+                            }
+                            completion(image)
+                        }
+                    }
+                    if let imageData = try? Data(contentsOf: imageURL),
+                       let loadedImage = UIImage(data: imageData) {
+                        executeComplitionOnMain(loadedImage)
+                    } else {
+                        executeComplitionOnMain(nil)
+                    }
                 }
+                return
             }
-            if let imageData = try? Data(contentsOf: imageURL),
-               let loadedImage = UIImage(data: imageData) {
-                executeComplitionOnMain(loadedImage)
-            } else {
-                executeComplitionOnMain(nil)
-            }
+            completion(cachedImage)
         }
+        
     }
 }
 
