@@ -16,6 +16,8 @@ class FeaturedArtService {
     
     private var isFeaturedArtLoading: Bool = false
     
+    private let imageLoader = ImageLoader()
+    
     init() {
         guard let featuredFolderURL = URL.documentsSubfolderURL(folderName: "FeaturedArts/"),
               let artFileManager = ArtFileManager(folderURL: featuredFolderURL) else {
@@ -136,10 +138,20 @@ class FeaturedArtService {
                     self?.isFeaturedArtLoading = false
                     return
                 }
-                self?.storeFeaturedArtData(artId: randomId, date: Date.now)
-                self?.artFileManager?.write(art: object)
-                self?.featuredArt = .loaded(object)
-                self?.isFeaturedArtLoading = false
+                guard let imageURL = object.primaryImage else {
+                    self?.forceUpdateFeaturedArt()
+                    return
+                }
+                self?.imageLoader.loadImage(urlString: imageURL, completion: { image in
+                    guard image != nil else {
+                        self?.forceUpdateFeaturedArt()
+                        return
+                    }
+                    self?.storeFeaturedArtData(artId: randomId, date: Date.now)
+                    self?.artFileManager?.write(art: object)
+                    self?.featuredArt = .loaded(object)
+                    self?.isFeaturedArtLoading = false
+                })
             }
         }
     }
