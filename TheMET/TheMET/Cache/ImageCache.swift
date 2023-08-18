@@ -35,7 +35,9 @@ class ImageCache {
                 guard let fileURL = self.makeFileUrl(urlString: urlString),
                       let data = try? Data(contentsOf: fileURL),
                       let image = UIImage(data: data) else {
-                    completion(nil)
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
                     return
                 }
                 self.loadedImagesCollection[imageURL] = image
