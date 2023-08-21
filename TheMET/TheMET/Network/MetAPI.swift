@@ -59,18 +59,19 @@ class MetAPI{
         }
         self.networkManager.get(
             urlString: urlString,
-            parameters: parameters) { data in
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .useDefaultKeys
-                if let data = data {
+            parameters: parameters) { result in
+                switch result {
+                case .failure:
+                    completion(nil)
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {
                         let result = try jsonDecoder.decode(ObjectsResponse.self, from: data)
                         completion(result)
                     } catch {
                         completion(nil)
                     }
-                } else {
-                    completion(nil)
                 }
             }
     }
@@ -102,18 +103,19 @@ class MetAPI{
         urlString.append(urlStringSuffix)
         self.networkManager.get(
             urlString: urlString,
-            parameters: [ : ]) { data in
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .useDefaultKeys
-                if let data = data {
+            parameters: [ : ]) { result in
+                switch result {
+                case .failure:
+                    completion(nil)
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {
                         let result = try jsonDecoder.decode(ObjectResponse.self, from: data)
                         completion(result)
                     } catch {
                         completion(nil)
                     }
-                } else {
-                    completion(nil)
                 }
             }
     }
@@ -145,18 +147,19 @@ class MetAPI{
         urlString.append(urlStringSuffix)
         self.networkManager.get(
             urlString: urlString,
-            parameters: [ : ]) { data in
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .useDefaultKeys
-                if let data = data {
+            parameters: [ : ]) { result in
+                switch result {
+                case .failure:
+                    completion(nil)
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {
                         let result = try jsonDecoder.decode(DepartmentsResponse.self, from: data)
                         completion(result)
                     } catch {
                         completion(nil)
                     }
-                } else {
-                    completion(nil)
                 }
             }
     }
@@ -189,18 +192,19 @@ class MetAPI{
         let searchParameters: [String : String] = self.parameters(from: parameters)
         self.networkManager.get(
             urlString: urlString,
-            parameters: searchParameters) { data in
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .useDefaultKeys
-                if let data = data {
+            parameters: searchParameters) { result in
+                switch result {
+                case .failure:
+                    completion(nil)
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {
                         let result = try jsonDecoder.decode(SearchResponse.self, from: data)
                         completion(result)
                     } catch {
                         completion(nil)
                     }
-                } else {
-                    completion(nil)
                 }
             }
     }

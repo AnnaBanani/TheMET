@@ -16,7 +16,17 @@ class NetworkManager {
     
     private var lastRequestTime = Date.distantPast
     
-    func get(urlString: String, parameters: [String : String], completion: @escaping (Data?) -> Void)  {
+//    func get(urlString: String, parameters: [String : String], completion: @escaping (Data?) -> Void)  {
+//        if self.isTimeIntervalLongEnough(lastRequest: lastRequestTime) {
+//            self.executeNetworkGet(urlString: urlString, parameters: parameters, completion: completion)
+//        } else {
+//            DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .microseconds(Int(12500))) { [weak self] in
+//                self?.get(urlString: urlString, parameters: parameters, completion: completion)
+//            }
+//        }
+//    }
+    
+    func get(urlString: String, parameters: [String : String], completion: @escaping (Result<Data, NetworkManagerError>) -> Void)  {
         if self.isTimeIntervalLongEnough(lastRequest: lastRequestTime) {
             self.executeNetworkGet(urlString: urlString, parameters: parameters, completion: completion)
         } else {
@@ -26,9 +36,9 @@ class NetworkManager {
         }
     }
     
-    private func executeNetworkGet(urlString: String, parameters: [String : String], completion: @escaping (Data?) -> Void)  {
+    private func executeNetworkGet(urlString: String, parameters: [String : String], completion: @escaping (Result<Data, NetworkManagerError>) -> Void)  {
         guard var components = URLComponents(string: urlString) else {
-            completion(nil)
+            completion(.failure(.invalidUrlString))
             return
         }
         components.queryItems = parameters.map { (key, value) in
@@ -36,28 +46,31 @@ class NetworkManager {
         }
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         guard let url = components.url else {
-            completion(nil)
+            completion(.failure(.invalidUrlComponents))
             return
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
         let urlSession = URLSession.shared
-        let fileDownloadTask = urlSession.dataTask(
+        let requestTask = urlSession.dataTask(
             with: urlRequest
         ) { data, _, error in
-            let executeCompletionOnMain: (Data?) -> Void = { loadedData in
+            let executeCompletionOnMain: (Result<Data, NetworkManagerError>) -> Void = { result in
                 DispatchQueue.main.async {
-                    completion(loadedData)
+                    completion(result)
                 }
             }
-            guard error == nil,
-                  let data = data else {
-                executeCompletionOnMain(nil)
+            if let error = error {
+                executeCompletionOnMain(.failure(.urlSessionTaskError(error)))
                 return
             }
-            executeCompletionOnMain(data)
+            guard let data = data else {
+                executeCompletionOnMain(.failure(.noDataInResponce))
+                return
+            }
+            executeCompletionOnMain(.success(data))
         }
-        fileDownloadTask.resume()
+        requestTask.resume()
         lastRequestTime = .now
     }
     
@@ -67,6 +80,13 @@ class NetworkManager {
         let requiedTimeInterval: TimeInterval = 0.0125
         return differenceInSeconds > requiedTimeInterval
     }
+}
+
+enum NetworkManagerError: Error {
+    case invalidUrlString
+    case invalidUrlComponents
+    case urlSessionTaskError(Error)
+    case noDataInResponce
 }
 
 
