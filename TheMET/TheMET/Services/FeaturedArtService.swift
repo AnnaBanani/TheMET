@@ -124,25 +124,42 @@ class FeaturedArtService {
         self.isFeaturedArtLoading = true
         self.featuredArt = .loading
         self.metAPI.objects { [weak self] objectResponce in
-            guard let objectResponce = objectResponce,
-            let randomId = objectResponce.objectIDs.randomElement() else {
+            guard let objectResponce = objectResponce
+            else {
                 self?.featuredArt = .failed
                 self?.isFeaturedArtLoading = false
                 return
             }
-            self?.metAPI.object(id: randomId) {[weak self] object in
-                guard let object = object else {
-                    self?.featuredArt = .failed
-                    self?.isFeaturedArtLoading = false
-                    return
-                }
-                self?.storeFeaturedArtData(artId: randomId, date: Date.now)
-                self?.artFileManager?.write(art: object)
-                self?.featuredArt = .loaded(object)
-                self?.isFeaturedArtLoading = false
-            }
+            self?.updateFeaturedArt(objectIDs: objectResponce.objectIDs)
         }
     }
     
+ 
+    
+    private func updateFeaturedArt(objectIDs: [ArtID]) {
+        var objectIDs = objectIDs
+        guard let randomId = objectIDs.randomElement() else {
+            self.featuredArt = .failed
+            self.isFeaturedArtLoading = false
+            return
+        }
+        self.metAPI.object(id: randomId) { [weak self] object in
+            guard let object = object else {
+                self?.featuredArt = .failed
+                self?.isFeaturedArtLoading = false
+                return
+            }
+            guard let imageString = object.primaryImage,
+                URL(string: imageString) != nil else {
+                objectIDs.removeAll { $0 == randomId }
+                self?.updateFeaturedArt(objectIDs: objectIDs)
+                return
+            }
+            self?.storeFeaturedArtData(artId: randomId, date: Date.now)
+            self?.artFileManager?.write(art: object)
+            self?.featuredArt = .loaded(object)
+            self?.isFeaturedArtLoading = false
+        }
+    }
 }
 
