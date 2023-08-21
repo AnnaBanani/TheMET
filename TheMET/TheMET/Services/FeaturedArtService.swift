@@ -150,7 +150,7 @@ class FeaturedArtService {
                 return
             }
             guard let imageString = object.primaryImage,
-                let _ = URL(string: imageString) else {
+                URL(string: imageString) != nil else {
                 objectIDs.removeAll { $0 == randomId }
                 self?.updateFeaturedArt(objectIDs: objectIDs)
                 return
