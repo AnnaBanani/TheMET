@@ -125,46 +125,16 @@ class FeaturedArtService {
         self.featuredArt = .loading
         self.metAPI.objects { [weak self] objectResponce in
             guard let objectResponce = objectResponce
-//                  let randomId = self?.getRandomID(objectToDelete: nil, objectResponce: objectResponce)
             else {
                 self?.featuredArt = .failed
                 self?.isFeaturedArtLoading = false
                 return
             }
             self?.updateFeaturedArt(objectIDs: objectResponce.objectIDs)
-//            self?.tryRandomId(randomID: randomId, objectResponce: objectResponce)
         }
     }
     
-//    private func getRandomID (objectToDelete: ArtID?, objectResponce: ObjectsResponse) -> ArtID? {
-//        objectResponce.objectIDs.removeAll { $0 == objectToDelete }
-//        guard let randomId = objectResponce.objectIDs.randomElement() else {return nil}
-//        return randomId
-//    }
-    
-//    private func tryRandomId(randomID: ArtID, objectResponce: ObjectsResponse) {
-//        self.metAPI.object(id: randomID) { [weak self] object in
-//            guard let object = object else {
-//                self?.featuredArt = .failed
-//                self?.isFeaturedArtLoading = false
-//                return
-//            }
-//            guard let imageString = object.primaryImage,
-//                let _ = URL(string: imageString) else {
-//                guard let newRandomID = self?.getRandomID(objectToDelete: randomID, objectResponce: objectResponce) else {
-//                    self?.featuredArt = .failed
-//                    self?.isFeaturedArtLoading = false
-//                    return
-//                }
-//                self?.tryRandomId(randomID: newRandomID, objectResponce: objectResponce)
-//                return
-//            }
-//            self?.storeFeaturedArtData(artId: randomID, date: Date.now)
-//            self?.artFileManager?.write(art: object)
-//            self?.featuredArt = .loaded(object)
-//            self?.isFeaturedArtLoading = false
-//        }
-//    }
+ 
     
     private func updateFeaturedArt(objectIDs: [ArtID]) {
         var objectIDs = objectIDs
