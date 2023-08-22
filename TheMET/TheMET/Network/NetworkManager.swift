@@ -15,17 +15,7 @@ class NetworkManager {
     static let standard: NetworkManager = NetworkManager()
     
     private var lastRequestTime = Date.distantPast
-    
-//    func get(urlString: String, parameters: [String : String], completion: @escaping (Data?) -> Void)  {
-//        if self.isTimeIntervalLongEnough(lastRequest: lastRequestTime) {
-//            self.executeNetworkGet(urlString: urlString, parameters: parameters, completion: completion)
-//        } else {
-//            DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .microseconds(Int(12500))) { [weak self] in
-//                self?.get(urlString: urlString, parameters: parameters, completion: completion)
-//            }
-//        }
-//    }
-    
+   
     func get(urlString: String, parameters: [String : String], completion: @escaping (Result<Data, NetworkManagerError>) -> Void)  {
         if self.isTimeIntervalLongEnough(lastRequest: lastRequestTime) {
             self.executeNetworkGet(urlString: urlString, parameters: parameters, completion: completion)
