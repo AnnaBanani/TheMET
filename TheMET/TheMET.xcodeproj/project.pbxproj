@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D5FD39E2ACB042100F779B1 /* MetAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5FD3982ACB038300F779B1 /* MetAPI.framework */; };
+		7D5FD39F2ACB042100F779B1 /* MetAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5FD3982ACB038300F779B1 /* MetAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3012FB429C4AE1800138CE3 /* AppDelegate.swift */; };
 		F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3012FB629C4AE1800138CE3 /* SceneDelegate.swift */; };
 		F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3012FBA29C4AE1800138CE3 /* Main.storyboard */; };
@@ -67,7 +69,32 @@
 		F3FD73402A7018DB00B163EA /* MetAPICache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD733F2A7018DB00B163EA /* MetAPICache.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7D5FD3972ACB038300F779B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D5FD3932ACB038300F779B1 /* MetAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7D5FD3872ACB031F00F779B1;
+			remoteInfo = MetAPI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7D5FD3A02ACB042100F779B1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7D5FD39F2ACB042100F779B1 /* MetAPI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		7D5FD3932ACB038300F779B1 /* MetAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MetAPI.xcodeproj; sourceTree = "<group>"; };
 		F3012FB129C4AE1800138CE3 /* TheMET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMET.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3012FB429C4AE1800138CE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3012FB629C4AE1800138CE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,12 +164,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D5FD39E2ACB042100F779B1 /* MetAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D5FD3922ACB034F00F779B1 /* MetAPI */ = {
+			isa = PBXGroup;
+			children = (
+				7D5FD3932ACB038300F779B1 /* MetAPI.xcodeproj */,
+			);
+			path = MetAPI;
+			sourceTree = "<group>";
+		};
+		7D5FD3942ACB038300F779B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D5FD3982ACB038300F779B1 /* MetAPI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7D5FD39C2ACB042100F779B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F3012FA829C4AE1800138CE3 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +201,7 @@
 				F30E835229FE854C00283EE3 /* Localizable.strings */,
 				F3012FB329C4AE1800138CE3 /* TheMET */,
 				F3012FB229C4AE1800138CE3 /* Products */,
+				7D5FD39C2ACB042100F779B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,6 +216,7 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
+				7D5FD3922ACB034F00F779B1 /* MetAPI */,
 				F3A1253A2A8E5AA300032DC3 /* Cache */,
 				F3A125372A8D01DC00032DC3 /* FullScreenPhotoViewController */,
 				F376B37C2A85299800AA096B /* ArtFilter */,
@@ -347,6 +400,7 @@
 				F3012FAD29C4AE1800138CE3 /* Sources */,
 				F3012FAE29C4AE1800138CE3 /* Frameworks */,
 				F3012FAF29C4AE1800138CE3 /* Resources */,
+				7D5FD3A02ACB042100F779B1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -384,12 +438,28 @@
 			mainGroup = F3012FA829C4AE1800138CE3;
 			productRefGroup = F3012FB229C4AE1800138CE3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7D5FD3942ACB038300F779B1 /* Products */;
+					ProjectRef = 7D5FD3932ACB038300F779B1 /* MetAPI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F3012FB029C4AE1800138CE3 /* TheMET */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7D5FD3982ACB038300F779B1 /* MetAPI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MetAPI.framework;
+			remoteRef = 7D5FD3972ACB038300F779B1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F3012FAF29C4AE1800138CE3 /* Resources */ = {
