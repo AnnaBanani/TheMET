@@ -18,6 +18,7 @@ class FullScreenPhotoViewController: UIViewController {
     }
     
     private var scale: CGFloat = 1
+    private let screenLimitPercentageForImageMoving: CGFloat = 0.1
     private var currentGestureScale: CGFloat = 1
     private let maxScale: CGFloat = 2
     private let minScale: CGFloat = 0.5
@@ -124,7 +125,7 @@ class FullScreenPhotoViewController: UIViewController {
     }
     
     private func calculatePermissibleTrans(viewSize: CGFloat, imageSize: CGFloat ) -> CGFloat {
-        let restRelWidth = 0.1 + (self.scale*(viewSize - imageSize)/2)/viewSize
+        let restRelWidth = self.screenLimitPercentageForImageMoving + (self.scale*(viewSize - imageSize)/2)/viewSize
         let relOffsetWidth = ((viewSize + ((viewSize * self.scale) - viewSize)/2))/(viewSize * self.scale)
         let correctedRelOffsetWidth = relOffsetWidth - restRelWidth/self.scale
         return correctedRelOffsetWidth * viewSize
