@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import Combine
 
 class FeaturedArtViewController: UIViewController {
     
@@ -23,6 +23,8 @@ class FeaturedArtViewController: UIViewController {
     private let favoriteService = FavoritesService.standart
 
     private let featuredArtService = FeaturedArtService()
+    
+    private var favoriteServiseSubscriber: AnyCancellable?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +36,10 @@ class FeaturedArtViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("random_artwork_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        NotificationCenter.default.addObserver(self, selector: #selector(favoriteServiceDidChange), name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
+        self.favoriteServiseSubscriber = self.favoriteService.$favoriteArts
+            .sink(receiveValue: { [weak self] newFavoriteArts in
+                self?.favoriteServiceDidChange(favoritesArts: newFavoriteArts)
+        })
         self.add(featuredSubView: self.loadingFeaturedArtView)
         self.add(featuredSubView: self.failedFeaturedArtView)
         self.add(featuredSubView: self.scrollView)
@@ -56,13 +61,12 @@ class FeaturedArtViewController: UIViewController {
             self?.displayCurrentFeaturedArtStatus()
         }
     }
-
-    @objc
-    private func favoriteServiceDidChange() {
+    
+    private func favoriteServiceDidChange(favoritesArts: [Art]) {
         guard case .loaded(let art) = self.featuredArtService.featuredArt else {
             return
         }
-        guard self.favoriteService.favoriteArts.contains(where: { favoriteArt in
+        guard favoritesArts.contains(where: { favoriteArt in
             return favoriteArt.objectID == art.objectID
         }) else {
             self.artView.isLiked = false

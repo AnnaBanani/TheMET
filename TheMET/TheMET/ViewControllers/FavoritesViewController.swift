@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -17,6 +18,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     private let searchBar: UISearchBar = UISearchBar()
     
     private let favoriteService = FavoritesService.standart
+    
+    private var favoriteServiseSubscriber: AnyCancellable?
     
     private let imageLoader = ImageLoader()
     
@@ -33,7 +36,10 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         self.displayArts = self.favoriteService.favoriteArts
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("favories_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        NotificationCenter.default.addObserver(self, selector: #selector(favoriteServiceDidChange), name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
+        self.favoriteServiseSubscriber = self.favoriteService.$favoriteArts
+            .sink(receiveValue: { [weak self] newFavoriteArts in
+                self?.favoriteServiceDidChange(favoriteArts: newFavoriteArts)
+            })
         self.searchBar.apply(barTintColor: UIColor(named: "blackberry"), textFieldBackgroundColor: UIColor(named: "blueberry0.5"), textFieldColor: UIColor(named: "plum"))
         self.searchBar.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.searchBar)
@@ -60,10 +66,9 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.searchBar.delegate = self
     }
     
-    @objc
-    private func favoriteServiceDidChange() {
-        self.displayArts = self.artFilter.filter(arts: self.favoriteService.favoriteArts, searchText: self.searchBar.searchTextField.text)
-        self.tableView.reloadData()
+    private func favoriteServiceDidChange(favoriteArts: [Art]) {
+            self.displayArts = self.artFilter.filter(arts: favoriteArts, searchText: self.searchBar.searchTextField.text)
+            self.tableView.reloadData()
     }
     
     private func loadCellImage(cell: ArtViewCell, art: Art) {

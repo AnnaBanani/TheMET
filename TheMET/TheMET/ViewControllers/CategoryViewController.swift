@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
     
@@ -15,6 +16,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     private let metAPI = MetAPI(networkManager: NetworkManager.standard)
     
     private let favoriteService = FavoritesService.standart
+    
+    private var favoriteServiseSubscriber: AnyCancellable?
     
     var departmentId: Int?
     
@@ -36,7 +39,10 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        NotificationCenter.default.addObserver(self, selector: #selector(favoriteServiceDidChange), name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
+        self.favoriteServiseSubscriber = self.favoriteService.$favoriteArts
+            .sink(receiveValue: { [weak self] newFavoriteArts in
+                self?.favoriteServiceDidChange()
+            })
         self.searchBar.apply(barTintColor: UIColor(named: "blackberry"), textFieldBackgroundColor: UIColor(named: "blueberry0.5"), textFieldColor: UIColor(named: "plum"))
         self.searchBar.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.searchBar)
@@ -62,7 +68,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         self.reloadCategory()
     }
     
-    @objc
     private func favoriteServiceDidChange() {
         self.categoryTableView.reloadData()
     }
@@ -294,7 +299,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //    UISearchBarDelegate
-        
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             self.reloadCategory()
         }
