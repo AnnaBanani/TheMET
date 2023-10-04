@@ -37,12 +37,9 @@ class FavoritesService {
             }
             group.notify(queue: .main) { [weak self] in
                 self?.favoriteArts = arts
-                NotificationCenter.default.post(name: FavoritesService.didChangeFavoriteArtsNotificationName, object: nil)
             }
         }
     }
-    
-    static let didChangeFavoriteArtsNotificationName = NSNotification.Name(rawValue: "didChangeFavoriteArts")
     
 //    MARK: - API
 
