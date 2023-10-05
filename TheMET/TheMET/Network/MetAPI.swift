@@ -62,8 +62,8 @@ class MetAPI{
             urlString: urlString,
             parameters: parameters) { result in
                 switch result {
-                case .failure:
-                    completion(.failure(.networkError(.invalidUrlComponents)))
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
@@ -107,8 +107,8 @@ class MetAPI{
             urlString: urlString,
             parameters: [ : ]) { result in
                 switch result {
-                case .failure:
-                    completion(.failure(.networkError(.invalidUrlComponents)))
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
@@ -152,8 +152,8 @@ class MetAPI{
             urlString: urlString,
             parameters: [ : ]) { result in
                 switch result {
-                case .failure:
-                    completion(.failure(.networkError(.invalidUrlComponents)))
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
@@ -263,9 +263,6 @@ class MetAPI{
 
 enum MetAPIError: Error {
     case metAPIDoesNotExist
-    case noDataInResponse
     case nonDecodableData
-    case invalidUrlString
-    case invalidUrlComponents
     case networkError(NetworkManagerError)
 }
