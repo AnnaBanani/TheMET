@@ -119,17 +119,17 @@ class CatalogViewController: UIViewController {
     
     private func reloadCatalog() {
         self.contentStatus = .loading
-        self.metAPI.departments { [weak self] departmentResponceResult in
-            switch departmentResponceResult {
+        self.metAPI.departments { [weak self] departmentResponseResult in
+            switch departmentResponseResult {
             case .failure:
                 self?.contentStatus = .failed
-            case .success(let departmentResponce):
+            case .success(let departmentResponse):
                 var catalogCellDataList: [CatalogCellData] = []
-                for department in departmentResponce.departments {
+                for department in departmentResponse.departments {
                     let catalogCellData: CatalogCellData = CatalogCellData(departmentId: department.id, departmentData: .placeholder)
                     catalogCellDataList.append(catalogCellData)
                 }
-                self?.loadedDepartments = departmentResponce.departments
+                self?.loadedDepartments = departmentResponse.departments
                 self?.contentStatus = .loaded(catalogCellDataList)
             }
         }

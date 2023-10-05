@@ -11,14 +11,14 @@ class MetAPICashe {
     
     static let standard: MetAPICashe = MetAPICashe()
     
-    private struct CachedData<RequestData, ResponceData> {
+    private struct CachedData<RequestData, ResponseData> {
         let requestData: RequestData
-        let responceData: ResponceData
+        let responseData: ResponseData
         let date: Date
         
-        init(requestData: RequestData, responceData: ResponceData) {
+        init(requestData: RequestData, responseData: ResponseData) {
             self.requestData = requestData
-            self.responceData = responceData
+            self.responseData = responseData
             self.date = Date.now
         }
     }
@@ -53,7 +53,7 @@ class MetAPICashe {
             completion(nil)
             return
         }
-        completion(cachedData.responceData)
+        completion(cachedData.responseData)
     }
     
     func object(id: ArtID, completion: @escaping (ObjectResponse?) -> Void) {
@@ -67,7 +67,7 @@ class MetAPICashe {
             completion(nil)
             return
         }
-        completion(cachedData.responceData)
+        completion(cachedData.responseData)
     }
     
     func departments(completion: @escaping (DepartmentsResponse?) -> Void) {
@@ -80,7 +80,7 @@ class MetAPICashe {
             completion(nil)
             return
         }
-        completion(cachedData.responceData)
+        completion(cachedData.responseData)
     }
     
     func search(parameters: [SearchParameter], completion: @escaping (SearchResponse?) -> Void) {
@@ -94,37 +94,37 @@ class MetAPICashe {
             completion(nil)
             return
         }
-        completion(cachedData.responceData)
+        completion(cachedData.responseData)
     }
     
-    func putObjectsResponce(metadataDate: Date?, departmentIds: [Int], responceData: ObjectsResponse) {
+    func putObjectsResponse(metadataDate: Date?, departmentIds: [Int], responseData: ObjectsResponse) {
         let newCachedData = CachedData<ObjectsRequestData, ObjectsResponse>(
             requestData: ObjectsRequestData(metadataDate: metadataDate, departmentIds: departmentIds),
-            responceData: responceData
+            responseData: responseData
         )
         self.objectsCache.append(newCachedData)
     }
     
-    func putObjectResponce(id: ArtID, responceData: ObjectResponse) {
+    func putObjectResponse(id: ArtID, responseData: ObjectResponse) {
         let newCachedData = CachedData<ArtID, ObjectResponse>(
             requestData: id,
-            responceData: responceData
+            responseData: responseData
         )
         self.objectCache.append(newCachedData)
     }
     
-    func putDepartmentsResponce(responceData: DepartmentsResponse) {
+    func putDepartmentsResponse(responseData: DepartmentsResponse) {
         let newCachedData = CachedData<Void, DepartmentsResponse>(
             requestData: Void(),
-            responceData: responceData
+            responseData: responseData
         )
         self.departmentsCashe.append(newCachedData)
     }
     
-    func putSearchResponce(parameters: [SearchParameter], responceData: SearchResponse) {
+    func putSearchResponse(parameters: [SearchParameter], responseData: SearchResponse) {
         let newCachedData = CachedData<[SearchParameter], SearchResponse>(
             requestData: parameters,
-            responceData: responceData
+            responseData: responseData
         )
         self.searchCache.append(newCachedData)
     }

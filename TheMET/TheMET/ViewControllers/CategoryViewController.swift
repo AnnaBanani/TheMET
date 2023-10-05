@@ -125,7 +125,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             }
             if let searchTextBeforeLoading = self.searchBar.searchTextField.text,
                !searchTextBeforeLoading.isEmpty {
-                self.loadSearchResponce(searchTextBeforeLoading: searchTextBeforeLoading, departmentId: id)
+                self.loadSearchResponse(searchTextBeforeLoading: searchTextBeforeLoading, departmentId: id)
             } else {
                 self.loadObjects(departmentId: id)
             }
@@ -135,13 +135,9 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func loadArtCellData(artID: ArtID, completion: @escaping (ArtCellData?) -> Void) {
         self.metAPI.object(id: artID) {objectResult in
-//            guard let objectResult = objectResult else {
-//                completion(nil)
-//                return
-//            }
             switch objectResult {
             case .failure:
-                self.contentStatus = .failed
+                completion(nil)
             case .success(let object):
                 let artCellData = ArtCellData(artID: artID, artData: .data(art: object))
                 completion(artCellData)
@@ -189,13 +185,13 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadObjects(departmentId: Int) {
-        self.metAPI.objects(departmentIds: [departmentId]) { [weak self] objectsResponceResult in
+        self.metAPI.objects(departmentIds: [departmentId]) { [weak self] objectsResponseResult in
             guard let self = self,
                   self.searchBar.searchTextField.text == nil ||
                     self.searchBar.searchTextField.text == "" else {
                 return
             }
-            switch objectsResponceResult {
+            switch objectsResponseResult {
             case .failure:
                 self.contentStatus = .failed
             case.success(let objectsResponse):
@@ -204,7 +200,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    private func loadSearchResponce(searchTextBeforeLoading: String, departmentId: Int) {
+    private func loadSearchResponse(searchTextBeforeLoading: String, departmentId: Int) {
         let parameters:[SearchParameter] = [
             .departmentId(departmentId),
             .q(searchTextBeforeLoading)

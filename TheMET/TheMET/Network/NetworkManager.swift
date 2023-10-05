@@ -55,7 +55,7 @@ class NetworkManager {
                 return
             }
             guard let data = data else {
-                executeCompletionOnMain(.failure(.noDataInResponce))
+                executeCompletionOnMain(.failure(.noDataInResponse))
                 return
             }
             executeCompletionOnMain(.success(data))
@@ -76,7 +76,7 @@ enum NetworkManagerError: Error {
     case invalidUrlString
     case invalidUrlComponents
     case urlSessionTaskError(Error)
-    case noDataInResponce
+    case noDataInResponse
 }
 
 

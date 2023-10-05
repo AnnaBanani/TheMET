@@ -123,8 +123,8 @@ class FeaturedArtService {
         }
         self.isFeaturedArtLoading = true
         self.featuredArt = .loading
-        self.metAPI.objects { [weak self] objectResponceResult in
-            switch objectResponceResult {
+        self.metAPI.objects { [weak self] objectResponseResult in
+            switch objectResponseResult {
             case .failure:
                 self?.featuredArt = .failed
                 self?.isFeaturedArtLoading = false
