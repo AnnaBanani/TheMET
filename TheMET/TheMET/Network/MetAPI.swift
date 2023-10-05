@@ -19,22 +19,22 @@ class MetAPI{
         self.networkManager = networkManager
     }
     
-    func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (ObjectsResponse?) -> Void) {
+    func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (Result<ObjectsResponse, MetAPIError>) -> Void) {
         self.metAPICache.objects(metadataDate: metadataDate, departmentIds: departmentIds) { [weak self] objectsResponce in
             guard let self = self else {
-                completion(nil)
+                completion(.failure(.metAPIdoesNotAnswer))
                 return
             }
             if let objectsResponce = objectsResponce {
-                completion(objectsResponce)
+                completion(.success(objectsResponce))
             } else {
                 self.executeObjects(metadataDate: metadataDate, departmentIds: departmentIds) {[weak self] realResponse in
                     guard let realResponse = realResponse else {
-                        completion(nil)
+                        completion(.failure(.noDataInResponce))
                         return
                     }
                     self?.metAPICache.putObjectsResponce(metadataDate: metadataDate, departmentIds: departmentIds, responceData: realResponse)
-                    completion(realResponse)
+                    completion(.success(realResponse))
                 }
             }
         }
@@ -76,22 +76,22 @@ class MetAPI{
             }
     }
     
-    func object(id: ArtID, completion: @escaping (ObjectResponse?) -> Void) {
+    func object(id: ArtID, completion: @escaping (Result<ObjectResponse, MetAPIError>) -> Void) {
         self.metAPICache.object(id: id) { [weak self] objectResponce in
             guard let self = self else {
-                completion(nil)
+                completion(.failure(.metAPIdoesNotAnswer))
                 return
             }
             if let objectResponce = objectResponce {
-                completion(objectResponce)
+                completion(.success(objectResponce))
             } else {
                 self.executeObject(id: id) {[weak self] realResponse in
                     guard let realResponse = realResponse else {
-                        completion(nil)
+                        completion(.failure(.noDataInResponce))
                         return
                     }
                     self?.metAPICache.putObjectResponce(id: id, responceData: realResponse)
-                    completion(realResponse)
+                    completion(.success(realResponse))
                 }
             }
         }
@@ -120,22 +120,22 @@ class MetAPI{
             }
     }
 
-    func departments(completion: @escaping (DepartmentsResponse?) -> Void) {
+    func departments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
         self.metAPICache.departments { [weak self] departmentsResponce in
             guard let self = self else {
-                completion(nil)
+                completion(.failure(.metAPIdoesNotAnswer))
                 return
             }
             if let departmentsResponce = departmentsResponce {
-                completion(departmentsResponce)
+                completion(.success(departmentsResponce))
             } else {
                 self.executeDepartments {[weak self] realResponse in
                     guard let realResponse = realResponse else {
-                        completion(nil)
+                        completion(.failure(.noDataInResponce))
                         return
                     }
                     self?.metAPICache.putDepartmentsResponce(responceData: realResponse)
-                    completion(realResponse)
+                    completion(.success(realResponse))
                 }
             }
         }
@@ -164,22 +164,22 @@ class MetAPI{
             }
     }
     
-    func search(parameters: [SearchParameter], completion: @escaping (SearchResponse?) -> Void) {
+    func search(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
         self.metAPICache.search(parameters: parameters) { [weak self] searchResponce in
             guard let self = self else {
-                completion(nil)
+                completion(.failure(.metAPIdoesNotAnswer))
                 return
             }
             if let searchResponce = searchResponce {
-                completion(searchResponce)
+                completion(.success(searchResponce))
             } else {
                 self.executeSearch(parameters: parameters) {[weak self] realResponse in
                     guard let realResponse = realResponse else {
-                        completion(nil)
+                        completion(.failure(.noDataInResponce))
                         return
                     }
                     self?.metAPICache.putSearchResponce(parameters: parameters, responceData: realResponse)
-                    completion(realResponse)
+                    completion(.success(realResponse))
                 }
             }
         }
@@ -255,4 +255,9 @@ class MetAPI{
         result.append(String(to))
         return result
     }
+}
+
+enum MetAPIError: Error {
+    case metAPIdoesNotAnswer
+    case noDataInResponce
 }
