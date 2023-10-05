@@ -22,7 +22,7 @@ class MetAPI{
     func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (Result<ObjectsResponse, MetAPIError>) -> Void) {
         self.metAPICache.objects(metadataDate: metadataDate, departmentIds: departmentIds) { [weak self] objectsResponce in
             guard let self = self else {
-                completion(.failure(.metAPIdoesNotAnswer))
+                completion(.failure(.metAPIDoesNotExist))
                 return
             }
             if let objectsResponce = objectsResponce {
@@ -79,7 +79,7 @@ class MetAPI{
     func object(id: ArtID, completion: @escaping (Result<ObjectResponse, MetAPIError>) -> Void) {
         self.metAPICache.object(id: id) { [weak self] objectResponce in
             guard let self = self else {
-                completion(.failure(.metAPIdoesNotAnswer))
+                completion(.failure(.metAPIDoesNotExist))
                 return
             }
             if let objectResponce = objectResponce {
@@ -123,7 +123,7 @@ class MetAPI{
     func departments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
         self.metAPICache.departments { [weak self] departmentsResponce in
             guard let self = self else {
-                completion(.failure(.metAPIdoesNotAnswer))
+                completion(.failure(.metAPIDoesNotExist))
                 return
             }
             if let departmentsResponce = departmentsResponce {
@@ -167,7 +167,7 @@ class MetAPI{
     func search(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
         self.metAPICache.search(parameters: parameters) { [weak self] searchResponce in
             guard let self = self else {
-                completion(.failure(.metAPIdoesNotAnswer))
+                completion(.failure(.metAPIDoesNotExist))
                 return
             }
             if let searchResponce = searchResponce {
@@ -258,6 +258,6 @@ class MetAPI{
 }
 
 enum MetAPIError: Error {
-    case metAPIdoesNotAnswer
+    case metAPIDoesNotExist
     case noDataInResponce
 }
