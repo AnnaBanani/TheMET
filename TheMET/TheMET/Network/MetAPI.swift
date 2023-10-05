@@ -19,28 +19,29 @@ class MetAPI{
         self.networkManager = networkManager
     }
     
-    func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (ObjectsResponse?) -> Void) {
-        self.metAPICache.objects(metadataDate: metadataDate, departmentIds: departmentIds) { [weak self] objectsResponce in
+    func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (Result<ObjectsResponse, MetAPIError>) -> Void) {
+        self.metAPICache.objects(metadataDate: metadataDate, departmentIds: departmentIds) { [weak self] objectsResponse in
             guard let self = self else {
-                completion(nil)
+                completion(.failure(.metAPIDoesNotExist))
                 return
             }
-            if let objectsResponce = objectsResponce {
-                completion(objectsResponce)
+            if let objectsResponse = objectsResponse {
+                completion(.success(objectsResponse))
             } else {
-                self.executeObjects(metadataDate: metadataDate, departmentIds: departmentIds) {[weak self] realResponse in
-                    guard let realResponse = realResponse else {
-                        completion(nil)
-                        return
+                self.executeObjects(metadataDate: metadataDate, departmentIds: departmentIds) {[weak self] realResponseResult in
+                    switch realResponseResult {
+                    case .failure(let error):
+                        completion(.failure(error))
+                    case .success(let realResponse):
+                        self?.metAPICache.putObjectsResponse(metadataDate: metadataDate, departmentIds: departmentIds, responseData: realResponse)
+                        completion(.success(realResponse))
                     }
-                    self?.metAPICache.putObjectsResponce(metadataDate: metadataDate, departmentIds: departmentIds, responceData: realResponse)
-                    completion(realResponse)
                 }
             }
         }
     }
     
-    private func executeObjects(metadataDate: Date?, departmentIds: [Int], completion: @escaping (ObjectsResponse?) -> Void) {
+    private func executeObjects(metadataDate: Date?, departmentIds: [Int], completion: @escaping (Result<ObjectsResponse, MetAPIError>) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/objects"
         urlString.append(urlStringSuffix)
@@ -61,43 +62,44 @@ class MetAPI{
             urlString: urlString,
             parameters: parameters) { result in
                 switch result {
-                case .failure:
-                    completion(nil)
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {
                         let result = try jsonDecoder.decode(ObjectsResponse.self, from: data)
-                        completion(result)
+                        completion(.success(result))
                     } catch {
-                        completion(nil)
+                        completion(.failure(.nonDecodableData))
                     }
                 }
             }
     }
     
-    func object(id: ArtID, completion: @escaping (ObjectResponse?) -> Void) {
-        self.metAPICache.object(id: id) { [weak self] objectResponce in
+    func object(id: ArtID, completion: @escaping (Result<ObjectResponse, MetAPIError>) -> Void) {
+        self.metAPICache.object(id: id) { [weak self] objectResponse in
             guard let self = self else {
-                completion(nil)
+                completion(.failure(.metAPIDoesNotExist))
                 return
             }
-            if let objectResponce = objectResponce {
-                completion(objectResponce)
+            if let objectResponse = objectResponse {
+                completion(.success(objectResponse))
             } else {
-                self.executeObject(id: id) {[weak self] realResponse in
-                    guard let realResponse = realResponse else {
-                        completion(nil)
-                        return
+                self.executeObject(id: id) {[weak self] realResponseResult in
+                    switch realResponseResult {
+                    case .failure(let error):
+                        completion(.failure(error))
+                    case .success(let realResponse):
+                        self?.metAPICache.putObjectResponse(id: id, responseData: realResponse)
+                        completion(.success(realResponse))
                     }
-                    self?.metAPICache.putObjectResponce(id: id, responceData: realResponse)
-                    completion(realResponse)
                 }
             }
         }
     }
     
-    private func executeObject(id: ArtID, completion: @escaping (ObjectResponse?) -> Void) {
+    private func executeObject(id: ArtID, completion: @escaping (Result<ObjectResponse, MetAPIError>) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/objects/\(id)"
         urlString.append(urlStringSuffix)
@@ -105,43 +107,44 @@ class MetAPI{
             urlString: urlString,
             parameters: [ : ]) { result in
                 switch result {
-                case .failure:
-                    completion(nil)
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {
                         let result = try jsonDecoder.decode(ObjectResponse.self, from: data)
-                        completion(result)
+                        completion(.success(result))
                     } catch {
-                        completion(nil)
+                        completion(.failure(.nonDecodableData))
                     }
                 }
             }
     }
 
-    func departments(completion: @escaping (DepartmentsResponse?) -> Void) {
-        self.metAPICache.departments { [weak self] departmentsResponce in
+    func departments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
+        self.metAPICache.departments { [weak self] departmentsResponse in
             guard let self = self else {
-                completion(nil)
+                completion(.failure(.metAPIDoesNotExist))
                 return
             }
-            if let departmentsResponce = departmentsResponce {
-                completion(departmentsResponce)
+            if let departmentsResponse = departmentsResponse {
+                completion(.success(departmentsResponse))
             } else {
-                self.executeDepartments {[weak self] realResponse in
-                    guard let realResponse = realResponse else {
-                        completion(nil)
-                        return
+                self.executeDepartments {[weak self] realResponseResult in
+                    switch realResponseResult {
+                    case . failure(let error):
+                        completion(.failure(error))
+                    case .success(let realResponse):
+                        self?.metAPICache.putDepartmentsResponse(responseData: realResponse)
+                        completion(.success(realResponse))
                     }
-                    self?.metAPICache.putDepartmentsResponce(responceData: realResponse)
-                    completion(realResponse)
                 }
             }
         }
     }
     
-    func executeDepartments(completion: @escaping (DepartmentsResponse?) -> Void) {
+    func executeDepartments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/departments"
         urlString.append(urlStringSuffix)
@@ -149,43 +152,44 @@ class MetAPI{
             urlString: urlString,
             parameters: [ : ]) { result in
                 switch result {
-                case .failure:
-                    completion(nil)
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {
                         let result = try jsonDecoder.decode(DepartmentsResponse.self, from: data)
-                        completion(result)
+                        completion(.success(result))
                     } catch {
-                        completion(nil)
+                        completion(.failure(.nonDecodableData))
                     }
                 }
             }
     }
     
-    func search(parameters: [SearchParameter], completion: @escaping (SearchResponse?) -> Void) {
-        self.metAPICache.search(parameters: parameters) { [weak self] searchResponce in
+    func search(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
+        self.metAPICache.search(parameters: parameters) { [weak self] searchResponse in
             guard let self = self else {
-                completion(nil)
+                completion(.failure(.metAPIDoesNotExist))
                 return
             }
-            if let searchResponce = searchResponce {
-                completion(searchResponce)
+            if let searchResponse = searchResponse {
+                completion(.success(searchResponse))
             } else {
-                self.executeSearch(parameters: parameters) {[weak self] realResponse in
-                    guard let realResponse = realResponse else {
-                        completion(nil)
-                        return
+                self.executeSearch(parameters: parameters) {[weak self] realResponseResult in
+                    switch realResponseResult {
+                    case .failure(let error):
+                        completion(.failure(error))
+                    case .success(let realResponse):
+                        self?.metAPICache.putSearchResponse(parameters: parameters, responseData: realResponse)
+                        completion(.success(realResponse))
                     }
-                    self?.metAPICache.putSearchResponce(parameters: parameters, responceData: realResponse)
-                    completion(realResponse)
                 }
             }
         }
     }
     
-    func executeSearch(parameters: [SearchParameter], completion: @escaping (SearchResponse?) -> Void) {
+    func executeSearch(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/search"
         urlString.append(urlStringSuffix)
@@ -194,16 +198,16 @@ class MetAPI{
             urlString: urlString,
             parameters: searchParameters) { result in
                 switch result {
-                case .failure:
-                    completion(nil)
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {
                         let result = try jsonDecoder.decode(SearchResponse.self, from: data)
-                        completion(result)
+                        completion(.success(result))
                     } catch {
-                        completion(nil)
+                        completion(.failure(.nonDecodableData))
                     }
                 }
             }
@@ -255,4 +259,10 @@ class MetAPI{
         result.append(String(to))
         return result
     }
+}
+
+enum MetAPIError: Error {
+    case metAPIDoesNotExist
+    case nonDecodableData
+    case networkError(NetworkManagerError)
 }

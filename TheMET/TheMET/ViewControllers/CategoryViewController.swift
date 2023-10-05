@@ -125,7 +125,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             }
             if let searchTextBeforeLoading = self.searchBar.searchTextField.text,
                !searchTextBeforeLoading.isEmpty {
-                self.loadSearchResponce(searchTextBeforeLoading: searchTextBeforeLoading, departmentId: id)
+                self.loadSearchResponse(searchTextBeforeLoading: searchTextBeforeLoading, departmentId: id)
             } else {
                 self.loadObjects(departmentId: id)
             }
@@ -134,13 +134,14 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadArtCellData(artID: ArtID, completion: @escaping (ArtCellData?) -> Void) {
-        self.metAPI.object(id: artID) {object in
-            guard let object = object else {
+        self.metAPI.object(id: artID) {objectResult in
+            switch objectResult {
+            case .failure:
                 completion(nil)
-                return
+            case .success(let object):
+                let artCellData = ArtCellData(artID: artID, artData: .data(art: object))
+                completion(artCellData)
             }
-            let artCellData = ArtCellData(artID: artID, artData: .data(art: object))
-            completion(artCellData)
         }
     }
     
@@ -184,34 +185,40 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadObjects(departmentId: Int) {
-        self.metAPI.objects(departmentIds: [departmentId]) { [weak self] objectsResponse in
+        self.metAPI.objects(departmentIds: [departmentId]) { [weak self] objectsResponseResult in
             guard let self = self,
                   self.searchBar.searchTextField.text == nil ||
                     self.searchBar.searchTextField.text == "" else {
                 return
             }
-            self.handleLoadingResponse(objectIDs: objectsResponse?.objectIDs)
+            switch objectsResponseResult {
+            case .failure:
+                self.contentStatus = .failed
+            case.success(let objectsResponse):
+                self.handleLoadingResponse(objectIDs: objectsResponse.objectIDs)
+            }
         }
     }
     
-    private func loadSearchResponce(searchTextBeforeLoading: String, departmentId: Int) {
+    private func loadSearchResponse(searchTextBeforeLoading: String, departmentId: Int) {
         let parameters:[SearchParameter] = [
             .departmentId(departmentId),
             .q(searchTextBeforeLoading)
         ]
-        self.metAPI.search(parameters: parameters) { [weak self] searchResponse in
+        self.metAPI.search(parameters: parameters) { [weak self] searchResponseResult in
             guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
                 return
             }
-            self?.handleLoadingResponse(objectIDs: searchResponse?.objectIDs)
+            switch searchResponseResult {
+            case . failure:
+                self?.contentStatus = .failed
+            case .success(let searchResponse):
+                self?.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
+            }
         }
     }
     
-    private func handleLoadingResponse(objectIDs: [ArtID]?) {
-        guard let objectIDs = objectIDs else {
-            self.contentStatus = .failed
-            return
-        }
+    private func handleLoadingResponse(objectIDs: [ArtID]) {
         var filteredArtCellDataList: [ArtCellData] = []
         for artId in objectIDs {
             let filteredArtCellData = ArtCellData(artID: artId, artData: .placeholder)
