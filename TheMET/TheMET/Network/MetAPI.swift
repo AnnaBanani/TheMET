@@ -30,8 +30,8 @@ class MetAPI{
             } else {
                 self.executeObjects(metadataDate: metadataDate, departmentIds: departmentIds) {[weak self] realResponseResult in
                     switch realResponseResult {
-                    case .failure:
-                        completion(.failure(.noDataInResponse))
+                    case .failure(let error):
+                        completion(.failure(error))
                     case .success(let realResponse):
                         self?.metAPICache.putObjectsResponse(metadataDate: metadataDate, departmentIds: departmentIds, responseData: realResponse)
                         completion(.success(realResponse))
@@ -63,7 +63,7 @@ class MetAPI{
             parameters: parameters) { result in
                 switch result {
                 case .failure:
-                    completion(.failure(.invalidUrlComponents))
+                    completion(.failure(.networkError(.invalidUrlComponents)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
@@ -71,7 +71,7 @@ class MetAPI{
                         let result = try jsonDecoder.decode(ObjectsResponse.self, from: data)
                         completion(.success(result))
                     } catch {
-                        completion(.failure(.noDataInResponse))
+                        completion(.failure(.nonDecodableData))
                     }
                 }
             }
@@ -88,8 +88,8 @@ class MetAPI{
             } else {
                 self.executeObject(id: id) {[weak self] realResponseResult in
                     switch realResponseResult {
-                    case .failure:
-                        completion(.failure(.noDataInResponse))
+                    case .failure(let error):
+                        completion(.failure(error))
                     case .success(let realResponse):
                         self?.metAPICache.putObjectResponse(id: id, responseData: realResponse)
                         completion(.success(realResponse))
@@ -108,7 +108,7 @@ class MetAPI{
             parameters: [ : ]) { result in
                 switch result {
                 case .failure:
-                    completion(.failure(.invalidUrlComponents))
+                    completion(.failure(.networkError(.invalidUrlComponents)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
@@ -116,7 +116,7 @@ class MetAPI{
                         let result = try jsonDecoder.decode(ObjectResponse.self, from: data)
                         completion(.success(result))
                     } catch {
-                        completion(.failure(.noDataInResponse))
+                        completion(.failure(.nonDecodableData))
                     }
                 }
             }
@@ -133,8 +133,8 @@ class MetAPI{
             } else {
                 self.executeDepartments {[weak self] realResponseResult in
                     switch realResponseResult {
-                    case . failure:
-                        completion(.failure(.noDataInResponse))
+                    case . failure(let error):
+                        completion(.failure(error))
                     case .success(let realResponse):
                         self?.metAPICache.putDepartmentsResponse(responseData: realResponse)
                         completion(.success(realResponse))
@@ -153,7 +153,7 @@ class MetAPI{
             parameters: [ : ]) { result in
                 switch result {
                 case .failure:
-                    completion(.failure(.invalidUrlComponents))
+                    completion(.failure(.networkError(.invalidUrlComponents)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
@@ -161,7 +161,7 @@ class MetAPI{
                         let result = try jsonDecoder.decode(DepartmentsResponse.self, from: data)
                         completion(.success(result))
                     } catch {
-                        completion(.failure(.noDataInResponse))
+                        completion(.failure(.nonDecodableData))
                     }
                 }
             }
@@ -178,8 +178,8 @@ class MetAPI{
             } else {
                 self.executeSearch(parameters: parameters) {[weak self] realResponseResult in
                     switch realResponseResult {
-                    case .failure:
-                        completion(.failure(.noDataInResponse))
+                    case .failure(let error):
+                        completion(.failure(error))
                     case .success(let realResponse):
                         self?.metAPICache.putSearchResponse(parameters: parameters, responseData: realResponse)
                         completion(.success(realResponse))
@@ -198,8 +198,8 @@ class MetAPI{
             urlString: urlString,
             parameters: searchParameters) { result in
                 switch result {
-                case .failure:
-                    completion(.failure(.invalidUrlComponents))
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
@@ -207,7 +207,7 @@ class MetAPI{
                         let result = try jsonDecoder.decode(SearchResponse.self, from: data)
                         completion(.success(result))
                     } catch {
-                        completion(.failure(.noDataInResponse))
+                        completion(.failure(.nonDecodableData))
                     }
                 }
             }
@@ -264,6 +264,8 @@ class MetAPI{
 enum MetAPIError: Error {
     case metAPIDoesNotExist
     case noDataInResponse
+    case nonDecodableData
     case invalidUrlString
     case invalidUrlComponents
+    case networkError(NetworkManagerError)
 }
