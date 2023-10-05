@@ -32,7 +32,7 @@ class FeaturedArtService {
         )
     }
     
-//    MARK: - API
+    //    MARK: - API
     
     private (set) var featuredArt: LoadingStatus<Art> = .loading {
         didSet {
@@ -43,7 +43,7 @@ class FeaturedArtService {
     
     
     var onFeaturedArtDidChange: () -> Void = {}
-   
+    
     @objc
     private func appDidBecomeActive() {
         switch self.featuredArt {
@@ -85,8 +85,8 @@ class FeaturedArtService {
     
     private func updateFeaturedArt() {
         guard let storedData = self.readFeaturedArtDataFromStore(),
-        self.isFeaturedArtDateActual(date: storedData.date),
-        let artFileManager = self.artFileManager else {
+              self.isFeaturedArtDateActual(date: storedData.date),
+              let artFileManager = self.artFileManager else {
             self.forceUpdateFeaturedArt()
             return
         }
@@ -123,18 +123,19 @@ class FeaturedArtService {
         }
         self.isFeaturedArtLoading = true
         self.featuredArt = .loading
-        self.metAPI.objects { [weak self] objectResponce in
-            guard let objectResponce = objectResponce
-            else {
+        self.metAPI.objects { [weak self] objectResponceResult in
+            switch objectResponceResult {
+            case .failure:
                 self?.featuredArt = .failed
                 self?.isFeaturedArtLoading = false
                 return
+            case .success(let objectResponse):
+                self?.updateFeaturedArt(objectIDs: objectResponse.objectIDs)
             }
-            self?.updateFeaturedArt(objectIDs: objectResponce.objectIDs)
         }
     }
     
- 
+    
     
     private func updateFeaturedArt(objectIDs: [ArtID]) {
         var objectIDs = objectIDs
@@ -143,23 +144,23 @@ class FeaturedArtService {
             self.isFeaturedArtLoading = false
             return
         }
-        self.metAPI.object(id: randomId) { [weak self] object in
-            guard let object = object else {
+        self.metAPI.object(id: randomId) { [weak self] objectResult in
+            switch objectResult {
+            case .failure:
                 self?.featuredArt = .failed
                 self?.isFeaturedArtLoading = false
-                return
+            case .success(let object):
+                guard let imageString = object.primaryImage,
+                      URL(string: imageString) != nil else {
+                    objectIDs.removeAll { $0 == randomId }
+                    self?.updateFeaturedArt(objectIDs: objectIDs)
+                    return
+                }
+                self?.storeFeaturedArtData(artId: randomId, date: Date.now)
+                self?.artFileManager?.write(art: object)
+                self?.featuredArt = .loaded(object)
+                self?.isFeaturedArtLoading = false
             }
-            guard let imageString = object.primaryImage,
-                URL(string: imageString) != nil else {
-                objectIDs.removeAll { $0 == randomId }
-                self?.updateFeaturedArt(objectIDs: objectIDs)
-                return
-            }
-            self?.storeFeaturedArtData(artId: randomId, date: Date.now)
-            self?.artFileManager?.write(art: object)
-            self?.featuredArt = .loaded(object)
-            self?.isFeaturedArtLoading = false
         }
     }
 }
-

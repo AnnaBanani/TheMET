@@ -119,38 +119,41 @@ class CatalogViewController: UIViewController {
     
     private func reloadCatalog() {
         self.contentStatus = .loading
-        self.metAPI.departments { [weak self] departmentResponce in
-            guard let responce = departmentResponce else {
+        self.metAPI.departments { [weak self] departmentResponceResult in
+            switch departmentResponceResult {
+            case .failure:
                 self?.contentStatus = .failed
-                return
+            case .success(let departmentResponce):
+                var catalogCellDataList: [CatalogCellData] = []
+                for department in departmentResponce.departments {
+                    let catalogCellData: CatalogCellData = CatalogCellData(departmentId: department.id, departmentData: .placeholder)
+                    catalogCellDataList.append(catalogCellData)
+                }
+                self?.loadedDepartments = departmentResponce.departments
+                self?.contentStatus = .loaded(catalogCellDataList)
             }
-            var catalogCellDataList: [CatalogCellData] = []
-            for department in responce.departments {
-                let catalogCellData: CatalogCellData = CatalogCellData(departmentId: department.id, departmentData: .placeholder)
-                catalogCellDataList.append(catalogCellData)
-            }
-            self?.loadedDepartments = responce.departments
-            self?.contentStatus = .loaded(catalogCellDataList)
         }
     }
     
     private func loadCatalogCellData(department: Department, completion: @escaping (CatalogCellData) -> Void) {
-        self.metAPI.objects(departmentIds: [department.id]) { [weak self] objects in
-            guard let objects = objects else {
-                let catalogCellData = CatalogCellData(departmentId: department.id, departmentData: .data(imageURL: nil, title: department.displayName, subTitle: nil))
-                completion(catalogCellData)
-                return
-            }
+        self.metAPI.objects(departmentIds: [department.id]) { [weak self] objectsResult in
             guard let self = self else {
                 return
             }
-            let subtitle: String = self.cellSubtitle(objectsCount: objects.total)
-            self.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
-                let catalogCellData = CatalogCellData(departmentId: department.id, departmentData: .data(imageURL: url, title: department.displayName, subTitle: subtitle))
+            switch objectsResult {
+            case .failure:
+                let catalogCellData = CatalogCellData(departmentId: department.id, departmentData: .data(imageURL: nil, title: department.displayName, subTitle: nil))
                 completion(catalogCellData)
-            })
+            case .success(let objects):
+                let subtitle: String = self.cellSubtitle(objectsCount: objects.total)
+                self.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
+                    let catalogCellData = CatalogCellData(departmentId: department.id, departmentData: .data(imageURL: url, title: department.displayName, subTitle: subtitle))
+                    completion(catalogCellData)
+                })
+            }
         }
     }
+    
     
     
     private func cellSubtitle(objectsCount: ArtID) -> String {
@@ -174,16 +177,17 @@ class CatalogViewController: UIViewController {
     }
     
     private func loadObjectImageURL(objectId: ArtID, completion: @escaping (URL?) -> Void){
-        self.metAPI.object(id: objectId) { object in
-            guard let object = object else {
+        self.metAPI.object(id: objectId) { objectResult in
+            switch objectResult {
+            case .failure:
                 completion(nil)
-                return
+            case .success(let object):
+                guard let imageURLstring = object.primaryImage else {
+                    completion(nil)
+                    return
+                }
+                completion(URL(string: imageURLstring))
             }
-            guard let imageURLstring = object.primaryImage else {
-                completion(nil)
-                return
-            }
-            completion(URL(string: imageURLstring))
         }
     }
     
