@@ -6,5 +6,6 @@
 //
 
 import Foundation
+import MetAPI
 
 typealias Art = ObjectResponse

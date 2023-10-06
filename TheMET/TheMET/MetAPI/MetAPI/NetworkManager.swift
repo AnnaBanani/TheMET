@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkManager {
+public class NetworkManager {
     
     private init() {
     }
@@ -72,7 +72,7 @@ class NetworkManager {
     }
 }
 
-enum NetworkManagerError: Error {
+public enum NetworkManagerError: Error {
     case invalidUrlString
     case invalidUrlComponents
     case urlSessionTaskError(Error)

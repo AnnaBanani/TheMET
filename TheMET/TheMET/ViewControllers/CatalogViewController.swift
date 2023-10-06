@@ -7,11 +7,12 @@
 
 import Foundation
 import UIKit
+import MetAPI
 
 
 class CatalogViewController: UIViewController {
     
-    private let metAPI = MetAPI(networkManager: NetworkManager.standard)
+    private let metAPI = MetAPI()
     
     private let loadingCatalogView = LoadingPlaceholderView.construstView(configuration: .catalogLoading)
     private let failedCatalogView = FailedPlaceholderView.constructView(configuration: .catalogFailed)

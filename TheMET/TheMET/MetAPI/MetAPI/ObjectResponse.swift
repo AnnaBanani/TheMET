@@ -8,128 +8,127 @@
 import Foundation
 import UIKit
 
-class ObjectResponse: Decodable, Encodable {
+public class ObjectResponse: Decodable, Encodable {
     
-    enum DecodeError: Error {
-        
+    public enum DecodeError: Error {
         case dateNotConverted
     }
 
-    let objectID: ArtID
+    public let objectID: ArtID
 
-    let isHighlight: Bool
+    public let isHighlight: Bool
 
-    let accessionNumber: String?
+    public let accessionNumber: String?
 
-    let accessionYear: String?
+    public let accessionYear: String?
 
-    let isPublicDomain: Bool
+    public let isPublicDomain: Bool
 
-    let primaryImage: String?
+    public let primaryImage: String?
 
-    let primaryImageSmall: String?
+    public let primaryImageSmall: String?
 
-    let additionalImages: [String]
+    public let additionalImages: [String]
 
-    let constituents: [Constituent]
+    public let constituents: [Constituent]
 
-    let department: String?
+    public let department: String?
     
-    let objectName: String?
+    public let objectName: String?
 
-    let title: String?
+    public let title: String?
 
-    let culture: String?
+    public let culture: String?
 
-    let period: String?
+    public let period: String?
 
-    let dynasty: String?
+    public let dynasty: String?
 
-    let reign: String?
+    public let reign: String?
 
-    let portfolio: String?
+    public let portfolio: String?
 
-    let artistRole: String?
+    public let artistRole: String?
     
-    let artistPrefix: String?
+    public let artistPrefix: String?
 
-    let artistDisplayName: String?
+    public let artistDisplayName: String?
 
-    let artistDisplayBio: String?
+    public let artistDisplayBio: String?
 
-    let artistSuffix: String?
+    public let artistSuffix: String?
 
-    let artistAlphaSort: String?
+    public let artistAlphaSort: String?
 
-    let artistNationality: String?
+    public let artistNationality: String?
 
-    let artistBeginDate: String?
+    public let artistBeginDate: String?
 
-    let artistEndDate: String?
+    public let artistEndDate: String?
 
-    let artistGender: String?
+    public let artistGender: String?
 
-    let artistWikidataUrl: String?
+    public let artistWikidataUrl: String?
 
-    let artistUlanUrl: String?
+    public let artistUlanUrl: String?
 
-    let objectDate: String?
+    public let objectDate: String?
 
-    let objectBeginDate: Int?
+    public let objectBeginDate: Int?
 
-    let objectEndDate: Int?
+    public let objectEndDate: Int?
 
-    let medium: String?
+    public let medium: String?
 
-    let dimensions: String?
+    public let dimensions: String?
 
-    let measurements: [Measurement]?
+    public let measurements: [Measurement]?
 
-    let creditLine: String?
+    public let creditLine: String?
 
-    let geographyType: String?
+    public let geographyType: String?
 
-    let city: String?
+    public let city: String?
 
-    let state: String?
+    public let state: String?
 
-    let county: String?
+    public let county: String?
 
-    let country: String?
+    public let country: String?
 
-    let region: String?
+    public let region: String?
 
-    let subregion: String?
+    public let subregion: String?
 
-    let locale: String?
+    public let locale: String?
 
-    let locus: String?
+    public let locus: String?
 
-    let excavation: String?
+    public let excavation: String?
 
-    let river: String?
+    public let river: String?
 
-    let classification: String?
+    public let classification: String?
 
-    let rightsAndReproduction: String?
+    public let rightsAndReproduction: String?
 
-    let linkResource: String?
+    public let linkResource: String?
 
-    let metadataDate: Date
+    public let metadataDate: Date
 
-    let repository: String?
+    public let repository: String?
 
-    let objectURL: String?
+    public let objectURL: String?
 
-    let tags: [Tag]?
+    public let tags: [Tag]?
 
-    let objectWikidataURL: String?
+    public let objectWikidataURL: String?
 
-    let isTimelineWork: Bool
+    public let isTimelineWork: Bool
 
-    let galleryNumber: String?
+    public let galleryNumber: String?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case objectID
         case isHighlight
         case accessionNumber
@@ -189,7 +188,7 @@ class ObjectResponse: Decodable, Encodable {
         case galleryNumber = "GalleryNumber"
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.objectID, forKey: .objectID)
         try container.encode(self.isHighlight, forKey: .isHighlight)
@@ -253,7 +252,7 @@ class ObjectResponse: Decodable, Encodable {
         try container.encode(self.galleryNumber, forKey: .galleryNumber)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.objectID = try container.decode(ArtID.self, forKey: .objectID)
         self.isHighlight = try container.decode(Bool.self, forKey: .isHighlight)
@@ -324,7 +323,7 @@ class ObjectResponse: Decodable, Encodable {
         self.galleryNumber = try container.decode(String?.self, forKey: .galleryNumber)
     }
 
-    struct Constituent: Decodable, Encodable {
+    public struct Constituent: Decodable, Encodable {
         private let constituentID: Int
         private let role: String?
         private let name: String?
@@ -333,13 +332,13 @@ class ObjectResponse: Decodable, Encodable {
         private let gender: String?
     }
 
-    struct ElementMeasurement: Decodable, Encodable {
+    public struct ElementMeasurement: Decodable, Encodable {
         private let height: Double?
         private let width: Double?
         private let length: Double?
         private let diameter: Double?
         
-        enum CodingKeys: String, CodingKey {
+        public enum CodingKeys: String, CodingKey {
             case height = "Height"
             case width = "Width"
             case length = "Length"
@@ -347,13 +346,13 @@ class ObjectResponse: Decodable, Encodable {
         }
     }
 
-    struct Measurement: Decodable, Encodable {
+    public struct Measurement: Decodable, Encodable {
         private let elementName: String?
         private let elementDescription: String?
         private let elementMeasurements: ElementMeasurement
     }
 
-    struct Tag: Decodable, Encodable {
+    public struct Tag: Decodable, Encodable {
         private let term: String
         private let AAT_URL: String?
         private let Wikidata_URL: String?

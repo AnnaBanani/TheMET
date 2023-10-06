@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-class DepartmentsResponse: Decodable {
+public class DepartmentsResponse: Decodable {
     
-    let departments: [Department]
+    public let departments: [Department]
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case departments
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.departments = try container.decode([Department].self, forKey: .departments)
     }

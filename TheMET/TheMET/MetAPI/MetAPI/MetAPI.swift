@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MetAPI{
+public class MetAPI{
     
     private var networkManager: NetworkManager
     
@@ -15,11 +15,11 @@ class MetAPI{
     
     private let urlBaseString: String = "https://collectionapi.metmuseum.org/"
     
-    init(networkManager: NetworkManager) {
-        self.networkManager = networkManager
+    public init() {
+        self.networkManager = NetworkManager.standard
     }
     
-    func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (Result<ObjectsResponse, MetAPIError>) -> Void) {
+    public func objects(metadataDate: Date? = nil, departmentIds: [Int] = [], completion: @escaping (Result<ObjectsResponse, MetAPIError>) -> Void) {
         self.metAPICache.objects(metadataDate: metadataDate, departmentIds: departmentIds) { [weak self] objectsResponse in
             guard let self = self else {
                 completion(.failure(.metAPIDoesNotExist))
@@ -77,7 +77,7 @@ class MetAPI{
             }
     }
     
-    func object(id: ArtID, completion: @escaping (Result<ObjectResponse, MetAPIError>) -> Void) {
+    public func object(id: ArtID, completion: @escaping (Result<ObjectResponse, MetAPIError>) -> Void) {
         self.metAPICache.object(id: id) { [weak self] objectResponse in
             guard let self = self else {
                 completion(.failure(.metAPIDoesNotExist))
@@ -122,7 +122,7 @@ class MetAPI{
             }
     }
 
-    func departments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
+    public func departments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
         self.metAPICache.departments { [weak self] departmentsResponse in
             guard let self = self else {
                 completion(.failure(.metAPIDoesNotExist))
@@ -144,7 +144,7 @@ class MetAPI{
         }
     }
     
-    func executeDepartments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
+    public func executeDepartments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/departments"
         urlString.append(urlStringSuffix)
@@ -167,7 +167,7 @@ class MetAPI{
             }
     }
     
-    func search(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
+    public func search(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
         self.metAPICache.search(parameters: parameters) { [weak self] searchResponse in
             guard let self = self else {
                 completion(.failure(.metAPIDoesNotExist))
@@ -189,7 +189,7 @@ class MetAPI{
         }
     }
     
-    func executeSearch(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
+    public func executeSearch(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/search"
         urlString.append(urlStringSuffix)
@@ -261,7 +261,7 @@ class MetAPI{
     }
 }
 
-enum MetAPIError: Error {
+public enum MetAPIError: Error {
     case metAPIDoesNotExist
     case nonDecodableData
     case networkError(NetworkManagerError)

@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 import Combine
+import MetAPI
 
 class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
     
     private let searchBar: UISearchBar = UISearchBar()
     
-    private let metAPI = MetAPI(networkManager: NetworkManager.standard)
+    private let metAPI = MetAPI()
     
     private let favoriteService = FavoritesService.standart
     

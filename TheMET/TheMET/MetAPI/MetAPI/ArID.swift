@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias ArtID = Int
+public typealias ArtID = Int
