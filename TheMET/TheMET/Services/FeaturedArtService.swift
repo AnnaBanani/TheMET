@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class FeaturedArtService {
     
@@ -34,15 +35,7 @@ class FeaturedArtService {
     
     //    MARK: - API
     
-    private (set) var featuredArt: LoadingStatus<Art> = .loading {
-        didSet {
-            self.onFeaturedArtDidChange()
-        }
-    }
-    
-    
-    
-    var onFeaturedArtDidChange: () -> Void = {}
+    @Published private(set) var featuredArt: LoadingStatus<Art> = .loading
     
     @objc
     private func appDidBecomeActive() {

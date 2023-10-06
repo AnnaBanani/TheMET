@@ -21,10 +21,12 @@ class FeaturedArtViewController: UIViewController {
     private let imageLoader = ImageLoader()
 
     private let favoriteService = FavoritesService.standart
+    
+    private var favoriteServiceSubscriber: AnyCancellable?
 
     private let featuredArtService = FeaturedArtService()
     
-    private var favoriteServiseSubscriber: AnyCancellable?
+    private var featuredArtServiceSubscriber: AnyCancellable?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +38,7 @@ class FeaturedArtViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("random_artwork_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        self.favoriteServiseSubscriber = self.favoriteService.$favoriteArts
+        self.favoriteServiceSubscriber = self.favoriteService.$favoriteArts
             .sink(receiveValue: { [weak self] newFavoriteArts in
                 self?.favoriteServiceDidChange(favoritesArts: newFavoriteArts)
         })
@@ -56,10 +58,10 @@ class FeaturedArtViewController: UIViewController {
         self.failedFeaturedArtView.onButtonTap = { [weak self] in
             self?.featuredArtService.forceUpdateFeaturedArt()
         }
-        self.displayCurrentFeaturedArtStatus()
-        self.featuredArtService.onFeaturedArtDidChange = {[weak self] in
-            self?.displayCurrentFeaturedArtStatus()
-        }
+        self.featuredArtServiceSubscriber = self.featuredArtService.$featuredArt
+            .sink(receiveValue: { [weak self] newFeaturedArt in
+                self?.displayFeaturedArt(newFeaturedArt)
+            })
     }
     
     private func favoriteServiceDidChange(favoritesArts: [Art]) {
@@ -85,10 +87,10 @@ class FeaturedArtViewController: UIViewController {
                 featuredSubView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
             ]
             NSLayoutConstraint.activate(constraints)
-        }
+    }
 
-    private func displayCurrentFeaturedArtStatus() {
-        switch self.featuredArtService.featuredArt {
+    private func displayFeaturedArt(_ featuredArt: LoadingStatus<Art>) {
+        switch featuredArt {
         case .failed:
             self.failedFeaturedArtView.isHidden = false
             self.loadingFeaturedArtView.isHidden = true
