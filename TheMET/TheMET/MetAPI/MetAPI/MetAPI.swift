@@ -144,7 +144,7 @@ public class MetAPI{
         }
     }
     
-    public func executeDepartments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
+    private func executeDepartments(completion: @escaping (Result<DepartmentsResponse, MetAPIError>) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/departments"
         urlString.append(urlStringSuffix)
@@ -189,7 +189,7 @@ public class MetAPI{
         }
     }
     
-    public func executeSearch(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
+    private func executeSearch(parameters: [SearchParameter], completion: @escaping (Result<SearchResponse, MetAPIError>) -> Void) {
         var urlString: String = self.urlBaseString
         let urlStringSuffix: String = "public/collection/v1/search"
         urlString.append(urlStringSuffix)

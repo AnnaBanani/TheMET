@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class NetworkManager {
+class NetworkManager {
     
     private init() {
     }
