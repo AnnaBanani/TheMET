@@ -72,7 +72,7 @@ class NetworkManager {
     }
 }
 
-enum NetworkManagerError: Error {
+public enum NetworkManagerError: Error {
     case invalidUrlString
     case invalidUrlComponents
     case urlSessionTaskError(Error)

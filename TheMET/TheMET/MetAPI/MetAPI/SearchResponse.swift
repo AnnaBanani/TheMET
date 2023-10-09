@@ -8,14 +8,12 @@
 import Foundation
 import UIKit
 
-class SearchResponse: Decodable {
-    
-    let total: Int
-    let objectIDs:[ArtID]
-    
+public class SearchResponse: Decodable {
+    public let total: Int
+    public let objectIDs:[ArtID]
 }
 
-enum SearchParameter: Equatable {
+public enum SearchParameter: Equatable {
     case q(String)
     case isHighlight(Bool)
     case title(Bool)
@@ -29,7 +27,7 @@ enum SearchParameter: Equatable {
     case dates((from: Int, to: Int))
     
     // Equatable
-    static func == (lhs: SearchParameter, rhs: SearchParameter) -> Bool {
+    public static func == (lhs: SearchParameter, rhs: SearchParameter) -> Bool {
         switch (lhs, rhs) {
         case (.q(let string1), .q(let string2)):
             return string1 == string2

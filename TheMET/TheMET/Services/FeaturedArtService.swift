@@ -8,10 +8,11 @@
 import Foundation
 import UIKit
 import Combine
+import MetAPI
 
 class FeaturedArtService {
     
-    private let metAPI = MetAPI(networkManager: NetworkManager.standard)
+    private let metAPI = MetAPI()
     
     private let artFileManager: ArtFileManager?
     

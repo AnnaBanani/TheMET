@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ObjectsResponse: Decodable {
+public class ObjectsResponse: Decodable {
     
-    var total: Int
-    var objectIDs: [ArtID]
+    public var total: Int
+    public var objectIDs: [ArtID]
     
 }
