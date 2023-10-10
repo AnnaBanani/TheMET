@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7D5FD38B2ACB031F00F779B1 /* MetAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D5FD38A2ACB031F00F779B1 /* MetAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D5FD39B2ACB03D500F779B1 /* TestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5FD39A2ACB03D500F779B1 /* TestFile.swift */; };
 		F3A6BFE82AD06B1600249847 /* MetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A6BFE62AD06B1600249847 /* MetAPI.swift */; };
 		F3A6BFEA2AD06B9D00249847 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A6BFE92AD06B9D00249847 /* NetworkManager.swift */; };
 		F3A6BFEC2AD06BB300249847 /* MetAPICache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A6BFEB2AD06BB300249847 /* MetAPICache.swift */; };
@@ -23,7 +22,6 @@
 /* Begin PBXFileReference section */
 		7D5FD3872ACB031F00F779B1 /* MetAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D5FD38A2ACB031F00F779B1 /* MetAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetAPI.h; sourceTree = "<group>"; };
-		7D5FD39A2ACB03D500F779B1 /* TestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFile.swift; sourceTree = "<group>"; };
 		F3A6BFE62AD06B1600249847 /* MetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetAPI.swift; sourceTree = "<group>"; };
 		F3A6BFE92AD06B9D00249847 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F3A6BFEB2AD06BB300249847 /* MetAPICache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetAPICache.swift; sourceTree = "<group>"; };
@@ -75,7 +73,6 @@
 				F3A6BFF32AD06C0D00249847 /* SearchResponse.swift */,
 				F3A6BFF52AD06CE100249847 /* ArID.swift */,
 				F3A6BFF92AD06D2800249847 /* DataModels */,
-				7D5FD39A2ACB03D500F779B1 /* TestFile.swift */,
 			);
 			path = MetAPI;
 			sourceTree = "<group>";
@@ -176,7 +173,6 @@
 				F3A6BFF42AD06C0D00249847 /* SearchResponse.swift in Sources */,
 				F3A6BFF02AD06BF500249847 /* ObjectResponse.swift in Sources */,
 				F3A6BFFA2AD070BF00249847 /* Department.swift in Sources */,
-				7D5FD39B2ACB03D500F779B1 /* TestFile.swift in Sources */,
 				F3A6BFE82AD06B1600249847 /* MetAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
