@@ -18,7 +18,7 @@
 "catalog_screen_title" = "Catalog";
 "catalog_screen_departments_section_title" = "Department";
 "catalog.loading_failed" = "Catalog cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
-"favories_screen_title" = "Favouriets";
+"favories_screen_title" = "Favories";
 "featured_artwork.loading" = "Please wait while we choose a masterpiece";
 "artwork.loading_failed" = "Artwork cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
 "artwork.load_again_cta" = "Try again";

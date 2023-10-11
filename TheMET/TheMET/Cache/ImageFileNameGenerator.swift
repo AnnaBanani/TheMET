@@ -10,7 +10,7 @@ import Foundation
 class ImageFileNameGenerator {
     
     func urlgenerateFilename(urlString: String) -> String? {
-        guard let urlName = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed) else {
+        guard var urlName = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed) else {
             return nil
         }
         var fileName: String = ""
