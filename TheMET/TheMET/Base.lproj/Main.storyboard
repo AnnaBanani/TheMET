@@ -99,21 +99,6 @@
             </objects>
             <point key="canvasLocation" x="708" y="632"/>
         </scene>
-        <!--About App View Controller-->
-        <scene sceneID="5Yf-Lc-OjH">
-            <objects>
-                <viewController storyboardIdentifier="AboutAppViewController" id="Qbw-uN-Pub" customClass="AboutAppViewController" customModule="TheMET" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Wbr-dB-mVp">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="l0M-vZ-dyq"/>
-                        <color key="backgroundColor" name="blackberry"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="he9-d2-s8A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1657" y="647"/>
-        </scene>
         <!--Title-->
         <scene sceneID="ZIG-95-7Va">
             <objects>

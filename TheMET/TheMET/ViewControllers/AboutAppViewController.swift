@@ -20,6 +20,7 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("about_app_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
+        self.view.backgroundColor = UIColor(named: "blackberry")
         let appVersion = self.getAppVersion()
         self.addLabel(_ : self.rightVersionLabel, color: UIColor(named: "blueberry"), title: appVersion, textAlignment: .right)
         self.addLabel(_ : self.leftVersionLabel, color: UIColor(named: "plum"), title: NSLocalizedString("about_screen_left_version_label", comment: ""), textAlignment: .left)
@@ -83,32 +84,31 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func showSafariPage(urlString: String) {
-        if let url = URL(string: urlString) {
-            let configuration = SFSafariViewController.Configuration()
-            configuration.entersReaderIfAvailable = true
-            let safariViewController = SFSafariViewController(url: url, configuration: configuration)
-            present(safariViewController, animated: true)
-        } else {
-            print ("error")
+        guard let url = URL(string: urlString) else {
+            print ("url did not create")
+            return
         }
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = true
+        let safariViewController = SFSafariViewController(url: url, configuration: configuration)
+        present(safariViewController, animated: true)
     }
     
     //  UITableViewDelegate, UITableViewDataSource
     
-   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       if let cell = tableView.dequeueReusableCell(withIdentifier: AboutAppViewCell.aboutAppViewCellIdentifier, for: indexPath) as? AboutAppViewCell {
-           cell.backgroundColor = .clear
-           cell.selectionStyle = .none
-           if indexPath.row == 0 {
-               cell.label.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), alignment: .left, fontSize: 16, title: NSLocalizedString("privacy_policy_label", comment: ""))
-           } else {
-               cell.label.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"),alignment: .left, fontSize: 16, title: NSLocalizedString("the_use_of_met_api_label", comment: ""))
-           }
-           return cell
-       } else {
-           print ("Error")
-           return UITableViewCell()
-       }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AboutAppViewCell.aboutAppViewCellIdentifier, for: indexPath) as? AboutAppViewCell else {
+            print ("cell did not get")
+            return UITableViewCell()
+        }
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        if indexPath.row == 0 {
+            cell.set(titleText: NSLocalizedString("privacy_policy_label", comment: ""))
+        } else {
+            cell.set(titleText: NSLocalizedString("the_use_of_met_api_label", comment: ""))
+        }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

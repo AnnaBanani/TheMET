@@ -65,8 +65,7 @@ class CatalogViewController: UIViewController {
     
     @objc
     private func aboutButtonDidTap() {
-        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-        let aboutAppViewController = mainStoryBoard.instantiateViewController(withIdentifier: "AboutAppViewController")
+        let aboutAppViewController: AboutAppViewController = AboutAppViewController()
         aboutAppViewController.modalPresentationStyle = .automatic
         aboutAppViewController.modalTransitionStyle = .coverVertical
         let aboutAppNavigationController = UINavigationController(rootViewController: aboutAppViewController)

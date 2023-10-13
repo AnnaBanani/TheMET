@@ -10,9 +10,13 @@ import UIKit
 
 class AboutAppViewCell: UITableViewCell {
     
-    var label: UILabel = UILabel()
-    let chevronView: UIImageView = UIImageView()
+    private let label: UILabel = UILabel()
+    private let chevronView: UIImageView = UIImageView()
     static let aboutAppViewCellIdentifier = "AboutCell"
+    
+    func set(titleText: String) {
+        self.label.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), alignment: .left, fontSize: 16, title: titleText)
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
