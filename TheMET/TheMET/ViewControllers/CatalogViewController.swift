@@ -14,6 +14,8 @@ class CatalogViewController: UIViewController {
     
     private let metAPI = MetAPI()
     
+    private let aboutButton: UIButton = UIButton()
+    
     private let loadingCatalogView = LoadingPlaceholderView.construstView(configuration: .catalogLoading)
     private let failedCatalogView = FailedPlaceholderView.constructView(configuration: .catalogFailed)
     private let loadedCatalogView = CatalogContentView.constructView()
@@ -51,6 +53,24 @@ class CatalogViewController: UIViewController {
             self?.loadParticularDepartmentCellDataIfNeeded(departmentId: departmentId)
         }
         self.reloadCatalog()
+        let aboutButton: UIBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "AboutAppIcon"),
+            style: .plain,
+            target: self,
+            action: #selector(aboutButtonDidTap)
+        )
+        aboutButton.tintColor = UIColor(named: "plum")
+        self.navigationItem.rightBarButtonItem = aboutButton
+    }
+    
+    @objc
+    private func aboutButtonDidTap() {
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let aboutAppViewController = mainStoryBoard.instantiateViewController(withIdentifier: "AboutAppViewController")
+        aboutAppViewController.modalPresentationStyle = .automatic
+        aboutAppViewController.modalTransitionStyle = .coverVertical
+        let aboutAppNavigationController = UINavigationController(rootViewController: aboutAppViewController)
+        self.present(aboutAppNavigationController, animated: true)
     }
     
     private func loadParticularDepartmentCellDataIfNeeded(departmentId: Int) {

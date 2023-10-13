@@ -19,6 +19,7 @@
 "catalog_screen_departments_section_title" = "Департамент";
 "catalog.loading_failed" = "Каталог не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
 "favories_screen_title" = "Избранное";
+"about_app_screen_title" = "О приложении";
 "featured_artwork.loading" = "Пожалуйста, подождите, пока мы выбираем шедевр";
 "artwork.loading_failed" = "Произведение не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
 "artwork.load_again_cta" = "Попробуйте снова";
@@ -27,3 +28,9 @@
 "category.loading_failed" = "Произведения не могут быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
 "button_title.show_more_tags_cta" = "Показать еще...";
 "search" = "Поиск...";
+"privacy_policy_label" = "Политика Конфиденциальности";
+"the_use_of_met_api_label" = "Использование the Metropolitan Museum of Art Collection API регулируется настоящими положениями и условиями";
+"about_screen_left_version_label" = "Версия";
+"about_scree_copyright_label" = "© 2023 Anna Sitnikova. All rights reserved.";
+"privacy_policy_url_sring" = "https://themetsupport.wordpress.com/the-met-app-privacy-policy-ru/";
+

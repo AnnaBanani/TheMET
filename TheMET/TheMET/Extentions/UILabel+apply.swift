@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UILabel {
-    func apply(font: String, color: UIColor?, fontSize: Double, title: String) {
+    func apply(font: String, color: UIColor?, alignment: NSTextAlignment = .center, fontSize: Double, title: String) {
         var labelAttributes: [NSAttributedString.Key: Any] = [ : ]
         let labelfontName = font
         if let labelFont: UIFont = UIFont(name: labelfontName, size: fontSize),
@@ -19,7 +19,7 @@ extension UILabel {
             if labelfontName == "Quattrocento" {
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.lineHeightMultiple = 1.3
-                paragraphStyle.alignment = .center
+                paragraphStyle.alignment = alignment
                 labelAttributes[.paragraphStyle] = paragraphStyle
             }
         }
