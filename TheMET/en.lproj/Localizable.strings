@@ -19,6 +19,7 @@
 "catalog_screen_departments_section_title" = "Department";
 "catalog.loading_failed" = "Catalog cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
 "favories_screen_title" = "Favourites";
+"about_app_screen_title" = "About";
 "featured_artwork.loading" = "Please wait while we choose a masterpiece";
 "artwork.loading_failed" = "Artwork cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
 "artwork.load_again_cta" = "Try again";
@@ -27,4 +28,9 @@
 "category.loading_failed" = "Artworks cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
 "button_title.show_more_tags_cta" = "Show more tags...";
 "search" = "Search...";
+"privacy_policy_label" = "Privacy Policy";
+"the_use_of_met_api_label" = "The use of the Metropolitan Museum of Art Collection API is subject to these terms and conditions";
+"about_screen_left_version_label" = "Version";
+"about_scree_copyright_label" = "© 2023 Anna Sitnikova. All rights reserved.";
+"privacy_policy_url_sring" = "https://themetsupport.wordpress.com/the-met-app-support-en/";
 

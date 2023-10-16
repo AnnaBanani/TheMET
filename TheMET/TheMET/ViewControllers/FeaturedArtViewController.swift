@@ -153,7 +153,7 @@ class FeaturedArtViewController: UIViewController {
     }
     
     private func imageDidTap(image: UIImage) {
-        let fullScreenViewController =  FullScreenPhotoViewController()
+        let fullScreenViewController = FullScreenPhotoViewController()
         fullScreenViewController.modalPresentationStyle = .fullScreen
         fullScreenViewController.image = image
         self.present(fullScreenViewController, animated: true)
