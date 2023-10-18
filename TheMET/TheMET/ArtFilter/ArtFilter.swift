@@ -10,7 +10,7 @@ import UIKit
 
 class ArtFilter {
     func filter(arts: [Art], searchText: String?) -> [Art] {
-        guard let searchText = searchText else {
+        guard let searchText = searchText, !searchText.isEmpty else {
             return arts
         }
         var filteredArts:[Art] = []

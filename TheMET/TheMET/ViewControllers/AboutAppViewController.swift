@@ -17,6 +17,9 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     private let tableView: UITableView = UITableView(frame: .zero, style: .plain)
     private let imageView: UIImageView = UIImageView()
     
+    private let privacyPolicyCellHeight: CGFloat = 53.67
+    private let useAPICellHeight: CGFloat = 130
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("about_app_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
@@ -53,7 +56,7 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.tableView.topAnchor.constraint(equalTo: self.leftVersionLabel.bottomAnchor,constant: 15),
-            self.tableView.heightAnchor.constraint(equalToConstant: 130 + 53.67)
+            self.tableView.heightAnchor.constraint(equalToConstant: self.privacyPolicyCellHeight + self.useAPICellHeight)
         ])
         NSLayoutConstraint.activate([
             self.copyRightLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -118,9 +121,9 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 1:
-            return 130
+            return self.useAPICellHeight
         default:
-            return 53.67
+            return self.privacyPolicyCellHeight
         }
     }
     
