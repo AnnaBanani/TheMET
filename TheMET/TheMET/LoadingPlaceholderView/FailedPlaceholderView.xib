@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZW-5i-T6V">
-                    <rect key="frame" x="50" y="479" width="293" height="20.333333333333314"/>
+                    <rect key="frame" x="50" y="439" width="293" height="20.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                 <constraint firstItem="6Z5-6V-4bl" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="FCf-hA-whe"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SRA-wP-ffI" secondAttribute="bottom" constant="50" id="HJa-qw-1pq"/>
                 <constraint firstItem="6Z5-6V-4bl" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="150" id="PmO-ui-bub"/>
-                <constraint firstItem="FZW-5i-T6V" firstAttribute="top" secondItem="6Z5-6V-4bl" secondAttribute="bottom" constant="120" id="Web-qa-uih"/>
+                <constraint firstItem="FZW-5i-T6V" firstAttribute="top" secondItem="6Z5-6V-4bl" secondAttribute="bottom" constant="80" id="Web-qa-uih"/>
                 <constraint firstItem="SRA-wP-ffI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="akd-lY-Ev3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="FZW-5i-T6V" secondAttribute="trailing" constant="50" id="iyL-uE-mEk"/>
                 <constraint firstItem="FZW-5i-T6V" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="tYB-21-z9y"/>
@@ -54,7 +54,7 @@
                 <outlet property="imageView" destination="6Z5-6V-4bl" id="VZT-K1-r3m"/>
                 <outlet property="textLabel" destination="FZW-5i-T6V" id="woe-EL-3DY"/>
             </connections>
-            <point key="canvasLocation" x="-31" y="20"/>
+            <point key="canvasLocation" x="-31.297709923664122" y="19.718309859154932"/>
         </view>
     </objects>
 </document>
