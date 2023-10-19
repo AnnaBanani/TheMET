@@ -311,6 +311,10 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self.reloadCategory()
         }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+    }
+    
 }
 
 
