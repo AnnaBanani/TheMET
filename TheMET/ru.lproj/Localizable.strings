@@ -17,7 +17,7 @@
 "random_artwork_screen_title" = "Произведение дня";
 "catalog_screen_title" = "Каталог";
 "catalog_screen_departments_section_title" = "Департамент";
-"catalog.loading_failed" = "Каталог не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
+"catalog.loading_failed" = "Каталог не может быть загружен  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
 "favories_screen_title" = "Избранное";
 "about_app_screen_title" = "О приложении";
 "featured_artwork.loading" = "Пожалуйста, подождите, пока мы выбираем шедевр";
