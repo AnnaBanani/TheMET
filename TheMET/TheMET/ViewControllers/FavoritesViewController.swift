@@ -148,6 +148,10 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.displayArts = self.artFilter.filter(arts: self.favoriteService.favoriteArts, searchText: searchText)
         self.tableView.reloadData()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+    }
       
 }
 
