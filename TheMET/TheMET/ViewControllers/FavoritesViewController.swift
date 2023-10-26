@@ -113,7 +113,10 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.selectionStyle = .none
             self.loadCellImage(cell: cell, art: art)
             cell.isLiked = true
-            cell.text = String.artDescriptionText(art: art)
+            cell.artistNameText = String.artistNameText(art: art)
+            cell.titleText = String.titleText(art: art)
+            cell.dateText = String.dateText(art: art)
+            cell.mediumText = String.mediumText(art: art)
             cell.tags = self.loadCellTags(art: art)
             let oblectID = art.objectID
             cell.onLikeButtonDidTap = { [weak self] in

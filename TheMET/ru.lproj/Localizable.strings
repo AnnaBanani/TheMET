@@ -9,6 +9,7 @@
 //fonts
 
 "serif_font" = "Noto Serif JP";
+"serif_font_bold" = "NotoSerifJP-SemiBold";
 "san_serif_font" = "Zen Kaku Gothic New Regular";
 "san_serif_font_bold" = "Zen Kaku Gothic New Bold";
 

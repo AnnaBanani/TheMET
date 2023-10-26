@@ -10,6 +10,8 @@
 		<string>Noto Serif JP.otf</string>
 		<string>Zen Kaku Gothic New Regular.ttf</string>
 		<string>Zen Kaku Gothic New Bold.ttf</string>
+		<string>Quattrocento Bold.ttf</string>
+		<string>NotoSerifJP-SemiBold.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -40,6 +40,8 @@
 		F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */; };
 		F376B37E2A8529AC00AA096B /* ArtFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376B37D2A8529AC00AA096B /* ArtFilter.swift */; };
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
+		F3904ADB2AEAD90000BFC3F4 /* Quattrocento Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3904AD92AEAD90000BFC3F4 /* Quattrocento Bold.ttf */; };
+		F3904ADD2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3904ADC2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf */; };
 		F3A125392A8D021F00032DC3 /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A125382A8D021F00032DC3 /* FullScreenPhotoViewController.swift */; };
 		F3A1253C2A8E5AB400032DC3 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */; };
 		F3A1253E2A8E675600032DC3 /* ImageFileNameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1253D2A8E675600032DC3 /* ImageFileNameGenerator.swift */; };
@@ -122,6 +124,8 @@
 		F376B37A2A8290B600AA096B /* LoadingPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPlaceholderView.swift; sourceTree = "<group>"; };
 		F376B37D2A8529AC00AA096B /* ArtFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFilter.swift; sourceTree = "<group>"; };
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		F3904AD92AEAD90000BFC3F4 /* Quattrocento Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quattrocento Bold.ttf"; path = "Sources/Fonts/Quattrocento Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		F3904ADC2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSerifJP-SemiBold.otf"; path = "../../../../../../Дизайн/Шрифты/Noto Serif JP/NotoSerifJP-SemiBold.otf"; sourceTree = "<group>"; };
 		F3A125382A8D021F00032DC3 /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		F3A1253D2A8E675600032DC3 /* ImageFileNameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileNameGenerator.swift; sourceTree = "<group>"; };
@@ -242,9 +246,11 @@
 		F3451E992A05699A00C31619 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F3904AD92AEAD90000BFC3F4 /* Quattrocento Bold.ttf */,
 				F3528F7C2A06C19E000D9CEB /* Zen Kaku Gothic New Regular.ttf */,
 				F3528F7E2A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf */,
 				F3528F7D2A06C19F000D9CEB /* Noto Serif JP.otf */,
+				F3904ADC2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf */,
 				F3451E942A05698200C31619 /* Caviar Dreams.ttf */,
 				F3451E952A05698200C31619 /* Quattrocento.ttf */,
 				F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */,
@@ -447,6 +453,7 @@
 			files = (
 				F3012FC129C4AE1A00138CE3 /* LaunchScreen.storyboard in Resources */,
 				F30E835029FE854C00283EE3 /* Localizable.strings in Resources */,
+				F3904ADB2AEAD90000BFC3F4 /* Quattrocento Bold.ttf in Resources */,
 				F3451E972A05698200C31619 /* Caviar Dreams.ttf in Resources */,
 				F3012FBE29C4AE1A00138CE3 /* Assets.xcassets in Resources */,
 				F3451E982A05698200C31619 /* Quattrocento.ttf in Resources */,
@@ -458,6 +465,7 @@
 				F3528F802A06C19F000D9CEB /* Noto Serif JP.otf in Resources */,
 				F3528F812A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf in Resources */,
 				F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */,
+				F3904ADD2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf in Resources */,
 				F3451E922A05644D00C31619 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
