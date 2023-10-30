@@ -117,7 +117,7 @@ class FeaturedArtService {
         }
         self.isFeaturedArtLoading = true
         self.featuredArt = .loading
-        self.metAPI.objects { [weak self] objectResponseResult in
+        self.metAPI.objects(departmentIds: [11, 15, 21]) { [weak self] objectResponseResult in
             switch objectResponseResult {
             case .failure:
                 self?.featuredArt = .failed
@@ -145,7 +145,8 @@ class FeaturedArtService {
                 self?.isFeaturedArtLoading = false
             case .success(let object):
                 guard let imageString = object.primaryImage,
-                      URL(string: imageString) != nil else {
+                      URL(string: imageString) != nil,
+                      object.isHighlight else {
                     objectIDs.removeAll { $0 == randomId }
                     self?.updateFeaturedArt(objectIDs: objectIDs)
                     return

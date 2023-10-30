@@ -9,23 +9,35 @@ import Foundation
 import UIKit
 
 extension String {
-    static  func artDescriptionText(art: Art) -> String {
+    static  func artistNameText(art: Art) -> String {
         var cellText: String = ""
         if let artistDisplayName = art.artistDisplayName,
            artistDisplayName.isEmpty == false {
-            cellText.append(artistDisplayName + "\n")
+            cellText.append(artistDisplayName)
         }
+        return cellText
+    }
+    static  func titleText(art: Art) -> String {
+        var cellText: String = ""
         if let title = art.title,
            title.isEmpty == false {
-            cellText.append(title + "\n")
+            cellText.append("\"\(title)\"")
         }
+        return cellText
+    }
+    static  func dateText(art: Art) -> String {
+        var cellText: String = ""
         if let objectDate = art.objectDate,
            objectDate.isEmpty == false {
-            cellText.append(objectDate + "\n")
+            cellText.append(objectDate)
         }
+        return cellText
+    }
+    static  func mediumText(art: Art) -> String {
+        var cellText: String = ""
         if let medium = art.medium,
            medium.isEmpty == false {
-            cellText.append(medium + "\n")
+            cellText.append(medium)
         }
         return cellText
     }

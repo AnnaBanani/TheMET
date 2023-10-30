@@ -130,7 +130,10 @@ class FeaturedArtViewController: UIViewController {
             } else {
                 self.artView.isLiked = false
             }
-            self.artView.text = String.artDescriptionText(art: art)
+            self.artView.artistNameText = String.artistNameText(art: art)
+            self.artView.titleText = String.titleText(art: art)
+            self.artView.dateText = String.dateText(art: art)
+            self.artView.mediumText = String.mediumText(art: art)
             self.artView.onLikeButtonDidTap = { [weak self] in
                 self?.likeButtonDidTap(art: art)
             }

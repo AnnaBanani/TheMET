@@ -9,6 +9,7 @@
 //fonts
 
 "serif_font" = "Quattrocento";
+"serif_font_bold" = "Quattrocento Bold";
 "san_serif_font" = "Caviar Dreams";
 "san_serif_font_bold" = "Caviar Dreams Bold";
 

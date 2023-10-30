@@ -253,7 +253,10 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.isPlaceholderVisible = false
                 self.loadCellImage(cell: cell, art: art)
                 cell.isLiked = self.isArtLiked(art: art)
-                cell.text = String.artDescriptionText(art: art)
+                cell.artistNameText = String.artistNameText(art: art)
+                cell.titleText = String.titleText(art: art)
+                cell.dateText = String.dateText(art: art)
+                cell.mediumText = String.mediumText(art: art)
                 if let departmentName = art.department {
                     cell.tags = [departmentName]
                 }

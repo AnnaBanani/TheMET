@@ -52,9 +52,21 @@ class ArtViewCell: UITableViewCell {
         get { return self.artView.isLiked }
         set { self.artView.isLiked = newValue }
     }
-    var text: String? {
-        get { return self.artView.text }
-        set { self.artView.text = newValue }
+    var artistNameText: String? {
+        get { return self.artView.artistNameText }
+        set { self.artView.artistNameText = newValue }
+    }
+    var titleText: String? {
+        get { return self.artView.titleText }
+        set { self.artView.titleText = newValue }
+    }
+    var dateText: String? {
+        get { return self.artView.dateText }
+        set { self.artView.dateText = newValue }
+    }
+    var mediumText: String? {
+        get { return self.artView.mediumText }
+        set { self.artView.mediumText = newValue }
     }
     var onLikeButtonDidTap: (() -> Void)? {
         get {return self.artView.onLikeButtonDidTap }
