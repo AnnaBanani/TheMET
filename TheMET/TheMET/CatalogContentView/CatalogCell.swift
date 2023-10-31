@@ -37,6 +37,7 @@ class CatalogCell: UICollectionViewCell {
             self.reapplyTitleStyle(text: newValue)
         }
     }
+    
     var subtitle: String? {
         get {
             return self.cardsSubTitleLabel.text
@@ -45,6 +46,7 @@ class CatalogCell: UICollectionViewCell {
             self.reapplySubTitleStyle(text: newValue)
         }
     }
+    
     var backgroundState: LoadingImageView.State {
         get {
             return self.imageView.state
@@ -97,8 +99,6 @@ class CatalogCell: UICollectionViewCell {
             self.cardsSubTitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8)
         ])
     }
-    
-   
     
     private func reapplyTitleStyle(text: String?) {
         guard let text = text else {
