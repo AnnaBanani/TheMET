@@ -42,6 +42,7 @@
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
 		F3904ADB2AEAD90000BFC3F4 /* Quattrocento Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3904AD92AEAD90000BFC3F4 /* Quattrocento Bold.ttf */; };
 		F3904ADD2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3904ADC2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf */; };
+		F3904AE32AF1559800BFC3F4 /* FeaturedArtistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3904AE22AF1559800BFC3F4 /* FeaturedArtistsView.swift */; };
 		F3A125392A8D021F00032DC3 /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A125382A8D021F00032DC3 /* FullScreenPhotoViewController.swift */; };
 		F3A1253C2A8E5AB400032DC3 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */; };
 		F3A1253E2A8E675600032DC3 /* ImageFileNameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1253D2A8E675600032DC3 /* ImageFileNameGenerator.swift */; };
@@ -126,6 +127,7 @@
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F3904AD92AEAD90000BFC3F4 /* Quattrocento Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quattrocento Bold.ttf"; path = "Sources/Fonts/Quattrocento Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		F3904ADC2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSerifJP-SemiBold.otf"; path = "../../../../../../Дизайн/Шрифты/Noto Serif JP/NotoSerifJP-SemiBold.otf"; sourceTree = "<group>"; };
+		F3904AE22AF1559800BFC3F4 /* FeaturedArtistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtistsView.swift; sourceTree = "<group>"; };
 		F3A125382A8D021F00032DC3 /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		F3A1253D2A8E675600032DC3 /* ImageFileNameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileNameGenerator.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
+				F3904AE02AF1557100BFC3F4 /* FeaturedArtistsView */,
 				F3A6BFFC2AD0719200249847 /* DataModels */,
 				7D5FD3922ACB034F00F779B1 /* MetAPI */,
 				F3A1253A2A8E5AA300032DC3 /* Cache */,
@@ -302,6 +305,14 @@
 				F376B37D2A8529AC00AA096B /* ArtFilter.swift */,
 			);
 			path = ArtFilter;
+			sourceTree = "<group>";
+		};
+		F3904AE02AF1557100BFC3F4 /* FeaturedArtistsView */ = {
+			isa = PBXGroup;
+			children = (
+				F3904AE22AF1559800BFC3F4 /* FeaturedArtistsView.swift */,
+			);
+			path = FeaturedArtistsView;
 			sourceTree = "<group>";
 		};
 		F3A125372A8D01DC00032DC3 /* FullScreenPhotoViewController */ = {
@@ -484,6 +495,7 @@
 				F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */,
 				F376B37E2A8529AC00AA096B /* ArtFilter.swift in Sources */,
 				F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */,
+				F3904AE32AF1559800BFC3F4 /* FeaturedArtistsView.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,
 				F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */,
 				F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */,
