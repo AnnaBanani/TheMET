@@ -21,6 +21,8 @@
 		F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99C29CC91F300013B2A /* ImageLoader.swift */; };
 		F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */; };
 		F30E835029FE854C00283EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F30E835229FE854C00283EE3 /* Localizable.strings */; };
+		F32400012AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32400002AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift */; };
+		F324FFFF2AF532DE00B8C175 /* CatalogSectionLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324FFFE2AF532DE00B8C175 /* CatalogSectionLoadingView.swift */; };
 		F3451E922A05644D00C31619 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3451E912A05644D00C31619 /* Colors.xcassets */; };
 		F3451E962A05698200C31619 /* Caviar Dreams Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */; };
 		F3451E972A05698200C31619 /* Caviar Dreams.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3451E942A05698200C31619 /* Caviar Dreams.ttf */; };
@@ -106,6 +108,8 @@
 		F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		F30E835129FE854C00283EE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F30E835329FE85BA00283EE3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F32400002AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogSectionTapToReloadView.swift; sourceTree = "<group>"; };
+		F324FFFE2AF532DE00B8C175 /* CatalogSectionLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogSectionLoadingView.swift; sourceTree = "<group>"; };
 		F3451E912A05644D00C31619 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Caviar Dreams Bold.ttf"; path = "TheMET/Fonts/Caviar Dreams Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		F3451E942A05698200C31619 /* Caviar Dreams.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Caviar Dreams.ttf"; path = "TheMET/Fonts/Caviar Dreams.ttf"; sourceTree = SOURCE_ROOT; };
@@ -208,30 +212,29 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
-				F3904AE02AF1557100BFC3F4 /* FeaturedArtistsView */,
-				F3A6BFFC2AD0719200249847 /* DataModels */,
+				F324FFFD2AF532B500B8C175 /* CatalogSectionsViews */,
 				7D5FD3922ACB034F00F779B1 /* MetAPI */,
-				F3A1253A2A8E5AA300032DC3 /* Cache */,
-				F3A125372A8D01DC00032DC3 /* FullScreenPhotoViewController */,
-				F376B37C2A85299800AA096B /* ArtFilter */,
-				F3FD733C2A700C5B00B163EA /* Generic Types */,
-				F3F5E7292A5312A30014CBF6 /* Services */,
+				F3528F8B2A0D01AA000D9CEB /* ViewControllers */,
 				F3F1D0442A449180003D4559 /* ArtView */,
 				F3C7DB5D2A14F73800DBBF87 /* TagListView */,
-				F3C7DB582A14F36500DBBF87 /* LoadingPlaceholderView */,
-				F3528F912A0E7FB7000D9CEB /* CatalogContentView */,
+				F3F5E7292A5312A30014CBF6 /* Services */,
 				F30CE99B29CC91BD00013B2A /* Network */,
-				F3528F862A0D00EA000D9CEB /* Extentions */,
-				F3528F8B2A0D01AA000D9CEB /* ViewControllers */,
+				F3C7DB582A14F36500DBBF87 /* LoadingPlaceholderView */,
+				F3FD733C2A700C5B00B163EA /* Generic Types */,
+				F3A125372A8D01DC00032DC3 /* FullScreenPhotoViewController */,
 				F3451E992A05699A00C31619 /* Fonts */,
+				F3528F862A0D00EA000D9CEB /* Extentions */,
+				F3528F912A0E7FB7000D9CEB /* CatalogContentView */,
+				F3A1253A2A8E5AA300032DC3 /* Cache */,
+				F376B37C2A85299800AA096B /* ArtFilter */,
 				F3012FC229C4AE1B00138CE3 /* Info.plist */,
-				F3012FBF29C4AE1A00138CE3 /* LaunchScreen.storyboard */,
-				F3012FBA29C4AE1800138CE3 /* Main.storyboard */,
-				F3012FBD29C4AE1A00138CE3 /* Assets.xcassets */,
-				F3451E912A05644D00C31619 /* Colors.xcassets */,
+				F3A6C0062AD7003100249847 /* AboutAppViewCell.swift */,
 				F3012FB429C4AE1800138CE3 /* AppDelegate.swift */,
 				F3012FB629C4AE1800138CE3 /* SceneDelegate.swift */,
-				F3A6C0062AD7003100249847 /* AboutAppViewCell.swift */,
+				F3012FBD29C4AE1A00138CE3 /* Assets.xcassets */,
+				F3451E912A05644D00C31619 /* Colors.xcassets */,
+				F3012FBF29C4AE1A00138CE3 /* LaunchScreen.storyboard */,
+				F3012FBA29C4AE1800138CE3 /* Main.storyboard */,
 			);
 			path = TheMET;
 			sourceTree = "<group>";
@@ -244,6 +247,15 @@
 				F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		F324FFFD2AF532B500B8C175 /* CatalogSectionsViews */ = {
+			isa = PBXGroup;
+			children = (
+				F324FFFE2AF532DE00B8C175 /* CatalogSectionLoadingView.swift */,
+				F32400002AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift */,
+			);
+			path = CatalogSectionsViews;
 			sourceTree = "<group>";
 		};
 		F3451E992A05699A00C31619 /* Fonts */ = {
@@ -326,6 +338,8 @@
 		F3A1253A2A8E5AA300032DC3 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
+				F3A6BFFC2AD0719200249847 /* DataModels */,
+				F3904AE02AF1557100BFC3F4 /* FeaturedArtistsView */,
 				F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */,
 				F3A1253D2A8E675600032DC3 /* ImageFileNameGenerator.swift */,
 			);
@@ -488,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F32400012AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift in Sources */,
 				F3012FCD29C9E37D00138CE3 /* CatalogViewController.swift in Sources */,
 				F3A1253E2A8E675600032DC3 /* ImageFileNameGenerator.swift in Sources */,
 				F3A6C0042AD6F30E00249847 /* AboutAppViewController.swift in Sources */,
@@ -523,6 +538,7 @@
 				F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */,
 				F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */,
 				F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */,
+				F324FFFF2AF532DE00B8C175 /* CatalogSectionLoadingView.swift in Sources */,
 				F3A125392A8D021F00032DC3 /* FullScreenPhotoViewController.swift in Sources */,
 				F3528F882A0D0149000D9CEB /* UILabel+apply.swift in Sources */,
 				F3A1253C2A8E5AB400032DC3 /* ImageCache.swift in Sources */,
