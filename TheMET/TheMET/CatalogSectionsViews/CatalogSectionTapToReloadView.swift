@@ -47,18 +47,29 @@ class CatalogSectionTapToReloadView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func constractView() -> CatalogSectionTapToReloadView {
+    static func constractView(configuration: CatalogSectionTapToReloadConfiguration) -> CatalogSectionTapToReloadView {
         let view = CatalogSectionTapToReloadView()
-        view.textLabel.numberOfLines = 0
-        view.textLabel.textAlignment = .center
-        view.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: NSLocalizedString("catalog_section.loading_failed", comment: ""))
-        view.button.apply(radius: 30, backgroundColor: UIColor(named: "blueberry"), fontColor: UIColor(named: "pear"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 20, buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""), image: nil)
-        view.button.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+        view.setup(configuration: configuration)
         return view
+    }
+    
+    private func setup(configuration: CatalogSectionTapToReloadConfiguration) {
+        self.textLabel.numberOfLines = 0
+        self.textLabel.textAlignment = .center
+        self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: NSLocalizedString("catalog_section.loading_failed", comment: ""))
+        self.button.apply(radius: 30, backgroundColor: UIColor(named: "blueberry"), fontColor: UIColor(named: "pear"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 20, buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""), image: nil)
+        self.button.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
     }
     
     @objc
     private func buttonDidTap() {
         self.onButtonTap()
     }
+}
+
+struct CatalogSectionTapToReloadConfiguration {
+    
+    let text: String
+    
+    static let catalogSectionTapToReload: CatalogSectionTapToReloadConfiguration = CatalogSectionTapToReloadConfiguration(text: NSLocalizedString("catalog_section.loading_failed", comment: ""))
 }

@@ -212,8 +212,10 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
-				F324FFFD2AF532B500B8C175 /* CatalogSectionsViews */,
 				7D5FD3922ACB034F00F779B1 /* MetAPI */,
+				F3904AE02AF1557100BFC3F4 /* FeaturedArtistsView */,
+				F3A6BFFC2AD0719200249847 /* DataModels */,
+				F324FFFD2AF532B500B8C175 /* CatalogSectionsViews */,
 				F3528F8B2A0D01AA000D9CEB /* ViewControllers */,
 				F3F1D0442A449180003D4559 /* ArtView */,
 				F3C7DB5D2A14F73800DBBF87 /* TagListView */,
@@ -338,8 +340,6 @@
 		F3A1253A2A8E5AA300032DC3 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				F3A6BFFC2AD0719200249847 /* DataModels */,
-				F3904AE02AF1557100BFC3F4 /* FeaturedArtistsView */,
 				F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */,
 				F3A1253D2A8E675600032DC3 /* ImageFileNameGenerator.swift */,
 			);

@@ -14,12 +14,16 @@ class CatalogSectionLoadingView: UIView {
     private let animationView: ArtsLoadingIndicatorView = ArtsLoadingIndicatorView()
     private let container: UIStackView = UIStackView()
     
-    static func constractView () -> CatalogSectionLoadingView {
+    static func constractView (configuration: CatalogSectionLoadingConfiguration) -> CatalogSectionLoadingView {
         let view = CatalogSectionLoadingView()
-        view.textLabel.numberOfLines = 0
-        view.textLabel.textAlignment = .left
-        view.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 16, title: NSLocalizedString("category_artworks.loading", comment: ""))
+        view.setup(configuration: configuration)
         return view
+    }
+    
+    private func setup(configuration: CatalogSectionLoadingConfiguration) {
+        self.textLabel.numberOfLines = 0
+        self.textLabel.textAlignment = .left
+        self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 16, title: configuration.text)
     }
     
     override init(frame: CGRect) {
@@ -47,5 +51,11 @@ class CatalogSectionLoadingView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+struct CatalogSectionLoadingConfiguration {
     
+    let text: String
+    
+    static let catalogSectionLoading: CatalogSectionLoadingConfiguration = CatalogSectionLoadingConfiguration(text: NSLocalizedString("category_artworks.loading", comment: ""))
 }
