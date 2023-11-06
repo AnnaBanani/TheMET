@@ -56,8 +56,8 @@ class CatalogSectionTapToReloadView: UIView {
     private func setup(configuration: CatalogSectionTapToReloadConfiguration) {
         self.textLabel.numberOfLines = 0
         self.textLabel.textAlignment = .center
-        self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: NSLocalizedString("catalog_section.loading_failed", comment: ""))
-        self.button.apply(radius: 30, backgroundColor: UIColor(named: "blueberry"), fontColor: UIColor(named: "pear"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 20, buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""), image: nil)
+        self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: configuration.text)
+        self.button.apply(radius: 30, backgroundColor: UIColor(named: "blueberry"), fontColor: UIColor(named: "pear"), font: NSLocalizedString("san_serif_font", comment: ""), fontSize: 20, buttonTitle: configuration.buttonTitle, image: nil)
         self.button.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
     }
     
@@ -71,5 +71,7 @@ struct CatalogSectionTapToReloadConfiguration {
     
     let text: String
     
-    static let catalogSectionTapToReload: CatalogSectionTapToReloadConfiguration = CatalogSectionTapToReloadConfiguration(text: NSLocalizedString("catalog_section.loading_failed", comment: ""))
+    let buttonTitle: String
+    
+    static let catalogSectionTapToReload: CatalogSectionTapToReloadConfiguration = CatalogSectionTapToReloadConfiguration(text: NSLocalizedString("catalog_section.loading_failed", comment: ""), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
 }
