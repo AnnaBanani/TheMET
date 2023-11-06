@@ -24,6 +24,7 @@
 "featured_artwork.loading" = "Пожалуйста, подождите, пока мы выбираем шедевр";
 "artwork.loading_failed" = "Произведение не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
 "artwork.load_again_cta" = "Попробуйте снова";
+"catalog_section.loading_failed" = "Что-то пошло не так";
 "featured_artwork.load_next_cta" = "Сгенерировать другое";
 "category_artworks.loading" = "Подождите пока мы развешиваем картины";
 "category.loading_failed" = "Произведения не могут быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";

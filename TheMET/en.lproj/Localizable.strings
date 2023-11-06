@@ -24,6 +24,7 @@
 "featured_artwork.loading" = "Please wait while we choose a masterpiece";
 "artwork.loading_failed" = "Artwork cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
 "artwork.load_again_cta" = "Try again";
+"catalog_section.loading_failed" = "Something went wrong";
 "featured_artwork.load_next_cta" = "Generate next artwork";
 "category_artworks.loading" = "Please wait,\nwhile we're hanging pictures";
 "category.loading_failed" = "Artworks cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";

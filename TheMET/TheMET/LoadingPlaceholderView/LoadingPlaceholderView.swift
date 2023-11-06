@@ -36,7 +36,6 @@ class LoadingPlaceholderView: UIView {
         self.container.distribution = .fill
         self.container.alignment = .center
         self.container.spacing = 30
-        
         NSLayoutConstraint.activate([
             self.container.widthAnchor.constraint(equalTo: self.widthAnchor),
             self.container.centerXAnchor.constraint(equalTo: self.centerXAnchor),
