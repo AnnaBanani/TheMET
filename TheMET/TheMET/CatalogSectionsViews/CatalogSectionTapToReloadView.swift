@@ -27,19 +27,17 @@ class CatalogSectionTapToReloadView: UIView {
         self.container.alignment = .center
         self.container.spacing = 30
         NSLayoutConstraint.activate([
-            self.container.widthAnchor.constraint(equalTo: self.widthAnchor),
-            self.container.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            self.container.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-            ])
+            self.container.heightAnchor.constraint(equalToConstant: 150),
+            self.container.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.container.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.container.topAnchor.constraint(equalTo: self.topAnchor, constant: 45)
+        ])
         NSLayoutConstraint.activate([
             self.button.heightAnchor.constraint(equalToConstant: 60),
-            self.button.leadingAnchor.constraint(equalTo: self.container.leadingAnchor, constant: 50),
-            self.button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50)
+            self.button.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -100)
         ])
         NSLayoutConstraint.activate([
             self.textLabel.heightAnchor.constraint(equalToConstant: 60),
-            self.textLabel.leadingAnchor.constraint(equalTo: self.container.leadingAnchor, constant: 50),
-            self.textLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50)
         ])
     }
     
