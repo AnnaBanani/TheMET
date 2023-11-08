@@ -56,35 +56,34 @@ class FeaturedArtistsContentView: UIView, UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedArtistsContentView.cellIdentifier, for: indexPath) as? CatalogCell {
-            let cellContent = self.content[indexPath.row]
-            cell.tag = cellContent.artistId
-            switch cellContent.artistData {
-            case .placeholder:
-                cell.isPlaceholderVisible = true
-            case .data(let imageURL, let title, let subTitle):
-                cell.isPlaceholderVisible = false
-                cell.title = title
-                cell.subtitle = subTitle
-                cell.backgroundState = .loading
-                if let imageURL = imageURL {
-                    self.imageLoader.loadImage(urlString: imageURL.absoluteString) { image in
-                        guard cell.tag == cellContent.artistId else { return }
-                        if let image = image {
-                            cell.backgroundState = .loaded(image)
-                        } else {
-                            cell.backgroundState = .failed
-                        }
-                    }
-                } else {
-                    cell.backgroundState = .failed
-                }
-            }
-            return cell
-        } else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedArtistsContentView.cellIdentifier, for: indexPath) as? CatalogCell else {
             print ("Error")
             return UICollectionViewCell()
         }
+        let cellContent = self.content[indexPath.row]
+        cell.tag = cellContent.artistId
+        switch cellContent.artistData {
+        case .placeholder:
+            cell.isPlaceholderVisible = true
+        case .data(let imageURL, let title, let subTitle):
+            cell.isPlaceholderVisible = false
+            cell.title = title
+            cell.subtitle = subTitle
+            cell.backgroundState = .loading
+            if let imageURL = imageURL {
+                self.imageLoader.loadImage(urlString: imageURL.absoluteString) { image in
+                    guard cell.tag == cellContent.artistId else { return }
+                    if let image = image {
+                        cell.backgroundState = .loaded(image)
+                    } else {
+                        cell.backgroundState = .failed
+                    }
+                }
+            } else {
+                cell.backgroundState = .failed
+            }
+        }
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
