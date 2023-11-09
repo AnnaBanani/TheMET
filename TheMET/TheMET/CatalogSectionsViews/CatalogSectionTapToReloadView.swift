@@ -30,7 +30,7 @@ class CatalogSectionTapToReloadView: UIView {
             self.container.heightAnchor.constraint(equalToConstant: 150),
             self.container.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.container.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.container.topAnchor.constraint(equalTo: self.topAnchor, constant: 45)
+            self.container.topAnchor.constraint(equalTo: self.topAnchor, constant: 15)
         ])
         NSLayoutConstraint.activate([
             self.button.heightAnchor.constraint(equalToConstant: 60),

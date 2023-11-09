@@ -32,7 +32,14 @@ class CatalogViewController: UIViewController {
         )
         aboutButton.tintColor = UIColor(named: "plum")
         self.navigationItem.rightBarButtonItem = aboutButton
+        self.departmentsSectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.departmentsSectionViewController.view)
+        NSLayoutConstraint.activate([
+            self.departmentsSectionViewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.departmentsSectionViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.departmentsSectionViewController.view.heightAnchor.constraint(equalToConstant: 240),
+            self.departmentsSectionViewController.view.topAnchor.constraint(equalTo: self.view.topAnchor)
+        ])
         self.addChild(self.departmentsSectionViewController)
         self.departmentsSectionViewController.didMove(toParent: self)
     }

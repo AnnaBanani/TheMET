@@ -15,6 +15,8 @@ class DepartmentsSectionViewController: UIViewController {
     
     private let aboutButton: UIButton = UIButton()
     
+    private let departmentLabel: UILabel = UILabel()
+    
     private let loadingCatalogView = CatalogSectionLoadingView.constractView(configuration: .catalogSectionLoading)
     private let failedCatalogView = CatalogSectionTapToReloadView.constractView(configuration: .catalogSectionTapToReload)
     private let loadedCatalogView = CatalogContentView.constructView()
@@ -31,9 +33,19 @@ class DepartmentsSectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.add(catalogSubview: self.failedCatalogView, stretchView: false)
-        self.add(catalogSubview: self.loadedCatalogView, stretchView: false)
-        self.add(catalogSubview: self.loadingCatalogView, stretchView: false)
+        self.departmentLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(departmentLabel)
+        self.departmentLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "pear"), fontSize: 16, title: NSLocalizedString("catalog_screen_departments_section_title", comment: ""))
+        self.departmentLabel.textAlignment = .center
+        NSLayoutConstraint.activate([
+            self.departmentLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            self.departmentLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            self.departmentLabel.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.departmentLabel.heightAnchor.constraint(equalToConstant: 60)
+            ])
+        self.add(catalogSubview: self.failedCatalogView)
+        self.add(catalogSubview: self.loadedCatalogView)
+        self.add(catalogSubview: self.loadingCatalogView)
         self.failedCatalogView.onButtonTap = { [weak self] in
             self?.reloadButtonDidTap()
         }
@@ -95,19 +107,15 @@ class DepartmentsSectionViewController: UIViewController {
         }
     }
     
-    private func add(catalogSubview: UIView, stretchView: Bool) {
+    private func add(catalogSubview: UIView) {
         catalogSubview.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(catalogSubview)
-        var constraints: [NSLayoutConstraint] = [
+        NSLayoutConstraint.activate([
             catalogSubview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
             catalogSubview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            catalogSubview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            catalogSubview.topAnchor.constraint(equalTo: self.departmentLabel.bottomAnchor, constant: 0),
             catalogSubview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-        ]
-        if stretchView {
-            constraints.append(catalogSubview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0))
-        }
-        NSLayoutConstraint.activate(constraints)
+        ])
     }
     
     private func reloadCatalog() {

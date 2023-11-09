@@ -37,10 +37,10 @@ class CatalogSectionLoadingView: UIView {
         self.container.alignment = .center
         self.container.spacing = 40
         NSLayoutConstraint.activate([
+            self.container.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             self.container.heightAnchor.constraint(equalToConstant: 150),
             self.container.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
             self.container.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -50),
-            self.container.topAnchor.constraint(equalTo: self.topAnchor, constant: 45)
             ])
         NSLayoutConstraint.activate([
             self.animationView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
