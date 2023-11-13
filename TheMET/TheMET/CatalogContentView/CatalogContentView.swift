@@ -24,7 +24,6 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     
     var onCatalogCellWillDisplay: (_ departmentId: Int) -> Void = { _ in }
     
-    @IBOutlet var label: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     
     var flowLayout: UICollectionViewFlowLayout {
@@ -43,11 +42,11 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.label.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "pear"), fontSize: 16, title: NSLocalizedString("catalog_screen_departments_section_title", comment: ""))
         self.collectionView.register(CatalogCell.self, forCellWithReuseIdentifier: CatalogContentView.cellIdentifier)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = self.flowLayout
+        self.collectionView.removeFromSuperview()
     }
     
     

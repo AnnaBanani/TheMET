@@ -25,6 +25,7 @@
 		F32400072AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32400062AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift */; };
 		F324000B2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324000A2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift */; };
 		F324000D2AFA6CB800B8C175 /* FeaturedArtistsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F324000C2AFA6CB800B8C175 /* FeaturedArtistsContentView.xib */; };
+		F32400112AFBE53B00B8C175 /* DepartmentsSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32400102AFBE53B00B8C175 /* DepartmentsSectionViewController.swift */; };
 		F324FFFF2AF532DE00B8C175 /* CatalogSectionLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324FFFE2AF532DE00B8C175 /* CatalogSectionLoadingView.swift */; };
 		F3451E922A05644D00C31619 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3451E912A05644D00C31619 /* Colors.xcassets */; };
 		F3451E962A05698200C31619 /* Caviar Dreams Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */; };
@@ -115,6 +116,7 @@
 		F32400062AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtistsContentView.swift; sourceTree = "<group>"; };
 		F324000A2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtistsCellData.swift; sourceTree = "<group>"; };
 		F324000C2AFA6CB800B8C175 /* FeaturedArtistsContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedArtistsContentView.xib; sourceTree = "<group>"; };
+		F32400102AFBE53B00B8C175 /* DepartmentsSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentsSectionViewController.swift; sourceTree = "<group>"; };
 		F324FFFE2AF532DE00B8C175 /* CatalogSectionLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogSectionLoadingView.swift; sourceTree = "<group>"; };
 		F3451E912A05644D00C31619 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Caviar Dreams Bold.ttf"; path = "TheMET/Fonts/Caviar Dreams Bold.ttf"; sourceTree = SOURCE_ROOT; };
@@ -315,6 +317,7 @@
 				F3012FCE29C9E3A800138CE3 /* FavoritesViewController.swift */,
 				F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */,
 				F3A6C0032AD6F30E00249847 /* AboutAppViewController.swift */,
+				F32400102AFBE53B00B8C175 /* DepartmentsSectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				F3847C582A0E972B00501F0F /* GradientView.swift in Sources */,
 				F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */,
 				F376B37E2A8529AC00AA096B /* ArtFilter.swift in Sources */,
+				F32400112AFBE53B00B8C175 /* DepartmentsSectionViewController.swift in Sources */,
 				F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */,
 				F3904AE32AF1559800BFC3F4 /* FeaturedArtistsView.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,

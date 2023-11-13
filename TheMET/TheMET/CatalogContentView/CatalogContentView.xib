@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,15 +11,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CatalogContentView" customModule="TheMET" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CatalogContentView" customModule="TheMET" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="240"/>
+            <rect key="frame" x="0.0" y="0.0" width="393" height="180"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TpD-Hh-ZMa">
-                    <rect key="frame" x="0.0" y="60" width="393" height="180"/>
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="180"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="180" id="ohC-6W-zzh"/>
-                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cIg-X8-0YR">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -27,34 +24,20 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bID-I8-5fq">
-                    <rect key="frame" x="20" y="0.0" width="353" height="60"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="IjP-Gj-Pdc"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="TpD-Hh-ZMa" firstAttribute="top" secondItem="bID-I8-5fq" secondAttribute="bottom" id="6tx-iC-JvU"/>
                 <constraint firstItem="TpD-Hh-ZMa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9A5-5e-8fm"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bID-I8-5fq" secondAttribute="trailing" constant="20" id="KST-2U-8Bh"/>
-                <constraint firstItem="bID-I8-5fq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="V4x-qP-ZPU"/>
+                <constraint firstAttribute="bottom" secondItem="TpD-Hh-ZMa" secondAttribute="bottom" id="FYP-Un-4u7"/>
                 <constraint firstItem="TpD-Hh-ZMa" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="YxD-WR-Gsf"/>
-                <constraint firstAttribute="bottom" secondItem="TpD-Hh-ZMa" secondAttribute="bottom" id="enn-f4-BKe"/>
-                <constraint firstItem="bID-I8-5fq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ikO-cj-Qd6"/>
+                <constraint firstItem="TpD-Hh-ZMa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sde-KU-5r3"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="collectionView" destination="TpD-Hh-ZMa" id="5Wb-EY-Rd5"/>
-                <outlet property="label" destination="bID-I8-5fq" id="N6Z-M4-GmS"/>
             </connections>
             <point key="canvasLocation" x="26.717557251908396" y="12.67605633802817"/>
         </view>
