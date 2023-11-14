@@ -52,8 +52,7 @@ class ArtistsSectionViewController: UIViewController {
     
     private func featuredArtistsViewDidTap() {
         let artistsViewController = ArtistsCatalogViewController()
-        artistsViewController.modalTransitionStyle = .crossDissolve
-        self.present(artistsViewController, animated: true)
+        self.navigationController?.pushViewController(artistsViewController, animated: true)
     }
     
     private func featuredArtistsViewTitle(artistsCount: Int) -> String {

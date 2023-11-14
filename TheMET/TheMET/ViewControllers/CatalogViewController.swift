@@ -54,6 +54,8 @@ class CatalogViewController: UIViewController {
             self.featuredArtistsViewController.view.heightAnchor.constraint(equalToConstant: 240),
             self.featuredArtistsViewController.view.topAnchor.constraint(equalTo: self.departmentsSectionViewController.view.bottomAnchor)
         ])
+        self.addChild(self.featuredArtistsViewController)
+        self.featuredArtistsViewController.didMove(toParent: self)
     }
     
     @objc
