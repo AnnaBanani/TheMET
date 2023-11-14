@@ -26,6 +26,9 @@
 		F324000B2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324000A2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift */; };
 		F324000D2AFA6CB800B8C175 /* FeaturedArtistsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F324000C2AFA6CB800B8C175 /* FeaturedArtistsContentView.xib */; };
 		F32400112AFBE53B00B8C175 /* DepartmentsSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32400102AFBE53B00B8C175 /* DepartmentsSectionViewController.swift */; };
+		F324001A2B027BD900B8C175 /* ArtistsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32400192B027BD900B8C175 /* ArtistsService.swift */; };
+		F324001C2B02873700B8C175 /* ArtistsSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324001B2B02873700B8C175 /* ArtistsSectionViewController.swift */; };
+		F324001E2B028C9400B8C175 /* ArtistsCatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324001D2B028C9300B8C175 /* ArtistsCatalogViewController.swift */; };
 		F324FFFF2AF532DE00B8C175 /* CatalogSectionLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324FFFE2AF532DE00B8C175 /* CatalogSectionLoadingView.swift */; };
 		F3451E922A05644D00C31619 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3451E912A05644D00C31619 /* Colors.xcassets */; };
 		F3451E962A05698200C31619 /* Caviar Dreams Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */; };
@@ -117,6 +120,9 @@
 		F324000A2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtistsCellData.swift; sourceTree = "<group>"; };
 		F324000C2AFA6CB800B8C175 /* FeaturedArtistsContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedArtistsContentView.xib; sourceTree = "<group>"; };
 		F32400102AFBE53B00B8C175 /* DepartmentsSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentsSectionViewController.swift; sourceTree = "<group>"; };
+		F32400192B027BD900B8C175 /* ArtistsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsService.swift; sourceTree = "<group>"; };
+		F324001B2B02873700B8C175 /* ArtistsSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsSectionViewController.swift; sourceTree = "<group>"; };
+		F324001D2B028C9300B8C175 /* ArtistsCatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsCatalogViewController.swift; sourceTree = "<group>"; };
 		F324FFFE2AF532DE00B8C175 /* CatalogSectionLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogSectionLoadingView.swift; sourceTree = "<group>"; };
 		F3451E912A05644D00C31619 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Caviar Dreams Bold.ttf"; path = "TheMET/Fonts/Caviar Dreams Bold.ttf"; sourceTree = SOURCE_ROOT; };
@@ -318,6 +324,8 @@
 				F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */,
 				F3A6C0032AD6F30E00249847 /* AboutAppViewController.swift */,
 				F32400102AFBE53B00B8C175 /* DepartmentsSectionViewController.swift */,
+				F324001B2B02873700B8C175 /* ArtistsSectionViewController.swift */,
+				F324001D2B028C9300B8C175 /* ArtistsCatalogViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -406,6 +414,7 @@
 		F3F5E7292A5312A30014CBF6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F32400192B027BD900B8C175 /* ArtistsService.swift */,
 				F3F1D0472A49E58E003D4559 /* FavoritesService.swift */,
 				F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */,
 			);
@@ -549,14 +558,17 @@
 				F3528F832A0AB99A000D9CEB /* UINavigationItem+apply.swift in Sources */,
 				F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */,
 				F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */,
+				F324001C2B02873700B8C175 /* ArtistsSectionViewController.swift in Sources */,
 				F3A6C0072AD7003100249847 /* AboutAppViewCell.swift in Sources */,
 				F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */,
 				F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */,
 				F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */,
+				F324001E2B028C9400B8C175 /* ArtistsCatalogViewController.swift in Sources */,
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,
 				F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */,
 				F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
+				F324001A2B027BD900B8C175 /* ArtistsService.swift in Sources */,
 				F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */,
 				F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */,
 				F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */,

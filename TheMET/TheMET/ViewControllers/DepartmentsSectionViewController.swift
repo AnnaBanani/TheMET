@@ -13,8 +13,6 @@ class DepartmentsSectionViewController: UIViewController {
     
     private let metAPI = MetAPI()
     
-    private let aboutButton: UIButton = UIButton()
-    
     private let departmentLabel: UILabel = UILabel()
     
     private let loadingCatalogView = CatalogSectionLoadingView.constractView(configuration: .catalogSectionLoading)

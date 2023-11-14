@@ -2,6 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>artists count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@artists_count@</string>
+		<key>artists_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>zero</key>
+			<string>%u имен</string>
+			<key>one</key>
+			<string>%u имя</string>
+			<key>two</key>
+			<string>%u имени</string>
+			<key>few</key>
+			<string>%u имени</string>
+			<key>maany</key>
+			<string>%u имен</string>
+		</dict>
+	</dict>
 	<key>objects count</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -13,11 +35,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>zero</key>
-			<string>0 объектов</string>
+			<string>%u объектов</string>
 			<key>one</key>
-			<string>1 объект</string>
+			<string>%u объект</string>
 			<key>two</key>
-			<string>2 объекта</string>
+			<string>%u объекта</string>
 			<key>few</key>
 			<string>%u объекта</string>
 			<key>many</key>
