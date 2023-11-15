@@ -46,7 +46,6 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = self.flowLayout
-        self.collectionView.removeFromSuperview()
     }
     
     

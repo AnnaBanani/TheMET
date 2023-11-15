@@ -12,7 +12,11 @@ import MetAPI
 
 class CatalogViewController: UIViewController {
     
+    private let aboutButton: UIButton = UIButton()
+    
     private let departmentsSectionViewController: DepartmentsSectionViewController = DepartmentsSectionViewController()
+    
+    private let featuredArtistsViewController: ArtistsSectionViewController = ArtistsSectionViewController()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,6 +46,16 @@ class CatalogViewController: UIViewController {
         ])
         self.addChild(self.departmentsSectionViewController)
         self.departmentsSectionViewController.didMove(toParent: self)
+        self.featuredArtistsViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.featuredArtistsViewController.view)
+        NSLayoutConstraint.activate([
+            self.featuredArtistsViewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.featuredArtistsViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.featuredArtistsViewController.view.heightAnchor.constraint(equalToConstant: 240),
+            self.featuredArtistsViewController.view.topAnchor.constraint(equalTo: self.departmentsSectionViewController.view.bottomAnchor)
+        ])
+        self.addChild(self.featuredArtistsViewController)
+        self.featuredArtistsViewController.didMove(toParent: self)
     }
     
     @objc

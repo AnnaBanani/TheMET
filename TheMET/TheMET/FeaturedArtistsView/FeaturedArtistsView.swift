@@ -20,7 +20,7 @@ class FeaturedArtistsView: UIView {
         get { return self.titleLabel.attributedText?.string }
         set {
             if let newValue = newValue {
-                self.titleLabel.apply(font: NSLocalizedString("san_serif_font_bold", comment: ""), color: UIColor(named: "pear"), fontSize: 18, title: newValue)
+                self.titleLabel.apply(font: NSLocalizedString("san_serif_font", comment: ""), color: UIColor(named: "pear"), fontSize: 18, title: newValue)
             } else {
                 self.titleLabel.attributedText = nil
             }
@@ -30,15 +30,15 @@ class FeaturedArtistsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.gradientView.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor(named: "blueberry")
         self.imageView.image = UIImage(named: "FeaturedArtistsCover")
         self.imageView.contentMode = .scaleAspectFill
         self.imageView.clipsToBounds = true
         self.addSubview(self.imageView)
-        self.addSubview(self.titleLabel)
         self.addSubview(self.gradientView)
+        self.addSubview(self.titleLabel)
         NSLayoutConstraint.activate([
             self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -53,7 +53,7 @@ class FeaturedArtistsView: UIView {
         ])
         NSLayoutConstraint.activate([
             self.titleLabel.centerXAnchor.constraint(equalTo: self.imageView.centerXAnchor),
-            self.titleLabel.bottomAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: -16)
+            self.titleLabel.bottomAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: -10)
         ])
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
         self.addGestureRecognizer(tapGestureRecognizer)
