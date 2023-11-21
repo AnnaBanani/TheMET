@@ -201,6 +201,8 @@ public class MetAPI{
                 case .failure(let error):
                     completion(.failure(.networkError(error)))
                 case .success(let data):
+                    let dataString = String(decoding: data, as: UTF8.self)
+                    print ("data \(dataString)")
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .useDefaultKeys
                     do {

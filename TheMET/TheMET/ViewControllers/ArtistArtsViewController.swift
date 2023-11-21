@@ -1,8 +1,8 @@
 //
-//  CategoryViewController.swift
+//  ArtistArtsViewController.swift
 //  TheMET
 //
-//  Created by Анна Ситникова on 06/07/2023.
+//  Created by Анна Ситникова on 15/11/2023.
 //
 
 import Foundation
@@ -10,26 +10,26 @@ import UIKit
 import Combine
 import MetAPI
 
-class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
-    
+class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
+
     private let searchBar: UISearchBar = UISearchBar()
     
     private let metAPI = MetAPI()
+    
+    private var imageLoader: ImageLoader = ImageLoader()
     
     private let favoriteService = FavoritesService.standart
     
     private var favoriteServiseSubscriber: AnyCancellable?
     
-    var departmentId: Int?
-    
-    private var imageLoader: ImageLoader = ImageLoader()
+    var artistName: String?
     
     private var loadingArtIds: [ArtID] = []
     
     private let loadingCategoryView = LoadingPlaceholderView.construstView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = FailedPlaceholderView.constructView(configuration: .categoryFailed)
     
-    private let categoryTableView: UITableView = UITableView(frame: .zero, style: .plain)
+    private let artistsTableView: UITableView = UITableView(frame: .zero, style: .plain)
     
     var contentStatus: LoadingStatus<[ArtCellData]> = .loading {
         didSet {
@@ -54,13 +54,13 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         ])
         self.add(subView: self.loadingCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.failedCategoryView, topAnchorSubView: self.searchBar)
-        self.add(subView: self.categoryTableView, topAnchorSubView: self.searchBar)
-        self.categoryTableView.separatorStyle = .none
-        self.categoryTableView.estimatedRowHeight = 10
-        self.categoryTableView.rowHeight = UITableView.automaticDimension
-        self.categoryTableView.register(ArtViewCell.self, forCellReuseIdentifier: ArtViewCell.artViewCellIdentifier)
-        self.categoryTableView.dataSource = self
-        self.categoryTableView.delegate = self
+        self.add(subView: self.artistsTableView, topAnchorSubView: self.searchBar)
+        self.artistsTableView.separatorStyle = .none
+        self.artistsTableView.estimatedRowHeight = 10
+        self.artistsTableView.rowHeight = UITableView.automaticDimension
+        self.artistsTableView.register(ArtViewCell.self, forCellReuseIdentifier: ArtViewCell.artViewCellIdentifier)
+        self.artistsTableView.dataSource = self
+        self.artistsTableView.delegate = self
         self.searchBar.delegate = self
         self.failedCategoryView.onButtonTap = { [weak self] in
             self?.reloadButtonDidTap()
@@ -70,7 +70,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func favoriteServiceDidChange() {
-        self.categoryTableView.reloadData()
+        self.artistsTableView.reloadData()
     }
     
     private func updateContent() {
@@ -78,17 +78,17 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         case .failed:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = false
-            self.categoryTableView.isHidden = true
+            self.artistsTableView.isHidden = true
         case .loaded:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
-            self.categoryTableView.isHidden = false
+            self.artistsTableView.isHidden = false
         case .loading:
             self.loadingCategoryView.isHidden = false
             self.failedCategoryView.isHidden = true
-            self.categoryTableView.isHidden = true
+            self.artistsTableView.isHidden = true
         }
-        self.categoryTableView.reloadData()
+        self.artistsTableView.reloadData()
     }
     
     private func add(subView: UIView, topAnchorSubView: UIView) {
@@ -114,7 +114,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadArtCellDataList() {
-        guard let id = self.departmentId else {
+        guard let artistName = self.artistName else {
             self.contentStatus = .failed
             return
         }
@@ -126,12 +126,76 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             }
             if let searchTextBeforeLoading = self.searchBar.searchTextField.text,
                !searchTextBeforeLoading.isEmpty {
-                self.loadSearchResponse(searchTextBeforeLoading: searchTextBeforeLoading, departmentId: id)
+                self.loadSearchResponse(searchTextBeforeLoading: searchTextBeforeLoading, artistName: artistName)
             } else {
-                self.loadObjects(departmentId: id)
+                self.loadObjects(artistName: artistName)
             }
-            self.categoryTableView.reloadData()
+            self.artistsTableView.reloadData()
         })
+    }
+    
+    private func loadObjects(artistName: String) {
+        guard let artistName = self.artistName else {
+            self.contentStatus = .failed
+            return
+        }
+        let parameters:[SearchParameter] = [
+            .artistOrCulture(true),
+            .q(artistName)
+        ]
+        self.metAPI.search(parameters: parameters) { [weak self] searchResponseResult in
+            guard let self = self else { return }
+            switch searchResponseResult {
+            case . failure:
+                self.contentStatus = .failed
+            case .success(let searchResponse):
+                let artCellDataList = self.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
+                let filteredArtCellDataList = self.filterArtCellDataList(artCellDataList: artCellDataList)
+                
+                //        отфильтровать по имени
+                self.contentStatus = .loaded(filteredArtCellDataList)
+            }
+        }
+    }
+    
+    private func loadSearchResponse(searchTextBeforeLoading: String, artistName: String) {
+        let parameters:[SearchParameter] = [
+            .title(true),
+            .q(searchTextBeforeLoading)
+        ]
+        self.metAPI.search(parameters: parameters) { [weak self] searchResponseResult in
+            guard let self = self else { return }
+            guard searchTextBeforeLoading == self.searchBar.searchTextField.text else { return }
+            switch searchResponseResult {
+            case . failure:
+                self.contentStatus = .failed
+            case .success(let searchResponse):
+                let artCellDataList = self.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
+                self.contentStatus = .loaded(artCellDataList)
+            }
+        }
+    }
+    
+    private func handleLoadingResponse(objectIDs: [ArtID]) -> [ArtCellData] {
+        var filteredArtCellDataList: [ArtCellData] = []
+        for artId in objectIDs {
+            let filteredArtCellData = ArtCellData(artID: artId, artData: .placeholder)
+            filteredArtCellDataList.append(filteredArtCellData)
+        }
+        return filteredArtCellDataList
+    }
+    
+    private func filterArtCellDataList(artCellDataList: [ArtCellData]) -> [ArtCellData] {
+        var filteredArtCellDataList: [ArtCellData] = []
+        //        отфильтровать по имени
+        return filteredArtCellDataList
+    }
+    
+    private func imageDidTap(image: UIImage) {
+        let fullScreenViewController =  FullScreenPhotoViewController()
+        fullScreenViewController.modalPresentationStyle = .fullScreen
+        fullScreenViewController.image = image
+        self.present(fullScreenViewController, animated: true)
     }
     
     private func loadArtCellData(artID: ArtID, completion: @escaping (ArtCellData?) -> Void) {
@@ -170,7 +234,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             return id == artId
         }
     }
-    
+
     private func isArtLiked(art: Art) -> Bool {
         return self.favoriteService.favoriteArts.contains(where: { favoriteArt in
             return favoriteArt.objectID == art.objectID
@@ -185,57 +249,18 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    private func loadObjects(departmentId: Int) {
-        self.metAPI.objects(departmentIds: [departmentId]) { [weak self] objectsResponseResult in
-            guard let self = self,
-                  self.searchBar.searchTextField.text == nil ||
-                    self.searchBar.searchTextField.text == "" else {
-                return
-            }
-            switch objectsResponseResult {
-            case .failure:
-                self.contentStatus = .failed
-            case.success(let objectsResponse):
-                self.handleLoadingResponse(objectIDs: objectsResponse.objectIDs)
-            }
+
+    
+//    UITableViewDelegate, UITableViewDataSource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch self.contentStatus {
+        case .failed, .loading:
+            return 0
+        case .loaded(let arts):
+            return arts.count
         }
     }
-    
-    private func loadSearchResponse(searchTextBeforeLoading: String, departmentId: Int) {
-        let parameters:[SearchParameter] = [
-            .departmentId(departmentId),
-            .q(searchTextBeforeLoading)
-        ]
-        self.metAPI.search(parameters: parameters) { [weak self] searchResponseResult in
-            guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
-                return
-            }
-            switch searchResponseResult {
-            case . failure:
-                self?.contentStatus = .failed
-            case .success(let searchResponse):
-                self?.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
-            }
-        }
-    }
-    
-    private func handleLoadingResponse(objectIDs: [ArtID]) {
-        var filteredArtCellDataList: [ArtCellData] = []
-        for artId in objectIDs {
-            let filteredArtCellData = ArtCellData(artID: artId, artData: .placeholder)
-            filteredArtCellDataList.append(filteredArtCellData)
-        }
-        self.contentStatus = .loaded(filteredArtCellDataList)
-    }
-    
-    private func imageDidTap(image: UIImage) {
-        let fullScreenViewController =  FullScreenPhotoViewController()
-        fullScreenViewController.modalPresentationStyle = .fullScreen
-        fullScreenViewController.image = image
-        self.present(fullScreenViewController, animated: true)
-    }
-    
-    //  UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard case .loaded(let arts) = self.contentStatus else {
@@ -257,9 +282,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.titleText = String.titleText(art: art)
                 cell.dateText = String.dateText(art: art)
                 cell.mediumText = String.mediumText(art: art)
-                if let departmentName = art.department {
-                    cell.tags = [departmentName]
-                }
                 cell.onLikeButtonDidTap = { [weak self] in
                     self?.likeButtonDidTap(cell: cell, art: art)
                 }
@@ -271,15 +293,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         } else {
             print ("Error")
             return UITableViewCell()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch self.contentStatus {
-        case .failed, .loading:
-            return 0
-        case .loaded(let arts):
-            return arts.count
         }
     }
     
@@ -319,5 +332,3 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
 }
-
-
