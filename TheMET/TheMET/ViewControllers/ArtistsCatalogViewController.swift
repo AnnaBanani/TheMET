@@ -15,8 +15,6 @@ class ArtistsCatalogViewController: UIViewController {
     private let artistsService = ArtistsService.standart
     
     private var artistsServiceSubscriber: AnyCancellable?
-   
-    private let searchBar: UISearchBar = UISearchBar()
     
     private let metAPI = MetAPI()
     
@@ -26,7 +24,7 @@ class ArtistsCatalogViewController: UIViewController {
     
     private var loadedArtists: [FeaturedArtistsCellData] = []
     
-    var loadingArtistNames: [String] = []
+    private var loadingArtistNames: [String] = []
     
     var contentStatus:LoadingStatus<[FeaturedArtistsCellData]> = .loading {
         didSet {
