@@ -64,6 +64,7 @@
 		F3C7DB5B2A14F38C00DBBF87 /* FailedPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */; };
 		F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */; };
 		F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */; };
+		F3D94C462B0539BD005D5CC9 /* ArtistArtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */; };
 		F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */; };
 		F3F1D0462A449194003D4559 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0452A449194003D4559 /* ArtView.swift */; };
 		F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0472A49E58E003D4559 /* FavoritesService.swift */; };
@@ -159,6 +160,7 @@
 		F3C7DB592A14F38C00DBBF87 /* FailedPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedPlaceholderView.xib; sourceTree = "<group>"; };
 		F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedPlaceholderView.swift; sourceTree = "<group>"; };
 		F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
+		F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistArtsViewController.swift; sourceTree = "<group>"; };
 		F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFileManager.swift; sourceTree = "<group>"; };
 		F3F1D0452A449194003D4559 /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		F3F1D0472A49E58E003D4559 /* FavoritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesService.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				F32400102AFBE53B00B8C175 /* DepartmentsSectionViewController.swift */,
 				F324001B2B02873700B8C175 /* ArtistsSectionViewController.swift */,
 				F324001D2B028C9300B8C175 /* ArtistsCatalogViewController.swift */,
+				F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
 				F324001A2B027BD900B8C175 /* ArtistsService.swift in Sources */,
 				F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */,
+				F3D94C462B0539BD005D5CC9 /* ArtistArtsViewController.swift in Sources */,
 				F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */,
 				F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */,
 				F32400072AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift in Sources */,

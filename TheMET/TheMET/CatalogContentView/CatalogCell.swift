@@ -56,6 +56,8 @@ class CatalogCell: UICollectionViewCell {
         }
     }
     
+    var backgroundImageURL: URL? = nil
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupLayout()

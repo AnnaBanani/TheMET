@@ -10,7 +10,7 @@ import UIKit
 
 struct FeaturedArtistsCellData {
     
-    var artistId: Int
+    var artistName: String
     
     var artistData: ArtistData
     
