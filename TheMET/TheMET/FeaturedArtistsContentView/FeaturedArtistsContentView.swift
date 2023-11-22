@@ -66,10 +66,11 @@ class FeaturedArtistsContentView: UIView, UICollectionViewDelegate, UICollection
         let cellContent = self.content[indexPath.row]
         switch cellContent.artistData {
         case .placeholder:
-            cell.isPlaceholderVisible = true
+            cell.title = ""
+            cell.subtitle = ""
+            cell.backgroundState = .loading
             cell.backgroundImageURL = nil
         case .data(let imageURL, let title, let subTitle):
-            cell.isPlaceholderVisible = false
             cell.title = title
             cell.subtitle = subTitle
             cell.backgroundState = .loading
@@ -99,6 +100,5 @@ class FeaturedArtistsContentView: UIView, UICollectionViewDelegate, UICollection
     func collectionView(_: UICollectionView, willDisplay: UICollectionViewCell, forItemAt: IndexPath) {
         let cellData = self.content[forItemAt.row]
         self.onFeaturedArtistsCellWillDisplay(cellData.artistName)
-        print("IndexPath: \(forItemAt.section), \(forItemAt.row)")
     }
 }

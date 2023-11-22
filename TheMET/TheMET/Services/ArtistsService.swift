@@ -33,14 +33,12 @@ class ArtistsService {
         "Paul Cézanne",
         "Edouard Manet",
         "Giacomo Guardi",
-        "Henri de Toulouse-Lautrec",
         "Amedeo Modigliani",
         "Wiener Werkstätte",
         "Thomas Hart Benton",
         "Egon Schiele",
         "Giovanni Domenico Tiepolo",
-        "Umberto Boccioni",
-        "Giovanni Battista Tiepolo"
+        "Umberto Boccioni"
     ]
     
 }

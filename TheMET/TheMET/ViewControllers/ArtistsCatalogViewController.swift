@@ -120,13 +120,13 @@ class ArtistsCatalogViewController: UIViewController {
         else { return }
         self.loadingArtistNames.append(artist.artistName)
         self.loadArtistCellData(artistName: artistName, completion: { [weak self] artistCellData in
-               if let contentStatus = self?.contentStatus,
-               case .loaded(var artistsCellDataList) = contentStatus,
+            guard let self = self else { return }
+            if case .loaded(var artistsCellDataList) = self.contentStatus,
                let artistCellDataIndex = artistsCellDataList.firstIndex(where: { $0.artistName == artistCellData.artistName}) {
                    artistsCellDataList[artistCellDataIndex] = artistCellData
-                self?.contentStatus = .loaded(artistsCellDataList)
+                self.contentStatus = .loaded(artistsCellDataList)
             }
-            self?.loadingArtistNames.removeAll { name in
+            self.loadingArtistNames.removeAll { name in
                 return name == artistName
             }
         })
@@ -151,22 +151,15 @@ class ArtistsCatalogViewController: UIViewController {
                 let artistCellData = FeaturedArtistsCellData(artistName: artistName, artistData: .data(imageURL: nil, title: artistName, subTitle: nil))
                 completion(artistCellData)
             case .success(let objects):
-                let subtitle: String = self.subtitle(objectsCount: objects.total)
-                self.loadArtistImageURL(objectsIDs: objects.objectIDs) { url in
-                    let artistCellData = FeaturedArtistsCellData(artistName: artistName, artistData: .data(imageURL: url, title: artistName, subTitle: subtitle))
+                self.loadArtistImageURL(objectsIDs: objects.objectIDs, artistName: artistName) { url in
+                    let artistCellData = FeaturedArtistsCellData(artistName: artistName, artistData: .data(imageURL: url, title: artistName, subTitle: nil))
                     completion(artistCellData)
                 }
             }
         }
     }
-    
-        
-    private func subtitle(objectsCount: Int) -> String {
-        let formatString: String = NSLocalizedString("objects count", comment: "")
-        return String.localizedStringWithFormat(formatString, objectsCount)
-    }
-    
-    private func loadArtistImageURL(objectsIDs: [ArtID], completion: @escaping (URL?) -> Void) {
+
+    private func loadArtistImageURL(objectsIDs: [ArtID], artistName: String, completion: @escaping (URL?) -> Void) {
         guard !objectsIDs.isEmpty else {
             completion(nil)
             return
@@ -176,7 +169,7 @@ class ArtistsCatalogViewController: UIViewController {
                 completion(imageURL)
             } else {
                 let newObjectsIds: [ArtID] = Array(objectsIDs.dropFirst())
-                self?.loadArtistImageURL(objectsIDs: newObjectsIds, completion: completion)
+                self?.loadArtistImageURL(objectsIDs: newObjectsIds, artistName: artistName, completion: completion)
             }
         }
     }
