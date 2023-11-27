@@ -61,9 +61,10 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
             cell.tag = cellContent.departmentId
             switch cellContent.departmentData {
             case .placeholder:
-                cell.isPlaceholderVisible = true
+                cell.title = ""
+                cell.subtitle = ""
+                cell.backgroundState = .loading
             case .data(let imageURL, let title, let subTitle):
-                cell.isPlaceholderVisible = false
                 cell.title = title
                 cell.subtitle = subTitle
                 cell.backgroundState = .loading
