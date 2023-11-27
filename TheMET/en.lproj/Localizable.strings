@@ -24,6 +24,7 @@
 "about_app_screen_title" = "About";
 "featured_artwork.loading" = "Please wait while we choose a masterpiece";
 "artwork.loading_failed" = "Artwork cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
+"arts_search.loading_failed" = "Nothing found \n \nTry again";
 "artwork.load_again_cta" = "Try again";
 "catalog_section.loading_failed" = "Something went wrong";
 "featured_artwork.load_next_cta" = "Generate next artwork";
