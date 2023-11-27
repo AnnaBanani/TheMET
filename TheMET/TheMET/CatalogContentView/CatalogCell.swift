@@ -14,21 +14,7 @@ class CatalogCell: UICollectionViewCell {
     private let cardsTitleLabel: UILabel = UILabel()
     private let cardsSubTitleLabel: UILabel = UILabel()
     private let gradientView: VerticalGradientView = VerticalGradientView()
-    
-//    var isPlaceholderVisible: Bool = false {
-//        didSet {
-//            if self.isPlaceholderVisible {
-//                self.imageView.state = .loading
-//                self.cardsTitleLabel.isHidden = true
-//                self.cardsSubTitleLabel.isHidden = true
-//            } else {
-//                self.imageView.state = self.backgroundState
-//                self.cardsTitleLabel.isHidden = false
-//                self.cardsSubTitleLabel.isHidden = false
-//            }
-//        }
-//    }
-    
+ 
     var title: String? {
         get {
             return self.cardsTitleLabel.attributedText?.string

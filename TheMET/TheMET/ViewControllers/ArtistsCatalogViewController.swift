@@ -151,7 +151,7 @@ class ArtistsCatalogViewController: UIViewController {
                 let artistCellData = FeaturedArtistsCellData(artistName: artistName, artistData: .data(imageURL: nil, title: artistName, subTitle: nil))
                 completion(artistCellData)
             case .success(let objects):
-                self.loadArtistImageURL(objectsIDs: objects.objectIDs, artistName: artistName) { url in
+                self.loadArtistImageURL(objectsIDs: objects.objectIDs) { url in
                     let artistCellData = FeaturedArtistsCellData(artistName: artistName, artistData: .data(imageURL: url, title: artistName, subTitle: nil))
                     completion(artistCellData)
                 }
@@ -159,7 +159,7 @@ class ArtistsCatalogViewController: UIViewController {
         }
     }
 
-    private func loadArtistImageURL(objectsIDs: [ArtID], artistName: String, completion: @escaping (URL?) -> Void) {
+    private func loadArtistImageURL(objectsIDs: [ArtID], completion: @escaping (URL?) -> Void) {
         guard !objectsIDs.isEmpty else {
             completion(nil)
             return
@@ -169,7 +169,7 @@ class ArtistsCatalogViewController: UIViewController {
                 completion(imageURL)
             } else {
                 let newObjectsIds: [ArtID] = Array(objectsIDs.dropFirst())
-                self?.loadArtistImageURL(objectsIDs: newObjectsIds, artistName: artistName, completion: completion)
+                self?.loadArtistImageURL(objectsIDs: newObjectsIds, completion: completion)
             }
         }
     }
