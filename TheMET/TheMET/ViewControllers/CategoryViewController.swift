@@ -78,25 +78,21 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     private func updateContent() {
         switch contentStatus {
         case .failed(.noInternet):
-            print ("no internet")
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = false
             self.categoryTableView.isHidden = true
             self.failedSearchView.isHidden = true
         case .failed(.noSearchingResult):
-            print("no search result")
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
             self.categoryTableView.isHidden = true
             self.failedSearchView.isHidden = false
         case .loaded:
-            print ("loaded")
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
             self.categoryTableView.isHidden = false
             self.failedSearchView.isHidden = true
         case .loading:
-            print ("loading")
             self.loadingCategoryView.isHidden = false
             self.failedCategoryView.isHidden = true
             self.categoryTableView.isHidden = true
