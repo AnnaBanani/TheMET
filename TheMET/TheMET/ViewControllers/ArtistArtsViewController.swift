@@ -26,8 +26,15 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private var loadingArtIds: [ArtID] = []
     
+    private var artistArtsList: [ArtCellData] = []
+    
+    private var isSearchFailed: Bool = false
+    
+    private let departmentIDs: [Int] = [11, 15, 21]
+    
     private let loadingCategoryView = LoadingPlaceholderView.construstView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = FailedPlaceholderView.constructView(configuration: .categoryFailed)
+    private let failedSearchView = FailedPlaceholderView.constructView(configuration: .searchArtsFailed)
     
     private let artistsTableView: UITableView = UITableView(frame: .zero, style: .plain)
     
@@ -55,6 +62,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         self.add(subView: self.loadingCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.failedCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.artistsTableView, topAnchorSubView: self.searchBar)
+        self.add(subView: self.failedSearchView, topAnchorSubView: self.searchBar)
         self.artistsTableView.separatorStyle = .none
         self.artistsTableView.estimatedRowHeight = 10
         self.artistsTableView.rowHeight = UITableView.automaticDimension
@@ -77,16 +85,25 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         switch contentStatus {
         case .failed:
             self.loadingCategoryView.isHidden = true
-            self.failedCategoryView.isHidden = false
             self.artistsTableView.isHidden = true
+            self.failedSearchView.isHidden = true
+            guard self.isSearchFailed else {
+                self.failedCategoryView.isHidden = false
+                self.failedSearchView.isHidden = true
+                return
+            }
+            self.failedCategoryView.isHidden = true
+            self.failedSearchView.isHidden = false
         case .loaded:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
             self.artistsTableView.isHidden = false
+            self.failedSearchView.isHidden = true
         case .loading:
             self.loadingCategoryView.isHidden = false
             self.failedCategoryView.isHidden = true
             self.artistsTableView.isHidden = true
+            self.failedSearchView.isHidden = true
         }
         self.artistsTableView.reloadData()
     }
@@ -115,6 +132,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func loadArtCellDataList() {
         guard let artistName = self.artistName else {
+            self.isSearchFailed = false
             self.contentStatus = .failed
             return
         }
@@ -136,6 +154,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func loadObjects(artistName: String) {
         guard let artistName = self.artistName else {
+            self.isSearchFailed = false
             self.contentStatus = .failed
             return
         }
@@ -147,13 +166,12 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
             guard let self = self else { return }
             switch searchResponseResult {
             case . failure:
+                self.isSearchFailed = false
                 self.contentStatus = .failed
             case .success(let searchResponse):
                 let artCellDataList = self.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
-                let filteredArtCellDataList = self.filterArtCellDataList(artCellDataList: artCellDataList)
-                
-                //        отфильтровать по имени
-                self.contentStatus = .loaded(filteredArtCellDataList)
+                self.artistArtsList = artCellDataList
+                self.contentStatus = .loaded(artCellDataList)
             }
         }
     }
@@ -165,13 +183,17 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         ]
         self.metAPI.search(parameters: parameters) { [weak self] searchResponseResult in
             guard let self = self else { return }
-            guard searchTextBeforeLoading == self.searchBar.searchTextField.text else { return }
+            guard searchTextBeforeLoading == self.searchBar.searchTextField.text else {
+                return
+            }
             switch searchResponseResult {
             case . failure:
+                self.isSearchFailed = true
                 self.contentStatus = .failed
             case .success(let searchResponse):
-                let artCellDataList = self.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
-                self.contentStatus = .loaded(artCellDataList)
+                let filteredArtCellDataList = self.filterArtCellDataList(objectIDs: searchResponse.objectIDs)
+                print ("search text \(searchTextBeforeLoading) search responce success \(filteredArtCellDataList.count)")
+                self.contentStatus = .loaded(filteredArtCellDataList)
             }
         }
     }
@@ -185,9 +207,14 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         return filteredArtCellDataList
     }
     
-    private func filterArtCellDataList(artCellDataList: [ArtCellData]) -> [ArtCellData] {
+    private func filterArtCellDataList(objectIDs: [ArtID]) -> [ArtCellData] {
         var filteredArtCellDataList: [ArtCellData] = []
-        //        отфильтровать по имени
+        for artID in objectIDs {
+            if self.artistArtsList.contains(where: { $0.artID == artID }) {
+                let filteredArtCellData = ArtCellData(artID: artID, artData: .placeholder)
+                filteredArtCellDataList.append(filteredArtCellData)
+            }
+        }
         return filteredArtCellDataList
     }
     

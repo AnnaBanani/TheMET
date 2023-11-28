@@ -51,5 +51,6 @@ struct FailedPlaceholderConfiguration {
     static let featuredFailed: FailedPlaceholderConfiguration = FailedPlaceholderConfiguration(text: NSLocalizedString("artwork.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
     static let catalogFailed: FailedPlaceholderConfiguration = FailedPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
     static let categoryFailed: FailedPlaceholderConfiguration = FailedPlaceholderConfiguration(text: NSLocalizedString("catalog.loading_failed", comment: ""), image: UIImage(named: "No Connection"), buttonTitle: NSLocalizedString("artwork.load_again_cta", comment: ""))
+    static let searchArtsFailed: FailedPlaceholderConfiguration = FailedPlaceholderConfiguration(text: NSLocalizedString("arts_search.loading_failed", comment: ""), image: UIImage(named: "Not Loaded Image"), buttonTitle: nil)
     
 }
