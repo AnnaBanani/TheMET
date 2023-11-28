@@ -38,7 +38,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private let artistsTableView: UITableView = UITableView(frame: .zero, style: .plain)
     
-    var contentStatus: LoadingStatus<[ArtCellData]> = .loading {
+    var contentStatus: LoadingStatus<[ArtCellData], FailedData> = .loading {
         didSet {
             self.updateContent()
         }
@@ -83,16 +83,15 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func updateContent() {
         switch contentStatus {
-        case .failed:
+        case .failed(.noInternet):
             self.loadingCategoryView.isHidden = true
+            self.failedCategoryView.isHidden = false
             self.artistsTableView.isHidden = true
             self.failedSearchView.isHidden = true
-            guard self.isSearchFailed else {
-                self.failedCategoryView.isHidden = false
-                self.failedSearchView.isHidden = true
-                return
-            }
+        case .failed(.noSearchingResult):
+            self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
+            self.artistsTableView.isHidden = true
             self.failedSearchView.isHidden = false
         case .loaded:
             self.loadingCategoryView.isHidden = true
@@ -132,8 +131,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func loadArtCellDataList() {
         guard let artistName = self.artistName else {
-            self.isSearchFailed = false
-            self.contentStatus = .failed
+            self.contentStatus = .failed(.noInternet)
             return
         }
         let searchTextBeforeWaiting = self.searchBar.searchTextField.text
@@ -154,8 +152,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func loadObjects(artistName: String) {
         guard let artistName = self.artistName else {
-            self.isSearchFailed = false
-            self.contentStatus = .failed
+            self.contentStatus = .failed(.noInternet)
             return
         }
         let parameters:[SearchParameter] = [
@@ -166,8 +163,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
             guard let self = self else { return }
             switch searchResponseResult {
             case . failure:
-                self.isSearchFailed = false
-                self.contentStatus = .failed
+                self.contentStatus = .failed(.noInternet)
             case .success(let searchResponse):
                 let artCellDataList = self.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
                 self.artistArtsList = artCellDataList
@@ -188,8 +184,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             switch searchResponseResult {
             case . failure:
-                self.isSearchFailed = true
-                self.contentStatus = .failed
+                self.contentStatus = .failed(.noSearchingResult)
             case .success(let searchResponse):
                 let filteredArtCellDataList = self.filterArtCellDataList(objectIDs: searchResponse.objectIDs)
                 print ("search text \(searchTextBeforeLoading) search responce success \(filteredArtCellDataList.count)")
@@ -242,14 +237,14 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.imageState = .loading
         cell.tag = art.objectID
         guard let imageURL =  art.primaryImage else {
-            cell.imageState = .failed
+            cell.imageState = .failed(.noInternet)
             return
         }
         self.imageLoader.loadImage(urlString: imageURL) { [weak cell] image in
             guard let cell = cell,
                   cell.tag == art.objectID else { return }
             guard let image = image else {
-                cell.imageState = .failed
+                cell.imageState = .failed(.noInternet)
                 return
             }
             cell.imageState = .loaded(image)

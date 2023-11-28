@@ -21,7 +21,7 @@ class DepartmentsSectionViewController: UIViewController {
     
     private var loadedDepartments: [Department] = []
     
-    var contentStatus:LoadingStatus<[CatalogCellData]> = .loading {
+    var contentStatus:LoadingStatus<[CatalogCellData], FailedData> = .loading {
         didSet {
             self.updateContent()
         }
@@ -121,7 +121,7 @@ class DepartmentsSectionViewController: UIViewController {
         self.metAPI.departments { [weak self] departmentResponseResult in
             switch departmentResponseResult {
             case .failure:
-                self?.contentStatus = .failed
+                self?.contentStatus = .failed(.noInternet)
             case .success(let departmentResponse):
                 var catalogCellDataList: [CatalogCellData] = []
                 for department in departmentResponse.departments {

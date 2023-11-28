@@ -89,7 +89,7 @@ class FeaturedArtViewController: UIViewController {
             NSLayoutConstraint.activate(constraints)
     }
 
-    private func displayFeaturedArt(_ featuredArt: LoadingStatus<Art>) {
+    private func displayFeaturedArt(_ featuredArt: LoadingStatus<Art, FailedData>) {
         switch featuredArt {
         case .failed:
             self.failedFeaturedArtView.isHidden = false
@@ -116,12 +116,12 @@ class FeaturedArtViewController: UIViewController {
                         if let image = image {
                             self.artView.imageState = .loaded(image)
                         } else {
-                            self.artView.imageState = .failed
+                            self.artView.imageState = .failed(.noInternet)
                         }
                     }
                 }
             } else {
-                self.artView.imageState = .failed
+                self.artView.imageState = .failed(.noInternet)
             }
             if self.favoriteService.favoriteArts.contains(where: { favoriteArt in
                 return favoriteArt.objectID == art.objectID

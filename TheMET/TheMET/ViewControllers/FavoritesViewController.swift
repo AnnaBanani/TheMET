@@ -22,6 +22,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     private var favoriteServiseSubscriber: AnyCancellable?
     
     private let imageLoader = ImageLoader()
+
+    private let failedSearchView = FailedPlaceholderView.constructView(configuration: .searchArtsFailed)
     
     var tableView: UITableView = UITableView(frame: .zero, style: .plain)
     
@@ -57,6 +59,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             self.tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
+        self.add(subView: self.failedSearchView, topAnchorSubView: self.searchBar)
+        self.failedSearchView.isHidden = true
         self.tableView.separatorStyle = .none
         self.tableView.estimatedRowHeight = 10
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -65,23 +69,36 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.delegate = self
         self.searchBar.delegate = self
     }
+   
+    
+    private func add(subView: UIView, topAnchorSubView: UIView) {
+        subView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(subView)
+        subView.backgroundColor = .clear
+        let constraints: [NSLayoutConstraint] = [
+            subView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            subView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            subView.topAnchor.constraint(equalTo: topAnchorSubView.bottomAnchor, constant: 0),
+            subView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
     
     private func favoriteServiceDidChange(favoriteArts: [Art]) {
         self.displayArts = self.artFilter.filter(arts: favoriteArts, searchText: self.searchBar.searchTextField.text)
-        self.tableView.reloadData()
     }
     
     private func loadCellImage(cell: ArtViewCell, art: Art) {
         cell.imageState = .loading
         cell.tag = art.objectID
         guard let imageURL =  art.primaryImage else {
-            cell.imageState = .failed
+            cell.imageState = .failed(.noInternet)
             return
         }
         self.imageLoader.loadImage(urlString: imageURL) { image in
             guard cell.tag == art.objectID else { return }
             guard let image = image else {
-                cell.imageState = .failed
+                cell.imageState = .failed(.noInternet)
                 return
             }
             cell.imageState = .loaded(image)
@@ -143,12 +160,18 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
 //    UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.failedSearchView.isHidden = true
         guard !searchText.isEmpty else {
             self.displayArts = favoriteService.favoriteArts
             self.tableView.reloadData()
             return
         }
         self.displayArts = self.artFilter.filter(arts: self.favoriteService.favoriteArts, searchText: searchText)
+        guard !self.displayArts.isEmpty else {
+            self.failedSearchView.isHidden = false
+            self.tableView.reloadData()
+            return
+        }
         self.tableView.reloadData()
     }
     

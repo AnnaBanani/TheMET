@@ -7,8 +7,14 @@
 
 import Foundation
 
-enum LoadingStatus<T> {
-    case loaded(T)
+enum LoadingStatus<LoadedData, FailedData> {
+    case loaded(LoadedData)
     case loading
-    case failed
+    case failed(FailedData)
+}
+
+
+enum FailedData {
+    case noInternet
+    case noSearchingResult
 }

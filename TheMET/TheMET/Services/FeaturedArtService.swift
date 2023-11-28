@@ -36,7 +36,7 @@ class FeaturedArtService {
     
     //    MARK: - API
     
-    @Published private(set) var featuredArt: LoadingStatus<Art> = .loading
+    @Published private(set) var featuredArt: LoadingStatus<Art, FailedData> = .loading
     
     @objc
     private func appDidBecomeActive() {
@@ -120,7 +120,7 @@ class FeaturedArtService {
         self.metAPI.objects(departmentIds: [11, 15, 21]) { [weak self] objectResponseResult in
             switch objectResponseResult {
             case .failure:
-                self?.featuredArt = .failed
+                self?.featuredArt = .failed(.noInternet)
                 self?.isFeaturedArtLoading = false
                 return
             case .success(let objectResponse):
@@ -134,14 +134,14 @@ class FeaturedArtService {
     private func updateFeaturedArt(objectIDs: [ArtID]) {
         var objectIDs = objectIDs
         guard let randomId = objectIDs.randomElement() else {
-            self.featuredArt = .failed
+            self.featuredArt = .failed(.noInternet)
             self.isFeaturedArtLoading = false
             return
         }
         self.metAPI.object(id: randomId) { [weak self] objectResult in
             switch objectResult {
             case .failure:
-                self?.featuredArt = .failed
+                self?.featuredArt = .failed(.noInternet)
                 self?.isFeaturedArtLoading = false
             case .success(let object):
                 guard let imageString = object.primaryImage,

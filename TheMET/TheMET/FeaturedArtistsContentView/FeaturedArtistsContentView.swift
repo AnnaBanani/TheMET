@@ -81,11 +81,11 @@ class FeaturedArtistsContentView: UIView, UICollectionViewDelegate, UICollection
                     if let image = image {
                         cell.backgroundState = .loaded(image)
                     } else {
-                        cell.backgroundState = .failed
+                        cell.backgroundState = .failed(.noInternet)
                     }
                 }
             } else {
-                cell.backgroundState = .failed
+                cell.backgroundState = .failed(.noInternet)
             }
         }
         return cell

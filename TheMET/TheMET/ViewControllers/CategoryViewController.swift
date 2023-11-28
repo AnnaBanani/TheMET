@@ -28,10 +28,11 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private let loadingCategoryView = LoadingPlaceholderView.construstView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = FailedPlaceholderView.constructView(configuration: .categoryFailed)
+    private let failedSearchView = FailedPlaceholderView.constructView(configuration: .searchArtsFailed)
     
     private let categoryTableView: UITableView = UITableView(frame: .zero, style: .plain)
     
-    var contentStatus: LoadingStatus<[ArtCellData]> = .loading {
+    var contentStatus: LoadingStatus<[ArtCellData], FailedData> = .loading {
         didSet {
             self.updateContent()
         }
@@ -55,6 +56,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         self.add(subView: self.loadingCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.failedCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.categoryTableView, topAnchorSubView: self.searchBar)
+        self.add(subView: self.failedSearchView, topAnchorSubView: self.searchBar)
         self.categoryTableView.separatorStyle = .none
         self.categoryTableView.estimatedRowHeight = 10
         self.categoryTableView.rowHeight = UITableView.automaticDimension
@@ -75,18 +77,30 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func updateContent() {
         switch contentStatus {
-        case .failed:
+        case .failed(.noInternet):
+            print ("no internet")
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = false
             self.categoryTableView.isHidden = true
+            self.failedSearchView.isHidden = true
+        case .failed(.noSearchingResult):
+            print("no search result")
+            self.loadingCategoryView.isHidden = true
+            self.failedCategoryView.isHidden = true
+            self.categoryTableView.isHidden = true
+            self.failedSearchView.isHidden = false
         case .loaded:
+            print ("loaded")
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
             self.categoryTableView.isHidden = false
+            self.failedSearchView.isHidden = true
         case .loading:
+            print ("loading")
             self.loadingCategoryView.isHidden = false
             self.failedCategoryView.isHidden = true
             self.categoryTableView.isHidden = true
+            self.failedSearchView.isHidden = true
         }
         self.categoryTableView.reloadData()
     }
@@ -115,7 +129,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func loadArtCellDataList() {
         guard let id = self.departmentId else {
-            self.contentStatus = .failed
+            self.contentStatus = .failed(.noInternet)
             return
         }
         let searchTextBeforeWaiting = self.searchBar.searchTextField.text
@@ -151,14 +165,14 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         cell.imageState = .loading
         cell.tag = art.objectID
         guard let imageURL =  art.primaryImage else {
-            cell.imageState = .failed
+            cell.imageState = .failed(.noInternet)
             return
         }
         self.imageLoader.loadImage(urlString: imageURL) { [weak cell] image in
             guard let cell = cell,
                   cell.tag == art.objectID else { return }
             guard let image = image else {
-                cell.imageState = .failed
+                cell.imageState = .failed(.noInternet)
                 return
             }
             cell.imageState = .loaded(image)
@@ -194,7 +208,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             }
             switch objectsResponseResult {
             case .failure:
-                self.contentStatus = .failed
+                self.contentStatus = .failed(.noInternet)
             case.success(let objectsResponse):
                 self.handleLoadingResponse(objectIDs: objectsResponse.objectIDs)
             }
@@ -212,7 +226,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             }
             switch searchResponseResult {
             case . failure:
-                self?.contentStatus = .failed
+                self?.contentStatus = .failed(.noSearchingResult)
             case .success(let searchResponse):
                 self?.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
             }

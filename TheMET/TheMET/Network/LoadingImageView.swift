@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class LoadingImageView: UIView {
-    typealias State = LoadingStatus<UIImage>
+    typealias State = LoadingStatus<UIImage, FailedData>
         
     var state: State = .loading {
         didSet {
@@ -63,7 +63,7 @@ class LoadingImageView: UIView {
         ])
     }
     
-    private func resetStateView(state: LoadingStatus<UIImage>) {
+    private func resetStateView(state: LoadingStatus<UIImage, FailedData>) {
         switch state {
         case .loading:
             self.imageView.image = nil
