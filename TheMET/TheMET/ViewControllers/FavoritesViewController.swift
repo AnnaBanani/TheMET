@@ -92,13 +92,13 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.imageState = .loading
         cell.tag = art.objectID
         guard let imageURL =  art.primaryImage else {
-            cell.imageState = .failed(.noInternet)
+            cell.imageState = .failed(ArtImageLoadingError.invalidImageURL)
             return
         }
         self.imageLoader.loadImage(urlString: imageURL) { image in
             guard cell.tag == art.objectID else { return }
             guard let image = image else {
-                cell.imageState = .failed(.noInternet)
+                cell.imageState = .failed(ArtImageLoadingError.imageCannotBeLoadedFromURL)
                 return
             }
             cell.imageState = .loaded(image)

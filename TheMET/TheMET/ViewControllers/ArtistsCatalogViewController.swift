@@ -26,7 +26,7 @@ class ArtistsCatalogViewController: UIViewController {
     
     private var loadingArtistNames: [String] = []
     
-    var contentStatus:LoadingStatus<[FeaturedArtistsCellData], FailedData> = .loading {
+    var contentStatus:LoadingStatus<[FeaturedArtistsCellData]> = .loading {
         didSet {
             self.updateContent()
         }

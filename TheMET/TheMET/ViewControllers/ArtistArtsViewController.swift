@@ -38,7 +38,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private let artistsTableView: UITableView = UITableView(frame: .zero, style: .plain)
     
-    var contentStatus: LoadingStatus<[ArtCellData], FailedData> = .loading {
+    var contentStatus: LoadingStatus<[ArtCellData]> = .loading {
         didSet {
             self.updateContent()
         }
@@ -83,16 +83,16 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func updateContent() {
         switch contentStatus {
-        case .failed(.noInternet):
-            self.loadingCategoryView.isHidden = true
-            self.failedCategoryView.isHidden = false
-            self.artistsTableView.isHidden = true
-            self.failedSearchView.isHidden = true
-        case .failed(.noSearchingResult):
+        case .failed(ArtsLoadingError.noSearchResult):
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
             self.artistsTableView.isHidden = true
             self.failedSearchView.isHidden = false
+        case .failed:
+            self.loadingCategoryView.isHidden = true
+            self.failedCategoryView.isHidden = false
+            self.artistsTableView.isHidden = true
+            self.failedSearchView.isHidden = true
         case .loaded:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
@@ -131,7 +131,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func loadArtCellDataList() {
         guard let artistName = self.artistName else {
-            self.contentStatus = .failed(.noInternet)
+            self.contentStatus = .failed(ArtistsArtsLoadingError.artistNameNotFound)
             return
         }
         let searchTextBeforeWaiting = self.searchBar.searchTextField.text
@@ -152,7 +152,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func loadObjects(artistName: String) {
         guard let artistName = self.artistName else {
-            self.contentStatus = .failed(.noInternet)
+            self.contentStatus = .failed(ArtistsArtsLoadingError.artistNameNotFound)
             return
         }
         let parameters:[SearchParameter] = [
@@ -162,8 +162,8 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         self.metAPI.search(parameters: parameters) { [weak self] searchResponseResult in
             guard let self = self else { return }
             switch searchResponseResult {
-            case . failure:
-                self.contentStatus = .failed(.noInternet)
+            case . failure(let error):
+                self.contentStatus = .failed(error)
             case .success(let searchResponse):
                 let artCellDataList = self.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
                 self.artistArtsList = artCellDataList
@@ -184,7 +184,7 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             switch searchResponseResult {
             case . failure:
-                self.contentStatus = .failed(.noSearchingResult)
+                self.contentStatus = .failed(ArtsLoadingError.noSearchResult)
             case .success(let searchResponse):
                 let filteredArtCellDataList = self.filterArtCellDataList(objectIDs: searchResponse.objectIDs)
                 print ("search text \(searchTextBeforeLoading) search responce success \(filteredArtCellDataList.count)")
@@ -237,14 +237,14 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.imageState = .loading
         cell.tag = art.objectID
         guard let imageURL =  art.primaryImage else {
-            cell.imageState = .failed(.noInternet)
+            cell.imageState = .failed(ArtImageLoadingError.invalidImageURL)
             return
         }
         self.imageLoader.loadImage(urlString: imageURL) { [weak cell] image in
             guard let cell = cell,
                   cell.tag == art.objectID else { return }
             guard let image = image else {
-                cell.imageState = .failed(.noInternet)
+                cell.imageState = .failed(ArtImageLoadingError.imageCannotBeLoadedFromURL)
                 return
             }
             cell.imageState = .loaded(image)
@@ -353,4 +353,8 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         self.searchBar.endEditing(true)
     }
     
+}
+
+enum ArtistsArtsLoadingError: Error {
+    case artistNameNotFound
 }

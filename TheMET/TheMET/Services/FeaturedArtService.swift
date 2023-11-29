@@ -36,7 +36,7 @@ class FeaturedArtService {
     
     //    MARK: - API
     
-    @Published private(set) var featuredArt: LoadingStatus<Art, FailedData> = .loading
+    @Published private(set) var featuredArt: LoadingStatus<Art> = .loading
     
     @objc
     private func appDidBecomeActive() {
@@ -119,8 +119,8 @@ class FeaturedArtService {
         self.featuredArt = .loading
         self.metAPI.objects(departmentIds: [11, 15, 21]) { [weak self] objectResponseResult in
             switch objectResponseResult {
-            case .failure:
-                self?.featuredArt = .failed(.noInternet)
+            case .failure(let error):
+                self?.featuredArt = .failed(error)
                 self?.isFeaturedArtLoading = false
                 return
             case .success(let objectResponse):
@@ -134,14 +134,14 @@ class FeaturedArtService {
     private func updateFeaturedArt(objectIDs: [ArtID]) {
         var objectIDs = objectIDs
         guard let randomId = objectIDs.randomElement() else {
-            self.featuredArt = .failed(.noInternet)
+            self.featuredArt = .failed(FeaturedArtServiseError.objectIdNotFound)
             self.isFeaturedArtLoading = false
             return
         }
         self.metAPI.object(id: randomId) { [weak self] objectResult in
             switch objectResult {
             case .failure:
-                self?.featuredArt = .failed(.noInternet)
+                self?.featuredArt = .failed(FeaturedArtServiseError.noObjectsResponce)
                 self?.isFeaturedArtLoading = false
             case .success(let object):
                 guard let imageString = object.primaryImage,
@@ -158,4 +158,9 @@ class FeaturedArtService {
             }
         }
     }
+}
+
+enum FeaturedArtServiseError: Error {
+    case objectIdNotFound
+    case noObjectsResponce
 }
