@@ -34,7 +34,6 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private let loadingCategoryView = LoadingPlaceholderView.construstView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = FailedPlaceholderView.constructView(configuration: .categoryFailed)
-    private let failedSearchView = FailedPlaceholderView.constructView(configuration: .searchArtsFailed)
     
     private let artistsTableView: UITableView = UITableView(frame: .zero, style: .plain)
     
@@ -62,7 +61,6 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         self.add(subView: self.loadingCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.failedCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.artistsTableView, topAnchorSubView: self.searchBar)
-        self.add(subView: self.failedSearchView, topAnchorSubView: self.searchBar)
         self.artistsTableView.separatorStyle = .none
         self.artistsTableView.estimatedRowHeight = 10
         self.artistsTableView.rowHeight = UITableView.automaticDimension
@@ -85,24 +83,22 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
         switch contentStatus {
         case .failed(ArtsLoadingError.noSearchResult):
             self.loadingCategoryView.isHidden = true
-            self.failedCategoryView.isHidden = true
+            self.failedCategoryView.isHidden = false
             self.artistsTableView.isHidden = true
-            self.failedSearchView.isHidden = false
+            self.failedCategoryView.set(configuration: .searchArtsFailed)
         case .failed:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = false
             self.artistsTableView.isHidden = true
-            self.failedSearchView.isHidden = true
+            self.failedCategoryView.set(configuration: .categoryFailed)
         case .loaded:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
             self.artistsTableView.isHidden = false
-            self.failedSearchView.isHidden = true
         case .loading:
             self.loadingCategoryView.isHidden = false
             self.failedCategoryView.isHidden = true
             self.artistsTableView.isHidden = true
-            self.failedSearchView.isHidden = true
         }
         self.artistsTableView.reloadData()
     }
@@ -151,10 +147,6 @@ class ArtistArtsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     private func loadObjects(artistName: String) {
-        guard let artistName = self.artistName else {
-            self.contentStatus = .failed(ArtistsArtsLoadingError.artistNameNotFound)
-            return
-        }
         let parameters:[SearchParameter] = [
             .artistOrCulture(true),
             .q(artistName)

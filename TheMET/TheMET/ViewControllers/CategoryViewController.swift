@@ -28,7 +28,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private let loadingCategoryView = LoadingPlaceholderView.construstView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = FailedPlaceholderView.constructView(configuration: .categoryFailed)
-    private let failedSearchView = FailedPlaceholderView.constructView(configuration: .searchArtsFailed)
     
     private let categoryTableView: UITableView = UITableView(frame: .zero, style: .plain)
     
@@ -56,7 +55,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         self.add(subView: self.loadingCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.failedCategoryView, topAnchorSubView: self.searchBar)
         self.add(subView: self.categoryTableView, topAnchorSubView: self.searchBar)
-        self.add(subView: self.failedSearchView, topAnchorSubView: self.searchBar)
         self.categoryTableView.separatorStyle = .none
         self.categoryTableView.estimatedRowHeight = 10
         self.categoryTableView.rowHeight = UITableView.automaticDimension
@@ -79,24 +77,22 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         switch contentStatus {
         case .failed(ArtsLoadingError.noSearchResult):
             self.loadingCategoryView.isHidden = true
-            self.failedCategoryView.isHidden = true
+            self.failedCategoryView.isHidden = false
             self.categoryTableView.isHidden = true
-            self.failedSearchView.isHidden = false
+            self.failedCategoryView.set(configuration: .searchArtsFailed)
         case .failed:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = false
             self.categoryTableView.isHidden = true
-            self.failedSearchView.isHidden = true
+            self.failedCategoryView.set(configuration: .categoryFailed)
         case .loaded:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
             self.categoryTableView.isHidden = false
-            self.failedSearchView.isHidden = true
         case .loading:
             self.loadingCategoryView.isHidden = false
             self.failedCategoryView.isHidden = true
             self.categoryTableView.isHidden = true
-            self.failedSearchView.isHidden = true
         }
         self.categoryTableView.reloadData()
     }
