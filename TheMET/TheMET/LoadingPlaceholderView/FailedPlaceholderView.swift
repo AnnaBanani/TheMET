@@ -21,11 +21,11 @@ class FailedPlaceholderView: UIView {
     static func constructView(configuration: FailedPlaceholderConfiguration) -> FailedPlaceholderView {
         let nib = UINib(nibName: FailedPlaceholderView.xibFileName, bundle: nil)
         let view = nib.instantiate(withOwner: nil).first as! FailedPlaceholderView
-        view.setup(configuration: configuration)
+        view.set(configuration: configuration)
         return view
     }
     
-    private func setup(configuration: FailedPlaceholderConfiguration) {
+    func set(configuration: FailedPlaceholderConfiguration) {
         self.imageView.image = configuration.image
         self.textLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), fontSize: 18, title: configuration.text)
         if let buttonTitle = configuration.buttonTitle {

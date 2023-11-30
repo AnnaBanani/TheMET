@@ -24,7 +24,7 @@
 "about_app_screen_title" = "О приложении";
 "featured_artwork.loading" = "Пожалуйста, подождите, пока мы выбираем шедевр";
 "artwork.loading_failed" = "Произведение не может быть загружено  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
-"arts_search.loading_failed" = "Ничего не найдено \n \nПопробуйте снова";
+"arts_search.loading_failed" = "Ничего не найдено";
 "artwork.load_again_cta" = "Попробуйте снова";
 "catalog_section.loading_failed" = "Что-то пошло не так";
 "featured_artwork.load_next_cta" = "Сгенерировать другое";

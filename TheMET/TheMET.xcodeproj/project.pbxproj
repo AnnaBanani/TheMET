@@ -72,6 +72,7 @@
 		F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */; };
 		F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */; };
 		F3F5E72F2A5D8AE10014CBF6 /* ArtViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */; };
+		F3F6A4F02B1798550004B59F /* LoadingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6A4EF2B1798550004B59F /* LoadingError.swift */; };
 		F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD733D2A700C7500B163EA /* LoadingStatus.swift */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +169,7 @@
 		F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtService.swift; sourceTree = "<group>"; };
 		F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtViewCell.swift; sourceTree = "<group>"; };
+		F3F6A4EF2B1798550004B59F /* LoadingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingError.swift; sourceTree = "<group>"; };
 		F3FD733D2A700C7500B163EA /* LoadingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -428,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				F3FD733D2A700C7500B163EA /* LoadingStatus.swift */,
+				F3F6A4EF2B1798550004B59F /* LoadingError.swift */,
 			);
 			path = "Generic Types";
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				F3528F962A0E7FDA000D9CEB /* CatalogCell.swift in Sources */,
 				F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */,
 				F3BC62962A696C22003A39D9 /* String+artDescriptionText.swift in Sources */,
+				F3F6A4F02B1798550004B59F /* LoadingError.swift in Sources */,
 				F36BD6CE2A7417870062AEFC /* ArtCellData.swift in Sources */,
 				F3A6C0002AD0720200249847 /* Art.swift in Sources */,
 				F3528F832A0AB99A000D9CEB /* UINavigationItem+apply.swift in Sources */,

@@ -75,10 +75,16 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func updateContent() {
         switch contentStatus {
+        case .failed(ArtsLoadingError.noSearchResult):
+            self.loadingCategoryView.isHidden = true
+            self.failedCategoryView.isHidden = false
+            self.categoryTableView.isHidden = true
+            self.failedCategoryView.set(configuration: .searchArtsFailed)
         case .failed:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = false
             self.categoryTableView.isHidden = true
+            self.failedCategoryView.set(configuration: .categoryFailed)
         case .loaded:
             self.loadingCategoryView.isHidden = true
             self.failedCategoryView.isHidden = true
@@ -115,7 +121,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func loadArtCellDataList() {
         guard let id = self.departmentId else {
-            self.contentStatus = .failed
+            self.contentStatus = .failed(CategoryViewControllerError.departmentIdNotFound)
             return
         }
         let searchTextBeforeWaiting = self.searchBar.searchTextField.text
@@ -151,14 +157,14 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         cell.imageState = .loading
         cell.tag = art.objectID
         guard let imageURL =  art.primaryImage else {
-            cell.imageState = .failed
+            cell.imageState = .failed(ArtImageLoadingError.invalidImageURL)
             return
         }
         self.imageLoader.loadImage(urlString: imageURL) { [weak cell] image in
             guard let cell = cell,
                   cell.tag == art.objectID else { return }
             guard let image = image else {
-                cell.imageState = .failed
+                cell.imageState = .failed(ArtImageLoadingError.imageCannotBeLoadedFromURL)
                 return
             }
             cell.imageState = .loaded(image)
@@ -193,8 +199,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 return
             }
             switch objectsResponseResult {
-            case .failure:
-                self.contentStatus = .failed
+            case .failure(let error):
+                self.contentStatus = .failed(error)
             case.success(let objectsResponse):
                 self.handleLoadingResponse(objectIDs: objectsResponse.objectIDs)
             }
@@ -212,7 +218,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             }
             switch searchResponseResult {
             case . failure:
-                self?.contentStatus = .failed
+                self?.contentStatus = .failed(ArtsLoadingError.noSearchResult)
             case .success(let searchResponse):
                 self?.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
             }
@@ -320,4 +326,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
 }
 
+
+enum CategoryViewControllerError: Error {
+    case departmentIdNotFound
+}
 
