@@ -28,7 +28,9 @@ class FeaturedArtistsContentView: UIView, UICollectionViewDelegate, UICollection
     
     var flowLayout: UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        let width = (self.bounds.width - 30)/2
+        let scene = UIApplication.shared.connectedScenes.first as! UIWindowScene
+        let screen = scene.screen
+        let width =  (screen.bounds.width - 30)/2
         layout.itemSize = CGSize(width: width, height: 180)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         layout.scrollDirection = .vertical
