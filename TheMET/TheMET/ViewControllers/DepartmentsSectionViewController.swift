@@ -17,7 +17,7 @@ class DepartmentsSectionViewController: UIViewController {
     
     private let loadingCatalogView = CatalogSectionLoadingView.constractView(configuration: .catalogSectionLoading)
     private let failedCatalogView = CatalogSectionTapToReloadView.constractView(configuration: .catalogSectionTapToReload)
-    private let loadedCatalogView = CatalogContentView.constructView()
+    private let loadedCatalogView = DepartmentsSectionContentView.constructView()
     
     private var loadedDepartments: [Department] = []
     

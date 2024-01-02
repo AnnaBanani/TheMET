@@ -1,5 +1,5 @@
 //
-//  CatalogContentView.swift
+//  DepartmentsSectionContentView.swift
 //  TheMET
 //
 //  Created by Анна Ситникова on 10/05/2023.
@@ -8,18 +8,20 @@
 import Foundation
 import UIKit
 
-class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
+class DepartmentsSectionContentView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var content: [CatalogCellData] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
+
     private let imageLoader = ImageLoader()
     
     var onCatalogCellTap: (_ departmentId: Int) -> Void = { _ in }
     
-    static let xibFileName = "CatalogContentView"
+    
+    static let xibFileName = "DepartmentsSectionContentView"
     static let cellIdentifier = "CatalogCell"
     
     var onCatalogCellWillDisplay: (_ departmentId: Int) -> Void = { _ in }
@@ -35,14 +37,14 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
         return layout
     }
     
-    static func constructView() -> CatalogContentView {
-        let nib = UINib(nibName: CatalogContentView.xibFileName, bundle: nil)
-        return nib.instantiate(withOwner: nil).first as! CatalogContentView
+    static func constructView() -> DepartmentsSectionContentView {
+        let nib = UINib(nibName: DepartmentsSectionContentView.xibFileName, bundle: nil)
+        return nib.instantiate(withOwner: nil).first as! DepartmentsSectionContentView
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.collectionView.register(CatalogCell.self, forCellWithReuseIdentifier: CatalogContentView.cellIdentifier)
+        self.collectionView.register(CatalogCell.self, forCellWithReuseIdentifier: DepartmentsSectionContentView.cellIdentifier)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = self.flowLayout
@@ -56,7 +58,7 @@ class CatalogContentView: UIView, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatalogContentView.cellIdentifier, for: indexPath) as? CatalogCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DepartmentsSectionContentView.cellIdentifier, for: indexPath) as? CatalogCell {
             let cellContent = self.content[indexPath.row]
             cell.tag = cellContent.departmentId
             switch cellContent.departmentData {

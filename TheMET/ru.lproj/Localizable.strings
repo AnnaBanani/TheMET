@@ -18,6 +18,7 @@
 "random_artwork_screen_title" = "Произведение дня";
 "catalog_screen_title" = "Каталог";
 "catalog_screen_departments_section_title" = "Департамент";
+"catalog_screen_cultures_section_title" = "Культура";
 "catalog_screen_feaured_artists_section_title" = "Избранные художники";
 "catalog.loading_failed" = "Каталог не может быть загружен  \nУбедитесь, что вы подключены к Wi-Fi или сети мобильного интернета";
 "favories_screen_title" = "Избранное";
