@@ -10,7 +10,7 @@ import UIKit
 
 class DepartmentsSectionContentView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var content: [CatalogCellData] = [] {
+    var content: [CatalogSectionCellData<Int>] = [] {
         didSet {
             self.collectionView.reloadData()
         }
@@ -60,8 +60,8 @@ class DepartmentsSectionContentView: UIView, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DepartmentsSectionContentView.cellIdentifier, for: indexPath) as? CatalogCell {
             let cellContent = self.content[indexPath.row]
-            cell.tag = cellContent.departmentId
-            switch cellContent.departmentData {
+            cell.tag = cellContent.identificator
+            switch cellContent.data {
             case .placeholder:
                 cell.title = ""
                 cell.subtitle = ""
@@ -72,7 +72,7 @@ class DepartmentsSectionContentView: UIView, UICollectionViewDelegate, UICollect
                 cell.backgroundState = .loading
                 if let imageURL = imageURL {
                     self.imageLoader.loadImage(urlString: imageURL.absoluteString) { image in
-                        guard cell.tag == cellContent.departmentId else { return }
+                        guard cell.tag == cellContent.identificator else { return }
                         if let image = image {
                             cell.backgroundState = .loaded(image)
                         } else {
@@ -93,11 +93,11 @@ class DepartmentsSectionContentView: UIView, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.collectionView.deselectItem(at: indexPath, animated: true)
         let cellData = self.content[indexPath.row]
-        self.onCatalogCellTap(cellData.departmentId)
+        self.onCatalogCellTap(cellData.identificator)
     }
   
     func collectionView(_: UICollectionView, willDisplay: UICollectionViewCell, forItemAt: IndexPath) {
         let cellData = self.content[forItemAt.row]
-        self.onCatalogCellWillDisplay(cellData.departmentId)
+        self.onCatalogCellWillDisplay(cellData.identificator)
     }
 }

@@ -90,11 +90,11 @@ class CulturesSectionContentView: UIView, UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.collectionView.deselectItem(at: indexPath, animated: true)
         let cellData = self.culturesContent[indexPath.row]
-        self.onCultureCellTap(cellData.sectionIdentificator)
+        self.onCultureCellTap(cellData.identificator)
     }
   
     func collectionView(_: UICollectionView, willDisplay: UICollectionViewCell, forItemAt: IndexPath) {
         let cellData = self.culturesContent[forItemAt.row]
-        self.onCultureCellWillDisplay(cellData.sectionIdentificator)
+        self.onCultureCellWillDisplay(cellData.identificator)
     }
 }

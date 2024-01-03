@@ -8,10 +8,13 @@
 import Foundation
 import UIKit
 import MetAPI
+import Combine
 
 class CulturesSectionViewController: UIViewController {
     
     private let culturesService = CulturesService.standart
+    
+    private var cultureServiceSubscriber: AnyCancellable?
     
     private let metAPI = MetAPI()
     
@@ -33,6 +36,10 @@ class CulturesSectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.cultureServiceSubscriber = self.culturesService.$culturesList
+            .sink(receiveValue: { [weak self] newCulturesList in
+                self?.reloadCatalog(culturesList: newCulturesList)
+            })
         self.culturesLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(culturesLabel)
         self.culturesLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "pear"), fontSize: 16, title: NSLocalizedString("catalog_screen_cultures_section_title", comment: ""))
@@ -97,7 +104,7 @@ class CulturesSectionViewController: UIViewController {
         self.contentStatus = .loading
         var culturesCellDataList: [CatalogSectionCellData<String>] = []
         for culture in culturesList {
-            let cultureCellData: CatalogSectionCellData = CatalogSectionCellData(sectionIdentificator: culture, data: .placeholder)
+            let cultureCellData: CatalogSectionCellData = CatalogSectionCellData(identificator: culture, data: .placeholder)
             culturesCellDataList.append(cultureCellData)
         }
         self.loadedCultures = culturesCellDataList
@@ -116,19 +123,19 @@ class CulturesSectionViewController: UIViewController {
             return
         }
         guard let cultureCellData = cultureCellDataList.first(where: { cellData in
-            cellData.sectionIdentificator == culture
+            cellData.identificator == culture
         }),
               case .placeholder = cultureCellData.data,
               !self.loadingCulturesNames.contains(culture),
               let particularCulture = self.loadedCultures.first(where: { particularCulture in
-                  particularCulture.sectionIdentificator == culture
+                  particularCulture.identificator == culture
               })
         else { return }
-        self.loadingCulturesNames.append(particularCulture.sectionIdentificator)
+        self.loadingCulturesNames.append(particularCulture.identificator)
         self.loadCultureCellData(culture: culture, completion: { [weak self] cultureCellData in
             guard let self = self else { return }
             if case .loaded(var culturesCellDataList) = self.contentStatus,
-               let cultureCellDataIndex = culturesCellDataList.firstIndex(where: { $0.sectionIdentificator == cultureCellData.sectionIdentificator}) {
+               let cultureCellDataIndex = culturesCellDataList.firstIndex(where: { $0.identificator == cultureCellData.identificator}) {
                 culturesCellDataList[cultureCellDataIndex] = cultureCellData
                 self.contentStatus = .loaded(culturesCellDataList)
             }
@@ -154,12 +161,12 @@ class CulturesSectionViewController: UIViewController {
                     self.loadCultureCellData(culture: culture, attempt: attempt + 1, completion: completion)
                     return
                 }
-                let cultureCellData = CatalogSectionCellData(sectionIdentificator: culture, data: .data(imageURL: nil, title: culture, subTitle: nil))
+                let cultureCellData = CatalogSectionCellData(identificator: culture, data: .data(imageURL: nil, title: culture, subTitle: nil))
                 completion(cultureCellData)
             case .success(let objects):
                 let subtitle: String = self.cellSubtitle(objectsCount: objects.total)
                 self.loadCultureImageURL(objectsIDs: objects.objectIDs) { url in
-                    let cultureCellData = CatalogSectionCellData(sectionIdentificator: culture, data: .data(imageURL: url, title: culture, subTitle: subtitle))
+                    let cultureCellData = CatalogSectionCellData(identificator: culture, data: .data(imageURL: url, title: culture, subTitle: subtitle))
                     completion(cultureCellData)
                 }
             }

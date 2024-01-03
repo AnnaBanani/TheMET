@@ -10,11 +10,11 @@ import UIKit
 
 struct CatalogSectionCellData <T> {
     
-    var sectionIdentificator: T
+    var identificator: T
     
-    var data: SectionData
+    var data: CellData
     
-    enum SectionData {
+    enum CellData {
         case placeholder
         case data(imageURL: URL?, title: String, subTitle: String?)
     }
