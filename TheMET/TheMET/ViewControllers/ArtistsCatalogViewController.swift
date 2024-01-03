@@ -34,10 +34,6 @@ class ArtistsCatalogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.artistsServiceSubscriber = self.artistsService.$artistsList
-            .sink(receiveValue: { [weak self] newArtistsList in
-                self?.reloadCatalog(artistsList: newArtistsList)
-            })
         self.add(artistsCatalogSubview: self.failedArtitstCatalogView)
         self.add(artistsCatalogSubview: self.loadedArtistsCatalogView)
         self.add(artistsCatalogSubview: self.loadingArtistsCatalogView)
@@ -50,7 +46,10 @@ class ArtistsCatalogViewController: UIViewController {
         self.loadedArtistsCatalogView.onFeaturedArtistsCellWillDisplay = { [weak self] artistName in
             self?.loadParticularArtistCellDataIfNeeded(artistName: artistName)
         }
-        self.reloadCatalog(artistsList: self.artistsService.artistsList)
+        self.artistsServiceSubscriber = self.artistsService.$artistsList
+            .sink(receiveValue: { [weak self] newArtistsList in
+                self?.reloadCatalog(artistsList: newArtistsList)
+            })
     }
     
     private func updateContent() {

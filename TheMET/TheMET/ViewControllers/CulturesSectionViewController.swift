@@ -36,10 +36,6 @@ class CulturesSectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.cultureServiceSubscriber = self.culturesService.$culturesList
-            .sink(receiveValue: { [weak self] newCulturesList in
-                self?.reloadCatalog(culturesList: newCulturesList)
-            })
         self.culturesLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(culturesLabel)
         self.culturesLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "pear"), fontSize: 16, title: NSLocalizedString("catalog_screen_cultures_section_title", comment: ""))
@@ -62,7 +58,10 @@ class CulturesSectionViewController: UIViewController {
         self.loadedCulturesCatalogView.onCultureCellWillDisplay = { [weak self] culture in
             self?.loadParticularCultureCellDataIfNeeded(culture: culture)
         }
-        self.reloadCatalog(culturesList: self.culturesService.culturesList)
+        self.cultureServiceSubscriber = self.culturesService.$culturesList
+            .sink(receiveValue: { [weak self] newCulturesList in
+                self?.reloadCatalog(culturesList: newCulturesList)
+            })
     }
     
     private func add(catalogSubview: UIView) {
