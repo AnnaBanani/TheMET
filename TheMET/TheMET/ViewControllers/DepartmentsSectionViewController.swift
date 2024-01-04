@@ -17,11 +17,11 @@ class DepartmentsSectionViewController: UIViewController {
     
     private let loadingCatalogView = CatalogSectionLoadingView.constractView(configuration: .catalogSectionLoading)
     private let failedCatalogView = CatalogSectionTapToReloadView.constractView(configuration: .catalogSectionTapToReload)
-    private let loadedCatalogView = CatalogContentView.constructView()
+    private let loadedCatalogView = DepartmentsSectionContentView.constructView()
     
     private var loadedDepartments: [Department] = []
     
-    var contentStatus:LoadingStatus<[CatalogCellData]> = .loading {
+    var contentStatus:LoadingStatus<[CatalogSectionCellData<Int>]> = .loading {
         didSet {
             self.updateContent()
         }
@@ -61,9 +61,9 @@ class DepartmentsSectionViewController: UIViewController {
             return
         }
         guard let catalogCellData = catalogCellDataList.first(where: { cellData in
-            cellData.departmentId == departmentId
+            cellData.identificator == departmentId
         }),
-              case .placeholder = catalogCellData.departmentData,
+              case .placeholder = catalogCellData.data,
               !self.loadingDepartmentIds.contains(departmentId),
         let department = self.loadedDepartments.first(where: { department in
             department.id == departmentId
@@ -75,7 +75,7 @@ class DepartmentsSectionViewController: UIViewController {
         self.loadCatalogCellData(department: department, completion: { [weak self] catalogCellData in
                if let contentStatus = self?.contentStatus,
                case .loaded(var catalogCellDataList) = contentStatus,
-               let catalogCellDataIndex = catalogCellDataList.firstIndex(where: { $0.departmentId == catalogCellData.departmentId}) {
+                  let catalogCellDataIndex = catalogCellDataList.firstIndex(where: { $0.identificator == catalogCellData.identificator}) {
                 catalogCellDataList[catalogCellDataIndex] = catalogCellData
                 self?.contentStatus = .loaded(catalogCellDataList)
             }
@@ -123,9 +123,9 @@ class DepartmentsSectionViewController: UIViewController {
             case .failure(let error):
                 self?.contentStatus = .failed(error)
             case .success(let departmentResponse):
-                var catalogCellDataList: [CatalogCellData] = []
+                var catalogCellDataList: [CatalogSectionCellData<Int>] = []
                 for department in departmentResponse.departments {
-                    let catalogCellData: CatalogCellData = CatalogCellData(departmentId: department.id, departmentData: .placeholder)
+                    let catalogCellData: CatalogSectionCellData = CatalogSectionCellData(identificator: department.id, data: .placeholder)
                     catalogCellDataList.append(catalogCellData)
                 }
                 self?.loadedDepartments = departmentResponse.departments
@@ -134,19 +134,19 @@ class DepartmentsSectionViewController: UIViewController {
         }
     }
     
-    private func loadCatalogCellData(department: Department, completion: @escaping (CatalogCellData) -> Void) {
+    private func loadCatalogCellData(department: Department, completion: @escaping (CatalogSectionCellData<Int>) -> Void) {
         self.metAPI.objects(departmentIds: [department.id]) { [weak self] objectsResult in
             guard let self = self else {
                 return
             }
             switch objectsResult {
             case .failure:
-                let catalogCellData = CatalogCellData(departmentId: department.id, departmentData: .data(imageURL: nil, title: department.displayName, subTitle: nil))
+                let catalogCellData = CatalogSectionCellData(identificator: department.id, data: .data(imageURL: nil, title: department.displayName, subTitle: nil))
                 completion(catalogCellData)
             case .success(let objects):
                 let subtitle: String = self.cellSubtitle(objectsCount: objects.total)
                 self.loadDepartmentImageURL(objectIds: objects.objectIDs, completion: { url in
-                    let catalogCellData = CatalogCellData(departmentId: department.id, departmentData: .data(imageURL: url, title: department.displayName, subTitle: subtitle))
+                    let catalogCellData = CatalogSectionCellData(identificator: department.id, data: .data(imageURL: url, title: department.displayName, subTitle: subtitle))
                     completion(catalogCellData)
                 })
             }

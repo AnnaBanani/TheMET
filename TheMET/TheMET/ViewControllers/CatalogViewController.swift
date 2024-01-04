@@ -18,6 +18,9 @@ class CatalogViewController: UIViewController {
     
     private let featuredArtistsViewController: ArtistsSectionViewController = ArtistsSectionViewController()
     
+    private let culturesSectionViewController: CulturesSectionViewController = CulturesSectionViewController()
+     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.tabBarItem = UITabBarItem(title: nil,
@@ -56,6 +59,16 @@ class CatalogViewController: UIViewController {
         ])
         self.addChild(self.featuredArtistsViewController)
         self.featuredArtistsViewController.didMove(toParent: self)
+        self.culturesSectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.culturesSectionViewController.view)
+        NSLayoutConstraint.activate([
+            self.culturesSectionViewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.culturesSectionViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.culturesSectionViewController.view.heightAnchor.constraint(equalToConstant: 240),
+            self.culturesSectionViewController.view.topAnchor.constraint(equalTo: self.featuredArtistsViewController.view.bottomAnchor)
+        ])
+        self.addChild(self.culturesSectionViewController)
+        self.culturesSectionViewController.didMove(toParent: self)
     }
     
     @objc

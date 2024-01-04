@@ -40,9 +40,9 @@
 		F3528F832A0AB99A000D9CEB /* UINavigationItem+apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F822A0AB99A000D9CEB /* UINavigationItem+apply.swift */; };
 		F3528F882A0D0149000D9CEB /* UILabel+apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F872A0D0149000D9CEB /* UILabel+apply.swift */; };
 		F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F892A0D0171000D9CEB /* UIButton+apply.swift */; };
-		F3528F952A0E7FDA000D9CEB /* CatalogContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F922A0E7FDA000D9CEB /* CatalogContentView.swift */; };
+		F3528F952A0E7FDA000D9CEB /* DepartmentsSectionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F922A0E7FDA000D9CEB /* DepartmentsSectionContentView.swift */; };
 		F3528F962A0E7FDA000D9CEB /* CatalogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3528F932A0E7FDA000D9CEB /* CatalogCell.swift */; };
-		F3528F972A0E7FDA000D9CEB /* CatalogContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3528F942A0E7FDA000D9CEB /* CatalogContentView.xib */; };
+		F3528F972A0E7FDA000D9CEB /* DepartmentsSectionContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3528F942A0E7FDA000D9CEB /* DepartmentsSectionContentView.xib */; };
 		F36BD6CE2A7417870062AEFC /* ArtCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CD2A7417870062AEFC /* ArtCellData.swift */; };
 		F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */; };
 		F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BD6D12A7C004C0062AEFC /* UISearchBar+apply.swift */; };
@@ -55,7 +55,6 @@
 		F3A125392A8D021F00032DC3 /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A125382A8D021F00032DC3 /* FullScreenPhotoViewController.swift */; };
 		F3A1253C2A8E5AB400032DC3 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */; };
 		F3A1253E2A8E675600032DC3 /* ImageFileNameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1253D2A8E675600032DC3 /* ImageFileNameGenerator.swift */; };
-		F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2160C2A3235510056EF54 /* CatalogCellData.swift */; };
 		F3A6C0002AD0720200249847 /* Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A6BFFF2AD0720200249847 /* Art.swift */; };
 		F3A6C0042AD6F30E00249847 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A6C0032AD6F30E00249847 /* AboutAppViewController.swift */; };
 		F3A6C0072AD7003100249847 /* AboutAppViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A6C0062AD7003100249847 /* AboutAppViewCell.swift */; };
@@ -65,6 +64,12 @@
 		F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */; };
 		F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */; };
 		F3D94C462B0539BD005D5CC9 /* ArtistArtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */; };
+		F3E712B22B28BBFC009BEE1B /* CulturesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E712B12B28BBFC009BEE1B /* CulturesService.swift */; };
+		F3E712B52B28BE6E009BEE1B /* CulturesSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E712B42B28BE6E009BEE1B /* CulturesSectionViewController.swift */; };
+		F3E712B72B28C18C009BEE1B /* CultureArtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E712B62B28C18C009BEE1B /* CultureArtsViewController.swift */; };
+		F3E712BD2B34A4D7009BEE1B /* CatalogSectionCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E712BC2B34A4D7009BEE1B /* CatalogSectionCellData.swift */; };
+		F3E712BF2B34A5C7009BEE1B /* CulturesSectionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E712BE2B34A5C7009BEE1B /* CulturesSectionContentView.swift */; };
+		F3E712C12B34A69E009BEE1B /* CulturesSectionContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3E712C02B34A69E009BEE1B /* CulturesSectionContentView.xib */; };
 		F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */; };
 		F3F1D0462A449194003D4559 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0452A449194003D4559 /* ArtView.swift */; };
 		F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F1D0472A49E58E003D4559 /* FavoritesService.swift */; };
@@ -136,9 +141,9 @@
 		F3528F822A0AB99A000D9CEB /* UINavigationItem+apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+apply.swift"; sourceTree = "<group>"; };
 		F3528F872A0D0149000D9CEB /* UILabel+apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+apply.swift"; sourceTree = "<group>"; };
 		F3528F892A0D0171000D9CEB /* UIButton+apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+apply.swift"; sourceTree = "<group>"; };
-		F3528F922A0E7FDA000D9CEB /* CatalogContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogContentView.swift; sourceTree = "<group>"; };
+		F3528F922A0E7FDA000D9CEB /* DepartmentsSectionContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentsSectionContentView.swift; sourceTree = "<group>"; };
 		F3528F932A0E7FDA000D9CEB /* CatalogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogCell.swift; sourceTree = "<group>"; };
-		F3528F942A0E7FDA000D9CEB /* CatalogContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatalogContentView.xib; sourceTree = "<group>"; };
+		F3528F942A0E7FDA000D9CEB /* DepartmentsSectionContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepartmentsSectionContentView.xib; sourceTree = "<group>"; };
 		F36BD6CD2A7417870062AEFC /* ArtCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtCellData.swift; sourceTree = "<group>"; };
 		F36BD6CF2A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsLoadingIndicatorView.swift; sourceTree = "<group>"; };
 		F36BD6D12A7C004C0062AEFC /* UISearchBar+apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+apply.swift"; sourceTree = "<group>"; };
@@ -151,7 +156,6 @@
 		F3A125382A8D021F00032DC3 /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		F3A1253D2A8E675600032DC3 /* ImageFileNameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileNameGenerator.swift; sourceTree = "<group>"; };
-		F3A2160C2A3235510056EF54 /* CatalogCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCellData.swift; sourceTree = "<group>"; };
 		F3A6BFFF2AD0720200249847 /* Art.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Art.swift; sourceTree = "<group>"; };
 		F3A6C0032AD6F30E00249847 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		F3A6C0062AD7003100249847 /* AboutAppViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewCell.swift; sourceTree = "<group>"; };
@@ -162,6 +166,12 @@
 		F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedPlaceholderView.swift; sourceTree = "<group>"; };
 		F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistArtsViewController.swift; sourceTree = "<group>"; };
+		F3E712B12B28BBFC009BEE1B /* CulturesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturesService.swift; sourceTree = "<group>"; };
+		F3E712B42B28BE6E009BEE1B /* CulturesSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturesSectionViewController.swift; sourceTree = "<group>"; };
+		F3E712B62B28C18C009BEE1B /* CultureArtsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CultureArtsViewController.swift; sourceTree = "<group>"; };
+		F3E712BC2B34A4D7009BEE1B /* CatalogSectionCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogSectionCellData.swift; sourceTree = "<group>"; };
+		F3E712BE2B34A5C7009BEE1B /* CulturesSectionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturesSectionContentView.swift; sourceTree = "<group>"; };
+		F3E712C02B34A69E009BEE1B /* CulturesSectionContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CulturesSectionContentView.xib; sourceTree = "<group>"; };
 		F3EDF2D52A20FB09000680B1 /* ArtFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFileManager.swift; sourceTree = "<group>"; };
 		F3F1D0452A449194003D4559 /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		F3F1D0472A49E58E003D4559 /* FavoritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesService.swift; sourceTree = "<group>"; };
@@ -230,6 +240,8 @@
 		F3012FB329C4AE1800138CE3 /* TheMET */ = {
 			isa = PBXGroup;
 			children = (
+				F3E712BB2B34A4A2009BEE1B /* CatalogSectionCellData */,
+				F3E712B82B28C611009BEE1B /* CultureContentView */,
 				F32400042AFA6A1E00B8C175 /* FeaturedArtistsContentView */,
 				7D5FD3922ACB034F00F779B1 /* MetAPI */,
 				F3904AE02AF1557100BFC3F4 /* FeaturedArtistsView */,
@@ -331,6 +343,8 @@
 				F324001B2B02873700B8C175 /* ArtistsSectionViewController.swift */,
 				F324001D2B028C9300B8C175 /* ArtistsCatalogViewController.swift */,
 				F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */,
+				F3E712B42B28BE6E009BEE1B /* CulturesSectionViewController.swift */,
+				F3E712B62B28C18C009BEE1B /* CultureArtsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -339,9 +353,8 @@
 			isa = PBXGroup;
 			children = (
 				F3528F932A0E7FDA000D9CEB /* CatalogCell.swift */,
-				F3528F922A0E7FDA000D9CEB /* CatalogContentView.swift */,
-				F3528F942A0E7FDA000D9CEB /* CatalogContentView.xib */,
-				F3A2160C2A3235510056EF54 /* CatalogCellData.swift */,
+				F3528F922A0E7FDA000D9CEB /* DepartmentsSectionContentView.swift */,
+				F3528F942A0E7FDA000D9CEB /* DepartmentsSectionContentView.xib */,
 			);
 			path = CatalogContentView;
 			sourceTree = "<group>";
@@ -405,6 +418,23 @@
 			path = TagListView;
 			sourceTree = "<group>";
 		};
+		F3E712B82B28C611009BEE1B /* CultureContentView */ = {
+			isa = PBXGroup;
+			children = (
+				F3E712BE2B34A5C7009BEE1B /* CulturesSectionContentView.swift */,
+				F3E712C02B34A69E009BEE1B /* CulturesSectionContentView.xib */,
+			);
+			path = CultureContentView;
+			sourceTree = "<group>";
+		};
+		F3E712BB2B34A4A2009BEE1B /* CatalogSectionCellData */ = {
+			isa = PBXGroup;
+			children = (
+				F3E712BC2B34A4D7009BEE1B /* CatalogSectionCellData.swift */,
+			);
+			path = CatalogSectionCellData;
+			sourceTree = "<group>";
+		};
 		F3F1D0442A449180003D4559 /* ArtView */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +452,7 @@
 				F32400192B027BD900B8C175 /* ArtistsService.swift */,
 				F3F1D0472A49E58E003D4559 /* FavoritesService.swift */,
 				F3F5E72A2A5312B70014CBF6 /* FeaturedArtService.swift */,
+				F3E712B12B28BBFC009BEE1B /* CulturesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -521,13 +552,14 @@
 				F3451E962A05698200C31619 /* Caviar Dreams Bold.ttf in Resources */,
 				F3528F7F2A06C19F000D9CEB /* Zen Kaku Gothic New Regular.ttf in Resources */,
 				F3AC638E2A433FCF00BEF886 /* Localizable.stringsdict in Resources */,
-				F3528F972A0E7FDA000D9CEB /* CatalogContentView.xib in Resources */,
+				F3528F972A0E7FDA000D9CEB /* DepartmentsSectionContentView.xib in Resources */,
 				F3C7DB5B2A14F38C00DBBF87 /* FailedPlaceholderView.xib in Resources */,
 				F3528F802A06C19F000D9CEB /* Noto Serif JP.otf in Resources */,
 				F3528F812A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf in Resources */,
 				F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */,
 				F3904ADD2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf in Resources */,
 				F3451E922A05644D00C31619 /* Colors.xcassets in Resources */,
+				F3E712C12B34A69E009BEE1B /* CulturesSectionContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,18 +576,20 @@
 				F3A6C0042AD6F30E00249847 /* AboutAppViewController.swift in Sources */,
 				F324000B2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift in Sources */,
 				F3847C582A0E972B00501F0F /* GradientView.swift in Sources */,
+				F3E712B72B28C18C009BEE1B /* CultureArtsViewController.swift in Sources */,
 				F3F1D04A2A4B0C8B003D4559 /* URL+getFolderURL.swift in Sources */,
 				F376B37E2A8529AC00AA096B /* ArtFilter.swift in Sources */,
 				F32400112AFBE53B00B8C175 /* DepartmentsSectionViewController.swift in Sources */,
+				F3E712BF2B34A5C7009BEE1B /* CulturesSectionContentView.swift in Sources */,
 				F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */,
 				F3904AE32AF1559800BFC3F4 /* FeaturedArtistsView.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,
 				F3EDF2D62A20FB09000680B1 /* ArtFileManager.swift in Sources */,
-				F3A2160D2A3235510056EF54 /* CatalogCellData.swift in Sources */,
 				F3F5E72F2A5D8AE10014CBF6 /* ArtViewCell.swift in Sources */,
 				F3012FC929C9E30700138CE3 /* RootTabBarController.swift in Sources */,
 				F3F1D0462A449194003D4559 /* ArtView.swift in Sources */,
-				F3528F952A0E7FDA000D9CEB /* CatalogContentView.swift in Sources */,
+				F3E712B52B28BE6E009BEE1B /* CulturesSectionViewController.swift in Sources */,
+				F3528F952A0E7FDA000D9CEB /* DepartmentsSectionContentView.swift in Sources */,
 				F3528F962A0E7FDA000D9CEB /* CatalogCell.swift in Sources */,
 				F3012FB529C4AE1800138CE3 /* AppDelegate.swift in Sources */,
 				F3BC62962A696C22003A39D9 /* String+artDescriptionText.swift in Sources */,
@@ -569,10 +603,12 @@
 				F3A6C0072AD7003100249847 /* AboutAppViewCell.swift in Sources */,
 				F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */,
 				F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */,
+				F3E712B22B28BBFC009BEE1B /* CulturesService.swift in Sources */,
 				F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */,
 				F324001E2B028C9400B8C175 /* ArtistsCatalogViewController.swift in Sources */,
 				F3012FB729C4AE1800138CE3 /* SceneDelegate.swift in Sources */,
 				F3F1D0482A49E58E003D4559 /* FavoritesService.swift in Sources */,
+				F3E712BD2B34A4D7009BEE1B /* CatalogSectionCellData.swift in Sources */,
 				F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
 				F324001A2B027BD900B8C175 /* ArtistsService.swift in Sources */,
