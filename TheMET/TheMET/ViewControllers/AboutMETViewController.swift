@@ -11,8 +11,6 @@ import MetAPI
 
 class AboutMETViewController: UIViewController {
     
-    private let aboutButton: UIButton = UIButton()
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.tabBarItem = UITabBarItem(title: nil,
