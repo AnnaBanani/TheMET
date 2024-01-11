@@ -50,7 +50,6 @@
 		F376B37E2A8529AC00AA096B /* ArtFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F376B37D2A8529AC00AA096B /* ArtFilter.swift */; };
 		F3847C582A0E972B00501F0F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3847C572A0E972B00501F0F /* GradientView.swift */; };
 		F3904ADB2AEAD90000BFC3F4 /* Quattrocento Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3904AD92AEAD90000BFC3F4 /* Quattrocento Bold.ttf */; };
-		F3904ADD2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3904ADC2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf */; };
 		F3904AE32AF1559800BFC3F4 /* FeaturedArtistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3904AE22AF1559800BFC3F4 /* FeaturedArtistsView.swift */; };
 		F3A125392A8D021F00032DC3 /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A125382A8D021F00032DC3 /* FullScreenPhotoViewController.swift */; };
 		F3A1253C2A8E5AB400032DC3 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */; };
@@ -78,6 +77,7 @@
 		F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */; };
 		F3F5E72F2A5D8AE10014CBF6 /* ArtViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */; };
 		F3F679822B4EF74800B6D499 /* AboutMETViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F679812B4EF74800B6D499 /* AboutMETViewController.swift */; };
+		F3F6798C2B50292200B6D499 /* NotoSerifJP-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3F6798B2B50292100B6D499 /* NotoSerifJP-SemiBold.otf */; };
 		F3F6A4F02B1798550004B59F /* LoadingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6A4EF2B1798550004B59F /* LoadingError.swift */; };
 		F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD733D2A700C7500B163EA /* LoadingStatus.swift */; };
 /* End PBXBuildFile section */
@@ -152,7 +152,6 @@
 		F376B37D2A8529AC00AA096B /* ArtFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFilter.swift; sourceTree = "<group>"; };
 		F3847C572A0E972B00501F0F /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F3904AD92AEAD90000BFC3F4 /* Quattrocento Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quattrocento Bold.ttf"; path = "Sources/Fonts/Quattrocento Bold.ttf"; sourceTree = SOURCE_ROOT; };
-		F3904ADC2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSerifJP-SemiBold.otf"; path = "../../../../../../Дизайн/Шрифты/Noto Serif JP/NotoSerifJP-SemiBold.otf"; sourceTree = "<group>"; };
 		F3904AE22AF1559800BFC3F4 /* FeaturedArtistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtistsView.swift; sourceTree = "<group>"; };
 		F3A125382A8D021F00032DC3 /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		F3A1253B2A8E5AB400032DC3 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -181,6 +180,7 @@
 		F3F5E72C2A571EE20014CBF6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		F3F5E72E2A5D8AE10014CBF6 /* ArtViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtViewCell.swift; sourceTree = "<group>"; };
 		F3F679812B4EF74800B6D499 /* AboutMETViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMETViewController.swift; sourceTree = "<group>"; };
+		F3F6798B2B50292100B6D499 /* NotoSerifJP-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifJP-SemiBold.otf"; sourceTree = "<group>"; };
 		F3F6A4EF2B1798550004B59F /* LoadingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingError.swift; sourceTree = "<group>"; };
 		F3FD733D2A700C7500B163EA /* LoadingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -310,7 +310,7 @@
 				F3528F7C2A06C19E000D9CEB /* Zen Kaku Gothic New Regular.ttf */,
 				F3528F7E2A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf */,
 				F3528F7D2A06C19F000D9CEB /* Noto Serif JP.otf */,
-				F3904ADC2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf */,
+				F3F6798B2B50292100B6D499 /* NotoSerifJP-SemiBold.otf */,
 				F3451E942A05698200C31619 /* Caviar Dreams.ttf */,
 				F3451E952A05698200C31619 /* Quattrocento.ttf */,
 				F3451E932A05698200C31619 /* Caviar Dreams Bold.ttf */,
@@ -551,6 +551,7 @@
 				F3451E972A05698200C31619 /* Caviar Dreams.ttf in Resources */,
 				F3012FBE29C4AE1A00138CE3 /* Assets.xcassets in Resources */,
 				F324000D2AFA6CB800B8C175 /* FeaturedArtistsContentView.xib in Resources */,
+				F3F6798C2B50292200B6D499 /* NotoSerifJP-SemiBold.otf in Resources */,
 				F3451E982A05698200C31619 /* Quattrocento.ttf in Resources */,
 				F3451E962A05698200C31619 /* Caviar Dreams Bold.ttf in Resources */,
 				F3528F7F2A06C19F000D9CEB /* Zen Kaku Gothic New Regular.ttf in Resources */,
@@ -560,7 +561,6 @@
 				F3528F802A06C19F000D9CEB /* Noto Serif JP.otf in Resources */,
 				F3528F812A06C19F000D9CEB /* Zen Kaku Gothic New Bold.ttf in Resources */,
 				F3012FBC29C4AE1800138CE3 /* Main.storyboard in Resources */,
-				F3904ADD2AEADBD900BFC3F4 /* NotoSerifJP-SemiBold.otf in Resources */,
 				F3451E922A05644D00C31619 /* Colors.xcassets in Resources */,
 				F3E712C12B34A69E009BEE1B /* CulturesSectionContentView.xib in Resources */,
 			);
