@@ -12,8 +12,6 @@ import MetAPI
 
 class CatalogViewController: UIViewController {
     
-    private let aboutButton: UIButton = UIButton()
-    
     private let scrollView: UIScrollView = UIScrollView()
     
     private let departmentsSectionViewController: DepartmentsSectionViewController = DepartmentsSectionViewController()
@@ -33,13 +31,6 @@ class CatalogViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("catalog_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        let aboutButton: UIBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "AboutAppIcon"),
-            style: .plain,
-            target: self,
-            action: #selector(aboutButtonDidTap)
-        )
-        aboutButton.tintColor = UIColor(named: "plum")
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.scrollView)
         NSLayoutConstraint.activate([
@@ -54,8 +45,6 @@ class CatalogViewController: UIViewController {
             contentGuide.leadingAnchor.constraint(equalTo: frameGuide.leadingAnchor),
             contentGuide.trailingAnchor.constraint(equalTo: frameGuide.trailingAnchor)
         ])
-        
-        self.navigationItem.rightBarButtonItem = aboutButton
         self.departmentsSectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.addSubview(self.departmentsSectionViewController.view)
         NSLayoutConstraint.activate([
@@ -89,14 +78,5 @@ class CatalogViewController: UIViewController {
         ])
         self.addChild(self.culturesSectionViewController)
         self.culturesSectionViewController.didMove(toParent: self)
-    }
-    
-    @objc
-    private func aboutButtonDidTap() {
-        let aboutAppViewController: AboutAppViewController = AboutAppViewController()
-        aboutAppViewController.modalPresentationStyle = .automatic
-        aboutAppViewController.modalTransitionStyle = .coverVertical
-        let aboutAppNavigationController = UINavigationController(rootViewController: aboutAppViewController)
-        self.present(aboutAppNavigationController, animated: true)
     }
 }

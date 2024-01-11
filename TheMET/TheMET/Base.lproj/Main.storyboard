@@ -30,6 +30,7 @@
                         <segue destination="fe6-89-rhd" kind="relationship" relationship="viewControllers" id="XcC-c2-WiS"/>
                         <segue destination="SOK-Vp-gia" kind="relationship" relationship="viewControllers" id="9qC-2E-lFJ"/>
                         <segue destination="iWJ-qh-B2g" kind="relationship" relationship="viewControllers" id="kCQ-ks-Iy2"/>
+                        <segue destination="jj0-sT-Byf" kind="relationship" relationship="viewControllers" id="VOI-a8-Eng"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QmL-s5-jGR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -118,6 +119,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zb1-dA-OLE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-204" y="632"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="4AH-5P-ufx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jj0-sT-Byf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Nyt-3S-L9q"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GWM-40-wNJ">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vv5-w2-GQ9" kind="relationship" relationship="rootViewController" id="qTJ-X2-bht"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HhQ-vr-bIK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-205" y="1327"/>
+        </scene>
+        <!--AboutMET View Controller-->
+        <scene sceneID="nGB-Uq-ekD">
+            <objects>
+                <viewController id="vv5-w2-GQ9" customClass="AboutMETViewController" customModule="TheMET" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rJd-3f-jiT">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="7Wc-UQ-qH8"/>
+                        <color key="backgroundColor" name="blackberry"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="g0U-bF-Fe9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2w9-Xa-EQD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="708" y="1327"/>
         </scene>
         <!--Item-->
         <scene sceneID="Hh1-he-caS">

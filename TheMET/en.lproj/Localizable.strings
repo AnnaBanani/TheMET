@@ -20,6 +20,7 @@
 "catalog_screen_departments_section_title" = "Department";
 "catalog_screen_cultures_section_title" = "Culture";
 "catalog_screen_feaured_artists_section_title" = "Featured Artists";
+"about_met_screen_title" = "About MET";
 "catalog.loading_failed" = "Catalog cannot be upload  \n \nMake sure you are connected to Wi-Fi or your cellural network";
 "favories_screen_title" = "Favourites";
 "about_app_screen_title" = "About";
