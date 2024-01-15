@@ -13,7 +13,7 @@ class ArtView: UIView {
     private let loadingImageView: LoadingImageView = LoadingImageView()
     private let likeButton: UIButton = UIButton()
     private let artistNameLabel: UILabel = UILabel()
-    private let titleLable: UILabel = UILabel()
+    private let titleLabel: UILabel = UILabel()
     private let dateLabel: UILabel = UILabel()
     private let mediumLabel: UILabel = UILabel()
     private var container: UIStackView = UIStackView()
@@ -36,8 +36,8 @@ class ArtView: UIView {
         set { self.setLabelText(newValue, label: artistNameLabel, font: NSLocalizedString("serif_font_bold", comment: "")) }
     }
     var titleText: String? {
-        get { return self.titleLable.text }
-        set { self.setLabelText(newValue, label: titleLable, font: NSLocalizedString("serif_font", comment: ""))  }
+        get { return self.titleLabel.text }
+        set { self.setLabelText(newValue, label: titleLabel, font: NSLocalizedString("serif_font", comment: ""))  }
     }
     var dateText: String? {
         get { return self.dateLabel.text }
@@ -125,7 +125,7 @@ class ArtView: UIView {
         self.container.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.container)
         self.container.addArrangedSubview(self.artistNameLabel)
-        self.container.addArrangedSubview(self.titleLable)
+        self.container.addArrangedSubview(self.titleLabel)
         self.container.addArrangedSubview(self.dateLabel)
         self.container.addArrangedSubview(self.mediumLabel)
         self.container.axis = .vertical

@@ -39,4 +39,8 @@
 "about_screen_left_version_label" = "Версия";
 "about_scree_copyright_label" = "© 2023 Anna Sitnikova. All rights reserved.";
 "privacy_policy_url_sring" = "https://themetsupport.wordpress.com/the-met-app-privacy-policy-ru/";
+"about_met_the_met_fifth_avenue_title_lable" = "Мет на Пятой Авеню";
+"about_met_the_met_fifth_avenue_address_lable" = "1000 Fifth Avenue \nNew York, NY 10028 \nPhone: 212-535-7710";
+"about_met_the_met_cloisters_title_lable" = "Клойстерс";
+"about_met_the_met_cloisters_address_lable" = "99 Margaret Corbin Drive \nFort Tryon Park \nNew York, NY 10040 \nPhone: 212-923-3700";
 
