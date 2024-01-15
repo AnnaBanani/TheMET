@@ -15,7 +15,7 @@ class LocationView: UIView {
     
     private let addressLabel: UILabel = UILabel()
     
-    let mapView: MKMapView = MKMapView()
+    private let mapView: MKMapView = MKMapView()
     
     private var container: UIStackView = UIStackView()
     
@@ -26,6 +26,10 @@ class LocationView: UIView {
     var addressText: String? {
         get { return self.titleLabel.text }
         set { self.setLabel(label: self.addressLabel, font: NSLocalizedString("san_serif_font", comment: ""), title: newValue) }
+    }
+    var coordinate: CLLocationCoordinate2D {
+        get { return self.mapView.centerCoordinate }
+        set { self.mapView.centerToCoordinate(newValue) }
     }
     
     override init(frame: CGRect) {
@@ -75,12 +79,29 @@ class LocationView: UIView {
     }
 }
 
-extension MKMapView {
-  func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 1000) {
-    let coordinateRegion = MKCoordinateRegion(
-      center: location.coordinate,
-      latitudinalMeters: regionRadius,
-      longitudinalMeters: regionRadius)
-    setRegion(coordinateRegion, animated: true)
-  }
+private extension MKMapView {
+    func centerToCoordinate(_ coordinate: CLLocationCoordinate2D) {
+        self.removeAnnotations(self.annotations)
+        let coordinateRegion = MKCoordinateRegion(
+            center: coordinate,
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000
+        )
+        let pin = SimplePin(coordinate: coordinate)
+        self.setRegion(coordinateRegion, animated: true)
+        self.addAnnotation(pin)
+    }
+}
+
+private class SimplePin: NSObject, MKAnnotation {
+    
+    let coordinate: CLLocationCoordinate2D
+    
+    init(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+    }
+    
+    let title: String? = ""
+
+    let subtitle: String? = ""
 }

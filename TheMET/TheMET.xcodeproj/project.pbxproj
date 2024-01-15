@@ -807,6 +807,7 @@
 				DEVELOPMENT_TEAM = 59X77F6RBT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TheMET/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -837,6 +838,7 @@
 				DEVELOPMENT_TEAM = 59X77F6RBT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TheMET/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

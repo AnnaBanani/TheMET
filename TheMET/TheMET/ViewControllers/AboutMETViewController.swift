@@ -79,10 +79,8 @@ class AboutMETViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.cloistersLocationView.bottomAnchor.constraint(equalTo: contentGuide.bottomAnchor)
         ])
-        let fifthAvenuLocation: CLLocation = CLLocation(latitude: 40.77962342752392, longitude: -73.96326546117187)
-        let cloistersLocation: CLLocation = CLLocation(latitude: 40.86502504586118, longitude: -73.93174886116802)
-        self.fifthAvenueLocationView.mapView.centerToLocation(fifthAvenuLocation)
-        self.cloistersLocationView.mapView.centerToLocation(cloistersLocation)
+        self.fifthAvenueLocationView.coordinate = CLLocationCoordinate2D.fifthAvenuLocation
+        self.cloistersLocationView.coordinate = CLLocationCoordinate2D.cloistersLocation
     }
     
     @objc
@@ -107,4 +105,8 @@ class AboutMETViewController: UIViewController {
     }
 }
 
+extension CLLocationCoordinate2D {
+    static let fifthAvenuLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 40.77962342752392, longitude: -73.96326546117187)
+    static let cloistersLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 40.86502504586118, longitude: -73.93174886116802)
+}
 
