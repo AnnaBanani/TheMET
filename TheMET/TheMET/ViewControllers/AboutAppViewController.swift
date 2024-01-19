@@ -8,9 +8,20 @@
 import Foundation
 import UIKit
 import SafariServices
+import Combine
 
 class AboutAppViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
+    private var viewModel: AboutAppViewModel?
+    
+    private var titleSubscriber: AnyCancellable?
+    private var topImageSubscriber: AnyCancellable?
+    private var firstLeftTextSubscriber: AnyCancellable?
+    private var firstRightTextSubscriber: AnyCancellable?
+    private var secondLeftTextSubscriber: AnyCancellable?
+    private var thirdLeftTextSubscriber: AnyCancellable?
+    private var bottomTextSubscriber: AnyCancellable?
+    
     private let rightVersionLabel: UILabel = UILabel()
     private let leftVersionLabel: UILabel = UILabel()
     private let copyRightLabel: UILabel = UILabel()
@@ -20,17 +31,18 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     private let privacyPolicyCellHeight: CGFloat = 53.67
     private let useAPICellHeight: CGFloat = 130
     
+    private var privatePolicyText: String = ""
+    private var useAPIText: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("about_app_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
+        self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: "", color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
         self.view.backgroundColor = UIColor(named: "blackberry")
-        let appVersion = self.getAppVersion()
-        self.addLabel(_ : self.rightVersionLabel, color: UIColor(named: "blueberry"), title: appVersion, textAlignment: .right)
-        self.addLabel(_ : self.leftVersionLabel, color: UIColor(named: "plum"), title: NSLocalizedString("about_screen_left_version_label", comment: ""), textAlignment: .left)
-        self.addLabel(_ : self.copyRightLabel, color: UIColor(named: "blueberry"), title: NSLocalizedString("about_scree_copyright_label", comment: ""), textAlignment: .left)
+        self.addLabel(_ : self.rightVersionLabel)
+        self.addLabel(_ : self.leftVersionLabel)
+        self.addLabel(_ : self.copyRightLabel)
         self.imageView.backgroundColor = .clear
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.imageView.image = UIImage(named: "AboutMETIcon")
         self.view.addSubview(self.imageView)
         self.tableView.backgroundColor = .clear
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,22 +80,56 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.register(AboutAppViewCell.self, forCellReuseIdentifier: AboutAppViewCell.aboutAppViewCellIdentifier)
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.setupViewModel()
     }
     
-    private func addLabel(_ label : UILabel,color: UIColor?, title: String, textAlignment: NSTextAlignment) {
+    private func setupViewModel() {
+        let viewModel = AboutAppViewModel()
+        self.viewModel = viewModel
+        self.titleSubscriber = viewModel.$title
+            .sink(receiveValue: { [weak self] titleText in
+            guard let self = self else {return}
+                self.title = titleText
+        })
+        self.topImageSubscriber = viewModel.$topImage
+            .sink(receiveValue: { [weak self] image in
+                guard let self = self,
+                      let image = image else { return }
+                self.imageView.image = image
+            })
+        self.firstLeftTextSubscriber = viewModel.$firstLeftText
+            .sink(receiveValue: { [weak self] text in
+                guard let self = self else {return}
+                self.leftVersionLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), alignment: .left, fontSize: 16, title: text)
+            })
+        self.firstRightTextSubscriber = viewModel.$firstRightText
+            .sink(receiveValue: { [weak self] text in
+                guard let self = self else {return}
+                self.rightVersionLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), alignment: .right, fontSize: 16, title: text)
+            })
+        self.bottomTextSubscriber = viewModel.$bottomText
+            .sink(receiveValue: { [weak self] text in
+                guard let self = self else {return}
+                self.copyRightLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "blueberry"), alignment: .left, fontSize: 16, title: text)
+            })
+        self.secondLeftTextSubscriber = viewModel.$secondLeftText
+            .sink(receiveValue: { [weak self] text in
+                guard let self = self else {return}
+                self.privatePolicyText = text
+                self.tableView.reloadData()
+        })
+        self.thirdLeftTextSubscriber = viewModel.$thirdLeftText
+            .sink(receiveValue: { [weak self] text in
+                guard let self = self else {return}
+                self.useAPIText = text
+                self.tableView.reloadData()
+        })
+    }
+    
+    private func addLabel(_ label : UILabel) {
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.apply(font: NSLocalizedString("serif_font", comment: ""), color: color, fontSize: 16, title: title)
-        label.textAlignment = textAlignment
         self.view.addSubview(label)
-    }
-    
-    private func getAppVersion() -> String {
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            return version
-        } else {
-            return ""
-        }
     }
     
     func showSafariPage(urlString: String) {
@@ -106,10 +152,11 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
         }
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
+        guard let viewModel = self.viewModel else { return cell}
         if indexPath.row == 0 {
-            cell.set(titleText: NSLocalizedString("privacy_policy_label", comment: ""))
+            cell.set(titleText: self.privatePolicyText)
         } else {
-            cell.set(titleText: NSLocalizedString("the_use_of_met_api_label", comment: ""))
+            cell.set(titleText: self.useAPIText)
         }
         return cell
     }
