@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import MetAPI
 import MapKit
+import Combine
 
 class AboutMETViewController: UIViewController {
     
@@ -16,9 +17,17 @@ class AboutMETViewController: UIViewController {
     
     private let emptyView: UIView = UIView()
     
-    private let fifthAvenueLocationView: LocationView = LocationView()
+    private let topLocationView: LocationView = LocationView()
     
-    private let cloistersLocationView: LocationView = LocationView()
+    private let bottomLocationView: LocationView = LocationView()
+    
+    private var viewModel: AboutMETViewModel?
+    
+    private var titleSubscriber: AnyCancellable?
+    
+    private var topMapViewDataSubscriber: AnyCancellable?
+    
+    private var bottomMapViewDataSubscriber: AnyCancellable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,15 +38,14 @@ class AboutMETViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("about_met_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        let aboutButton: UIBarButtonItem = UIBarButtonItem(
+        let navigationRightButton: UIBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "AboutAppIcon"),
             style: .plain,
             target: self,
-            action: #selector(aboutButtonDidTap)
+            action: #selector(navigationRightButtonDidTap)
         )
-        aboutButton.tintColor = UIColor(named: "plum")
-        self.navigationItem.rightBarButtonItem = aboutButton
+        navigationRightButton.tintColor = UIColor(named: "plum")
+        self.navigationItem.rightBarButtonItem = navigationRightButton
         
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.scrollView)
@@ -63,50 +71,60 @@ class AboutMETViewController: UIViewController {
             self.emptyView.trailingAnchor.constraint(equalTo: contentGuide.trailingAnchor)
         ])
         self.setLocationView(
-            locationView: self.fifthAvenueLocationView, 
-            title: NSLocalizedString("about_met_the_met_fifth_avenue_title_lable", comment: ""),
-            address: NSLocalizedString("about_met_the_met_fifth_avenue_address_lable", comment: ""),
+            locationView: self.topLocationView,
             topAnchorView: self.emptyView,
             contentGuide: contentGuide
         )
         self.setLocationView(
-            locationView: self.cloistersLocationView,
-            title: NSLocalizedString("about_met_the_met_cloisters_title_lable", comment: ""),
-            address: NSLocalizedString("about_met_the_met_cloisters_address_lable", comment: ""),
-            topAnchorView: self.fifthAvenueLocationView,
+            locationView: self.bottomLocationView,
+            topAnchorView: self.topLocationView,
             contentGuide: contentGuide
         )
         NSLayoutConstraint.activate([
-            self.cloistersLocationView.bottomAnchor.constraint(equalTo: contentGuide.bottomAnchor)
+            self.bottomLocationView.bottomAnchor.constraint(equalTo: contentGuide.bottomAnchor)
         ])
-        self.fifthAvenueLocationView.coordinate = CLLocationCoordinate2D.fifthAvenuLocation
-        self.cloistersLocationView.coordinate = CLLocationCoordinate2D.cloistersLocation
+        self.setupViewModel()
     }
     
     @objc
-    private func aboutButtonDidTap() {
-        let aboutAppViewController: AboutAppViewController = AboutAppViewController()
-        aboutAppViewController.modalPresentationStyle = .automatic
-        aboutAppViewController.modalTransitionStyle = .coverVertical
-        let aboutAppNavigationController = UINavigationController(rootViewController: aboutAppViewController)
-        self.present(aboutAppNavigationController, animated: true)
+    private func navigationRightButtonDidTap() {
+        self.viewModel?.navigationRightButtonTapped()
     }
     
-    private func setLocationView(locationView: LocationView, title: String, address: String, topAnchorView: UIView,  contentGuide: UILayoutGuide) {
+    private func setupViewModel() {
+        let viewModel = AboutMETViewModel(presentingControllerProvider: { [weak self] in
+            return self
+        })
+        self.viewModel = viewModel
+        self.titleSubscriber = viewModel.$title
+            .sink(receiveValue: { [weak self] titleText in
+            guard let self = self else {return}
+            self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: titleText, color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
+        })
+        self.topMapViewDataSubscriber = viewModel.$topMapViewData
+            .sink(receiveValue: { [weak self] newMapViewData in
+                guard let self = self else {return}
+                self.topLocationView.titleText = newMapViewData.title
+                self.topLocationView.addressText = newMapViewData.subtitle
+                self.topLocationView.coordinate = CLLocationCoordinate2D(latitude: newMapViewData.latitude , longitude: newMapViewData.longitude)
+            })
+        self.bottomMapViewDataSubscriber = viewModel.$bottomMapViewData
+            .sink(receiveValue: { [weak self] newMapViewData in
+                guard let self = self else {return}
+                self.bottomLocationView.titleText = newMapViewData.title
+                self.bottomLocationView.addressText = newMapViewData.subtitle
+                self.bottomLocationView.coordinate = CLLocationCoordinate2D(latitude: newMapViewData.latitude , longitude: newMapViewData.longitude)
+            })
+    }
+    
+    private func setLocationView(locationView: LocationView, topAnchorView: UIView,  contentGuide: UILayoutGuide) {
         locationView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.addSubview(locationView)
-        locationView.titleText = title
-        locationView.addressText = address
         NSLayoutConstraint.activate([
             locationView.leadingAnchor.constraint(equalTo: contentGuide.leadingAnchor, constant: 10),
             locationView.trailingAnchor.constraint(equalTo: contentGuide.trailingAnchor, constant: -10),
             locationView.topAnchor.constraint(equalTo: topAnchorView.bottomAnchor, constant: 40)
         ])
     }
-}
-
-extension CLLocationCoordinate2D {
-    static let fifthAvenuLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 40.77962342752392, longitude: -73.96326546117187)
-    static let cloistersLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 40.86502504586118, longitude: -73.93174886116802)
 }
 

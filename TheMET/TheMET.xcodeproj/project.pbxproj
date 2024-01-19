@@ -79,6 +79,7 @@
 		F3F679822B4EF74800B6D499 /* AboutMETViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F679812B4EF74800B6D499 /* AboutMETViewController.swift */; };
 		F3F6798C2B50292200B6D499 /* NotoSerifJP-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3F6798B2B50292100B6D499 /* NotoSerifJP-SemiBold.otf */; };
 		F3F679922B51B15A00B6D499 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F679912B51B15A00B6D499 /* LocationView.swift */; };
+		F3F679992B59A1A100B6D499 /* AboutMETViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F679982B59A1A100B6D499 /* AboutMETViewModel.swift */; };
 		F3F6A4F02B1798550004B59F /* LoadingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6A4EF2B1798550004B59F /* LoadingError.swift */; };
 		F3FD733E2A700C7500B163EA /* LoadingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FD733D2A700C7500B163EA /* LoadingStatus.swift */; };
 /* End PBXBuildFile section */
@@ -183,6 +184,7 @@
 		F3F679812B4EF74800B6D499 /* AboutMETViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMETViewController.swift; sourceTree = "<group>"; };
 		F3F6798B2B50292100B6D499 /* NotoSerifJP-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifJP-SemiBold.otf"; sourceTree = "<group>"; };
 		F3F679912B51B15A00B6D499 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		F3F679982B59A1A100B6D499 /* AboutMETViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMETViewModel.swift; sourceTree = "<group>"; };
 		F3F6A4EF2B1798550004B59F /* LoadingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingError.swift; sourceTree = "<group>"; };
 		F3FD733D2A700C7500B163EA /* LoadingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -350,6 +352,7 @@
 				F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */,
 				F3E712B42B28BE6E009BEE1B /* CulturesSectionViewController.swift */,
 				F3E712B62B28C18C009BEE1B /* CultureArtsViewController.swift */,
+				F3F679982B59A1A100B6D499 /* AboutMETViewModel.swift */,
 				F3F679812B4EF74800B6D499 /* AboutMETViewController.swift */,
 			);
 			path = ViewControllers;
@@ -595,6 +598,7 @@
 				F376B37E2A8529AC00AA096B /* ArtFilter.swift in Sources */,
 				F32400112AFBE53B00B8C175 /* DepartmentsSectionViewController.swift in Sources */,
 				F3E712BF2B34A5C7009BEE1B /* CulturesSectionContentView.swift in Sources */,
+				F3F679992B59A1A100B6D499 /* AboutMETViewModel.swift in Sources */,
 				F3528F8A2A0D0171000D9CEB /* UIButton+apply.swift in Sources */,
 				F3904AE32AF1559800BFC3F4 /* FeaturedArtistsView.swift in Sources */,
 				F3012FCB29C9E35800138CE3 /* FeaturedArtViewController.swift in Sources */,
