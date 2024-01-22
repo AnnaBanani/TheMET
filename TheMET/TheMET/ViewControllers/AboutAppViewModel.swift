@@ -8,25 +8,29 @@
 import Foundation
 import UIKit
 import Combine
+import SafariServices
 
 class AboutAppViewModel {
 
     @Published private(set) var title: String
     @Published private(set) var topImage: UIImage?
-    @Published private(set) var firstLeftText: String
-    @Published private(set) var firstRightText: String
-    @Published private(set) var secondLeftText: String
-    @Published private(set) var thirdLeftText: String
-    @Published private(set) var bottomText: String
+    @Published private(set) var versionText: String
+    @Published private(set) var versionNumberText: String
+    @Published private(set) var privatePolicyText: String
+    @Published private(set) var termAndPolicyLeftText: String
+    @Published private(set) var copyRightText: String
     
-    init() {
+    private let presentingControllerProvider: () -> UIViewController?
+    
+    init(presentingControllerProvider: @escaping () -> UIViewController?) {
         self.title = NSLocalizedString("about_app_screen_title", comment: "")
         self.topImage = UIImage(named: "AboutMETIcon")
-        self.firstLeftText = NSLocalizedString("about_screen_left_version_label", comment: "")
-        self.firstRightText = AboutAppViewModel.getAppVersion()
-        self.secondLeftText = NSLocalizedString("privacy_policy_label", comment: "")
-        self.thirdLeftText = NSLocalizedString("the_use_of_met_api_label", comment: "")
-        self.bottomText = NSLocalizedString("about_scree_copyright_label", comment: "")
+        self.versionText = NSLocalizedString("about_screen_left_version_label", comment: "")
+        self.versionNumberText = AboutAppViewModel.getAppVersion()
+        self.privatePolicyText = NSLocalizedString("privacy_policy_label", comment: "")
+        self.termAndPolicyLeftText = NSLocalizedString("the_use_of_met_api_label", comment: "")
+        self.copyRightText = NSLocalizedString("about_scree_copyright_label", comment: "")
+        self.presentingControllerProvider = presentingControllerProvider
     }
     
     private static func getAppVersion() -> String {
@@ -37,4 +41,30 @@ class AboutAppViewModel {
         }
     }
     
+    func secondLeftDidTap() {
+        self.showSafariPage(url: .secondLeftURL)
+    }
+    
+    func thirdLeftDidTap() {
+        self.showSafariPage(url: .thirdLeftURL)
+    }
+    
+    private func showSafariPage(url: URL?) {
+        guard let presentingController = self.presentingControllerProvider() else {
+            return
+        }
+        guard let url = url else {
+            print ("url did not create")
+            return
+        }
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = true
+        let safariViewController = SFSafariViewController(url: url, configuration: configuration)
+        presentingController.present(safariViewController, animated: true)
+    }
+}
+
+private extension URL {
+    static let secondLeftURL: URL? = URL(string: NSLocalizedString("privacy_policy_url_sring", comment: ""))
+    static let thirdLeftURL: URL? = URL(string:"https://www.metmuseum.org/information/terms-and-conditions")
 }

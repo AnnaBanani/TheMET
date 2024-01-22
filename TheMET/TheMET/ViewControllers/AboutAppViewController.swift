@@ -16,11 +16,11 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var titleSubscriber: AnyCancellable?
     private var topImageSubscriber: AnyCancellable?
-    private var firstLeftTextSubscriber: AnyCancellable?
-    private var firstRightTextSubscriber: AnyCancellable?
-    private var secondLeftTextSubscriber: AnyCancellable?
-    private var thirdLeftTextSubscriber: AnyCancellable?
-    private var bottomTextSubscriber: AnyCancellable?
+    private var versionTextSubscriber: AnyCancellable?
+    private var versionNumberTextSubscriber: AnyCancellable?
+    private var privatePolicyLeftTextSubscriber: AnyCancellable?
+    private var termsAndConditionsLeftTextSubscriber: AnyCancellable?
+    private var copyRightTextSubscriber: AnyCancellable?
     
     private let rightVersionLabel: UILabel = UILabel()
     private let leftVersionLabel: UILabel = UILabel()
@@ -84,7 +84,9 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func setupViewModel() {
-        let viewModel = AboutAppViewModel()
+        let viewModel = AboutAppViewModel(presentingControllerProvider: { [weak self] in
+            return self
+        })
         self.viewModel = viewModel
         self.titleSubscriber = viewModel.$title
             .sink(receiveValue: { [weak self] titleText in
@@ -97,28 +99,28 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
                       let image = image else { return }
                 self.imageView.image = image
             })
-        self.firstLeftTextSubscriber = viewModel.$firstLeftText
+        self.versionTextSubscriber = viewModel.$versionText
             .sink(receiveValue: { [weak self] text in
                 guard let self = self else {return}
                 self.leftVersionLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), alignment: .left, fontSize: 16, title: text)
             })
-        self.firstRightTextSubscriber = viewModel.$firstRightText
+        self.versionNumberTextSubscriber = viewModel.$versionNumberText
             .sink(receiveValue: { [weak self] text in
                 guard let self = self else {return}
                 self.rightVersionLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "plum"), alignment: .right, fontSize: 16, title: text)
             })
-        self.bottomTextSubscriber = viewModel.$bottomText
+        self.copyRightTextSubscriber = viewModel.$copyRightText
             .sink(receiveValue: { [weak self] text in
                 guard let self = self else {return}
                 self.copyRightLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "blueberry"), alignment: .left, fontSize: 16, title: text)
             })
-        self.secondLeftTextSubscriber = viewModel.$secondLeftText
+        self.privatePolicyLeftTextSubscriber = viewModel.$privatePolicyText
             .sink(receiveValue: { [weak self] text in
                 guard let self = self else {return}
                 self.privatePolicyText = text
                 self.tableView.reloadData()
         })
-        self.thirdLeftTextSubscriber = viewModel.$thirdLeftText
+        self.termsAndConditionsLeftTextSubscriber = viewModel.$termAndPolicyLeftText
             .sink(receiveValue: { [weak self] text in
                 guard let self = self else {return}
                 self.useAPIText = text
@@ -132,17 +134,6 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(label)
     }
     
-    func showSafariPage(urlString: String) {
-        guard let url = URL(string: urlString) else {
-            print ("url did not create")
-            return
-        }
-        let configuration = SFSafariViewController.Configuration()
-        configuration.entersReaderIfAvailable = true
-        let safariViewController = SFSafariViewController(url: url, configuration: configuration)
-        present(safariViewController, animated: true)
-    }
-    
     //  UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -152,7 +143,7 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
         }
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
-        guard let viewModel = self.viewModel else { return cell}
+        guard self.viewModel != nil else { return cell}
         if indexPath.row == 0 {
             cell.set(titleText: self.privatePolicyText)
         } else {
@@ -175,13 +166,10 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var urlString = String()
         if indexPath.row == 0 {
-            urlString = NSLocalizedString("privacy_policy_url_sring", comment: "")
+            self.viewModel?.secondLeftDidTap()
         } else {
-            urlString = "https://www.metmuseum.org/information/terms-and-conditions"
+            self.viewModel?.thirdLeftDidTap()
         }
-        self.showSafariPage(urlString: urlString)
     }
-   
 }
