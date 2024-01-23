@@ -41,12 +41,12 @@ class AboutAppViewModel {
         }
     }
     
-    func secondLeftDidTap() {
-        self.showSafariPage(url: .secondLeftURL)
+    func privatePolicyButtonDidTap() {
+        self.showSafariPage(url: .privatePolicyURL)
     }
     
-    func thirdLeftDidTap() {
-        self.showSafariPage(url: .thirdLeftURL)
+    func termsAndConditionsButtonDidTap() {
+        self.showSafariPage(url: .termsAndConditionsURL)
     }
     
     private func showSafariPage(url: URL?) {
@@ -65,6 +65,6 @@ class AboutAppViewModel {
 }
 
 private extension URL {
-    static let secondLeftURL: URL? = URL(string: NSLocalizedString("privacy_policy_url_sring", comment: ""))
-    static let thirdLeftURL: URL? = URL(string:"https://www.metmuseum.org/information/terms-and-conditions")
+    static let privatePolicyURL: URL? = URL(string: NSLocalizedString("privacy_policy_url_sring", comment: ""))
+    static let termsAndConditionsURL: URL? = URL(string:"https://www.metmuseum.org/information/terms-and-conditions")
 }

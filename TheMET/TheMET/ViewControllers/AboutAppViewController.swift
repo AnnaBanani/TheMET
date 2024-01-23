@@ -167,9 +167,9 @@ class AboutAppViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.viewModel?.secondLeftDidTap()
+            self.viewModel?.privatePolicyButtonDidTap()
         } else {
-            self.viewModel?.thirdLeftDidTap()
+            self.viewModel?.termsAndConditionsButtonDidTap()
         }
     }
 }
