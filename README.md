@@ -12,7 +12,7 @@
 
 The MET app harnesses the power of The Metropolitan Museum of Art's Open Access API, leveraging freely available datasets comprising over 470,000 artworks: [https://metmuseum.github.io]
 
-![icon](https://raw.githubusercontent.com/annabanani/TheMET/master/Design/MET_Icon.png | width=100)
+<img src="https://raw.githubusercontent.com/annabanani/TheMET/master/Design/MET_Icon.png" width="100">
 ![launched screen](https://raw.githubusercontent.com/annabanani/TheMET/master/Design/MET_Launch%20Screen.png)
 ![random art tab](https://raw.githubusercontent.com/annabanani/TheMET/master/Screenshots/6.7%20Random.png)
 ![catalog tab](https://raw.githubusercontent.com/annabanani/TheMET/master/Screenshots/6.7%20Catalog.png)
