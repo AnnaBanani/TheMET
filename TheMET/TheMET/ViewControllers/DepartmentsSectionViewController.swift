@@ -95,15 +95,7 @@ class DepartmentsSectionViewController: UIViewController {
             catalogSubview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
-    
-//    private func reloadCatalog() {
-//        let viewModel = DepartmentsSectionViewModel(presentingControllerProvider: { [weak self] in
-//            return self
-//        })
-//        self.viewModel = viewModel
-//        viewModel.reloadCatalog()
-//    }
-    
+
     private func catalogCellDidTap(_ departmentId: Int) {
         self.viewModel?.cellDidTap(departmentId: departmentId)
     }
