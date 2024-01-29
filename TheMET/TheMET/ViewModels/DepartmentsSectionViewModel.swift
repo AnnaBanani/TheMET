@@ -22,12 +22,13 @@ class DepartmentsSectionViewModel {
     
     private var loadedDepartments: [Department] = []
     
-    var loadingDepartmentIds: [Int] = []
+    private var loadingDepartmentIds: [Int] = []
     
     init(presentingControllerProvider: @escaping () -> UIViewController?) {
         self.title = NSLocalizedString("catalog_screen_departments_section_title", comment: "")
         self.contentStatus = .loading
         self.presentingControllerProvider = presentingControllerProvider
+        self.reloadCatalog()
     }
     
     func cellDidTap(departmentId: Int) {
@@ -42,7 +43,7 @@ class DepartmentsSectionViewModel {
         presentingController.present(categoryNavigationController, animated: true)
     }
     
-    func cellAppeared(objectIds: [ArtID], completion: @escaping (URL?) -> Void) {
+    private func cellAppeared(objectIds: [ArtID], completion: @escaping (URL?) -> Void) {
         guard !objectIds.isEmpty else {
             completion(nil)
             return
@@ -57,7 +58,7 @@ class DepartmentsSectionViewModel {
         }
     }
     
-    func loadParticularDepartmentCellDataIfNeeded(departmentId: Int) {
+    func cellWillDisplay(departmentId: Int) {
         guard case .loaded(let catalogCellDataList) = self.contentStatus else {
             return
         }
@@ -140,7 +141,7 @@ class DepartmentsSectionViewModel {
         }
     }
     
-    func reloadCatalog() {
+    private func reloadCatalog() {
         self.contentStatus = .loading
         self.metAPI.departments { [weak self] departmentResponseResult in
             switch departmentResponseResult {

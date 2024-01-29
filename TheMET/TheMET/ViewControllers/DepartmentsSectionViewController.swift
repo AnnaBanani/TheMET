@@ -7,12 +7,9 @@
 
 import Foundation
 import UIKit
-import MetAPI
 import Combine
 
 class DepartmentsSectionViewController: UIViewController {
-    
-    private let metAPI = MetAPI()
     
     private var viewModel: DepartmentsSectionViewModel?
     
@@ -46,10 +43,9 @@ class DepartmentsSectionViewController: UIViewController {
             self?.viewModel?.cellDidTap(departmentId: departmentId)
         }
         self.loadedCatalogView.onCatalogCellWillDisplay = { [weak self] departmentId in
-            self?.viewModel?.loadParticularDepartmentCellDataIfNeeded(departmentId: departmentId)
+            self?.viewModel?.cellWillDisplay(departmentId: departmentId)
         }
         self.setupViewModel()
-        self.viewModel?.reloadCatalog()
     }
     
     private func setupViewModel() {
@@ -100,13 +96,13 @@ class DepartmentsSectionViewController: UIViewController {
         ])
     }
     
-    private func reloadCatalog() {
-        let viewModel = DepartmentsSectionViewModel(presentingControllerProvider: { [weak self] in
-            return self
-        })
-        self.viewModel = viewModel
-        viewModel.reloadCatalog()
-    }
+//    private func reloadCatalog() {
+//        let viewModel = DepartmentsSectionViewModel(presentingControllerProvider: { [weak self] in
+//            return self
+//        })
+//        self.viewModel = viewModel
+//        viewModel.reloadCatalog()
+//    }
     
     private func catalogCellDidTap(_ departmentId: Int) {
         self.viewModel?.cellDidTap(departmentId: departmentId)
