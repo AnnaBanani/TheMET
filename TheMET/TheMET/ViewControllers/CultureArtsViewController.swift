@@ -46,6 +46,7 @@ class CultureArtsViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
+        self.view.backgroundColor = UIColor(named: "blackberry")
         self.favoriteServiseSubscriber = self.favoriteService.$favoriteArts
             .sink(receiveValue: { [weak self] newFavoriteArts in
                 self?.favoriteServiceDidChange()
