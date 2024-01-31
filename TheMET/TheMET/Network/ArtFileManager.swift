@@ -29,7 +29,7 @@ class ArtFileManager {
         }
         let fileManager = FileManager.default
         let fileURL = self.makeFileUrl(artId: art.objectID)
-        DispatchQueue.global().sync {
+        DispatchQueue.global().async {
             if !fileManager.fileExists(atPath: self.folderURL.path) {
                 do {
                     try fileManager.createDirectory(at: self.folderURL, withIntermediateDirectories: true)

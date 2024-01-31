@@ -228,7 +228,7 @@ class CultureArtsViewController: UIViewController, UITableViewDelegate, UITableV
     private func loadCellImage(cell: ArtViewCell, art: Art) {
         cell.imageState = .loading
         cell.tag = art.objectID
-        guard let imageURL =  art.primaryImage else {
+        guard let imageURL = art.primaryImage else {
             cell.imageState = .failed(ArtImageLoadingError.invalidImageURL)
             return
         }
