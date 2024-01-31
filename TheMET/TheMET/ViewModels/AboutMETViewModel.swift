@@ -43,6 +43,14 @@ class AboutMETViewModel {
         let aboutAppNavigationController = UINavigationController(rootViewController: aboutAppViewController)
         presentingController.present(aboutAppNavigationController, animated: true)
     }
+    
+    func topLocatonViewDidTap() {
+        print ("top")
+    }
+    
+    func bottomLocatonViewDidTap() {
+        print ("bottom")
+    }
 }
 
 private extension AboutMETViewModel.MapViewData {

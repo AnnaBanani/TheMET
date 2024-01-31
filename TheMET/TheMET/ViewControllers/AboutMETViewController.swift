@@ -46,7 +46,6 @@ class AboutMETViewController: UIViewController {
         )
         navigationRightButton.tintColor = UIColor(named: "plum")
         self.navigationItem.rightBarButtonItem = navigationRightButton
-        
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.scrollView)
         NSLayoutConstraint.activate([
@@ -84,6 +83,14 @@ class AboutMETViewController: UIViewController {
             self.bottomLocationView.bottomAnchor.constraint(equalTo: contentGuide.bottomAnchor)
         ])
         self.setupViewModel()
+        self.topLocationView.onMapViewTapped = { [weak self] in
+            guard let self = self else { return }
+            self.viewModel?.topLocatonViewDidTap()
+        }
+        self.bottomLocationView.onMapViewTapped = { [weak self] in
+            guard let self = self else { return }
+            self.viewModel?.bottomLocatonViewDidTap()
+        }
     }
     
     @objc
