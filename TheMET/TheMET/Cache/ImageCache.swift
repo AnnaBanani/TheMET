@@ -18,46 +18,60 @@ class ImageCache {
     
     @objc
     private func cleanUpCache() {
-        self.loadedImagesCollection = [:]
+        self.loadedImagesCollectionQueue.async {
+            self.loadedImagesCollection = [:]
+        }
     }
 
     private var loadedImagesCollection: [URL : UIImage] = [:]
     
+    private let loadedImagesCollectionQueue = DispatchQueue(label: "loadedImagesCollectionQueue")
+    
     func loadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
-        guard let imageURL = URL(string: urlString) else {
-            completion(nil)
-            return
-        }
-        if let image = self.loadedImagesCollection[imageURL]  {
-            completion(image)
-        } else {
-            DispatchQueue.global().sync {
-                guard let fileURL = self.makeFileUrl(urlString: urlString),
-                      let data = try? Data(contentsOf: fileURL),
-                      let image = UIImage(data: data) else {
-                    DispatchQueue.main.async {
-                        completion(nil)
-                    }
-                    return
+        self.loadedImagesCollectionQueue.async {
+            guard let imageURL = URL(string: urlString) else {
+                DispatchQueue.main.async {
+                    completion(nil)
                 }
-                self.loadedImagesCollection[imageURL] = image
+                return
+            }
+            if let image = self.loadedImagesCollection[imageURL]  {
                 DispatchQueue.main.async {
                     completion(image)
+                }
+            } else {
+                DispatchQueue.global().async {
+                    guard let fileURL = self.makeFileUrl(urlString: urlString),
+                          let data = try? Data(contentsOf: fileURL),
+                          let image = UIImage(data: data) else {
+                        DispatchQueue.main.async {
+                            completion(nil)
+                        }
+                        return
+                    }
+                    self.loadedImagesCollectionQueue.async {
+                        self.loadedImagesCollection[imageURL] = image
+                    }
+                    DispatchQueue.main.async {
+                        completion(image)
+                    }
                 }
             }
         }
     }
     
     func putLoadedImageToCache(image: UIImage, for urlString: String) {
-        guard let imageURL = URL(string: urlString) else {
-            return
-        }
-        self.loadedImagesCollection[imageURL] = image
-        DispatchQueue.global().sync {
-            guard let fileURL = self.makeFileUrl(urlString: urlString) else { return }
-            let fileManager = FileManager.default
-            let data = image.pngData()
-            fileManager.createFile(atPath: fileURL.path, contents: data)
+        self.loadedImagesCollectionQueue.async {
+            guard let imageURL = URL(string: urlString) else {
+                return
+            }
+            self.loadedImagesCollection[imageURL] = image
+            DispatchQueue.global().async {
+                guard let fileURL = self.makeFileUrl(urlString: urlString) else { return }
+                let fileManager = FileManager.default
+                let data = image.pngData()
+                fileManager.createFile(atPath: fileURL.path, contents: data)
+            }
         }
     }
     
