@@ -15,8 +15,7 @@ class AboutMETViewModel {
     struct MapViewData {
         let title: String?
         let subtitle: String?
-        let latitude: Double
-        let longitude: Double
+        let coordinate: CLLocationCoordinate2D
     }
     
     @Published private(set) var title: String
@@ -46,57 +45,51 @@ class AboutMETViewModel {
     }
     
     func topLocatonViewDidTap() {
-        self.locationViewDidTap(latitude: self.topMapViewData.latitude, longitude: self.topMapViewData.longitude, name: NSLocalizedString("about_met_the_met_fifth_avenue_title_lable", comment: ""), address: "The+Metropolitan+Museum+of+Art,+1000+Fifth+Avenue+New+York,+NY+10028")
+        self.locationViewDidTap(coordinate: self.topMapViewData.coordinate, name: NSLocalizedString("about_met_the_met_fifth_avenue_title_lable", comment: ""), address: "The+Metropolitan+Museum+of+Art,+1000+Fifth+Avenue+New+York,+NY+10028")
     }
     
     func bottomLocatonViewDidTap() {
-        self.locationViewDidTap(latitude: self.bottomMapViewData.latitude, longitude: self.bottomMapViewData.longitude, name: NSLocalizedString("about_met_the_met_cloisters_title_lable", comment: ""), address: "The+Met+Cloisters,+99+Margaret+Corbin+Drive+Fort+Tryon+Park+New+York,+NY+10040")
+        self.locationViewDidTap(coordinate: self.bottomMapViewData.coordinate, name: NSLocalizedString("about_met_the_met_cloisters_title_lable", comment: ""), address: "The+Met+Cloisters,+99+Margaret+Corbin+Drive+Fort+Tryon+Park+New+York,+NY+10040")
     }
     
-    private func locationViewDidTap(latitude: Double, longitude: Double, name: String, address: String) {
+    private func locationViewDidTap(coordinate: CLLocationCoordinate2D, name: String, address: String) {
         guard let presentingController = self.presentingControllerProvider() else {
             return
         }
-        if UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL) {
+        guard UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) else {
+            self.openInAppleMap(coordinate: coordinate, name: name)
+            return
+        }
             let alertController = UIAlertController(
                 title: nil,
                 message: nil,
                 preferredStyle: .actionSheet
             )
             let googleAction = UIAlertAction(
-                title: "Show in Google Maps",
+                title: NSLocalizedString("about_met_google_maps_presents_cta", comment: ""),
                 style: .default,
                 handler: { _ in
-                    UIApplication.shared.open(
-                        URL(
-                            string:
-                                "comgooglemaps://?q=\(address)&center=\(latitude),\(longitude)&zoom=14"
-                        )!
-                    )
+                    self.openInGoogleMap(coordinate: coordinate, address: address)
                 }
             )
             let appleMapAction = UIAlertAction(
-                title: "Show in Apple Maps",
+                title: NSLocalizedString("about_met_apple_maps_presents_cta", comment: ""),
                 style: .default
             ) { _ in
-                self.openInAppleMap(latitude: latitude, longitude: longitude, name: name)
+                self.openInAppleMap(coordinate: coordinate, name: name)
             }
             let cancelAction = UIAlertAction(
-                title: "Cancel",
+                title: NSLocalizedString("about_met_cancel_cta", comment: ""),
                 style: .cancel
             )
             alertController.addAction(googleAction)
             alertController.addAction(appleMapAction)
             alertController.addAction(cancelAction)
             presentingController.present(alertController, animated: true)
-        } else {
-            self.openInAppleMap(latitude: latitude, longitude: longitude, name: name)
-        }
     }
     
-    private func openInAppleMap(latitude: Double, longitude: Double, name:  String) {
+    private func openInAppleMap(coordinate: CLLocationCoordinate2D, name:  String) {
         let regionDistance:CLLocationDistance = 10000
-        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let regionSpan = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
         let options: [String : Any] = [
             MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
@@ -107,6 +100,15 @@ class AboutMETViewModel {
         mapItem.name = name
         mapItem.openInMaps(launchOptions: options)
     }
+    
+    private func openInGoogleMap(coordinate: CLLocationCoordinate2D, address:  String) {
+        UIApplication.shared.open(
+            URL(
+                string:
+                    "comgooglemaps://?q=\(address)&center=\(coordinate.latitude),\(coordinate.longitude)&zoom=14"
+            )!
+        )
+    }
 }
 
 
@@ -115,13 +117,11 @@ private extension AboutMETViewModel.MapViewData {
     static let fifthAvenue = AboutMETViewModel.MapViewData(
         title: NSLocalizedString("about_met_the_met_fifth_avenue_title_lable", comment: ""),
         subtitle: NSLocalizedString("about_met_the_met_fifth_avenue_address_lable", comment: ""),
-        latitude: 40.77962342752392,
-        longitude: -73.96326546117187
+        coordinate: CLLocationCoordinate2D(latitude: 40.77962342752392, longitude: -73.96326546117187)
     )
     static let cloisters = AboutMETViewModel.MapViewData(
         title: NSLocalizedString("about_met_the_met_cloisters_title_lable", comment: ""),
         subtitle: NSLocalizedString("about_met_the_met_cloisters_address_lable", comment: ""),
-        latitude: 40.86502504586118,
-        longitude: -73.93174886116802
+        coordinate: CLLocationCoordinate2D(latitude: 40.86502504586118, longitude: -73.93174886116802)
     )
 }

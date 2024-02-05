@@ -113,14 +113,14 @@ class AboutMETViewController: UIViewController {
                 guard let self = self else {return}
                 self.topLocationView.titleText = newMapViewData.title
                 self.topLocationView.addressText = newMapViewData.subtitle
-                self.topLocationView.coordinate = CLLocationCoordinate2D(latitude: newMapViewData.latitude , longitude: newMapViewData.longitude)
+                self.topLocationView.coordinate = newMapViewData.coordinate
             })
         self.bottomMapViewDataSubscriber = viewModel.$bottomMapViewData
             .sink(receiveValue: { [weak self] newMapViewData in
                 guard let self = self else {return}
                 self.bottomLocationView.titleText = newMapViewData.title
                 self.bottomLocationView.addressText = newMapViewData.subtitle
-                self.bottomLocationView.coordinate = CLLocationCoordinate2D(latitude: newMapViewData.latitude , longitude: newMapViewData.longitude)
+                self.bottomLocationView.coordinate = newMapViewData.coordinate
             })
     }
     
