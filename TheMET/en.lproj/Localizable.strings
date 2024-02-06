@@ -43,3 +43,6 @@
 "about_met_the_met_fifth_avenue_address_lable" = "1000 Fifth Avenue \nNew York, NY 10028 \nPhone: 212-535-7710";
 "about_met_the_met_cloisters_title_lable" = "The Met Cloisters";
 "about_met_the_met_cloisters_address_lable" = "99 Margaret Corbin Drive \nFort Tryon Park \nNew York, NY 10040 \nPhone: 212-923-3700";
+"about_met_google_maps_presents_cta" = "Show on Google Maps";
+"about_met_apple_maps_presents_cta" = "Show on Apple Maps";
+"about_met_cancel_cta" = "Cancel";

@@ -17,7 +17,11 @@ class LocationView: UIView {
     
     private let mapView: MKMapView = MKMapView()
     
+    private let mapContainer: UIView = UIView()
+    
     private var container: UIStackView = UIStackView()
+    
+    var onMapViewTapped: (() -> Void)?
     
     var titleText: String? {
         get { return self.titleLabel.text }
@@ -35,6 +39,13 @@ class LocationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setContainerLayout()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMapView(_:)))
+            self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc
+    private func didTapMapView(_ sender: UITapGestureRecognizer) {
+        self.onMapViewTapped?()
     }
     
     required init?(coder: NSCoder) {
@@ -70,7 +81,16 @@ class LocationView: UIView {
         ])
         self.container.addArrangedSubview(self.titleLabel)
         self.container.addArrangedSubview(self.addressLabel)
-        self.container.addArrangedSubview(self.mapView)
+        self.container.addArrangedSubview(self.mapContainer)
+        self.mapView.translatesAutoresizingMaskIntoConstraints = false
+        self.mapContainer.addSubview(self.mapView)
+        NSLayoutConstraint.activate([
+            self.mapView.topAnchor.constraint(equalTo: self.mapContainer.topAnchor),
+            self.mapView.trailingAnchor.constraint(equalTo: self.mapContainer.trailingAnchor),
+            self.mapView.leadingAnchor.constraint(equalTo: self.mapContainer.leadingAnchor),
+            self.mapView.bottomAnchor.constraint(equalTo: self.mapContainer.bottomAnchor)
+        ])
+        self.mapView.isUserInteractionEnabled = false
         self.setMapView()
         self.container.axis = .vertical
         self.container.distribution = .fill

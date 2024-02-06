@@ -46,7 +46,6 @@ class AboutMETViewController: UIViewController {
         )
         navigationRightButton.tintColor = UIColor(named: "plum")
         self.navigationItem.rightBarButtonItem = navigationRightButton
-        
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.scrollView)
         NSLayoutConstraint.activate([
@@ -84,6 +83,14 @@ class AboutMETViewController: UIViewController {
             self.bottomLocationView.bottomAnchor.constraint(equalTo: contentGuide.bottomAnchor)
         ])
         self.setupViewModel()
+        self.topLocationView.onMapViewTapped = { [weak self] in
+            guard let self = self else { return }
+            self.viewModel?.topLocatonViewDidTap()
+        }
+        self.bottomLocationView.onMapViewTapped = { [weak self] in
+            guard let self = self else { return }
+            self.viewModel?.bottomLocatonViewDidTap()
+        }
     }
     
     @objc
@@ -106,14 +113,14 @@ class AboutMETViewController: UIViewController {
                 guard let self = self else {return}
                 self.topLocationView.titleText = newMapViewData.title
                 self.topLocationView.addressText = newMapViewData.subtitle
-                self.topLocationView.coordinate = CLLocationCoordinate2D(latitude: newMapViewData.latitude , longitude: newMapViewData.longitude)
+                self.topLocationView.coordinate = newMapViewData.coordinate
             })
         self.bottomMapViewDataSubscriber = viewModel.$bottomMapViewData
             .sink(receiveValue: { [weak self] newMapViewData in
                 guard let self = self else {return}
                 self.bottomLocationView.titleText = newMapViewData.title
                 self.bottomLocationView.addressText = newMapViewData.subtitle
-                self.bottomLocationView.coordinate = CLLocationCoordinate2D(latitude: newMapViewData.latitude , longitude: newMapViewData.longitude)
+                self.bottomLocationView.coordinate = newMapViewData.coordinate
             })
     }
     
