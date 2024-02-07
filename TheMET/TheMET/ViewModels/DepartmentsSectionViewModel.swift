@@ -39,8 +39,7 @@ class DepartmentsSectionViewModel {
         let categoryViewController = mainStoryBoard.instantiateViewController(withIdentifier: "CategoryViewController") as? CategoryViewController
         guard let categoryViewController = categoryViewController else { return }
         categoryViewController.departmentId = departmentId
-        let categoryNavigationController = UINavigationController(rootViewController: categoryViewController)
-        presentingController.present(categoryNavigationController, animated: true)
+        presentingController.navigationController?.pushViewController(categoryViewController, animated: true)
     }
     
     private func cellAppeared(objectIds: [ArtID], completion: @escaping (URL?) -> Void) {
