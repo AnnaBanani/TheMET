@@ -56,7 +56,8 @@ class FeaturedArtViewController: UIViewController {
         })
         self.viewModel = viewModel
         self.titleSubscriber = viewModel.$title.sink(receiveValue: { [weak self] newTitle in
-            self?.title = newTitle
+            guard let self = self else {return}
+            self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: newTitle, color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
         })
         self.artStateSubscriber = viewModel.$artState.sink(receiveValue: { [weak self] newState in
             guard let self = self else { return }

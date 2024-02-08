@@ -37,7 +37,7 @@ class ArtFileManager {
                     return
                 }
             }
-            fileManager.createFile(atPath: fileURL.path(), contents: jsonData)
+            fileManager.createFile(atPath: fileURL.path, contents: jsonData)
         }
     }
     
@@ -74,8 +74,8 @@ class ArtFileManager {
         DispatchQueue.global().async {
             do {
                 let directoryContents = try FileManager.default.contentsOfDirectory(at: self.folderURL, includingPropertiesForKeys: nil, options: [])
-                for file in directoryContents {
-                    let fileName = (file.lastPathComponent).replacingOccurrences(of: file.pathExtension, with: "")
+                for fileURL in directoryContents {
+                    let fileName = (fileURL.lastPathComponent).replacingOccurrences(of: ("." + fileURL.pathExtension), with: "")
                     if let id: ArtID = ArtID(fileName) {
                         artIds.append(id)
                     }

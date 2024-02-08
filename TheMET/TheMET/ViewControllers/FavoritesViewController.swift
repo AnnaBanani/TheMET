@@ -86,6 +86,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private func favoriteServiceDidChange(favoriteArts: [Art]) {
         self.displayArts = self.artFilter.filter(arts: favoriteArts, searchText: self.searchBar.searchTextField.text)
+        self.tableView.reloadData()
     }
     
     private func loadCellImage(cell: ArtViewCell, art: Art) {
