@@ -74,6 +74,20 @@ class CultureArtsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         self.updateContent()
         self.reloadCategory()
+        self.hideKeyboard()
+    }
+   
+    private func hideKeyboard() {
+        let tap: UIGestureRecognizer  = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dissmissKeyboard)
+        )
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc
+    private func dissmissKeyboard() {
+        self.view.endEditing(true)
     }
     
     private func favoriteServiceDidChange() {

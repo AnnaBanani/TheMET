@@ -68,8 +68,21 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchBar.delegate = self
+        self.hideKeyboard()
     }
    
+    private func hideKeyboard() {
+        let tap: UIGestureRecognizer  = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dissmissKeyboard)
+        )
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc
+    private func dissmissKeyboard() {
+        self.view.endEditing(true)
+    }
     
     private func add(subView: UIView, topAnchorSubView: UIView) {
         subView.translatesAutoresizingMaskIntoConstraints = false
