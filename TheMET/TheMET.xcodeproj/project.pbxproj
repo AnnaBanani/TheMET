@@ -21,6 +21,7 @@
 		F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99C29CC91F300013B2A /* ImageLoader.swift */; };
 		F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */; };
 		F30E835029FE854C00283EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F30E835229FE854C00283EE3 /* Localizable.strings */; };
+		F31156152B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31156142B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift */; };
 		F32400012AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32400002AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift */; };
 		F32400072AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32400062AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift */; };
 		F324000B2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324000A2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift */; };
@@ -128,6 +129,7 @@
 		F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		F30E835129FE854C00283EE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F30E835329FE85BA00283EE3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F31156142B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsCatalogViewModel.swift; sourceTree = "<group>"; };
 		F32400002AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogSectionTapToReloadView.swift; sourceTree = "<group>"; };
 		F32400062AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtistsContentView.swift; sourceTree = "<group>"; };
 		F324000A2AFA6BB700B8C175 /* FeaturedArtistsCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedArtistsCellData.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				F3F679982B59A1A100B6D499 /* AboutMETViewModel.swift */,
 				F366A8882B62AE04002E98EC /* DepartmentsSectionViewModel.swift */,
 				F374A8572B715E5E0055F303 /* FeaturedArtViewModel.swift */,
+				F31156142B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				F3D94C462B0539BD005D5CC9 /* ArtistArtsViewController.swift in Sources */,
 				F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */,
 				F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */,
+				F31156152B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift in Sources */,
 				F32400072AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift in Sources */,
 				F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */,
 				F324FFFF2AF532DE00B8C175 /* CatalogSectionLoadingView.swift in Sources */,
