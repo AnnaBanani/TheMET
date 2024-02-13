@@ -17,8 +17,7 @@ class ArtistsCatalogViewController: UIViewController {
     private let loadingArtistsCatalogView = LoadingPlaceholderView.construstView(configuration: .catalogLoading)
     private let failedArtitstCatalogView = FailedPlaceholderView.constructView(configuration: .catalogFailed)
     private let loadedArtistsCatalogView = FeaturedArtistsContentView.constructView()
-    
-    private var loadedArtistsSubscriber: AnyCancellable?
+
     private var contentStatusSubscriber: AnyCancellable?
     
     
@@ -35,11 +34,6 @@ class ArtistsCatalogViewController: UIViewController {
             return self
         }
         self.viewModel = viewModel
-        self.loadedArtistsSubscriber = viewModel.$loadedArtists
-            .sink(receiveValue: { [weak self] newLoadedArtists in
-                guard let self = self else {return}
-                self.loadedArtistsCatalogView.content = newLoadedArtists
-            })
         self.contentStatusSubscriber = viewModel.$contentStatus
             .sink(receiveValue: { [weak self] newContentStatus in
                 guard let self = self else {return}

@@ -18,11 +18,11 @@ class ArtistsCatalogViewModel {
     
     private let metAPI = MetAPI()
     
-    @Published private(set) var loadedArtists: [FeaturedArtistsCellData] = []
-    
     @Published private(set)var contentStatus:LoadingStatus<[FeaturedArtistsCellData]>
     
     private let presentingControllerProvider: () -> UIViewController?
+    
+    private var loadedArtists: [FeaturedArtistsCellData] = []
     
     private var loadingArtistNames: [String] = []
     
