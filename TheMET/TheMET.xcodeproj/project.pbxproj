@@ -66,6 +66,7 @@
 		F3C7DB5C2A14F38C00DBBF87 /* FailedPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */; };
 		F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */; };
 		F3D94C462B0539BD005D5CC9 /* ArtistArtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */; };
+		F3E2ADF52B84FC8D0034867F /* CultureSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2ADF42B84FC8D0034867F /* CultureSectionViewModel.swift */; };
 		F3E712B22B28BBFC009BEE1B /* CulturesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E712B12B28BBFC009BEE1B /* CulturesService.swift */; };
 		F3E712B52B28BE6E009BEE1B /* CulturesSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E712B42B28BE6E009BEE1B /* CulturesSectionViewController.swift */; };
 		F3E712B72B28C18C009BEE1B /* CultureArtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E712B62B28C18C009BEE1B /* CultureArtsViewController.swift */; };
@@ -175,6 +176,7 @@
 		F3C7DB5A2A14F38C00DBBF87 /* FailedPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedPlaceholderView.swift; sourceTree = "<group>"; };
 		F3C7DB5E2A14F74700DBBF87 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		F3D94C452B0539BD005D5CC9 /* ArtistArtsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistArtsViewController.swift; sourceTree = "<group>"; };
+		F3E2ADF42B84FC8D0034867F /* CultureSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CultureSectionViewModel.swift; sourceTree = "<group>"; };
 		F3E712B12B28BBFC009BEE1B /* CulturesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturesService.swift; sourceTree = "<group>"; };
 		F3E712B42B28BE6E009BEE1B /* CulturesSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturesSectionViewController.swift; sourceTree = "<group>"; };
 		F3E712B62B28C18C009BEE1B /* CultureArtsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CultureArtsViewController.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				F366A8882B62AE04002E98EC /* DepartmentsSectionViewModel.swift */,
 				F374A8572B715E5E0055F303 /* FeaturedArtViewModel.swift */,
 				F31156142B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift */,
+				F3E2ADF42B84FC8D0034867F /* CultureSectionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				F36BD6D22A7C004C0062AEFC /* UISearchBar+apply.swift in Sources */,
 				F31156152B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift in Sources */,
 				F32400072AFA6A4D00B8C175 /* FeaturedArtistsContentView.swift in Sources */,
+				F3E2ADF52B84FC8D0034867F /* CultureSectionViewModel.swift in Sources */,
 				F3F5E72D2A571EE20014CBF6 /* CategoryViewController.swift in Sources */,
 				F324FFFF2AF532DE00B8C175 /* CatalogSectionLoadingView.swift in Sources */,
 				F3A125392A8D021F00032DC3 /* FullScreenPhotoViewController.swift in Sources */,
