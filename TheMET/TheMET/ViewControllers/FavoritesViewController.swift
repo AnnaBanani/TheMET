@@ -25,6 +25,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
 
     private let failedSearchView = FailedPlaceholderView.constructView(configuration: .searchArtsFailed)
     
+    private let transparentView = UIView()
+    
     var tableView: UITableView = UITableView(frame: .zero, style: .plain)
     
     override func awakeFromNib() {
@@ -68,8 +70,41 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchBar.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        self.setupHideKeyboardTapRegogniser()
+    }
+    
+    @objc
+    private func keyboardWillDisappear() {
+        self.transparentView.removeFromSuperview()
+    }
+    
+    @objc
+    private func keyboardWillAppear() {
+        self.transparentView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.transparentView)
+        self.transparentView.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            self.transparentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            self.transparentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            self.transparentView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            self.transparentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        ])
     }
    
+    private func setupHideKeyboardTapRegogniser() {
+        let tap: UIGestureRecognizer  = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dissmissKeyboard)
+        )
+        self.transparentView.addGestureRecognizer(tap)
+    }
+    
+    @objc
+    private func dissmissKeyboard() {
+        self.view.endEditing(true)
+    }
     
     private func add(subView: UIView, topAnchorSubView: UIView) {
         subView.translatesAutoresizingMaskIntoConstraints = false
