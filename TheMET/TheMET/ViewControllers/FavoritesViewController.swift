@@ -11,18 +11,16 @@ import Combine
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-    private let artFilter : ArtFilter = ArtFilter()
+    private var displayedState: LoadingStatus<[FavoriteArtState]> = .loading
     
-    private var displayArts: [Art] = []
+    private var viewModel: FavoritesViewModel?
+    
+    private var titleSubscriber:AnyCancellable?
+    private var artStatesSubscriber:AnyCancellable?
+    private var searchtextSubscriber: AnyCancellable?
     
     private let searchBar: UISearchBar = UISearchBar()
     
-    private let favoriteService = FavoritesService.standart
-    
-    private var favoriteServiseSubscriber: AnyCancellable?
-    
-    private let imageLoader = ImageLoader()
-
     private let failedSearchView = FailedPlaceholderView.constructView(configuration: .searchArtsFailed)
     
     private let transparentView = UIView()
@@ -38,12 +36,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.displayArts = self.favoriteService.favoriteArts
-        self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("favories_screen_title", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        self.favoriteServiseSubscriber = self.favoriteService.$favoriteArts
-            .sink(receiveValue: { [weak self] newFavoriteArts in
-                self?.favoriteServiceDidChange(favoriteArts: newFavoriteArts)
-            })
         self.searchBar.apply(barTintColor: UIColor(named: "blackberry"), textFieldBackgroundColor: UIColor(named: "blueberry0.5"), textFieldColor: UIColor(named: "plum"))
         self.searchBar.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.searchBar)
@@ -73,6 +65,42 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         self.setupHideKeyboardTapRegogniser()
+        self.setupViewModel()
+    }
+    
+    private func setupViewModel() {
+        let viewModel = FavoritesViewModel(presentingControllerProvider: { [weak self] in
+            return self
+        })
+        self.viewModel = viewModel
+        self.titleSubscriber = viewModel.$title
+            .sink(receiveValue: { [weak self] newTitle in
+                guard let self = self else {return}
+                self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: newTitle, color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
+        })
+        self.artStatesSubscriber = viewModel.$artStates
+            .sink(receiveValue: { [weak self] newArtStates in
+                guard let self = self else {return}
+                self.displayedState = newArtStates
+                switch newArtStates {
+                case .loaded:
+                    self.failedSearchView.isHidden = true
+                    self.tableView.isHidden = false
+                    self.tableView.reloadData()
+                case .loading:
+                    break
+                case .failed:
+                    self.failedSearchView.isHidden = false
+                    self.tableView.isHidden = true
+                    break
+                }
+        })
+        self.searchtextSubscriber = viewModel.$searchText
+            .sink(receiveValue: { [weak self] newSearchText in
+                guard let self = self else {return}
+                self.tableView.reloadData()
+        })
+        
     }
     
     @objc
@@ -119,66 +147,31 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         NSLayoutConstraint.activate(constraints)
     }
     
-    private func favoriteServiceDidChange(favoriteArts: [Art]) {
-        self.displayArts = self.artFilter.filter(arts: favoriteArts, searchText: self.searchBar.searchTextField.text)
-        self.tableView.reloadData()
-    }
-    
-    private func loadCellImage(cell: ArtViewCell, art: Art) {
-        cell.imageState = .loading
-        cell.tag = art.objectID
-        guard let imageURL =  art.primaryImage else {
-            cell.imageState = .failed(ArtImageLoadingError.invalidImageURL)
-            return
-        }
-        self.imageLoader.loadImage(urlString: imageURL) { image in
-            guard cell.tag == art.objectID else { return }
-            guard let image = image else {
-                cell.imageState = .failed(ArtImageLoadingError.imageCannotBeLoadedFromURL)
-                return
-            }
-            cell.imageState = .loaded(image)
-        }
-    }
-    
-    private func loadCellTags(art: Art) -> [String] {
-        var tags: [String] = []
-        if let departmentName = art.department {
-            tags.append(departmentName)
-        }
-        return tags
-    }
-    
-    private func imageDidTap(image: UIImage) {
-        let fullScreenViewController =  FullScreenPhotoViewController()
-        fullScreenViewController.modalPresentationStyle = .fullScreen
-        fullScreenViewController.image = image
-        self.present(fullScreenViewController, animated: true)
-    }
-    
-//  UITableViewDelegate, UITableViewDataSource
+//    UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
-            var art: Art
-            art = self.displayArts[indexPath.row]
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-            self.loadCellImage(cell: cell, art: art)
-            cell.isLiked = true
-            cell.artistNameText = String.artistNameText(art: art)
-            cell.titleText = String.titleText(art: art)
-            cell.dateText = String.dateText(art: art)
-            cell.mediumText = String.mediumText(art: art)
-            cell.tags = self.loadCellTags(art: art)
-            let oblectID = art.objectID
-            cell.onLikeButtonDidTap = { [weak self] in
-                self?.favoriteService.removeArt(id: oblectID)
+            guard case .loaded(let loadedData) = self.displayedState else {
+                return UITableViewCell()
             }
-            cell.onImageDidTap = { [weak self] image in
-                self?.imageDidTap(image: image)
-            }
-            return cell
+            let artState = loadedData[indexPath.row]
+                cell.backgroundColor = .clear
+                cell.selectionStyle = .none
+                self.viewModel?.artWillBeDisplayed(art: artState)
+                cell.imageState = artState.imageStatus
+                cell.isLiked = true
+                cell.artistNameText = artState.artistsName
+                cell.titleText = artState.titleText
+                cell.dateText = artState.dateText
+                cell.mediumText = artState.mediumText
+                let oblectID = artState.objectID
+                cell.onLikeButtonDidTap = { [weak self] in
+                    self?.viewModel?.onLikeButtonDidTap(id: oblectID)
+                }
+                cell.onImageDidTap = { [weak self] image in
+                    self?.viewModel?.imageDidTap(image: image)
+                }
+                return cell
         } else {
             print ("Error")
             return UITableViewCell()
@@ -186,7 +179,10 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.displayArts.count
+        guard case .loaded(let loadedData) = displayedState else {
+            return 0
+        }
+        return loadedData.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -196,19 +192,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
 //    UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.failedSearchView.isHidden = true
-        guard !searchText.isEmpty else {
-            self.displayArts = favoriteService.favoriteArts
-            self.tableView.reloadData()
-            return
-        }
-        self.displayArts = self.artFilter.filter(arts: self.favoriteService.favoriteArts, searchText: searchText)
-        guard !self.displayArts.isEmpty else {
-            self.failedSearchView.isHidden = false
-            self.tableView.reloadData()
-            return
-        }
-        self.tableView.reloadData()
+        self.viewModel?.searchTextDidChange(searchText: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
