@@ -17,7 +17,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private var titleSubscriber:AnyCancellable?
     private var artStatesSubscriber:AnyCancellable?
-    private var searchtextSubscriber: AnyCancellable?
     
     private let searchBar: UISearchBar = UISearchBar()
     
@@ -94,11 +93,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.tableView.isHidden = true
                     break
                 }
-        })
-        self.searchtextSubscriber = viewModel.$searchText
-            .sink(receiveValue: { [weak self] newSearchText in
-                guard let self = self else {return}
-                self.tableView.reloadData()
         })
         
     }

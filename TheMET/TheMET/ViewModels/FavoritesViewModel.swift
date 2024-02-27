@@ -27,7 +27,8 @@ struct FavoriteArtState {
 class FavoritesViewModel {
     @Published private(set) var title: String
     @Published private(set) var artStates: LoadingStatus<[FavoriteArtState]>
-    @Published private(set) var searchText: String
+    
+    private var lastSearchedText: String = ""
     
     private var artsWithImageLoading:[Int] = []
     
@@ -48,7 +49,6 @@ class FavoritesViewModel {
     init(presentingControllerProvider: @escaping () -> UIViewController?) {
         self.title = NSLocalizedString("favories_screen_title", comment: "")
         self.artStates = .loading
-        self.searchText = ""
         self.presentingControllerProvider = presentingControllerProvider
         self.favoriteServiseSubscriber = self.favoriteService.$favoriteArts
             .sink(receiveValue: { [weak self] newFavoriteArts in
@@ -58,7 +58,7 @@ class FavoritesViewModel {
     
     private func favoriteServiceDidChange(favoriteArts: [Art]) {
         self.allFavoriteArts = favoriteArts
-        self.displayArts = self.artFilter.filter(arts: favoriteArts, searchText: self.searchText)
+        self.displayArts = self.artFilter.filter(arts: favoriteArts, searchText: self.lastSearchedText)
         self.mapDisplyedArts(arts: self.displayArts)
     }
     
@@ -118,6 +118,7 @@ class FavoritesViewModel {
     }
     
     func searchTextDidChange(searchText: String) {
+        self.lastSearchedText = searchText
         guard !searchText.isEmpty else {
             self.mapDisplyedArts(arts: self.favoriteService.favoriteArts)
             return
