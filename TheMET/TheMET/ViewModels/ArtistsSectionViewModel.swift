@@ -44,10 +44,7 @@ class ArtistsSectionViewModel {
     }
     
     private func featuredArtistsViewTitle(artistsCount: Int) -> String {
-        print ("artistsCount \(artistsCount)")
         let formatString: String = NSLocalizedString("artists count", comment: "")
-        print ("format string \(formatString)")
-        print ("\(String.localizedStringWithFormat(formatString, artistsCount))")
         return String.localizedStringWithFormat(formatString, artistsCount)
     }
     

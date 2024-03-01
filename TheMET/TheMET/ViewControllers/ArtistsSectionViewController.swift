@@ -54,8 +54,8 @@ class ArtistsSectionViewController: UIViewController {
         self.titleSubscriber = viewModel.$title.sink(receiveValue: { newTitle in
             self.featuredArtistsLabel.apply(font: NSLocalizedString("serif_font", comment: ""), color: UIColor(named: "pear"), fontSize: 16, title: newTitle)
         })
-        self.imageSubscriber = viewModel.$image.sink(receiveValue: { newimage in
-            guard let image = newimage else {return}
+        self.imageSubscriber = viewModel.$image.sink(receiveValue: { newImage in
+            guard let image = newImage else { return self.featuredArtistsView.image = nil }
             self.featuredArtistsView.image = image
         })
         self.subtitleSubscriber = viewModel.$subtitle.sink(receiveValue: { newSubtitle in

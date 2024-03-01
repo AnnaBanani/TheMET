@@ -29,13 +29,7 @@ class FeaturedArtistsView: UIView {
     
     var image: UIImage? {
         get { return self.imageView.image }
-        set {
-            if let newValue = newValue {
-                self.imageView.image = newValue
-            } else {
-                self.imageView.image = nil
-            }
-        }
+        set { self.imageView.image = newValue }
     }
     
     override init(frame: CGRect) {
