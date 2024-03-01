@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class FeaturedArtistsView: UIView {
-    
+        
     private let imageView: UIImageView = UIImageView()
     private let titleLabel: UILabel = UILabel()
     private let gradientView: VerticalGradientView = VerticalGradientView()
@@ -27,13 +27,17 @@ class FeaturedArtistsView: UIView {
         }
     }
     
+    var image: UIImage? {
+        get { return self.imageView.image }
+        set { self.imageView.image = newValue }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         self.gradientView.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor(named: "blueberry")
-        self.imageView.image = UIImage(named: "FeaturedArtistsCover")
         self.imageView.contentMode = .scaleAspectFill
         self.imageView.clipsToBounds = true
         self.addSubview(self.imageView)

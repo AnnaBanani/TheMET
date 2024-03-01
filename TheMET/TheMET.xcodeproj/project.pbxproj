@@ -19,6 +19,7 @@
 		F3012FCD29C9E37D00138CE3 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3012FCC29C9E37D00138CE3 /* CatalogViewController.swift */; };
 		F3012FCF29C9E3A800138CE3 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3012FCE29C9E3A800138CE3 /* FavoritesViewController.swift */; };
 		F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99C29CC91F300013B2A /* ImageLoader.swift */; };
+		F30D23732B90EED600E2929D /* ArtistsSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30D23722B90EED600E2929D /* ArtistsSectionViewModel.swift */; };
 		F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */; };
 		F30E835029FE854C00283EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F30E835229FE854C00283EE3 /* Localizable.strings */; };
 		F31156152B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31156142B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift */; };
@@ -128,6 +129,7 @@
 		F3012FCC29C9E37D00138CE3 /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		F3012FCE29C9E3A800138CE3 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		F30CE99C29CC91F300013B2A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		F30D23722B90EED600E2929D /* ArtistsSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsSectionViewModel.swift; sourceTree = "<group>"; };
 		F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		F30E835129FE854C00283EE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F30E835329FE85BA00283EE3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				F31156142B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift */,
 				F3E2ADF42B84FC8D0034867F /* CultureSectionViewModel.swift */,
 				F3E2ADF92B864DA40034867F /* FavoritesViewModel.swift */,
+				F30D23722B90EED600E2929D /* ArtistsSectionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F32400012AF542DD00B8C175 /* CatalogSectionTapToReloadView.swift in Sources */,
+				F30D23732B90EED600E2929D /* ArtistsSectionViewModel.swift in Sources */,
 				F3012FCD29C9E37D00138CE3 /* CatalogViewController.swift in Sources */,
 				F3A1253E2A8E675600032DC3 /* ImageFileNameGenerator.swift in Sources */,
 				F3A6C0042AD6F30E00249847 /* AboutAppViewController.swift in Sources */,
