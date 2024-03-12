@@ -54,10 +54,8 @@ class CultureArtsViewController: UIViewController, UITableViewDelegate, UITableV
         self.searchBar.delegate = self
         self.failedCategoryView.onButtonTap = { [weak self] in
             self?.viewModel?.reloadButtonDidTap()
-            self?.culturesTableView.reloadData()
         }
         self.updateContent()
-        self.viewModel?.reloadCategory()
         self.culturesTableView.reloadData()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -79,7 +77,6 @@ class CultureArtsViewController: UIViewController, UITableViewDelegate, UITableV
                 guard let self = self else { return }
                 self.searchBar.text = searchText
             })
-        viewModel.reloadCategory()
         self.culturesTableView.reloadData()
     }
     
@@ -208,13 +205,14 @@ class CultureArtsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         let artState = cultureArtStates[forRowAt.row]
         
-        self.viewModel?.tableViewWillDisplay(cultureArtState: artState)
+        self.viewModel?.artWillBeDisplayed(cultureArtState: artState)
     }
     
     //    UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.viewModel?.reloadCategory()
-        self.culturesTableView.reloadData()
+        self.viewModel?.searchTextDidChange(searchText: searchText)
+//        self.viewModel?.reloadCategory()
+//        self.culturesTableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

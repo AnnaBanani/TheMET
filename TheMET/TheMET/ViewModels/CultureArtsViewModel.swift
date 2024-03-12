@@ -63,6 +63,7 @@ class CultureArtsViewModel {
             .sink(receiveValue: { [weak self] newFavoriteArts in
                 self?.favoriteServiceDidChange(newFavoriteArts: newFavoriteArts)
             })
+        self.reloadCategory()
     }
     private func favoriteServiceDidChange(newFavoriteArts: [Art]) {
         
@@ -96,7 +97,12 @@ class CultureArtsViewModel {
         self.reloadCategory()
     }
     
-    func reloadCategory() {
+    func searchTextDidChange(searchText: String) {
+        self.searchText = searchText
+        self.reloadCategory()
+    }
+    
+    private func reloadCategory() {
         self.cultureArtStatesList = .loading
         self.loadArtCellDataList()
     }
@@ -293,7 +299,7 @@ class CultureArtsViewModel {
         }
     }
     
-    func tableViewWillDisplay(cultureArtState: CultureArtState) {
+    func artWillBeDisplayed(cultureArtState: CultureArtState) {
         guard case .placeholder(let artID) = cultureArtState,
               !self.loadingArtIds.contains(artID) else { return }
         self.loadingArtIds.append(artID)
