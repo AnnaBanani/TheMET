@@ -211,8 +211,6 @@ class CultureArtsViewController: UIViewController, UITableViewDelegate, UITableV
     //    UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.viewModel?.searchTextDidChange(searchText: searchText)
-//        self.viewModel?.reloadCategory()
-//        self.culturesTableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
