@@ -21,6 +21,7 @@
 		F30CE99D29CC91F300013B2A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30CE99C29CC91F300013B2A /* ImageLoader.swift */; };
 		F30D23732B90EED600E2929D /* ArtistsSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30D23722B90EED600E2929D /* ArtistsSectionViewModel.swift */; };
 		F30D23802B924C0B00E2929D /* CultureArtsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30D237F2B924C0B00E2929D /* CultureArtsViewModel.swift */; };
+		F30D23862BA897C400E2929D /* CategoryArtsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30D23852BA897C400E2929D /* CategoryArtsViewModel.swift */; };
 		F30E834D29FBEDCF00283EE3 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */; };
 		F30E835029FE854C00283EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F30E835229FE854C00283EE3 /* Localizable.strings */; };
 		F31156152B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31156142B7BC950008EE0C5 /* ArtistsCatalogViewModel.swift */; };
@@ -132,6 +133,7 @@
 		F30CE99C29CC91F300013B2A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		F30D23722B90EED600E2929D /* ArtistsSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsSectionViewModel.swift; sourceTree = "<group>"; };
 		F30D237F2B924C0B00E2929D /* CultureArtsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CultureArtsViewModel.swift; sourceTree = "<group>"; };
+		F30D23852BA897C400E2929D /* CategoryArtsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryArtsViewModel.swift; sourceTree = "<group>"; };
 		F30E834C29FBEDCF00283EE3 /* LoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		F30E835129FE854C00283EE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F30E835329FE85BA00283EE3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				F3E2ADF92B864DA40034867F /* FavoritesViewModel.swift */,
 				F30D23722B90EED600E2929D /* ArtistsSectionViewModel.swift */,
 				F30D237F2B924C0B00E2929D /* CultureArtsViewModel.swift */,
+				F30D23852BA897C400E2929D /* CategoryArtsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				F3F5E72B2A5312B70014CBF6 /* FeaturedArtService.swift in Sources */,
 				F3C7DB5F2A14F74700DBBF87 /* TagListView.swift in Sources */,
 				F324001A2B027BD900B8C175 /* ArtistsService.swift in Sources */,
+				F30D23862BA897C400E2929D /* CategoryArtsViewModel.swift in Sources */,
 				F36BD6D02A7A7C580062AEFC /* ArtsLoadingIndicatorView.swift in Sources */,
 				F3D94C462B0539BD005D5CC9 /* ArtistArtsViewController.swift in Sources */,
 				F376B37B2A8290B600AA096B /* LoadingPlaceholderView.swift in Sources */,

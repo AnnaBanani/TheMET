@@ -12,19 +12,18 @@ import MetAPI
 
 class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
     
+    private var viewModel: CategoryArtsViewModel?
+    
+    private var categoryArtStatesSubscriber:AnyCancellable?
+    private var searchTextSubscriber: AnyCancellable?
+    
     private let searchBar: UISearchBar = UISearchBar()
-    
-    private let metAPI = MetAPI()
-    
-    private let favoriteService = FavoritesService.standart
-    
-    private var favoriteServiseSubscriber: AnyCancellable?
     
     var departmentId: Int?
     
     private var imageLoader: ImageLoader = ImageLoader()
     
-    private var loadingArtIds: [ArtID] = []
+    var contentStatus: LoadingStatus<[CategoryArtState]> = .loading
     
     private let loadingCategoryView = LoadingPlaceholderView.construstView(configuration: .categoryArtworksLoading)
     private let failedCategoryView = FailedPlaceholderView.constructView(configuration: .categoryFailed)
@@ -33,19 +32,9 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     private let transparentView = UIView()
     
-    var contentStatus: LoadingStatus<[ArtCellData]> = .loading {
-        didSet {
-            self.updateContent()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.standardAppearance = self.navigationItem.apply(title: NSLocalizedString("", comment: ""), color: UIColor(named: "plum"), fontName: NSLocalizedString("serif_font", comment: ""), fontSize: 22)
-        self.favoriteServiseSubscriber = self.favoriteService.$favoriteArts
-            .sink(receiveValue: { [weak self] newFavoriteArts in
-                self?.favoriteServiceDidChange()
-            })
         self.searchBar.apply(barTintColor: UIColor(named: "blackberry"), textFieldBackgroundColor: UIColor(named: "blueberry0.5"), textFieldColor: UIColor(named: "plum"))
         self.searchBar.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.searchBar)
@@ -65,13 +54,14 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         self.categoryTableView.delegate = self
         self.searchBar.delegate = self
         self.failedCategoryView.onButtonTap = { [weak self] in
-            self?.reloadButtonDidTap()
+            self?.viewModel?.reloadButtonDidTap()
         }
         self.updateContent()
-        self.reloadCategory()
+        self.categoryTableView.reloadData()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
-           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         self.setupHideKeyboardTapRegogniser()
+        self.setUpViewModel()
     }
     
     @objc
@@ -91,7 +81,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             self.transparentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
         ])
     }
-   
+    
     private func setupHideKeyboardTapRegogniser() {
         let tap: UIGestureRecognizer  = UITapGestureRecognizer(
             target: self,
@@ -105,7 +95,20 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.endEditing(true)
     }
     
-    private func favoriteServiceDidChange() {
+    private func setUpViewModel() {
+        let viewModel = CategoryArtsViewModel(presentingControllerProvider: { self }, departmentID: self.departmentId)
+        self.viewModel = viewModel
+        self.categoryArtStatesSubscriber = viewModel.$categoryArtStatesList
+            .sink(receiveValue: { [weak self] newListState in
+                guard let self = self else { return }
+                self.contentStatus = newListState
+                self.updateContent()
+            })
+        self.searchTextSubscriber = viewModel.$searchText
+            .sink(receiveValue: { [weak self] newSearchText in
+                guard let self = self else { return }
+                self.searchBar.text = newSearchText
+            })
         self.categoryTableView.reloadData()
     }
     
@@ -146,167 +149,33 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         NSLayoutConstraint.activate(constraints)
     }
     
-    private func reloadButtonDidTap() {
-        self.reloadCategory()
-    }
-    
-    private func reloadCategory() {
-        self.contentStatus = .loading
-        self.loadArtCellDataList()
-    }
-    
-    private func loadArtCellDataList() {
-        guard let id = self.departmentId else {
-            self.contentStatus = .failed(CategoryViewControllerError.departmentIdNotFound)
-            return
-        }
-        let searchTextBeforeWaiting = self.searchBar.searchTextField.text
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
-            guard let self = self,
-                searchTextBeforeWaiting == self.searchBar.searchTextField.text else {
-                return
-            }
-            if let searchTextBeforeLoading = self.searchBar.searchTextField.text,
-               !searchTextBeforeLoading.isEmpty {
-                self.loadSearchResponse(searchTextBeforeLoading: searchTextBeforeLoading, departmentId: id)
-            } else {
-                self.loadObjects(departmentId: id)
-            }
-            self.categoryTableView.reloadData()
-        })
-    }
-    
-    private func loadArtCellData(artID: ArtID, completion: @escaping (ArtCellData?) -> Void) {
-        self.metAPI.object(id: artID) {objectResult in
-            switch objectResult {
-            case .failure:
-                completion(nil)
-            case .success(let object):
-                let artCellData = ArtCellData(artID: artID, artData: .data(art: object))
-                completion(artCellData)
-            }
-        }
-    }
-    
-  
-    private func loadCellImage(cell: ArtViewCell, art: Art) {
-        cell.imageState = .loading
-        cell.tag = art.objectID
-        guard let imageURL =  art.primaryImage else {
-            cell.imageState = .failed(ArtImageLoadingError.invalidImageURL)
-            return
-        }
-        self.imageLoader.loadImage(urlString: imageURL) { [weak cell] image in
-            guard let cell = cell,
-                  cell.tag == art.objectID else { return }
-            guard let image = image else {
-                cell.imageState = .failed(ArtImageLoadingError.imageCannotBeLoadedFromURL)
-                return
-            }
-            cell.imageState = .loaded(image)
-        }
-    }
-    
-    private func removeLoadingArtId(artId: ArtID) {
-        self.loadingArtIds.removeAll { id in
-            return id == artId
-        }
-    }
-    
-    private func isArtLiked(art: Art) -> Bool {
-        return self.favoriteService.favoriteArts.contains(where: { favoriteArt in
-            return favoriteArt.objectID == art.objectID
-        })
-    }
-    
-    private func likeButtonDidTap(cell: ArtViewCell, art: Art) {
-        if cell.isLiked {
-            self.favoriteService.removeArt(id: art.objectID)
-        } else {
-            self.favoriteService.addFavoriteArt(art)
-        }
-    }
-    
-    private func loadObjects(departmentId: Int) {
-        self.metAPI.objects(departmentIds: [departmentId]) { [weak self] objectsResponseResult in
-            guard let self = self,
-                  self.searchBar.searchTextField.text == nil ||
-                    self.searchBar.searchTextField.text == "" else {
-                return
-            }
-            switch objectsResponseResult {
-            case .failure(let error):
-                self.contentStatus = .failed(error)
-            case.success(let objectsResponse):
-                self.handleLoadingResponse(objectIDs: objectsResponse.objectIDs)
-            }
-        }
-    }
-    
-    private func loadSearchResponse(searchTextBeforeLoading: String, departmentId: Int) {
-        let parameters:[SearchParameter] = [
-            .departmentId(departmentId),
-            .q(searchTextBeforeLoading)
-        ]
-        self.metAPI.search(parameters: parameters) { [weak self] searchResponseResult in
-            guard searchTextBeforeLoading == self?.searchBar.searchTextField.text else {
-                return
-            }
-            switch searchResponseResult {
-            case . failure:
-                self?.contentStatus = .failed(ArtsLoadingError.noSearchResult)
-            case .success(let searchResponse):
-                self?.handleLoadingResponse(objectIDs: searchResponse.objectIDs)
-            }
-        }
-    }
-    
-    private func handleLoadingResponse(objectIDs: [ArtID]) {
-        var filteredArtCellDataList: [ArtCellData] = []
-        for artId in objectIDs {
-            let filteredArtCellData = ArtCellData(artID: artId, artData: .placeholder)
-            filteredArtCellDataList.append(filteredArtCellData)
-        }
-        self.contentStatus = .loaded(filteredArtCellDataList)
-    }
-    
-    private func imageDidTap(image: UIImage) {
-        let fullScreenViewController =  FullScreenPhotoViewController()
-        fullScreenViewController.modalPresentationStyle = .fullScreen
-        fullScreenViewController.image = image
-        self.present(fullScreenViewController, animated: true)
-    }
-    
     //  UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard case .loaded(let arts) = self.contentStatus else {
-            return UITableViewCell()
-        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ArtViewCell.artViewCellIdentifier, for: indexPath) as? ArtViewCell {
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
-            let art = arts[indexPath.row]
-            switch art.artData {
+            guard case .loaded(let loadedData) = self.contentStatus else {
+                return UITableViewCell()
+            }
+            let artState = loadedData[indexPath.row]
+            switch artState {
             case .placeholder:
-                cell.tag = art.artID
                 cell.isPlaceholderVisible = true
-            case .data(let art):
+            case .loaded(let loadedArtState):
                 cell.isPlaceholderVisible = false
-                self.loadCellImage(cell: cell, art: art)
-                cell.isLiked = self.isArtLiked(art: art)
-                cell.artistNameText = String.artistNameText(art: art)
-                cell.titleText = String.titleText(art: art)
-                cell.dateText = String.dateText(art: art)
-                cell.mediumText = String.mediumText(art: art)
-                if let departmentName = art.department {
-                    cell.tags = [departmentName]
-                }
+                self.viewModel?.artWillBeDisplayed(artState: loadedArtState)
+                cell.isLiked = loadedArtState.isLiked
+                cell.artistNameText = loadedArtState.artistsName
+                cell.titleText = loadedArtState.titleText
+                cell.dateText = loadedArtState.dateText
+                cell.mediumText = loadedArtState.mediumText
+                cell.imageState = loadedArtState.imageStatus
                 cell.onLikeButtonDidTap = { [weak self] in
-                    self?.likeButtonDidTap(cell: cell, art: art)
+                    self?.viewModel?.likeButtonDidTap(artID: loadedArtState.objectID)
                 }
                 cell.onImageDidTap = { [weak self] image in
-                    self?.imageDidTap(image: image)
+                    self?.viewModel?.imageDidTap(image: image)
                 }
             }
             return cell
@@ -328,32 +197,18 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
+    
     func tableView(_ tableView: UITableView, willDisplay: UITableViewCell, forRowAt: IndexPath) {
-        guard case .loaded(let arts) = self.contentStatus else {
+        guard case .loaded(let categoryArtStates) = self.contentStatus else {
             return
         }
-        let art = arts[forRowAt.row]
-        guard case .placeholder = art.artData,
-              !self.loadingArtIds.contains(art.artID) else {
-            return
-        }
-        self.loadingArtIds.append(art.artID)
-        self.loadArtCellData(artID: art.artID) { [weak self] artCellData in
-            if let artCellData = artCellData,
-               let contentStatus = self?.contentStatus,
-               case .loaded(var artCellDataList) = contentStatus,
-               let artCellDataIndex = artCellDataList.firstIndex(where: { $0.artID == art.artID}) {
-                artCellDataList[artCellDataIndex] = artCellData
-                self?.contentStatus = .loaded(artCellDataList)
-            }
-            self?.removeLoadingArtId(artId: art.artID)
-        }
+        let artState = categoryArtStates[forRowAt.row]
+        self.viewModel?.artWillBeDisplayed(categoryArtState: artState)
     }
     
     //    UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.reloadCategory()
+        self.viewModel?.searchTextDidChange(searchText: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
