@@ -21,8 +21,6 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     
     var departmentId: Int?
     
-    private var imageLoader: ImageLoader = ImageLoader()
-    
     var contentStatus: LoadingStatus<[CategoryArtState]> = .loading
     
     private let loadingCategoryView = LoadingPlaceholderView.construstView(configuration: .categoryArtworksLoading)
