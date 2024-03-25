@@ -160,7 +160,6 @@ class CultureArtsViewModel {
                 self.cultureArtStatesList = .failed(ArtsLoadingError.noSearchResult)
             case .success(let searchResponse):
                 let filteredArtCellDataList = self.filterArtCellDataList(objectIDs: searchResponse.objectIDs)
-                print ("search text \(searchTextBeforeLoading) search responce success \(filteredArtCellDataList.count)")
                 self.cultureArtStatesList = .loaded(filteredArtCellDataList)
             }
         }

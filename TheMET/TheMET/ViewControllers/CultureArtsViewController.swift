@@ -204,7 +204,6 @@ class CultureArtsViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         let artState = cultureArtStates[forRowAt.row]
-        
         self.viewModel?.artWillBeDisplayed(cultureArtState: artState)
     }
     
